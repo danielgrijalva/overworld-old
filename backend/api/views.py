@@ -4,6 +4,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .serializers import GameSerializer
+from .fields import fields
 
 
 @api_view()
@@ -27,7 +28,7 @@ def log(request):
 
 @api_view(['GET'])
 def search(request, name):
-    params = {'search': name, 'fields': 'name'}
+    params = {'search': name, 'fields': fields}
     headers={'user-key': settings.IGDB_KEY}
     url = settings.IGDB_URL.format(endpoint='games')
     r = requests.post(url=url, params=params, headers=headers)
