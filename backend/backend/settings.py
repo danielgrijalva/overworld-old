@@ -31,6 +31,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+CORS_ORIGIN_WHITELIST = (
+    'localhost:3000/'
+)
 
 # Application definition
 
@@ -43,9 +46,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'api',
     'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -128,4 +133,4 @@ STATIC_URL = '/static/'
 # IGDB
 
 IGDB_KEY = os.getenv('IGDB_KEY')
-IGDB_URL = 'https://api-v3.igdb.com/games'
+IGDB_URL = 'https://api-v3.igdb.com/{endpoint}/'
