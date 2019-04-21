@@ -2,6 +2,9 @@ from .models import Game
 from rest_framework import serializers
 
 
-class GetGameSerializer(serializers.Serializer):
+class GameSerializer(serializers.Serializer):
+    igdb = serializers.IntegerField()
     name = serializers.CharField()
-    category = serializers.IntegerField()
+
+    def create(self, validated_data):
+        return Game.objects.create(**validated_data)    
