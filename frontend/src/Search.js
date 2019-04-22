@@ -22,7 +22,7 @@ class GameSearch extends Component {
 
   onChange = debounce(value => {
     if (value.length === 0) {
-      this.setState({ isLoading: false });
+      this.setState({ isLoading: false, results: [] });
     } else {
       this.setState({ isLoading: true });
 
