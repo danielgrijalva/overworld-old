@@ -1,50 +1,65 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { debounce } from "lodash";
+import { Search, Grid, Label } from "semantic-ui-react";
 
-class Search extends Component {
+const resultRenderer = ({ id, name, title }) => (
+  <Label key={id} content={name} />
+);
+
+class GameSearch extends Component {
   constructor() {
     super();
     this.state = {
-      results: []
+      results: [],
+      isLoading: false
     };
 
-    this.onSubmit = this.onSubmit.bind(this);
-    this.showResults = this.showResults.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
-  onSubmit(event) {
-    event.preventDefault();
-    const data = new FormData(event.target);
+  handleResultSelect = (e, { result }) => window.location.reload();
 
-    axios
-      .get(`/api/search/${data.get("name")}`)
-      .then(response => {
-        this.showResults(response);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-  }
+  onChange = debounce(value => {
+    if (value.length === 0) {
+      this.setState({ isLoading: false, results: [] });
+    } else {
+      this.setState({ isLoading: true });
 
-  showResults(response) {
-    this.setState({ results: response.data });
-  }
+      axios
+        .get(`/api/search/${value}`)
+        .then(response => {
+          const results = response.data.map(result => ({
+            ...result,
+            key: result.id
+          }));
+          this.setState({ results: results, isLoading: false });
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    }
+  }, 300);
 
   render() {
-    const { results } = this.state;
+    const { results, isLoading } = this.state;
     return (
-      <div className="App">
-        <form method="POST" onSubmit={this.onSubmit}>
-          <input type="text" name="name" placeholder="search" />
-          <button type="submit">Search</button>
-        </form>
-
-        {results.map(game => {
-          return <p>{game.name}</p>;
-        })}
-      </div>
+      <Grid>
+        <Grid.Column width={6}>
+          <Search
+            loading={isLoading}
+            onResultSelect={this.handleResultSelect}
+            onSearchChange={e => this.onChange(e.target.value)}
+            results={results}
+            resultRenderer={resultRenderer}
+            placeholder={"Search"}
+            noResultsMessage={"No games found."}
+            {...this.props}
+          />
+        </Grid.Column>
+      </Grid>
     );
   }
 }
 
-export default Search;
+export default GameSearch;
