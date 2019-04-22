@@ -17,3 +17,7 @@
 .ui.inverted.menu .orange.active.item:hover {
   background: #f2711c !important;
 }
+
+.ui.inverted.menu .green.active.item:hover {
+  background: #21ba45 !important;
+}
