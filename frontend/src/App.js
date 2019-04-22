@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Menu, Segment, Container, Header } from "semantic-ui-react";
+import { Menu, Segment, Container, Icon, Dropdown } from "semantic-ui-react";
 import "./App.css";
 import GameSearch from "./Search";
 
@@ -30,7 +30,7 @@ export default class App extends Component {
               <Menu.Item
                 name="Lists"
                 active={activeItem === "Lists"}
-                color={"orange"}
+                color={"green"}
                 onClick={this.handleItemClick}
               />
               <Menu.Item
@@ -39,6 +39,19 @@ export default class App extends Component {
                 color={"pink"}
                 onClick={this.handleItemClick}
               />
+              <Dropdown text="Daniel" pointing className="link item">
+                <Dropdown.Menu>
+                  <Dropdown.Item><Icon name="user circle"></Icon>Profile</Dropdown.Item>
+                  <Dropdown.Item><Icon name="gamepad"></Icon>Games</Dropdown.Item>
+                  <Dropdown.Item><Icon name="list alternate"></Icon>Lists</Dropdown.Item>
+                  <Dropdown.Item><Icon name="book"></Icon>Reviews</Dropdown.Item>
+                  <Dropdown.Item><Icon name="folder"></Icon>Backlog</Dropdown.Item>
+                  <Dropdown.Item><Icon name="shopping bag"></Icon>Wishlist</Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item><Icon name="cog"></Icon>Settings</Dropdown.Item>
+                  <Dropdown.Item><Icon name="log out"></Icon>Log out</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
               <Menu.Item fitted={"vertically"}>
                 <GameSearch />
               </Menu.Item>
