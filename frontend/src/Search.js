@@ -13,37 +13,46 @@ class GameSearch extends Component {
     super();
     this.state = {
       results: [],
-      isLoading: false
+      isLoading: false,
+      value: ''
     };
 
     this.onChange = this.onChange.bind(this);
+    this.search = this.search.bind(this);
   }
 
-  handleResultSelect = (e, { result }) => window.location.reload();
+  handleResultSelect = (e, { result }) => {
+    this.setState({ results: [], isLoading: false, value: '' })
+    this.props.history.push(`/games/${result.slug}`, result)
+  };
 
-  onChange = debounce(value => {
-    if (value.length === 0) {
-      this.setState({ isLoading: false, results: [] });
+  search = debounce(value => {
+    axios
+      .get(`/api/search/${value}`)
+      .then(response => {
+        const results = response.data.map(result => ({
+          ...result,
+          key: result.id
+        }));
+        this.setState({ results: results, isLoading: false });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+  }, 300)
+
+  onChange = value => {
+    if (value.length < 1) {
+      this.setState({ isLoading: false, results: [], value: '' });
     } else {
-      this.setState({ isLoading: true });
-
-      axios
-        .get(`/api/search/${value}`)
-        .then(response => {
-          const results = response.data.map(result => ({
-            ...result,
-            key: result.id
-          }));
-          this.setState({ results: results, isLoading: false });
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+      this.setState({ isLoading: true, value: value });
+      this.search(value)
     }
-  }, 300);
+  }
 
   render() {
-    const { results, isLoading } = this.state;
+    const { results, isLoading, value } = this.state;
     return (
       <Grid>
         <Grid.Column width={6}>
@@ -54,6 +63,7 @@ class GameSearch extends Component {
             results={results}
             resultRenderer={resultRenderer}
             placeholder={"Search"}
+            value={value}
             noResultsMessage={"No games found."}
             {...this.props}
           />
