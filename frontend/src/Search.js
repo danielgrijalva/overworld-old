@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from 'react-router-dom';
 import axios from "axios";
 import { debounce } from "lodash";
 import { Search, Grid, Label } from "semantic-ui-react";
@@ -35,7 +36,7 @@ class GameSearch extends Component {
           }));
           this.setState({ results: results, isLoading: false });
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     }
@@ -62,4 +63,4 @@ class GameSearch extends Component {
   }
 }
 
-export default GameSearch;
+export default withRouter(GameSearch);
