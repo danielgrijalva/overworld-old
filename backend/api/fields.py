@@ -1,1 +1,1 @@
-fields = 'cover,first_release_date,involved_companies,name,summary'
+fields = 'cover,first_release_date,involved_companies,name,slug,summary'

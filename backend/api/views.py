@@ -31,6 +31,15 @@ def search(request, name):
     params = {'search': name, 'fields': fields}
     headers={'user-key': settings.IGDB_KEY}
     url = settings.IGDB_URL.format(endpoint='games')
-    r = requests.post(url=url, params=params, headers=headers)
+    r = requests.post(url=url, params=params, headers=headers) 
+
+    return Response(r.json())
+
+@api_view(['GET'])
+def get_cover(request, cover_id):
+    data = f'fields: image_id; where id={cover_id};'
+    headers={'user-key': settings.IGDB_KEY}
+    url = settings.IGDB_URL.format(endpoint='covers')
+    r = requests.post(url=url, data=data, headers=headers)   
 
     return Response(r.json())
