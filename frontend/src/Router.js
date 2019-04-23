@@ -1,9 +1,9 @@
 import React from "react";
-import { BrowserRouter as BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import App from './App';
 import Game from './Game';
 import Navbar from './Navbar';
-
+import Actions from './Actions'
 function NotFound() {
     return <p>Not Found</p>;
 }
@@ -16,6 +16,7 @@ function AppRouter() {
                 <Switch>
                     <Route path="/" exact component={App} />
                     <Route path="/games/:slug" component={Game} />
+                    <Route path="/lists/" component={Actions} />
                     <Route component={NotFound} />
                 </Switch >
             </BrowserRouter>
