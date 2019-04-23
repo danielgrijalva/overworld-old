@@ -1,0 +1,53 @@
+.game-header {
+    display: block !important;
+}
+
+.game-header>h1 {
+    color: #fff;
+    text-shadow: #000 2px 0 5px;
+    display: inline;
+    margin-right: 1rem;
+}
+
+.game-info, .game-header{
+    display: block;
+    font-size: 1.5rem;
+    color: #9ab;
+    text-shadow: 0 0 7px rgba(0, 0, 0, .45);
+    white-space: nowrap;
+    max-width: 100%;
+    letter-spacing: .02em;
+}
+
+.release-date {
+    margin-right: 1rem;
+}
+
+a {
+    color: #def;
+    border-bottom: 1px solid #456 !important;
+}
+
+a:hover {
+    color: #40bcf4;
+}
+
+.cover {
+    box-shadow: 0 0 7px rgba(0, 0, 0, .45);
+}
+
+.margin-bottom {
+    margin-bottom: 3rem !important;
+}
+
+.margin-bottom-sm {
+    margin-bottom: 1.5rem !important;
+}
+
+.margin-top {
+    margin-top: 3rem !important;
+}
+
+.margin-top-sm {
+    margin-top: 1.5rem !important;
+}
