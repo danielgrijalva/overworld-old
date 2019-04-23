@@ -9,7 +9,7 @@ from pprint import pprint
 
 @api_view()
 def get_game(request, igdb):
-    data = f'fields *; where id={igdb};'
+    data = f'fields {fields}; where id={igdb};'
     headers={'user-key': settings.IGDB_KEY}
     url = settings.IGDB_URL.format(endpoint='games')
     r = requests.post(url=url, data=data, headers=headers)
@@ -27,8 +27,8 @@ def log(request):
 
 
 @api_view(['GET'])
-def search(request, name):
-    params = {'search': name, 'fields': fields}
+def search_game(request, name):
+    params = {'search': name, 'fields': 'name,slug'}
     headers={'user-key': settings.IGDB_KEY}
     url = settings.IGDB_URL.format(endpoint='games')
     r = requests.post(url=url, params=params, headers=headers) 
@@ -37,27 +37,28 @@ def search(request, name):
 
 @api_view(['GET'])
 def get_cover(request, cover_id):
-    data = f'fields: image_id; where id={cover_id};'
+    data = f'fields: image_id,width,height; where id={cover_id};'
     headers={'user-key': settings.IGDB_KEY}
     url = settings.IGDB_URL.format(endpoint='covers')
     r = requests.post(url=url, data=data, headers=headers)   
 
     return Response(r.json())
 
-@api_view(['GET'])
-def get_company(request, company_id):
-    inv = get_involved_company(company_id)
+
+def get_developer_name(company_id):
     headers={'user-key': settings.IGDB_KEY}
-    data = f"fields name,slug; where id={inv[0]['company']};"
+    data = f"fields name,slug; where id={company_id};"
     url = settings.IGDB_URL.format(endpoint='companies')
     r = requests.post(url=url, data=data, headers=headers) 
 
-    return Response(r.json())
-    
-def get_involved_company(involved_company_id):
-    data = f'fields *; where id={involved_company_id};'
+    return r.json()
+
+@api_view(['GET'])
+def get_developer(request, game_id):
+    data = f'fields *; where game={game_id} & developer=true;'
     headers={'user-key': settings.IGDB_KEY}
     url = settings.IGDB_URL.format(endpoint='involved_companies')
     r = requests.post(url=url, data=data, headers=headers)
+    developer = get_developer_name(r.json()[0]['company'])
 
-    return r.json()
+    return Response(developer)
