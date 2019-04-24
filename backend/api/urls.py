@@ -7,6 +7,4 @@ urlpatterns = [
     path('log/', views.log),
     path('search/<str:name>', views.search_game),
     path('covers/<int:cover_id>', views.get_cover),
-    # path('companies/<int:company_id>', views.get_company)
-    path('developers/<int:game_id>', views.get_developer)
 ]

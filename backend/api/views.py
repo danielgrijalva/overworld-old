@@ -12,9 +12,12 @@ def get_game(request, igdb):
     data = f'fields {fields}; where id={igdb};'
     headers={'user-key': settings.IGDB_KEY}
     url = settings.IGDB_URL.format(endpoint='games')
-    r = requests.post(url=url, data=data, headers=headers)
+    r = requests.post(url=url, data=data, headers=headers).json()
 
-    return Response(r.json())
+    dev = get_developer(r[0]['id'])[0]
+    r[0]['developer'] = dev
+
+    return Response(r)
     
 @api_view(['GET', 'POST'])
 def log(request):
@@ -53,12 +56,11 @@ def get_developer_name(company_id):
 
     return r.json()
 
-@api_view(['GET'])
-def get_developer(request, game_id):
+def get_developer(game_id):
     data = f'fields *; where game={game_id} & developer=true;'
     headers={'user-key': settings.IGDB_KEY}
     url = settings.IGDB_URL.format(endpoint='involved_companies')
     r = requests.post(url=url, data=data, headers=headers)
     developer = get_developer_name(r.json()[0]['company'])
 
-    return Response(developer)
+    return developer
