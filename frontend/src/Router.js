@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import App from './App';
 import Game from './Game';
 import Navbar from './Navbar';
-import Actions from './Actions'
+import Actions from './actions/Actions'
 function NotFound() {
     return <p>Not Found</p>;
 }

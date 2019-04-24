@@ -1,9 +1,54 @@
 import React from "react";
 import { Container, Grid, Image, Loader } from "semantic-ui-react";
-import Actions from "./Actions";
+import Actions from './actions/Actions';
 import axios from "axios";
 import Moment from "react-moment";
 import "./Game.css";
+import ContentLoader from "react-content-loader"
+
+const TitleLoader = () => (
+  <ContentLoader
+    height={25}
+    width={400}
+    speed={1}
+    primaryColor="#9ab"
+    secondaryColor="#7a8895"
+    gradientRatio={1}
+
+  >
+    <rect x="0" y="0" rx="7" ry="7" width="370" height="13" />
+  </ContentLoader>
+)
+
+const ImageLoader = () => (
+  <ContentLoader
+    height={160}
+    width={200}
+    speed={1}
+    primaryColor="#9ab"
+    secondaryColor="#7a8895"
+  >
+    <rect x="0" y="0" rx="6" ry="6" width="180" height="160" />
+  </ContentLoader>
+)
+
+const ListLoader = () => (
+  <ContentLoader
+    height={110}
+    width={400}
+    speed={1}
+    primaryColor="#9ab"
+    secondaryColor="#7a8895"
+    gradientRatio={1}
+  >
+    <rect x="0" y="0" rx="5" ry="5" width="300" height="10" />
+    <rect x="20" y="20" rx="5" ry="5" width="270" height="10" />
+    <rect x="20" y="40" rx="5" ry="5" width="220" height="10" />
+    <rect x="0" y="60" rx="5" ry="5" width="300" height="10" />
+    <rect x="20" y="80" rx="5" ry="5" width="250" height="10" />
+    <rect x="20" y="100" rx="5" ry="5" width="130" height="10" />
+  </ContentLoader>
+)
 
 class Game extends React.Component {
   constructor(props) {
@@ -13,26 +58,24 @@ class Game extends React.Component {
       game: {},
       isLoading: true,
       isCoverLoading: true,
-      isCompanyLoading: true,
       cover: {},
-      company: ""
     };
   }
 
-  componentWillReceiveProps(props) {
-    if (props.location.state !== this.state.gameId) {
-      const gameId = props.location.state;
-      this.resetState(gameId);
-      this.loadGame(gameId);
-    }
-  }
+  // componentWillReceiveProps(props) {
+  //   if (props.location.state !== this.state.gameId) {
+  //     const gameId = props.location.state;
+  //     this.resetState(gameId);
+  //     this.loadGame(gameId);
+  //   }
+  // }
 
-  componentWillMount() {
-    const gameId = this.props.location.state;
-    this.resetState(gameId);
+  // componentWillMount() {
+  //   const gameId = this.props.location.state;
+  //   this.resetState(gameId);
 
-    this.loadGame(gameId);
-  }
+  //   this.loadGame(gameId);
+  // }
 
   resetState = gameId => {
     this.setState({
@@ -40,9 +83,7 @@ class Game extends React.Component {
       game: {},
       isLoading: true,
       isCoverLoading: true,
-      isCompanyLoading: true,
       cover: {},
-      company: ""
     });
   };
 
@@ -55,17 +96,15 @@ class Game extends React.Component {
   };
 
   getGameData = game => {
-    axios.all([this.getCover(game.cover), this.getDeveloper(game.id)]).then(
-      axios.spread((cover, company) => {
+    axios.all([this.getCover(game.cover)]).then(
+      axios.spread((cover) => {
         this.setState({
-          isCompanyLoading: false,
           isCoverLoading: false,
           cover: {
             cover: cover.data[0].image_id,
             width: cover.data[0].width,
             height: cover.data[0].height
           },
-          company: company.data[0]
         });
       })
     );
@@ -75,29 +114,18 @@ class Game extends React.Component {
     return axios.get(`/api/covers/${id}`);
   };
 
-  getDeveloper = gameId => {
-    return axios.get(`/api/developers/${gameId}`);
-  };
-
   render() {
     const {
       game,
       isLoading,
       isCoverLoading,
-      isCompanyLoading,
       cover,
-      company
     } = this.state;
-
-    if (isLoading) {
-      return <p>loading</p>;
-    }
 
     return (
       <Container>
         <Grid
           className="game"
-          verticalAlign={!isCoverLoading ? "top" : "middle"}
           centered
         >
           <Grid.Row>
@@ -108,33 +136,42 @@ class Game extends React.Component {
                   className="cover frame"
                   src={`https://images.igdb.com/igdb/image/upload/t_cover_big/${
                     cover.cover
-                  }.jpg`}
+                    }.jpg`}
                 />
               ) : (
-                <Loader active inline="centered" size="medium" />
-              )}
+                  <ImageLoader />
+                  // <Loader active inline="centered" size="medium" />
+                )}
             </Grid.Column>
             <Grid.Column width={8}>
               <section className="game-header margin-bottom-sm">
-                <h1>{game.name}</h1>
-                <small className="release-date">
-                  <a href="#">
-                    <Moment unix format="YYYY">
-                      {game.first_release_date}
-                    </Moment>
-                  </a>
-                </small>
+                {!isLoading ?
+                  <React.Fragment>
+                    <h1>{game.name}</h1>
+                    <small className="release-date">
+                      <a href="#">
+                        <Moment unix format="YYYY">
+                          {game.first_release_date}
+                        </Moment>
+                      </a>
+                    </small>
+                  </React.Fragment>
+                  : <TitleLoader />
+                }
               </section>
               <section className="game-info margin-bottom-sm">
-                {!isCompanyLoading ? (
+                {!isLoading ?
                   <small className="company">
-                    A game by&nbsp;
-                    <a href="#">{company.name}</a>
+                    A game by <a href="#">{game.developer.name}</a>
                   </small>
-                ) : null}
+                  :
+                  <ListLoader />
+                }
               </section>
               <section>
-                <p style={{textAlign: 'justify'}}>{game.summary}</p>
+                <p style={{ textAlign: 'justify' }}>
+                  {game.summary}
+                </p>
               </section>
             </Grid.Column>
             <Grid.Column width={4}>
