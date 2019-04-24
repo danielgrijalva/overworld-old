@@ -1,21 +1,21 @@
 import React from "react";
-import { Container, Grid, Image, Loader, Menu, Icon } from "semantic-ui-react";
-
+import { Container, Grid, Image, Loader } from "semantic-ui-react";
+import Actions from "./Actions";
 import axios from "axios";
 import Moment from "react-moment";
-import './Game.css'
+import "./Game.css";
 
 class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      gameId: '',
+      gameId: "",
       game: {},
       isLoading: true,
       isCoverLoading: true,
       isCompanyLoading: true,
       cover: {},
-      company: ''
+      company: ""
     };
   }
 
@@ -42,43 +42,42 @@ class Game extends React.Component {
       isCoverLoading: true,
       isCompanyLoading: true,
       cover: {},
-      company: ''
-    })
-  }
+      company: ""
+    });
+  };
 
   loadGame = gameId => {
-    axios.get(`/api/games/${gameId}`)
-      .then(response => {
-        const game = response.data[0];
-        this.setState({ isLoading: false, game: game })
-        this.getGameData(game)
-      })
-  }
+    axios.get(`/api/games/${gameId}`).then(response => {
+      const game = response.data[0];
+      this.setState({ isLoading: false, game: game });
+      this.getGameData(game);
+    });
+  };
 
   getGameData = game => {
-    axios.all([this.getCover(game.cover), this.getDeveloper(game.id)])
-      .then(axios.spread((cover, company) => {
+    axios.all([this.getCover(game.cover), this.getDeveloper(game.id)]).then(
+      axios.spread((cover, company) => {
         this.setState({
           isCompanyLoading: false,
           isCoverLoading: false,
           cover: {
             cover: cover.data[0].image_id,
             width: cover.data[0].width,
-            height: cover.data[0].height,
+            height: cover.data[0].height
           },
           company: company.data[0]
-        })
-      }))
-  }
+        });
+      })
+    );
+  };
 
   getCover = id => {
-    return axios.get(`/api/covers/${id}`)
-  }
-
+    return axios.get(`/api/covers/${id}`);
+  };
 
   getDeveloper = gameId => {
-    return axios.get(`/api/developers/${gameId}`)
-  }
+    return axios.get(`/api/developers/${gameId}`);
+  };
 
   render() {
     const {
@@ -87,55 +86,59 @@ class Game extends React.Component {
       isCoverLoading,
       isCompanyLoading,
       cover,
-      company } = this.state;
+      company
+    } = this.state;
 
     if (isLoading) {
-      return <p>loading</p>
+      return <p>loading</p>;
     }
 
     return (
       <Container>
-        <Grid verticalAlign={!isCoverLoading ? 'top' : 'middle'} centered>
+        <Grid
+          className="game"
+          verticalAlign={!isCoverLoading ? "top" : "middle"}
+          centered
+        >
           <Grid.Row>
             <Grid.Column width={4}>
-              {!isCoverLoading ?
+              {!isCoverLoading ? (
                 <Image
                   rounded
                   className="cover frame"
-                  src={`https://images.igdb.com/igdb/image/upload/t_cover_big/${cover.cover}.jpg`}
+                  src={`https://images.igdb.com/igdb/image/upload/t_cover_big/${
+                    cover.cover
+                  }.jpg`}
                 />
-
-                :
+              ) : (
                 <Loader active inline="centered" size="medium" />
-              }
+              )}
             </Grid.Column>
             <Grid.Column width={8}>
               <section className="game-header margin-bottom-sm">
                 <h1>{game.name}</h1>
                 <small className="release-date">
-                  <a href="#"><Moment unix format="YYYY">
-                    {game.first_release_date}
-                  </Moment></a>
+                  <a href="#">
+                    <Moment unix format="YYYY">
+                      {game.first_release_date}
+                    </Moment>
+                  </a>
                 </small>
-
               </section>
               <section className="game-info margin-bottom-sm">
-                {!isCompanyLoading ?
-                  <small className="company">A game by&nbsp;
-
+                {!isCompanyLoading ? (
+                  <small className="company">
+                    A game by&nbsp;
                     <a href="#">{company.name}</a>
                   </small>
-
-                  :
-                  null
-                }
+                ) : null}
               </section>
               <section>
-                <p>{game.summary}</p>
+                <p style={{textAlign: 'justify'}}>{game.summary}</p>
               </section>
             </Grid.Column>
             <Grid.Column width={4}>
-                n
+              <Actions />
             </Grid.Column>
           </Grid.Row>
         </Grid>
