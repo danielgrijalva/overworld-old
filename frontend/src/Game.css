@@ -9,7 +9,7 @@
   margin-right: 0.7rem;
 }
 
-.game-info,
+.game-info:not(rect),
 .game-header {
   display: block;
   font-size: 1.5rem;
@@ -54,7 +54,11 @@ a:hover {
   margin-top: 1.5rem !important;
 }
 
-.ui.actions.menu,
+.ui.menu {
+  border: none !important;
+}
+
+.ui.ui.actions.menu,
 .ui.actions.menu .actions.item {
   background: #456 !important;
 }
@@ -64,15 +68,29 @@ a:hover {
   color: #bcd !important;
 }
 
-i {
+.action-buttons i {
   text-shadow: 0 0 7px rgba(0, 0, 0, 0.25);
+  color: #9ab;
 }
 
-.star {
+.star,
+rect {
   text-shadow: none !important;
 }
 
+.half-star {
+  color: #334556 !important;
+}
+
 .stars {
-  font-size: 24px;
-  margin-top: 0.5rem;
+  margin-top: 0.8rem;
+}
+
+.lazy-load-image-background.blur {
+  filter: blur(10px);
+}
+
+.lazy-load-image-background.blur.lazy-load-image-loaded {
+  filter: none;
+  transition: filter 0.4s;
 }

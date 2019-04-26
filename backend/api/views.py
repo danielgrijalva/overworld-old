@@ -17,6 +17,9 @@ def get_game(request, igdb):
     dev = get_developer(r[0]['id'])[0]
     r[0]['developer'] = dev
 
+    cover = get_cover(r[0]['cover'])[0]
+    r[0]['cover'] = cover
+    
     return Response(r)
     
 @api_view(['GET', 'POST'])
@@ -38,14 +41,14 @@ def search_game(request, name):
 
     return Response(r.json())
 
-@api_view(['GET'])
-def get_cover(request, cover_id):
+# @api_view(['GET'])
+def get_cover(cover_id):
     data = f'fields: image_id,width,height; where id={cover_id};'
     headers={'user-key': settings.IGDB_KEY}
     url = settings.IGDB_URL.format(endpoint='covers')
     r = requests.post(url=url, data=data, headers=headers)   
 
-    return Response(r.json())
+    return r.json()
 
 
 def get_developer_name(company_id):
