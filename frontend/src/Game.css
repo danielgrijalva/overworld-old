@@ -1,7 +1,3 @@
-.game-header {
-  display: block !important;
-}
-
 .game-header > h1 {
   color: #fff;
   text-shadow: #000 2px 0 5px;
@@ -33,7 +29,10 @@ a:hover {
   color: #40bcf4;
 }
 
-.cover,
+.cover {
+  box-shadow: 0 0 0 1px rgba(221,238,255,.35) !important;
+}
+
 .actions {
   box-shadow: 0 2px 7px rgba(0, 0, 0, 0.35) !important;
 }
@@ -93,4 +92,13 @@ rect {
 .lazy-load-image-background.blur.lazy-load-image-loaded {
   filter: none;
   transition: filter 0.4s;
+}
+
+.game-content {
+  padding-top: 450px !important;
+  background-image: none;
+}
+
+.cover.placeholder {
+  image-rendering: pixelated;
 }
