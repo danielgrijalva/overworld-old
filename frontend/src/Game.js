@@ -1,13 +1,12 @@
 import React from "react";
-import { Container, Grid, Image } from "semantic-ui-react";
+import { Container, Grid } from "semantic-ui-react";
 import Actions from "./actions/Actions";
 import axios from "axios";
 import Moment from "react-moment";
 import "./Game.css";
 import ContentLoader from "react-content-loader";
-import LazyLoad from "react-lazyload";
 import { LazyImage } from "react-lazy-images";
-import  ProgressiveImage  from "react-progressive-image";
+import Backdrop from "./Backdrop";
 
 const TitleLoader = () => (
   <ContentLoader
@@ -56,6 +55,7 @@ class Game extends React.Component {
     this.state = {
       gameId: "",
       game: {},
+      screenshots: [],
       isLoading: true,
       isCoverLoading: true,
       cover: {}
@@ -88,102 +88,108 @@ class Game extends React.Component {
   };
 
   loadGame = gameId => {
-    axios.get(`/api/games/${gameId}`).then(response => {
-      const game = response.data[0];
-      console.log(game);
-      this.setState({ isLoading: false, game: game });
-      // this.getGameData(game);
-    });
-  };
-
-  getGameData = game => {
-    axios.all([this.getCover(game.cover)]).then(
-      axios.spread(cover => {
+    axios.all([this.loadGameInfo(gameId), this.loadScreenshots(gameId)]).then(
+      axios.spread((game, scr) => {
         this.setState({
-          isCoverLoading: false,
-          cover: {
-            cover: cover.data[0].image_id,
-            width: cover.data[0].width,
-            height: cover.data[0].height
-          }
+          game: game.data.results,
+          screenshots: scr.data.results,
+          isLoading: false
         });
       })
     );
   };
 
-  getCover = id => {
-    return axios.get(`/api/covers/${id}`);
+  loadGameInfo = gameId => {
+    return axios.get(`/api/games/${gameId}`);
+  };
+
+  loadScreenshots = gameId => {
+    return axios.get(`/api/screenshots/${gameId}`);
+  };
+
+  createMarkup = html => {
+    return { __html: html };
   };
 
   render() {
-    const { game, isLoading, isCoverLoading, cover } = this.state;
+    const { game, screenshots, isLoading } = this.state;
 
     return (
       <Container>
         <Grid className="game" centered>
-          <Grid.Row>
+          {!isLoading && (
+            <Backdrop
+              placeholder={
+                screenshots.length > 0
+                  ? screenshots[0].thumb_url
+                  : game.images[0].thumb_url
+              }
+              actual={
+                screenshots.length > 0
+                  ? screenshots[0].original_url
+                  : game.images[0].original
+              }
+            />
+          )}
+          <Grid.Row className="game-content">
             <Grid.Column width={4}>
-              {/* // <Image
-                //   rounded
-                //   className="cover frame"
-                //   src={`https://images.igdb.com/igdb/image/upload/t_cover_big/${
-                //     cover.cover
-                //   }.jpg`}
-                // />
-                // <LazyLoadImage
-                //   className="ui image rounded cover"
-                //   effect="blur"
-                //   placeholderSrc={`https://images.igdb.com/igdb/image/upload/t_micro/${
-                //     game.cover.image_id
-                //   }.jpg`}
-                //   src={`https://images.igdb.com/igdb/image/upload/t_cover_big/${
-                //     game.cover.image_id
-                //   }.jpg`} // use normal <img> attributes as props
-                // /> */}
-              {!isLoading && (
-                <ProgressiveImage
-                  src={`https://images.igdb.com/igdb/image/upload/t_cover_big/${
-                    game.cover.image_id
-                  }.jpg`}
-                  placeholder="tiny-image.jpg"
-                >
-                  {src => <img src={src} alt="an image" />}
-                </ProgressiveImage>
+              {!isLoading ? (
+                <LazyImage
+                  src={game.image.small_url}
+                  alt="Game cover."
+                  placeholder={({ imageProps, ref }) => (
+                    <img
+                      {...imageProps}
+                      ref={ref}
+                      className="ui rounded image cover placeholder"
+                      src={game.image.thumb_url}
+                    />
+                  )}
+                  actual={({ imageProps }) => (
+                    <img className="ui rounded image cover" {...imageProps} />
+                  )}
+                />
+              ) : (
+                <ImageLoader />
               )}
             </Grid.Column>
-            <Grid.Column width={8}>
-              <section className="game-header margin-bottom-sm">
-                {!isLoading ? (
-                  <React.Fragment>
-                    <h1>{game.name}</h1>
-                    <small className="release-date">
-                      <a href="#">
-                        <Moment unix format="YYYY">
-                          {game.first_release_date}
-                        </Moment>
-                      </a>
-                    </small>
-                  </React.Fragment>
-                ) : (
-                  <TitleLoader />
-                )}
-              </section>
-              <section className="game-info margin-bottom-sm">
-                {!isLoading ? (
-                  <small className="company">
-                    A game by <a href="#">{game.developer.name}</a>
-                  </small>
-                ) : (
-                  <ListLoader />
-                )}
-              </section>
-              <section>
-                <p style={{ textAlign: "justify" }}>{game.summary}</p>
-              </section>
-            </Grid.Column>
-            <Grid.Column width={4}>
-              <Actions />
-            </Grid.Column>
+            {!isLoading ? (
+              <React.Fragment>
+                <Grid.Column width={8}>
+                  <section className="game-header margin-bottom-sm">
+                    <React.Fragment>
+                      <h1>{game.name}</h1>
+                      <small className="release-date">
+                        <a href="#">
+                          <Moment format="YYYY">
+                            {game.original_release_date}
+                          </Moment>
+                        </a>
+                      </small>
+                    </React.Fragment>
+                  </section>
+                  <section>
+                    <span className="game-info margin-bottom-sm">
+                      <small className="company">
+                        A game by <a href="#">{game.developers[0].name}</a>
+                      </small>
+                    </span>
+                    <span
+                      style={{ textAlign: "justify" }}
+                      dangerouslySetInnerHTML={this.createMarkup(game.deck)}
+                    />
+                  </section>
+                </Grid.Column>
+                <Grid.Column width={4}>
+                  <Actions />
+                </Grid.Column>
+              </React.Fragment>
+            ) : (
+              <React.Fragment>
+                <TitleLoader />
+                <ListLoader />
+              </React.Fragment>
+            )}
           </Grid.Row>
         </Grid>
       </Container>
