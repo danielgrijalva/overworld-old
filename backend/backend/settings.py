@@ -130,7 +130,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# IGDB
+# Giant Bomb
 
-IGDB_KEY = os.getenv('IGDB_KEY')
-IGDB_URL = 'https://api-v3.igdb.com/{endpoint}/'
+GB_KEY = os.getenv('GB_KEY')
+GB_URL = 'https://www.giantbomb.com/api/{endpoint}/?format=json&api_key=' + GB_KEY
+GB_GAME_URL = 'https://www.giantbomb.com/api/game/{guid}?format=json&api_key=' + GB_KEY
+GB_IMAGES_URL = 'https://www.giantbomb.com/api/images/{guid}?filter=image_tag:{tag}&format=json&api_key=' + GB_KEY
