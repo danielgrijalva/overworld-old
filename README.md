@@ -6,7 +6,7 @@ The app is built upon React powered by a Django Rest Framework API.
 
 ### Setup
 
-* Obtain your key from [IGDB](https://api.igdb.com/) and paste it in the `.env` file:
+* Obtain your key from [Giant Bomb](https://www.giantbomb.com/api/) and paste it in the `.env` file:
 
 ```
 cp .env.default .env
@@ -30,4 +30,4 @@ npm start
 ```
 
 ## Acknowledgements
-Data from the [IGDB API](https://igdb.com).
+Data from the [Giant Bomb API](https://www.giantbomb.com/api/).

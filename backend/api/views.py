@@ -4,21 +4,14 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .serializers import GameSerializer
-from .fields import fields
-from pprint import pprint
+from .fields import fields, search_fields
 
 @api_view()
-def get_game(request, igdb):
-    data = f'fields {fields}; where id={igdb};'
-    headers={'user-key': settings.IGDB_KEY}
-    url = settings.IGDB_URL.format(endpoint='games')
-    r = requests.post(url=url, data=data, headers=headers).json()
-
-    dev = get_developer(r[0]['id'])[0]
-    r[0]['developer'] = dev
-
-    cover = get_cover(r[0]['cover'])[0]
-    r[0]['cover'] = cover
+def get_game(request, guid):
+    params = {'field_list': fields}
+    headers= {'user-agent': 'LetterboxdForVideogames'}
+    url = settings.GB_GAME_URL.format(guid=guid)
+    r = requests.get(url=url, params=params, headers=headers)
     
     return Response(r)
     
@@ -34,36 +27,17 @@ def log(request):
 
 @api_view(['GET'])
 def search_game(request, name):
-    params = {'search': name, 'fields': 'name,slug'}
-    headers={'user-key': settings.IGDB_KEY}
-    url = settings.IGDB_URL.format(endpoint='games')
-    r = requests.post(url=url, params=params, headers=headers) 
-
+    params = {'resources': 'game', 'field_list': search_fields, 'query': name}
+    headers= {'user-agent': 'LetterboxdForVideogames'}
+    url = settings.GB_URL.format(endpoint='search')
+    r = requests.get(url=url, params=params, headers=headers) 
     return Response(r.json())
 
-# @api_view(['GET'])
-def get_cover(cover_id):
-    data = f'fields: image_id,width,height; where id={cover_id};'
-    headers={'user-key': settings.IGDB_KEY}
-    url = settings.IGDB_URL.format(endpoint='covers')
-    r = requests.post(url=url, data=data, headers=headers)   
 
-    return r.json()
+@api_view(['GET'])
+def get_screenshots(request, guid):
+    url = settings.GB_IMAGES_URL.format(guid=guid, tag='Screenshots')
+    headers= {'user-agent': 'LetterboxdForVideogames'}
+    r = requests.get(url=url, headers=headers)   
 
-
-def get_developer_name(company_id):
-    headers={'user-key': settings.IGDB_KEY}
-    data = f"fields name,slug; where id={company_id};"
-    url = settings.IGDB_URL.format(endpoint='companies')
-    r = requests.post(url=url, data=data, headers=headers) 
-
-    return r.json()
-
-def get_developer(game_id):
-    data = f'fields *; where game={game_id} & developer=true;'
-    headers={'user-key': settings.IGDB_KEY}
-    url = settings.IGDB_URL.format(endpoint='involved_companies')
-    r = requests.post(url=url, data=data, headers=headers)
-    developer = get_developer_name(r.json()[0]['company'])
-
-    return developer
+    return Response(r.json())
