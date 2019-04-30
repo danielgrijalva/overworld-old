@@ -16,7 +16,7 @@ class Navbar extends Component {
     const { activeItem } = this.state;
 
     return (
-      <Segment inverted attached={true} className="margin-bottom">
+      <Segment inverted attached={true} className="navbar margin-bottom">
         <Container>
           <Menu inverted secondary>
             <Menu.Item
