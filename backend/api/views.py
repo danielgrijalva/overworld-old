@@ -13,13 +13,7 @@ def get_game(request, guid):
     url = settings.GB_GAME_URL.format(guid=guid)
     r = requests.get(url=url, params=params, headers=headers)
 
-    dev = get_developer(r[0]['id'])[0]
-    r[0]['developer'] = dev
-
-    cover = get_cover(r[0]['cover'])[0]
-    r[0]['cover'] = cover
-    
-    return Response(r)
+    return Response(r.json())
     
 @api_view(['GET', 'POST'])
 def log(request):
