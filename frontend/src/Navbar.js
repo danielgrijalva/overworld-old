@@ -16,7 +16,7 @@ class Navbar extends Component {
     const { activeItem } = this.state;
 
     return (
-      <Segment inverted attached={true}>
+      <Segment inverted attached={true} className="margin-bottom">
         <Container>
           <Menu inverted secondary>
             <Menu.Item
@@ -50,7 +50,7 @@ class Navbar extends Component {
                   <Dropdown.Item><Icon name="gamepad"></Icon>Games</Dropdown.Item>
                   <Dropdown.Item><Icon name="list alternate"></Icon>Lists</Dropdown.Item>
                   <Dropdown.Item><Icon name="book"></Icon>Reviews</Dropdown.Item>
-                  <Dropdown.Item><Icon name="folder"></Icon>Backlog</Dropdown.Item>
+                  <Dropdown.Item><Icon name="clock"></Icon>Backlog</Dropdown.Item>
                   <Dropdown.Item><Icon name="shopping bag"></Icon>Wishlist</Dropdown.Item>
                   <Dropdown.Divider />
                   <Dropdown.Item><Icon name="cog"></Icon>Settings</Dropdown.Item>

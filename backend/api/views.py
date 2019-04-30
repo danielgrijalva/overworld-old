@@ -12,8 +12,8 @@ def get_game(request, guid):
     headers= {'user-agent': 'LetterboxdForVideogames'}
     url = settings.GB_GAME_URL.format(guid=guid)
     r = requests.get(url=url, params=params, headers=headers)
-
-    return Response(r.json())
+    
+    return Response(r)
     
 @api_view(['GET', 'POST'])
 def log(request):
@@ -41,4 +41,3 @@ def get_screenshots(request, guid):
     r = requests.get(url=url, headers=headers)   
 
     return Response(r.json())
-
