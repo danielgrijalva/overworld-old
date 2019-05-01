@@ -4,6 +4,7 @@ import App from './App';
 import Game from './Game';
 import Navbar from './Navbar';
 import Actions from './actions/Actions'
+
 function NotFound() {
     return <p>Not Found</p>;
 }
