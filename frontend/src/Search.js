@@ -4,7 +4,7 @@ import axios from "axios";
 import { debounce } from "lodash";
 import { Search, Grid, Label } from "semantic-ui-react";
 
-const resultRenderer = ({ id, name, title }) => (
+const resultRenderer = ({ id, name }) => (
   <Label key={id} content={name} />
 );
 
@@ -23,16 +23,17 @@ class GameSearch extends Component {
 
   handleResultSelect = (e, { result }) => {
     this.setState({ results: [], isLoading: false, value: '' })
-    this.props.history.push(`/games/${result.slug}`, result)
+    this.props.history.push(`/games/${result.guid}`, result.guid)
   };
 
   search = debounce(value => {
     axios
       .get(`/api/search/${value}`)
       .then(response => {
-        const results = response.data.map(result => ({
+        console.log(response)
+        const results = response.data.results.map(result => ({
           ...result,
-          key: result.id
+          key: result.guid
         }));
         this.setState({ results: results, isLoading: false });
       })
@@ -64,8 +65,7 @@ class GameSearch extends Component {
             resultRenderer={resultRenderer}
             placeholder={"Search"}
             value={value}
-            noResultsMessage={"No games found."}
-            {...this.props}
+            noResultsMessage={"No games found"}
           />
         </Grid.Column>
       </Grid>

@@ -4,15 +4,14 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .serializers import GameSerializer
-from .fields import fields
-
+from .fields import fields, search_fields
 
 @api_view()
-def get_game(request, igdb):
-    data = f'fields *; where id={igdb};'
-    headers={'user-key': settings.IGDB_KEY}
-    url = settings.IGDB_URL.format(endpoint='games')
-    r = requests.post(url=url, data=data, headers=headers)
+def get_game(request, guid):
+    params = {'field_list': fields}
+    headers= {'user-agent': 'LetterboxdForVideogames'}
+    url = settings.GB_GAME_URL.format(guid=guid)
+    r = requests.get(url=url, params=params, headers=headers)
 
     return Response(r.json())
     
@@ -27,19 +26,19 @@ def log(request):
 
 
 @api_view(['GET'])
-def search(request, name):
-    params = {'search': name, 'fields': fields}
-    headers={'user-key': settings.IGDB_KEY}
-    url = settings.IGDB_URL.format(endpoint='games')
-    r = requests.post(url=url, params=params, headers=headers) 
-
+def search_game(request, name):
+    params = {'resources': 'game', 'field_list': search_fields, 'query': name}
+    headers= {'user-agent': 'LetterboxdForVideogames'}
+    url = settings.GB_URL.format(endpoint='search')
+    r = requests.get(url=url, params=params, headers=headers) 
     return Response(r.json())
+
 
 @api_view(['GET'])
-def get_cover(request, cover_id):
-    data = f'fields: image_id; where id={cover_id};'
-    headers={'user-key': settings.IGDB_KEY}
-    url = settings.IGDB_URL.format(endpoint='covers')
-    r = requests.post(url=url, data=data, headers=headers)   
+def get_screenshots(request, guid):
+    url = settings.GB_IMAGES_URL.format(guid=guid, tag='Screenshots')
+    headers= {'user-agent': 'LetterboxdForVideogames'}
+    r = requests.get(url=url, headers=headers)   
 
     return Response(r.json())
+
