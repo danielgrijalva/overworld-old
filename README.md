@@ -28,6 +28,11 @@ cd frontend/
 npm install
 npm start
 ```
+## Features
+
+So far you can search for any game and view its details in a _letterboxd-styled_ page.  
+  
+![demo](https://user-images.githubusercontent.com/11547406/56997872-7711c400-6b66-11e9-90ce-f14caae4565c.gif)
 
 ## Acknowledgements
 Data from the [Giant Bomb API](https://www.giantbomb.com/api/).
