@@ -1,6 +1,5 @@
 import React from "react";
 import ContentLoader from "react-content-loader";
-import { Grid } from "semantic-ui-react";
 
 export const TitleLoader = () => (
   <ContentLoader
