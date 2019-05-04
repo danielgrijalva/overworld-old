@@ -1,5 +1,12 @@
 import React from "react";
-import { Container, Grid } from "semantic-ui-react";
+import {
+  Container,
+  Grid,
+  Label,
+  Icon,
+  List,
+  Tab
+} from "semantic-ui-react";
 import Actions from "./actions/Actions";
 import axios from "axios";
 import Moment from "react-moment";
@@ -7,6 +14,7 @@ import { LazyImage } from "react-lazy-images";
 import Backdrop from "./Backdrop";
 import { ImageLoader, TitleLoader, ListLoader } from "./Loaders";
 import "./Game.css";
+import { External } from "./external/External";
 
 class Game extends React.Component {
   constructor(props) {
@@ -70,6 +78,27 @@ class Game extends React.Component {
     return { __html: html };
   };
 
+  getPlatform = p => {
+    switch (p) {
+      case "PlayStation 4":
+        return <Icon name="playstation" size="large" />;
+      case "Xbox One":
+        return <Icon name="xbox" size="large" />;
+      case "PC":
+        return <Icon name="windows" size="large" />;
+      case "Mac":
+        return <Icon name="apple" size="large" />;
+      case "Linux":
+        return <Icon name="linux" size="large" />;
+      case "Nintendo Switch":
+        return <Icon name="nintendo switch" size="large" />;
+      case "Android":
+        return <Icon name="android" size="large" />;
+      default:
+        return <Label className="platform">{p}</Label>;
+    }
+  };
+
   render() {
     const { game, screenshots, isLoading } = this.state;
 
@@ -94,21 +123,71 @@ class Game extends React.Component {
             <React.Fragment>
               <Grid.Column width={4}>
                 {!isLoading ? (
-                  <LazyImage
-                    src={game.image.small_url}
-                    alt="Game cover."
-                    placeholder={({ imageProps, ref }) => (
-                      <img
-                        {...imageProps}
-                        ref={ref}
-                        className="ui rounded image cover placeholder"
-                        src={game.image.thumb_url}
-                      />
-                    )}
-                    actual={({ imageProps }) => (
-                      <img className="ui rounded image cover" {...imageProps} />
-                    )}
-                  />
+                  <React.Fragment>
+                    <LazyImage
+                      src={game.image.small_url}
+                      alt="Game cover."
+                      placeholder={({ imageProps, ref }) => (
+                        <img
+                          {...imageProps}
+                          ref={ref}
+                          className="ui rounded image cover placeholder"
+                          src={game.image.thumb_url}
+                        />
+                      )}
+                      actual={({ imageProps }) => (
+                        <img
+                          className="ui rounded image cover"
+                          {...imageProps}
+                        />
+                      )}
+                    />
+                    <section className="margin-top-xs quick-stats">
+                      <List horizontal>
+                        <List.Item>
+                          <List.Content>
+                            <Icon
+                              size="small"
+                              color="green"
+                              name="circle check"
+                            />
+                            11.2k
+                          </List.Content>
+                        </List.Item>
+                        <List.Item>
+                          <List.Content>
+                            <Icon
+                              size="small"
+                              color="orange"
+                              name="heart"
+                            />
+                            7.7k
+                          </List.Content>
+                        </List.Item>
+                        <List.Item>
+                          <List.Content>
+                            <Icon
+                              size="small"
+                              color="teal"
+                              name="clock"
+                            />
+                            5k
+                          </List.Content>
+                        </List.Item>
+                        <List.Item>
+                          <List.Content>
+                            <Icon
+                              size="small"
+                              color="yellow"
+                              name="shop"
+                            />
+                            6.1k
+                          </List.Content>
+                        </List.Item>
+                      </List>
+                    </section>
+                    <External game={game} />
+                  </React.Fragment>
                 ) : (
                   <ImageLoader />
                 )}
@@ -137,6 +216,43 @@ class Game extends React.Component {
                       <span
                         style={{ textAlign: "justify" }}
                         dangerouslySetInnerHTML={this.createMarkup(game.deck)}
+                      />
+                      <Tab
+                        className="tabs margin-top"
+                        menu={{ secondary: true, pointing: true }}
+                        panes={[
+                          {
+                            menuItem: "team",
+                            render: () => (
+                              <Tab.Pane attached={false}>
+                                {game.people.map(p => (
+                                  <Label className="platform">{p.name}</Label>
+                                ))}
+                              </Tab.Pane>
+                            )
+                          },
+                          {
+                            menuItem: "genres",
+                            render: () => (
+                              <Tab.Pane attached={false}>
+                                {game.genres.map(g => (
+                                  <Label className="platform">{g.name}</Label>
+                                ))}
+                              </Tab.Pane>
+                            )
+                          },
+                          {
+                            menuItem: "platforms",
+                            render: () => (
+                              <Tab.Pane attached={false}>
+                                {game.platforms.map(p => (
+                                  <Label className="platform">{p.name}</Label>
+                                ))}
+                              </Tab.Pane>
+                            )
+                          },
+                          { menuItem: "details" }
+                        ]}
                       />
                     </section>
                   </React.Fragment>
