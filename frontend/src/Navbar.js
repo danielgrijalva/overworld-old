@@ -16,9 +16,7 @@ class Navbar extends Component {
     const { activeItem } = this.state;
 
     return (
-      <Segment inverted attached={true} className="navbar margin-bottom">
-        <Container>
-          <Menu inverted secondary>
+          <Menu className="navbar" inverted secondary>
             <Menu.Item
               content="Home"
               name=""
@@ -62,8 +60,6 @@ class Navbar extends Component {
               </Menu.Item>
             </Menu.Menu>
           </Menu>
-        </Container>
-      </Segment>
     );
   }
 }
