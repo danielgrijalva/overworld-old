@@ -22,7 +22,7 @@
   border-bottom: 2px solid #fff !important;
 }
 
-.tabs > .menu {
+.tabs > .ui.secondary.menu {
   border-bottom: 1px solid #456 !important;
 }
 
@@ -47,7 +47,7 @@
 
 .tab.details .column.details {
   margin-top: 1rem;
-  padding-left: .5rem !important;
+  padding-left: 0.5rem !important;
 }
 
 .tab.details .column {
@@ -56,4 +56,5 @@
 
 .tab.details .row {
   padding-top: 0;
+  padding-bottom: 0;
 }

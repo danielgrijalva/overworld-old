@@ -1,0 +1,9 @@
+.quick-stats,
+.quick-stats a {
+  text-align: center;
+  color: #678 !important;
+}
+
+.quick-stats a:hover {
+  color: #9ab !important;
+}

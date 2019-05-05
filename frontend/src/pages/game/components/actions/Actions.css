@@ -1,0 +1,44 @@
+.ui.menu.fluid.actions {
+  border: none !important;
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.35) !important;
+  background: #456 !important;
+  width: 85% !important;
+}
+
+.ui.menu.actions .item {
+  text-shadow: 0 0 7px rgba(0, 0, 0, 0.45);
+  color: #bcd !important;
+  background: #456 !important;
+}
+
+.action-buttons {
+  padding: 0 1rem !important;
+  margin: auto !important;
+}
+
+.action-buttons .column {
+  padding: 0.35rem 0 !important;
+}
+
+.action-buttons i {
+  text-shadow: 0 0 7px rgba(0, 0, 0, 0.25);
+  color: #9ab;
+  padding: 0 !important;
+}
+
+.star,
+rect {
+  text-shadow: none !important;
+}
+
+.half-star {
+  color: #334556 !important;
+}
+
+.rate {
+  display: inline-flex !important;
+}
+
+.stars {
+  margin-top: 0.8rem;
+}

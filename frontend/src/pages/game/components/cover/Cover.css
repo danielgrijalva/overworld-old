@@ -1,0 +1,9 @@
+.cover {
+  box-shadow: 0 0 0 1px rgb(48, 56, 64);
+}
+
+.cover.placeholder {
+  /* width: 250px;
+  height: 600px; */
+  image-rendering: pixelated;
+}
