@@ -9,7 +9,7 @@ export const TitleLoader = () => (
     primaryColor="#242b34"
     secondaryColor="#343d4c"
   >
-    <rect x="0" y="0" rx="7" ry="7" width="370" height="13" />
+    <rect x="0" y="0" rx="5" ry="5" width="260" height="10" />
   </ContentLoader>
 );
 
@@ -21,7 +21,7 @@ export const ImageLoader = () => (
     primaryColor="#242b34"
     secondaryColor="#343d4c"
   >
-    <rect x="0" y="0" rx="4" ry="4" width="200" height="160" />
+    <rect x="0" y="0" rx="4" ry="4" width="185" height="153" />
   </ContentLoader>
 );
 
@@ -33,11 +33,11 @@ export const ListLoader = () => (
     primaryColor="#242b34"
     secondaryColor="#343d4c"
   >
-    <rect x="0" y="0" rx="5" ry="5" width="300" height="10" />
-    <rect x="20" y="20" rx="5" ry="5" width="270" height="10" />
-    <rect x="20" y="40" rx="5" ry="5" width="220" height="10" />
-    <rect x="0" y="60" rx="5" ry="5" width="300" height="10" />
-    <rect x="20" y="80" rx="5" ry="5" width="250" height="10" />
-    <rect x="20" y="100" rx="5" ry="5" width="130" height="10" />
+    <rect x="0" y="0" rx="5" ry="5" width="330" height="10" />
+    <rect x="20" y="20" rx="5" ry="5" width="300" height="10" />
+    <rect x="20" y="40" rx="5" ry="5" width="250" height="10" />
+    <rect x="0" y="60" rx="5" ry="5" width="330" height="10" />
+    <rect x="20" y="80" rx="5" ry="5" width="280" height="10" />
+    <rect x="20" y="100" rx="5" ry="5" width="160" height="10" />
   </ContentLoader>
 );
