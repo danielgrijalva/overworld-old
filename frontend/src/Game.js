@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Container,
-  Grid,
-  Label,
-  Icon,
-  List,
-  Tab
-} from "semantic-ui-react";
+import { Container, Grid, Label, Icon, List, Tab } from "semantic-ui-react";
 import Actions from "./actions/Actions";
 import axios from "axios";
 import Moment from "react-moment";
@@ -15,12 +8,14 @@ import Backdrop from "./Backdrop";
 import { ImageLoader, TitleLoader, ListLoader } from "./Loaders";
 import "./Game.css";
 import { External } from "./external/External";
+import { Details } from "./details/Details";
 
 class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       gameId: "",
+      countries: [],
       game: {},
       screenshots: [],
       isLoading: true,
@@ -48,6 +43,7 @@ class Game extends React.Component {
     this.setState({
       gameId: gameId,
       game: {},
+      countries: [],
       isLoading: true,
       isCoverLoading: true,
       cover: {}
@@ -62,8 +58,22 @@ class Game extends React.Component {
           screenshots: scr.data.results,
           isLoading: false
         });
+
+        this.getCountry(game.data.results.developers[0].id);
+        this.getCountry(game.data.results.publishers[0].id);
       })
     );
+  };
+
+  getCountry = publisher_id => {
+    axios.get(`/api/games/country/${publisher_id}`).then(response => {
+      const c = response.data.results.location_country;
+      if (!this.state.countries.includes(c)) {
+        this.setState(prevState => {
+          countries: prevState.countries.push(c);
+        });
+      }
+    });
   };
 
   loadGameInfo = gameId => {
@@ -100,7 +110,7 @@ class Game extends React.Component {
   };
 
   render() {
-    const { game, screenshots, isLoading } = this.state;
+    const { game, screenshots, isLoading, countries } = this.state;
 
     return (
       <Container>
@@ -144,7 +154,7 @@ class Game extends React.Component {
                     />
                     <section className="margin-top-xs quick-stats">
                       <List horizontal>
-                        <List.Item>
+                        <List.Item as="a">
                           <List.Content>
                             <Icon
                               size="small"
@@ -154,33 +164,21 @@ class Game extends React.Component {
                             11.2k
                           </List.Content>
                         </List.Item>
-                        <List.Item>
+                        <List.Item as="a">
                           <List.Content>
-                            <Icon
-                              size="small"
-                              color="orange"
-                              name="heart"
-                            />
+                            <Icon size="small" color="orange" name="heart" />
                             7.7k
                           </List.Content>
                         </List.Item>
-                        <List.Item>
+                        <List.Item as="a">
                           <List.Content>
-                            <Icon
-                              size="small"
-                              color="teal"
-                              name="clock"
-                            />
+                            <Icon size="small" color="teal" name="clock" />
                             5k
                           </List.Content>
                         </List.Item>
-                        <List.Item>
+                        <List.Item as="a">
                           <List.Content>
-                            <Icon
-                              size="small"
-                              color="yellow"
-                              name="shop"
-                            />
+                            <Icon size="small" color="yellow" name="shop" />
                             6.1k
                           </List.Content>
                         </List.Item>
@@ -192,79 +190,42 @@ class Game extends React.Component {
                   <ImageLoader />
                 )}
               </Grid.Column>
-              <Grid.Column width={8}>
+              <Grid.Column width={12}>
                 {!isLoading ? (
-                  <React.Fragment>
-                    <section className="game-header margin-bottom-sm">
-                      <React.Fragment>
-                        <h1>{game.name}</h1>
-                        <small className="release-date">
-                          <a href="#">
-                            <Moment format="YYYY">
-                              {game.original_release_date}
-                            </Moment>
-                          </a>
-                        </small>
-                      </React.Fragment>
-                    </section>
-                    <section>
-                      <span className="game-info margin-bottom-sm">
-                        <small className="company">
-                          A game by <a href="#">{game.developers[0].name}</a>
-                        </small>
-                      </span>
-                      <span
-                        style={{ textAlign: "justify" }}
-                        dangerouslySetInnerHTML={this.createMarkup(game.deck)}
-                      />
-                      <Tab
-                        className="tabs margin-top"
-                        menu={{ secondary: true, pointing: true }}
-                        panes={[
-                          {
-                            menuItem: "team",
-                            render: () => (
-                              <Tab.Pane attached={false}>
-                                {game.people.map(p => (
-                                  <Label className="platform">{p.name}</Label>
-                                ))}
-                              </Tab.Pane>
-                            )
-                          },
-                          {
-                            menuItem: "genres",
-                            render: () => (
-                              <Tab.Pane attached={false}>
-                                {game.genres.map(g => (
-                                  <Label className="platform">{g.name}</Label>
-                                ))}
-                              </Tab.Pane>
-                            )
-                          },
-                          {
-                            menuItem: "platforms",
-                            render: () => (
-                              <Tab.Pane attached={false}>
-                                {game.platforms.map(p => (
-                                  <Label className="platform">{p.name}</Label>
-                                ))}
-                              </Tab.Pane>
-                            )
-                          },
-                          { menuItem: "details" }
-                        ]}
-                      />
-                    </section>
-                  </React.Fragment>
+                  <section className="game-header margin-bottom-sm">
+                    <h1>{game.name}</h1>
+                    <small className="release-date">
+                      <a href="#">
+                        <Moment format="YYYY">
+                          {game.original_release_date}
+                        </Moment>
+                      </a>
+                    </small>
+                    <small className="company">
+                      <a href="#">{game.developers[0].name}</a>
+                    </small>
+                  </section>
                 ) : (
-                  <React.Fragment>
-                    <TitleLoader />
-                    <ListLoader />
-                  </React.Fragment>
+                  <TitleLoader />
                 )}
-              </Grid.Column>
-              <Grid.Column width={4}>
-                <Actions />
+
+                <Grid>
+                  <Grid.Row>
+                    <Grid.Column width={10}>
+                      {!isLoading ? (
+                        <section>
+                          <p className="summary">{game.deck}</p>
+                          <Details game={game} countries={countries} />
+                        </section>
+                      ) : (
+                        <ListLoader />
+                      )}
+                    </Grid.Column>
+                    <Grid.Column width={6}>
+                      <Actions />
+                    </Grid.Column>
+                  </Grid.Row>
+                </Grid>
               </Grid.Column>
             </React.Fragment>
           </Grid.Row>
