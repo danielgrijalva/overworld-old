@@ -25,7 +25,7 @@ export const ImageLoader = () => (
   </ContentLoader>
 );
 
-export const ListLoader = () => (
+export const TextLoader = () => (
   <ContentLoader
     height={110}
     width={400}

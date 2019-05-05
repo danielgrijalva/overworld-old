@@ -17,18 +17,14 @@ export default class Backdrop extends React.Component {
                   ref={ref}
                   className="backdrop-placeholder"
                   style={{
-                    backgroundImage: `url(${
-                      this.props.placeholder
-                    })`
+                    backgroundImage: `url(${this.props.placeholder})`
                   }}
                 />
               )}
               actual={({ imageProps }) => (
                 <div
                   style={{
-                    backgroundImage: `url(${
-                      imageProps.src
-                    })`
+                    backgroundImage: `url(${imageProps.src})`
                   }}
                   className="backdrop-actual"
                 />

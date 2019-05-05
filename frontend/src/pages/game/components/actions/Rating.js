@@ -11,11 +11,11 @@ export default class Ratings extends React.Component {
     };
   }
 
-  onStarClick = (nextValue, prevValue, name) => {
+  onStarClick = nextValue => {
     this.setState({ rating: nextValue });
   };
 
-  onStarClickHalfStar = (nextValue, prevValue, name, e) => {
+  onStarClickHalfStar = (nextValue, e) => {
     const xPos =
       (e.pageX - e.currentTarget.getBoundingClientRect().left) /
       e.currentTarget.offsetWidth;
@@ -26,11 +26,7 @@ export default class Ratings extends React.Component {
 
     this.setState({ rating_half_star: nextValue });
   };
-
-  onStarHover = (nextValue, prevValue, name) => {
-    console.log(nextValue, prevValue, name);
-  };
-
+  
   render() {
     return (
       <Rating

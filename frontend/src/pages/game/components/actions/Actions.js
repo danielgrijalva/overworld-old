@@ -2,9 +2,10 @@ import React from "react";
 import { Menu } from "semantic-ui-react";
 import Buttons from "./Buttons";
 import Ratings from "./Rating";
+import "./Actions.css";
 
 class Actions extends React.Component {
-  constructor(props) {
+  constructor() {
     super();
     this.state = {
       isModalActive: false

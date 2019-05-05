@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, Icon, Popup } from "semantic-ui-react";
 
 export default class Buttons extends React.Component {
-  constructor(props) {
+  constructor() {
     super();
     this.state = {
       liked: false,
@@ -51,7 +51,7 @@ export default class Buttons extends React.Component {
                   link
                   size="big"
                   value="played"
-                  color={played ? "green" : ""}
+                  color={played ? "green" : null}
                   name="circle check"
                   onClick={this.onClick}
                 />
@@ -69,7 +69,7 @@ export default class Buttons extends React.Component {
                   link
                   size="big"
                   value="liked"
-                  color={liked ? "orange" : ""}
+                  color={liked ? "orange" : null}
                   name="heart"
                   onClick={this.onClick}
                 />
@@ -87,7 +87,7 @@ export default class Buttons extends React.Component {
                   link
                   size="big"
                   value="backlog"
-                  color={backlog ? "teal" : ""}
+                  color={backlog ? "teal" : null}
                   name="clock"
                   onClick={this.onClick}
                 />
@@ -105,7 +105,7 @@ export default class Buttons extends React.Component {
                   link
                   size="big"
                   value="wishlist"
-                  color={wishlist ? "yellow" : ""}
+                  color={wishlist ? "yellow" : null}
                   name="shop"
                   onClick={this.onClick}
                 />
