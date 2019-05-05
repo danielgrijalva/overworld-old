@@ -17,12 +17,12 @@
 }
 
 .release-date {
-  margin-right: 1rem;
+  margin-right: .7rem;
 }
 
 .game-header a,
 .game-info a {
-  color: #def;
+  color: #9ab;
   border-bottom: 1px solid #456 !important;
 }
 
@@ -68,22 +68,35 @@ a:hover {
   color: #bcd !important;
 }
 
+.action-buttons .column {
+  padding: .35rem 0 !important;
+}
+
+.action-buttons {
+  padding: 0 1rem !important;
+  margin: auto !important;
+}
+
 .action-buttons i {
   text-shadow: 0 0 7px rgba(0, 0, 0, 0.25);
   color: #9ab;
+  padding: 0 !important;
 }
 
 .ui.menu.fluid.actions {
-  width: 90% !important;
+  width: 85% !important;
 }
 
-.star,
-rect {
+.star, rect {
   text-shadow: none !important;
 }
 
 .half-star {
   color: #334556 !important;
+}
+
+.rate {
+  display: inline-flex !important;
 }
 
 .stars {
@@ -100,12 +113,24 @@ rect {
 }
 
 .game-content {
-  padding-top: 460px !important;
+  padding-top: 410px !important;
   background-image: none;
 }
 
 .cover.placeholder {
   image-rendering: pixelated;
+}
+
+.summary {
+  text-align: justify;
+  font-size: 16px;
+  line-height: 25px;
+}
+
+.popup, .popup::before {
+  background-color: #242c34 !important;
+  background: #242c34 !important;
+  color: #9ab !important;
 }
 
 .label.platform {
@@ -122,37 +147,13 @@ rect {
   background: #303840;
 }
 
-.segment.tab {
-  padding: 0;
-  margin: 0 !important;
-  background: #14181c !important;
-}
-
-.tabs a {
-  text-transform: uppercase !important;
-  color: #00e054 !important;
-}
-
-.tabs a:hover {
-  border-bottom: 2px solid #00e054 !important;
-}
-
-.tabs a.active {
-  color: #fff !important;
-  font-weight: 400 !important;
-  border-bottom: 2px solid #fff !important;
-}
-
-.tabs > .menu {
-  border-bottom: 1px solid #456 !important;
-}
-
-.tabs > .menu a {
-  font-size: 1rem;
-}
-
-.quick-stats {
+.quick-stats, .quick-stats a {
   text-align: center;
-  color: #678;
-  font-size: 10px !important;
+  color: #678 !important;
 }
+
+.quick-stats a:hover{
+  color: #fff !important;
+}
+
+
