@@ -23,7 +23,13 @@
 }
 
 .navbar {
+  width: 1200px;
+  margin: auto !important; 
   z-index: 1;
+  height: 95px;
+  background-color: transparent;
+  background-repeat: repeat-x;
+  background-image: linear-gradient(180deg,#14181c 0,rgba(20,24,28,.9) 20%,rgba(20,24,28,.8) 35%,rgba(20,24,28,.65) 45%,rgba(20,24,28,.45) 60%,rgba(20,24,28,.20) 75%,rgba(20,24,28,.1) 85%,rgba(20,24,28,0)) !important;
 }
 
 .site-header {

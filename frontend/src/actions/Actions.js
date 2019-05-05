@@ -17,11 +17,11 @@ class Actions extends React.Component {
 
   render() {
     return (
-      <Menu floated="right" icon="labeled" className="actions margin-top" vertical fluid>
+      <Menu floated="right" icon="labeled" className="actions" vertical fluid>
         <Menu.Item>
           <Buttons />
         </Menu.Item>
-        <Menu.Item>
+        <Menu.Item className="rate">
           Rate
           <Ratings />
         </Menu.Item>
