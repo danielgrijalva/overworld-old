@@ -32,7 +32,7 @@ npm start
 
 So far you can search for any game and view its details in a _letterboxd-styled_ page.  
   
-![demo](https://user-images.githubusercontent.com/11547406/56997872-7711c400-6b66-11e9-90ce-f14caae4565c.gif)
-
+![demo](https://user-images.githubusercontent.com/11547406/57188656-d0a82480-6ebf-11e9-990f-bf69a7df0d90.gif)
+  
 ## Acknowledgements
 Data from the [Giant Bomb API](https://www.giantbomb.com/api/).
