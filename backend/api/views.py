@@ -42,3 +42,12 @@ def get_screenshots(request, guid):
 
     return Response(r.json())
 
+@api_view(['GET'])
+def get_game_country(request, publisher_id):
+    company_id = f'3010-{publisher_id}'
+    url = settings.GB_COMPANY_URL.format(guid=company_id, endpoint='company')
+    headers= {'user-agent': 'LetterboxdForVideogames'}
+    params = {'field_list': 'location_country'}
+    r = requests.get(url=url, params=params, headers=headers) 
+
+    return Response(r.json())

@@ -43,8 +43,8 @@ export default class Buttons extends React.Component {
 
     return (
       <Grid className="action-buttons">
-        <Grid.Row centered columns={4} verticalAlign="middle">
-          <Grid.Column textAlign="center">
+        <Grid.Row columns={4} verticalAlign="middle">
+          <Grid.Column>
             <Popup
               trigger={
                 <Icon
