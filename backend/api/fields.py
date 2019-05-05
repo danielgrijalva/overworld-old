@@ -9,10 +9,13 @@ _fields = [
     'images',
     'image_tags',
     'name',
+    'original_game_rating',
     'original_release_date',
     'people',
     'platforms',
+    'publishers',
     'site_detail_url',
+    'themes',
 ]
 
 _search_fields = [
