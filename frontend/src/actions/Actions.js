@@ -21,7 +21,7 @@ class Actions extends React.Component {
         <Menu.Item>
           <Buttons />
         </Menu.Item>
-        <Menu.Item>
+        <Menu.Item className="rate">
           Rate
           <Ratings />
         </Menu.Item>
