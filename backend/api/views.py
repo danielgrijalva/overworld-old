@@ -51,3 +51,22 @@ def get_game_country(request, publisher_id):
     r = requests.get(url=url, params=params, headers=headers) 
 
     return Response(r.json())
+
+@api_view()
+def get_popular_games(request):
+    data = 'fields popularity,name,cover; sort popularity desc; limit 8;'
+    headers={'user-key': settings.IGDB_KEY}
+    url = settings.IGDB_URL.format(endpoint='games')
+    r = requests.post(url=url, data=data, headers=headers)
+
+    return Response(r.json())
+    
+@api_view()
+def get_igdb_cover(request, cover_id):
+    data = f'fields image_id; where id={cover_id};'
+    headers={'user-key': settings.IGDB_KEY}
+    url = settings.IGDB_URL.format(endpoint='covers')
+    r = requests.post(url=url, data=data, headers=headers)
+
+    return Response(r.json())
+    
