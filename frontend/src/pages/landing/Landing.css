@@ -1,0 +1,49 @@
+.ui .buttons .or {
+  width: 0;
+}
+
+h1 {
+  color: #fff;
+}
+
+.landing {
+  padding-top: 410px !important;
+  background-image: none;
+}
+
+.landing-header {
+  text-align: center;
+}
+
+.landing-header a {
+  color: #def;
+}
+
+.landing-header a:hover {
+  color: #fff !important;
+}
+
+.popular {
+  text-align: center;
+}
+
+.popular .image {
+  display: inline-block;
+  margin: 1rem 1rem 0 0;
+  width: 90px;
+  height: 128px;
+  background: #0c0e10;
+  box-shadow: 0 0 0 1px rgb(48, 56, 64);
+  border-radius: 0.3125rem;
+}
+
+.popular .placeholder {
+  display: inline-block;
+}
+
+.image > p {
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+}
