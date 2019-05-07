@@ -1,0 +1,21 @@
+.ui.icon.input > input {
+  background-color: #9ab;
+  color: #456;
+  border: none;
+  transition: opacity 0.2s;
+  opacity: 0.2;
+}
+
+.ui.icon.input > input:focus {
+  opacity: 1;
+  background-color: #fff;
+  color: #000;
+}
+
+.ui.icon.input > input:focus + .search.icon {
+  color: #000;
+}
+
+.ui.icon.input > .search.icon {
+  color: #9ab;
+}
