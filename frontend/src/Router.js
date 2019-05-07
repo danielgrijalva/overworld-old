@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Game from "./pages/game/Game";
 import Navbar from "./pages/app/components/navbar/Navbar";
-import Landing from './pages/landing/Landing';
+import Landing from "./pages/landing/Landing";
 
 function NotFound() {
   return <p>Not Found</p>;
