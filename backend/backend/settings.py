@@ -137,3 +137,8 @@ GB_URL = 'https://www.giantbomb.com/api/{endpoint}/?format=json&api_key=' + GB_K
 GB_GAME_URL = 'https://www.giantbomb.com/api/game/{guid}?format=json&api_key=' + GB_KEY
 GB_IMAGES_URL = 'https://www.giantbomb.com/api/images/{guid}?filter=image_tag:{tag}&format=json&api_key=' + GB_KEY
 GB_COMPANY_URL = 'https://www.giantbomb.com/api/company/{guid}?format=json&api_key=' + GB_KEY
+
+# IGDB
+
+IGDB_KEY = os.getenv('IGDB_KEY')
+IGDB_URL = 'https://api-v3.igdb.com/{endpoint}/'

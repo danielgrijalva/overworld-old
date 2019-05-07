@@ -38,7 +38,10 @@ class Game extends React.Component {
   }
 
   componentWillMount() {
-    const gameId = this.props.location.state;
+    var gameId = this.props.location.state;
+    if (!gameId) {
+      gameId = this.props.match.params.slug;
+    }
     this.resetState(gameId);
     this.loadGame(gameId);
   }
