@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import { debounce } from "lodash";
 import { Search, Grid } from "semantic-ui-react";
 import { ResultRenderer } from "./ResultRenderer";
+import "./Search.css";
 
 class GameSearch extends Component {
   constructor() {
@@ -55,7 +56,6 @@ class GameSearch extends Component {
             onSearchChange={e => this.onChange(e.target.value)}
             results={results}
             resultRenderer={ResultRenderer}
-            placeholder={"Search"}
             value={value}
             noResultsMessage={"No games found"}
           />
