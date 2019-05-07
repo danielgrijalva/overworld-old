@@ -1,21 +1,21 @@
 import React from "react";
-import './Popular.css'
+import "./Popular.css";
 
-export const Popular = ({isLoading, popular}) => (
+export const Popular = ({ isLoading, popular }) => (
   <section className="popular margin-top-xs margin-bottom">
     {!isLoading ? (
       <React.Fragment>
-        {popular.map(p => {
+        {popular.map((p, i) => {
           return (
-            <div className="cover-wrapper">
+            <div key={p.id} className="cover-wrapper">
               <img
-                key={p}
                 className="cover"
+                alt={p.name}
                 src={`https://images.igdb.com/igdb/image/upload/t_cover_big/${
                   p.image_id
                 }.jpg`}
               />
-              <div className="cover-overlay">
+              <div key={i} className="cover-overlay">
                 <strong>{p.name}</strong>
               </div>
             </div>
@@ -24,7 +24,7 @@ export const Popular = ({isLoading, popular}) => (
       </React.Fragment>
     ) : (
       <React.Fragment>
-        {[...Array(6)].map(i => (
+        {[...Array(6)].map((_, i) => (
           <div key={i} className="placeholder" />
         ))}
       </React.Fragment>

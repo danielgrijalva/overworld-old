@@ -60,7 +60,7 @@ export default class Landing extends React.Component {
         const covers = res.map(c => c.data[0].image_id);
         const { popular } = this.state;
         covers.map((c, i) => {
-          popular[i].image_id = c;
+          return (popular[i].image_id = c);
         });
         this.setState({
           popular: popular,

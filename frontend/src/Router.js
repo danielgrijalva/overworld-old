@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import App from "./pages/app/App";
 import Game from "./pages/game/Game";
 import Navbar from "./pages/app/components/navbar/Navbar";
 import Landing from './pages/landing/Landing';
