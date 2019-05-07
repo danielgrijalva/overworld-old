@@ -1,15 +1,12 @@
 import React from "react";
-import "./External.css";
 import { Icon, List, Card } from "semantic-ui-react";
+import "./External.css";
 
 export const External = ({ game }) => (
   <section className="external">
     <Card className="external margin-top-sm">
       <Card.Header className="external header">External links</Card.Header>
       <Card.Content className="external content">
-        {/* {game.platforms.map(p => {
-          return <Label className="platform">{p.name}</Label>;
-        })} */}
         <List divided relaxed>
           <List.Item>
             <List.Content

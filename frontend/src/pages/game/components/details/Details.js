@@ -14,7 +14,7 @@ export const Details = ({ game, countries }) => {
           render: () => (
             <Tab.Pane attached={false}>
               {game.people.map(p => (
-                <Label className="platform">{p.name}</Label>
+                <Label key={p.id}>{p.name}</Label>
               ))}
             </Tab.Pane>
           )
@@ -24,10 +24,10 @@ export const Details = ({ game, countries }) => {
           render: () => (
             <Tab.Pane attached={false}>
               {game.genres.map(g => (
-                <Label className="platform">{g.name}</Label>
+                <Label key={g.id}>{g.name}</Label>
               ))}
               {game.themes.map(t => (
-                <Label className="platform">{t.name}</Label>
+                <Label key={t.id}>{t.name}</Label>
               ))}
             </Tab.Pane>
           )
@@ -37,7 +37,7 @@ export const Details = ({ game, countries }) => {
           render: () => (
             <Tab.Pane attached={false}>
               {game.platforms.map(p => (
-                <Label className="platform">{p.name}</Label>
+                <Label key={p.id}>{p.name}</Label>
               ))}
             </Tab.Pane>
           )
@@ -54,7 +54,7 @@ export const Details = ({ game, countries }) => {
                     </h3>
                   </Grid.Column>
                   <Grid.Column width={8} className="details">
-                    <Label className="platform">
+                    <Label>
                       <Moment format="MMMM DD YYYY">
                         {game.original_release_date}
                       </Moment>
@@ -69,7 +69,7 @@ export const Details = ({ game, countries }) => {
                   </Grid.Column>
                   <Grid.Column width={8} className="details">
                     {countries.map(c => {
-                      return <Label className="platform">{c}</Label>;
+                      return <Label key={c}>{c}</Label>;
                     })}
                   </Grid.Column>
                 </Grid.Row>
@@ -81,7 +81,7 @@ export const Details = ({ game, countries }) => {
                   </Grid.Column>
                   <Grid.Column width={8} className="details">
                     {game.developers.map(d => {
-                      return <Label className="platform">{d.name}</Label>;
+                      return <Label key={d.id}>{d.name}</Label>;
                     })}
                   </Grid.Column>
                 </Grid.Row>
@@ -93,7 +93,7 @@ export const Details = ({ game, countries }) => {
                   </Grid.Column>
                   <Grid.Column width={8} className="details">
                     {game.publishers.map(p => {
-                      return <Label className="platform">{p.name}</Label>;
+                      return <Label key={p.id}>{p.name}</Label>;
                     })}
                   </Grid.Column>
                 </Grid.Row>
@@ -105,9 +105,7 @@ export const Details = ({ game, countries }) => {
                       </h3>
                     </Grid.Column>
                     <Grid.Column width={8} className="details">
-                      <Label className="platform">
-                        {game.original_game_rating[0].name}
-                      </Label>
+                      <Label>{game.original_game_rating[0].name}</Label>
                     </Grid.Column>
                   </Grid.Row>
                 )}
