@@ -9,6 +9,11 @@ h1 {
 .landing {
   padding-top: 410px !important;
   background-image: none;
+  text-shadow: 0 0 7px rgba(0, 0, 0, 0.45);
+}
+
+.landing a {
+  border-bottom: 1px solid #456;
 }
 
 .landing-header {
@@ -27,23 +32,137 @@ h1 {
   text-align: center;
 }
 
-.popular .image {
-  display: inline-block;
+.popular .cover-wrapper {
   margin: 1rem 1rem 0 0;
-  width: 90px;
-  height: 128px;
+  width: 135px;
+  height: 192px;
+  display: inline-flex;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgb(48, 56, 64);
+  border-radius: 0.3125rem;
+  cursor: pointer;
+}
+
+.popular .cover-wrapper:hover .cover-overlay {
+  opacity: 1;
+}
+
+.popular .cover {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.3125rem;
+}
+
+.popular .cover-overlay {
+  position: absolute;
+  opacity: 0;
+  flex-shrink: 0;
+  display: block;
+  z-index: 2;
+  width: 135px;
+  height: 192px;
+  transition: opacity 0.2s;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 0.3125rem;
+}
+
+.cover-overlay > strong {
+  color: #fff;
+  text-shadow: 0 0 7px rgba(0, 0, 0, 0.45);
+  padding: 0 0.325rem;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+}
+
+.popular .placeholder {
+  display: inline-block;
+  width: 135px;
+  height: 192px;
+  margin: 1rem 1rem 0 0;
   background: #0c0e10;
   box-shadow: 0 0 0 1px rgb(48, 56, 64);
   border-radius: 0.3125rem;
 }
 
-.popular .placeholder {
-  display: inline-block;
+.features .message {
+  text-align: left;
+  text-shadow: none;
+  color: #9ab;
+  background: #456;
+  cursor: pointer;
 }
 
-.image > p {
-  height: 100%;
-  display: inline-flex;
-  align-items: center;
-  vertical-align: middle;
+.ui.message .icon {
+  margin: 0 0.6em 0 0 !important;
+}
+
+.ui.message:hover {
+  color: #fff;
+}
+
+.ui.message.track:hover {
+  background-color: #21ba45;
+}
+
+.ui.message.like:hover {
+  background-color: #f2711c;
+}
+
+.ui.message.reviews:hover {
+  background-color: #6435c9;
+}
+
+.ui.message.rate:hover {
+  background-color: #fbbd08;
+}
+
+.ui.message.journal:hover {
+  background-color: #e03997;
+}
+
+.ui.message.lists:hover {
+  background-color: #2185d0;
+}
+
+.backdrop-name,
+.backdrop-name a {
+  color: #678;
+}
+
+.backdrop-name a:hover {
+  color: #9ab !important;
+}
+
+footer {
+  background-color: #2c3440;
+  padding: 2rem;
+  display: block;
+}
+
+/* 
+footer .list {
+  float: right;
+} */
+
+footer .list a {
+  font-size: 16px !important;
+  font-weight: 700;
+  color: #9ab !important;
+  text-shadow: 0 0 7px rgba(0, 0, 0, 0.45);
+  letter-spacing: 0.025rem;
+}
+
+footer .list a:hover {
+  color: #def !important;
+}
+
+footer .info, footer .info a {
+  padding-top: 0 !important;
+  color: #678 !important;
+}
+
+footer .info a:hover {
+  color: #9ab !important;
 }
