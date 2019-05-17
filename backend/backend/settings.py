@@ -45,15 +45,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'allauth',
-    'allauth.account',
     'api',
-    'corsheaders',
-    'rest_auth',
-    'rest_framework',
-    'rest_framework.authtoken',
     'users',
+    'corsheaders',
+    'rest_framework',
+    'knox'
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
+}
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -119,10 +120,6 @@ AUTH_PASSWORD_VALIDATORS = [
 # User authentication
 
 AUTH_USER_MODEL = 'users.CustomUser'
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-SITE_ID = 1
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
