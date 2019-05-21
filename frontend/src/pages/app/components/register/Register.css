@@ -1,0 +1,68 @@
+.ui.modal,
+.register > .content {
+  background: #456 !important;
+}
+
+.description .ui.header {
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.025rem;
+  color: #26323f;
+  margin: 0 0 0.75rem;
+}
+
+.register .close.icon {
+  color: #def;
+  top: 2rem;
+  right: 1.5rem;
+}
+
+.register {
+  padding: 1rem;
+}
+
+.register .ui.form label {
+  color: #def;
+  font-weight: 300;
+}
+
+.register .ui.form input {
+  background: #9ab;
+  transition: 0.2s;
+  border: none !important;
+}
+
+.ui.checkbox input:focus ~ label {
+  color: #def !important;
+}
+
+.ui.checkbox .box:before,
+.ui.checkbox label:before {
+  background: #def !important;
+  border: none !important;
+}
+
+.ui.checkbox input:checked ~ label:after {
+  color: #456 !important;
+}
+
+.ui.form .required.field > .checkbox:after {
+  content: "";
+}
+
+.register .button.positive {
+  margin: 0.7rem 0 1rem;
+  text-shadow: 0 0 7px rgba(0, 0, 0, 0.35);
+}
+
+.ui.error.message {
+  background-color: #f2711c;
+  color: #fff;
+  box-shadow: none;
+  margin-top: 0.7rem;
+  width: 100%;
+}
+
+.ui.error.message:not(:last-child) {
+  margin-bottom: 0.7rem;
+}
