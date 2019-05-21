@@ -3,6 +3,8 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Game from "./pages/game/Game";
 import Navbar from "./pages/app/components/navbar/Navbar";
 import Landing from "./pages/landing/Landing";
+import { Provider } from "react-redux";
+import store from "./store";
 
 function NotFound() {
   return <p>Not Found</p>;
@@ -10,7 +12,7 @@ function NotFound() {
 
 function AppRouter() {
   return (
-    <React.Fragment>
+    <Provider store={store}>
       <BrowserRouter>
         <Navbar />
         <Switch>
@@ -19,7 +21,7 @@ function AppRouter() {
           <Route component={NotFound} />
         </Switch>
       </BrowserRouter>
-    </React.Fragment>
+    </Provider>
   );
 }
 
