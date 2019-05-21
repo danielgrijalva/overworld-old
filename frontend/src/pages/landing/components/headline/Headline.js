@@ -1,5 +1,6 @@
 import React from "react";
 import { Register } from "../../../app/components/register/Register";
+import { LogIn } from "../../../app/components/login/LoginModal";
 
 import "./Headline.css";
 
@@ -9,7 +10,7 @@ export const Headline = () => (
     <p>
       Start your gaming journal now, it's free!
       <Register />
-      Or <a href="/">sign in</a> if you're already a member.
+      Or <LogIn /> if you're already a member.
     </p>
   </section>
 );

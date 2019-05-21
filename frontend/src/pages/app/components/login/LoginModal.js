@@ -1,18 +1,16 @@
 import React from "react";
-import { Modal, Button, Header } from "semantic-ui-react";
 import axios from "axios";
+import { Modal, Header } from "semantic-ui-react";
 import Error from "../errors/Error.js";
-import { RegistrationForm } from "./Form";
-import "./Register.css";
+import { LoginForm } from "./Form";
+import "./LoginModal.css";
 
-export class Register extends React.Component {
+export class LogIn extends React.Component {
   constructor() {
     super();
     this.state = {
-      email: "",
       username: "",
       password: "",
-      confirmPassword: "",
       open: false,
       errors: []
     };
@@ -26,16 +24,15 @@ export class Register extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    const { email, username, password } = this.state;
+    const { username, password } = this.state;
 
     axios
-      .post("/api/users/register/", {
-        email: email,
+      .post("/api/users/login/", {
         username: username,
-        password: password,
+        password: password
       })
       .then(response => {
-        console.log(response.data)
+        console.log(response.data);
         if (this.state.errors) {
           this.setState({ errors: [], open: false });
         }
@@ -51,21 +48,14 @@ export class Register extends React.Component {
 
   handleClose = () =>
     this.setState({
-      email: "",
       username: "",
       password: "",
-      confirmPassword: "",
       open: false,
       errors: []
     });
 
   validateForm = () => {
-    return (
-      this.state.email.length > 0 &&
-      this.state.username.length > 0 &&
-      this.state.password.length > 8 &&
-      this.state.password === this.state.confirmPassword
-    );
+    return this.state.username.length > 0 && this.state.password.length > 8;
   };
 
   render() {
@@ -76,22 +66,18 @@ export class Register extends React.Component {
         open={open}
         onClose={this.handleClose}
         trigger={
-          <Button
-            onClick={this.handleOpen}
-            color="green"
-            style={{ margin: "0 1rem" }}
-          >
-            Get Started
-          </Button>
+          <a class="sign-in" onClick={this.handleOpen}>
+            sign in
+          </a>
         }
-        className="register"
         closeIcon
+        className="register"
       >
         <Modal.Content>
           <Modal.Description>
-            <Header>Join</Header>
+            <Header>Log In</Header>
           </Modal.Description>
-          <RegistrationForm
+          <LoginForm
             validateForm={this.validateForm}
             handleChange={this.handleChange}
             handleSubmit={this.handleSubmit}
