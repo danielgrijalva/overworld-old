@@ -1,77 +1,24 @@
 import React from "react";
 import { Container } from "semantic-ui-react";
-import Backdrop from "../game/components/backdrop/Backdrop";
+import { connect } from "react-redux";
+import { getPopular, getBackdrop } from "../../actions/landing";
 import { Footer } from "../app/components/footer/Footer";
 import { Features } from "./components/features/Features";
+import { Headline } from "./components/headline/Headline";
 import { Popular } from "./components/popular/Popular";
 import { Backdrops as options } from "./Backdrops";
-import { Headline } from "./components/headline/Headline";
-import axios from "axios";
+import Backdrop from "../game/components/backdrop/Backdrop";
 import "./Landing.css";
 
-export default class Landing extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      backdrop: {},
-      popular: {},
-      popularCovers: [],
-      isLoadingPopular: true
-    };
-  }
-
+class Landing extends React.Component {
   componentWillMount() {
-    this.getBackdrop();
-    this.getPopular();
-  }
-
-  getBackdrop = () => {
     const game = options[Math.floor(Math.random() * options.length)];
-
-    this.loadBackdrop(game);
-  };
-
-  loadBackdrop = game => {
-    axios.get(`/api/screenshots/${game.gameId}`).then(response => {
-      const backdrop = response.data.results[0];
-      this.setState({
-        backdrop: {
-          ...this.state.backdrop,
-          placeholder: backdrop.thumb_url,
-          actual: backdrop.original_url,
-          name: game.name,
-          gameId: game.gameId
-        }
-      });
-    });
-  };
-
-  getPopular = () => {
-    axios.get("/api/popular/").then(response => {
-      this.setState({ popular: response.data });
-      this.getPopularCovers();
-    });
-  };
-
-  getPopularCovers = () => {
-    var games = this.state.popular.map(p => `/api/igdb/cover/${p.cover}`);
-    axios.all(games.map(l => axios.get(l))).then(
-      axios.spread((...res) => {
-        const covers = res.map(c => c.data[0].image_id);
-        const { popular } = this.state;
-        covers.map((c, i) => {
-          return (popular[i].image_id = c);
-        });
-        this.setState({
-          popular: popular,
-          isLoadingPopular: false
-        });
-      })
-    );
-  };
+    this.props.getBackdrop(game);
+    this.props.getPopular();
+  }
 
   render() {
-    const { backdrop, popular, isLoadingPopular } = this.state;
+    const { isLoadingPopular, popular, backdrop } = this.props;
     return (
       <React.Fragment>
         <Container className="padding-bottom">
@@ -96,3 +43,14 @@ export default class Landing extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  backdrop: state.landing.backdrop,
+  isLoadingPopular: state.landing.isLoadingPopular,
+  popular: state.landing.popular
+});
+
+export default connect(
+  mapStateToProps,
+  { getPopular, getBackdrop }
+)(Landing);
