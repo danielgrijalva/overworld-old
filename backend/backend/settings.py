@@ -120,13 +120,6 @@ AUTH_PASSWORD_VALIDATORS = [
 # User authentication
 
 AUTH_USER_MODEL = 'users.CustomUser'
-<<<<<<< HEAD
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-SITE_ID = 1
-=======
->>>>>>> 307750e3e68f15cc81daf6035e405f7928961a29
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
