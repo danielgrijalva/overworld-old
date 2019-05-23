@@ -1,20 +1,20 @@
 import React from "react";
 import { Modal, Button, Header } from "semantic-ui-react";
-import axios from "axios";
 import Error from "../errors/Error.js";
+import { connect } from "react-redux";
+import { register } from "../../../../actions/auth";
 import { RegistrationForm } from "./Form";
 import "./Register.css";
 
-export class Register extends React.Component {
+class Register extends React.Component {
   constructor() {
     super();
     this.state = {
       email: "",
       username: "",
       password: "",
-      confirmPassword: "",
-      open: false,
-      errors: []
+      password2: "",
+      open: false
     };
   }
 
@@ -28,23 +28,13 @@ export class Register extends React.Component {
     event.preventDefault();
     const { email, username, password } = this.state;
 
-    axios
-      .post("/api/users/register/", {
-        email: email,
-        username: username,
-        password: password,
-      })
-      .then(response => {
-        console.log(response.data)
-        if (this.state.errors) {
-          this.setState({ errors: [], open: false });
-        }
-      })
-      .catch(error => {
-        this.setState({
-          errors: Object.values(error.response.data)
-        });
-      });
+    const newUser = {
+      email,
+      username,
+      password
+    };
+
+    this.props.register(newUser);
   };
 
   handleOpen = () => this.setState({ open: true });
@@ -53,8 +43,8 @@ export class Register extends React.Component {
     this.setState({
       email: "",
       username: "",
-      password: "",
-      confirmPassword: "",
+      password1: "",
+      password2: "",
       open: false,
       errors: []
     });
@@ -63,13 +53,14 @@ export class Register extends React.Component {
     return (
       this.state.email.length > 0 &&
       this.state.username.length > 0 &&
-      this.state.password.length > 8 &&
-      this.state.password === this.state.confirmPassword
+      this.state.password.length >= 8 &&
+      this.state.password === this.state.password2
     );
   };
 
   render() {
-    const { errors, open } = this.state;
+    const { open } = this.state;
+    const { errors } = this.props;
     return (
       <Modal
         size="mini"
@@ -105,3 +96,13 @@ export class Register extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  errors: state.auth.errors,
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(
+  mapStateToProps,
+  { register }
+)(Register);

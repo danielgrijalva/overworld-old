@@ -65,3 +65,7 @@
 .navbar > .menu > .active.item {
   text-shadow: none !important;
 }
+
+.dropdown .item > a {
+  color: rgba(0, 0, 0, 0.87) !important;
+}

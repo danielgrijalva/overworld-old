@@ -21,7 +21,7 @@ export const RegistrationForm = ({
     </Form.Field>
     <Form.Field>
       <label>Confirm password</label>
-      <input type="password" name="confirmPassword" onChange={handleChange} />
+      <input type="password" name="password2" onChange={handleChange} />
     </Form.Field>
     <Button
       floated="right"

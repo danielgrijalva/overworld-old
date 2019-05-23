@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 import { Menu, Icon, Dropdown } from "semantic-ui-react";
 import GameSearch from "../search/Search";
+import LogIn from "../login/LoginModal";
+import { logout } from "../../../../actions/auth";
 import "./Navbar.css";
 
 class Navbar extends Component {
@@ -17,7 +20,7 @@ class Navbar extends Component {
 
     return (
       <Menu className="navbar" inverted secondary>
-      <div className="menu-bg" />
+        <div className="menu-bg" />
         <Menu.Item
           content="Home"
           name=""
@@ -43,43 +46,51 @@ class Navbar extends Component {
             color={"pink"}
             onClick={this.handleItemClick}
           />
-          <Dropdown text="Daniel" pointing className="link item">
-            <Dropdown.Menu>
-              <Dropdown.Item>
-                <Icon name="user circle" />
-                Profile
-              </Dropdown.Item>
-              <Dropdown.Item>
-                <Icon name="gamepad" />
-                Games
-              </Dropdown.Item>
-              <Dropdown.Item>
-                <Icon name="list alternate" />
-                Lists
-              </Dropdown.Item>
-              <Dropdown.Item>
-                <Icon name="book" />
-                Reviews
-              </Dropdown.Item>
-              <Dropdown.Item>
-                <Icon name="clock" />
-                Backlog
-              </Dropdown.Item>
-              <Dropdown.Item>
-                <Icon name="shopping bag" />
-                Wishlist
-              </Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item>
-                <Icon name="cog" />
-                Settings
-              </Dropdown.Item>
-              <Dropdown.Item>
-                <Icon name="log out" />
-                Log out
-              </Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
+          {this.props.isAuthenticated ? (
+            <Dropdown
+              text={`${this.props.user.username}`}
+              pointing
+              className="link item"
+            >
+              <Dropdown.Menu>
+                <Dropdown.Item>
+                  <Icon name="user circle" />
+                  <a href={`/${this.props.user.username}`}>Profile</a>
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <Icon name="gamepad" />
+                  Games
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <Icon name="list alternate" />
+                  Lists
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <Icon name="book" />
+                  Reviews
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <Icon name="clock" />
+                  Backlog
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <Icon name="shopping bag" />
+                  Wishlist
+                </Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item>
+                  <Icon name="cog" />
+                  <a href="/settings">Settings</a>
+                </Dropdown.Item>
+                <Dropdown.Item onClick={this.props.logout}>
+                  <Icon name="log out" />
+                  Logout
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          ) : (
+            <LogIn />
+          )}
           <Menu.Item fitted={"vertically"}>
             <GameSearch />
           </Menu.Item>
@@ -89,4 +100,12 @@ class Navbar extends Component {
   }
 }
 
-export default withRouter(Navbar);
+const mapStateToProps = state => ({
+  user: state.auth.user,
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(
+  mapStateToProps,
+  { logout }
+)(withRouter(Navbar));
