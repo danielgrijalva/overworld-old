@@ -1,6 +1,8 @@
 # letterboxd-for-games
 A [letterboxd](https://letterboxd.com) for video games.
-
+  
+![landing](https://user-images.githubusercontent.com/11547406/57320244-47f1da00-70b3-11e9-9c08-821548c351ca.png)
+  
 ## Development
 The app is built upon React powered by a Django Rest Framework API.
 

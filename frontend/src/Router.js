@@ -1,26 +1,35 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./store";
 import Game from "./pages/game/Game";
 import Navbar from "./pages/app/components/navbar/Navbar";
-import Landing from './pages/landing/Landing';
+import App from "./pages/app/App";
+import { loadUser } from "./actions/auth";
 
-function NotFound() {
+const notFound = () => {
   return <p>Not Found</p>;
-}
+};
 
-function AppRouter() {
-  return (
-    <React.Fragment>
-      <BrowserRouter>
-        <Navbar />
-        <Switch>
-          <Route path="/" exact component={Landing} />
-          <Route path="/games/:slug" component={Game} />
-          <Route component={NotFound} />
-        </Switch>
-      </BrowserRouter>
-    </React.Fragment>
-  );
+class AppRouter extends React.Component {
+  componentWillMount() {
+    store.dispatch(loadUser());
+  }
+
+  render() {
+    return (
+      <Provider store={store}>
+        <BrowserRouter>
+          <Navbar />
+          <Switch>
+            <Route path="/" exact component={App} />
+            <Route path="/games/:slug" component={Game} />
+            <Route component={notFound} />
+          </Switch>
+        </BrowserRouter>
+      </Provider>
+    );
+  }
 }
 
 export default AppRouter;

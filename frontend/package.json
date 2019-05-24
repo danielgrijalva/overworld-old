@@ -11,9 +11,13 @@
     "react-lazy-images": "^1.1.0",
     "react-moment": "^0.9.2",
     "react-rating": "^1.6.2",
+    "react-redux": "^7.0.3",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
     "react-star-rating-component": "^1.4.1",
+    "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0",
     "semantic-ui": "^2.4.2",
     "semantic-ui-react": "^0.86.0"
   },
