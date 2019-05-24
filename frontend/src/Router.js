@@ -12,7 +12,7 @@ const notFound = () => {
 };
 
 class AppRouter extends React.Component {
-  componentDidMount() {
+  componentWillMount() {
     store.dispatch(loadUser());
   }
 
