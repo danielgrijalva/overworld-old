@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import Moment from "react-moment";
 import { Container, Grid } from "semantic-ui-react";
+import { connect } from "react-redux";
 import Backdrop from "./components/backdrop/Backdrop";
 import { External } from "./components/external/External";
 import { Details } from "./components/details/Details";
@@ -159,7 +160,9 @@ class Game extends React.Component {
                     </Grid.Column>
                     <Grid.Column width={6}>
                       {/* Actions menu */}
-                      {!isLoading && <Actions />}
+                      {!isLoading && (
+                        <Actions isAuthenticated={this.props.isAuthenticated} />
+                      )}
                     </Grid.Column>
                   </Grid.Row>
                 </Grid>
@@ -172,4 +175,9 @@ class Game extends React.Component {
   }
 }
 
-export default Game;
+const mapStateToProps = state => ({
+  user: state.auth.user,
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps)(Game);

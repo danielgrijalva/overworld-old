@@ -2,6 +2,7 @@ import React from "react";
 import { Menu } from "semantic-ui-react";
 import Buttons from "./Buttons";
 import Ratings from "./Rating";
+import LogIn from '../../../app/components/login/LoginModal'
 import "./Actions.css";
 
 class Actions extends React.Component {
@@ -19,15 +20,21 @@ class Actions extends React.Component {
   render() {
     return (
       <Menu floated="right" icon="labeled" className="actions" vertical fluid>
-        <Menu.Item>
-          <Buttons />
-        </Menu.Item>
-        <Menu.Item className="rate">
-          Rate
-          <Ratings />
-        </Menu.Item>
-        <Menu.Item content="Review or log" link />
-        <Menu.Item content="Add to a list" link />
+        {this.props.isAuthenticated ? (
+          <React.Fragment>
+            <Menu.Item>
+              <Buttons />
+            </Menu.Item>
+            <Menu.Item className="rate">
+              Rate
+              <Ratings />
+            </Menu.Item>
+            <Menu.Item content="Review or log" link />
+            <Menu.Item content="Add to a list" link />
+          </React.Fragment>
+        ) : (
+          <LogIn loginText="Sign in to log, rate or review..." />
+        )}
         <Menu.Item content="Share..." link />
       </Menu>
     );
