@@ -7,7 +7,8 @@ import {
   LOGIN_FAIL,
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
-  REGISTER_FAIL
+  REGISTER_FAIL,
+  DISMISS_ERRORS
 } from "./types";
 
 export const loadUser = () => (dispatch, getState) => {
@@ -83,6 +84,10 @@ export const register = ({ email, username, password }) => dispatch => {
         payload: Object.values(error.response.data)
       });
     });
+};
+
+export const dismissErrors = () => dispatch => {
+  dispatch({ type: DISMISS_ERRORS });
 };
 
 export const tokenConfig = getState => {

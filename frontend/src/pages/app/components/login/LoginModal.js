@@ -2,7 +2,7 @@ import React from "react";
 import { Modal, Header, Menu } from "semantic-ui-react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { login } from "../../../../actions/auth";
+import { login, dismissErrors } from "../../../../actions/auth";
 import Error from "../errors/Error.js";
 import { LoginForm } from "./Form";
 import "./LoginModal.css";
@@ -32,12 +32,17 @@ class LogIn extends React.Component {
 
   handleOpen = () => this.setState({ open: true });
 
-  handleClose = () =>
+  handleClose = () => {
     this.setState({
       username: "",
       password: "",
       open: false
     });
+
+    if (this.props.errors.length > 0) {
+      this.props.dismissErrors();
+    }
+  };
 
   validateForm = () => {
     return this.state.username.length > 0 && this.state.password.length > 0;
@@ -85,5 +90,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { login }
+  { login, dismissErrors }
 )(LogIn);

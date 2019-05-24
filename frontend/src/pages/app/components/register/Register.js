@@ -2,7 +2,7 @@ import React from "react";
 import { Modal, Button, Header } from "semantic-ui-react";
 import Error from "../errors/Error.js";
 import { connect } from "react-redux";
-import { register } from "../../../../actions/auth";
+import { register, dismissErrors } from "../../../../actions/auth";
 import { RegistrationForm } from "./Form";
 import "./Register.css";
 
@@ -39,15 +39,19 @@ class Register extends React.Component {
 
   handleOpen = () => this.setState({ open: true });
 
-  handleClose = () =>
+  handleClose = () => {
     this.setState({
       email: "",
       username: "",
       password1: "",
       password2: "",
-      open: false,
-      errors: []
+      open: false
     });
+
+    if (this.props.errors.length > 0) {
+      this.props.dismissErrors();
+    }
+  };
 
   validateForm = () => {
     return (
@@ -104,5 +108,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { register }
+  { register, dismissErrors }
 )(Register);
