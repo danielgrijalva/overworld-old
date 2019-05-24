@@ -39,7 +39,7 @@ So far you can do the following:
 * Search for games
 * View several details of the game
 
-> [Demo](/medio/demo.gif) 
+> [Demo](/media/demo.gif) 
 
 ![landing](/media/landing.png)
   
