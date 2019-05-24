@@ -1,8 +1,9 @@
-# letterboxd-for-games
-A [letterboxd](https://letterboxd.com) for video games.
-  
-![landing](https://user-images.githubusercontent.com/11547406/57320244-47f1da00-70b3-11e9-9c08-821548c351ca.png)
-  
+# overworld
+
+![logo](logo.png)
+
+> *A [letterboxd](https://letterboxd.com) for video games.*
+
 ## Development
 The app is built upon React powered by a Django Rest Framework API.
 
@@ -37,4 +38,5 @@ So far you can search for any game and view its details in a _letterboxd-styled_
 ![demo](https://user-images.githubusercontent.com/11547406/57188656-d0a82480-6ebf-11e9-990f-bf69a7df0d90.gif)
   
 ## Acknowledgements
-Data from the [Giant Bomb API](https://www.giantbomb.com/api/).
+Data from the [Giant Bomb API](https://www.giantbomb.com/api/).  
+Icon made by [Freepik](https://www.freepik.com/).
