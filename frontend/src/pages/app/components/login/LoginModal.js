@@ -39,7 +39,7 @@ class LogIn extends React.Component {
       open: false
     });
 
-    if (this.props.errors.length > 0) {
+    if (this.props.errors) {
       this.props.dismissErrors();
     }
   };
@@ -52,6 +52,7 @@ class LogIn extends React.Component {
     if (this.props.isAuthenticated) {
       return <Redirect to={`/${this.props.user.username}`} />;
     }
+    
     const { open } = this.state;
     const { errors } = this.props;
     return (
@@ -59,7 +60,13 @@ class LogIn extends React.Component {
         size="mini"
         open={open}
         onClose={this.handleClose}
-        trigger={<Menu.Item name="Sign in" onClick={this.handleOpen} />}
+        trigger={
+          <Menu.Item
+            content={this.props.loginText}
+            onClick={this.handleOpen}
+            link
+          />
+        }
         closeIcon
         className="register"
       >

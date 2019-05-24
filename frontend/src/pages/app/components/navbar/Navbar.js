@@ -95,7 +95,9 @@ class Navbar extends Component {
                 </Dropdown.Menu>
               </Dropdown>
             ) : (
-              <LogIn />
+              <LogIn
+                loginText={'Sign In'}
+              />
             )}
             <Menu.Item fitted={"vertically"}>
               <GameSearch />
