@@ -11,10 +11,15 @@ import Backdrop from "../game/components/backdrop/Backdrop";
 import "./Landing.css";
 
 class Landing extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const game = options[Math.floor(Math.random() * options.length)];
-    this.props.getBackdrop(game);
-    this.props.getPopular();
+    if (Object.keys(this.props.backdrop).length === 0) {
+      this.props.getBackdrop(game);
+    }
+
+    if (this.props.popular.length === 0) {
+      this.props.getPopular();
+    }
   }
 
   render() {

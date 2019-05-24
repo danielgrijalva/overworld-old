@@ -7,7 +7,7 @@ const columnProps = { mobile: 12, computer: 4 };
 export const Features = () => (
   <section className="features">
     <Grid centered>
-      <p style={{ textTransform: "uppercase" }}>Features...</p>
+      <p style={{ letterSpacing: '.6rem' }}>•••</p>
       <Grid.Row width={12}>
         <Grid.Column {...columnProps}>
           <Message
