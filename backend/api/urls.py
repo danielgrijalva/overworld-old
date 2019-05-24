@@ -1,6 +1,5 @@
 from django.urls import path, include
 from django.conf.urls import url
-# from allauth.account.views import confirm_email
 from . import views
 from rest_framework_jwt.views import obtain_jwt_token
 

@@ -1,18 +1,19 @@
 import React from "react";
-import axios from "axios";
-import { Modal, Header } from "semantic-ui-react";
+import { Modal, Header, Menu } from "semantic-ui-react";
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { login } from "../../../../actions/auth";
 import Error from "../errors/Error.js";
 import { LoginForm } from "./Form";
 import "./LoginModal.css";
 
-export class LogIn extends React.Component {
+class LogIn extends React.Component {
   constructor() {
     super();
     this.state = {
       username: "",
       password: "",
-      open: false,
-      errors: []
+      open: false
     };
   }
 
@@ -26,22 +27,7 @@ export class LogIn extends React.Component {
     event.preventDefault();
     const { username, password } = this.state;
 
-    axios
-      .post("/api/users/login/", {
-        username: username,
-        password: password
-      })
-      .then(response => {
-        console.log(response.data);
-        if (this.state.errors) {
-          this.setState({ errors: [], open: false });
-        }
-      })
-      .catch(error => {
-        this.setState({
-          errors: Object.values(error.response.data)
-        });
-      });
+    this.props.login(username, password);
   };
 
   handleOpen = () => this.setState({ open: true });
@@ -50,32 +36,31 @@ export class LogIn extends React.Component {
     this.setState({
       username: "",
       password: "",
-      open: false,
-      errors: []
+      open: false
     });
 
   validateForm = () => {
-    return this.state.username.length > 0 && this.state.password.length > 8;
+    return this.state.username.length > 0 && this.state.password.length > 0;
   };
 
   render() {
-    const { errors, open } = this.state;
+    if (this.props.isAuthenticated) {
+      return <Redirect to={`/${this.props.user.username}`} />;
+    }
+    const { open } = this.state;
+    const { errors } = this.props;
     return (
       <Modal
         size="mini"
         open={open}
         onClose={this.handleClose}
-        trigger={
-          <a class="sign-in" onClick={this.handleOpen}>
-            sign in
-          </a>
-        }
+        trigger={<Menu.Item name="Sign in" onClick={this.handleOpen} />}
         closeIcon
         className="register"
       >
         <Modal.Content>
           <Modal.Description>
-            <Header>Log In</Header>
+            <Header>Welcome back</Header>
           </Modal.Description>
           <LoginForm
             validateForm={this.validateForm}
@@ -91,3 +76,14 @@ export class LogIn extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  errors: state.auth.errors,
+  user: state.auth.user,
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(
+  mapStateToProps,
+  { login }
+)(LogIn);

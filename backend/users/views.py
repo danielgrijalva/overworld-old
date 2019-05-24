@@ -33,3 +33,14 @@ class LoginView(generics.GenericAPIView):
                 'user': user_data.data,
                 'token': AuthToken.objects.create(user)[1]
             })    
+
+
+class UserView(generics.RetrieveAPIView):
+    permission_classes = [
+        permissions.IsAuthenticated,
+    ]
+
+    serializer_class = UserSerializer
+
+    def get_object(self):
+        return self.request.user

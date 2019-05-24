@@ -16,12 +16,12 @@ export const RegistrationForm = ({
       <input name="username" onChange={handleChange} />
     </Form.Field>
     <Form.Field>
-      <label>Password</label>
+      <label>Password (at least 8 characters)</label>
       <input type="password" name="password" onChange={handleChange} />
     </Form.Field>
     <Form.Field>
       <label>Confirm password</label>
-      <input type="password" name="confirmPassword" onChange={handleChange} />
+      <input type="password" name="password2" onChange={handleChange} />
     </Form.Field>
     <Button
       floated="right"

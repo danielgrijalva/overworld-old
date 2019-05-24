@@ -22,7 +22,7 @@ export const LoginForm = ({
       type="submit"
       disabled={!validateForm()}
     >
-      Log In
+      Sign In
     </Button>
   </Form>
 );
