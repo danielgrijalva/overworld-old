@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { Menu, Icon, Dropdown } from "semantic-ui-react";
+import { Menu, Icon, Dropdown, Container } from "semantic-ui-react";
 import GameSearch from "../search/Search";
 import LogIn from "../login/LoginModal";
 import { logout } from "../../../../actions/auth";
@@ -19,83 +19,90 @@ class Navbar extends Component {
     const { activeItem } = this.state;
 
     return (
-      <Menu className="navbar" inverted secondary>
-        <div className="menu-bg" />
-        <Menu.Item
-          content="Home"
-          name=""
-          active={activeItem === ""}
-          onClick={this.handleItemClick}
-        />
-        <Menu.Menu position={"right"}>
+      <Container>
+        <Menu className="navbar" inverted secondary>
+          <div className="menu-bg" />
           <Menu.Item
-            name="games"
-            active={activeItem === "games"}
-            color={"violet"}
+            content={
+              <React.Fragment>
+                <img alt="logo" src="/earth.svg" />
+                <h1>Overworld</h1>
+              </React.Fragment>
+            }
+            name=""
+            className="brand"
             onClick={this.handleItemClick}
           />
-          <Menu.Item
-            name="lists"
-            active={activeItem === "lists"}
-            color={"green"}
-            onClick={this.handleItemClick}
-          />
-          <Menu.Item
-            name="people"
-            active={activeItem === "people"}
-            color={"pink"}
-            onClick={this.handleItemClick}
-          />
-          {this.props.isAuthenticated ? (
-            <Dropdown
-              text={`${this.props.user.username}`}
-              pointing
-              className="link item"
-            >
-              <Dropdown.Menu>
-                <Dropdown.Item>
-                  <Icon name="user circle" />
-                  <a href={`/${this.props.user.username}`}>Profile</a>
-                </Dropdown.Item>
-                <Dropdown.Item>
-                  <Icon name="gamepad" />
-                  Games
-                </Dropdown.Item>
-                <Dropdown.Item>
-                  <Icon name="list alternate" />
-                  Lists
-                </Dropdown.Item>
-                <Dropdown.Item>
-                  <Icon name="book" />
-                  Reviews
-                </Dropdown.Item>
-                <Dropdown.Item>
-                  <Icon name="clock" />
-                  Backlog
-                </Dropdown.Item>
-                <Dropdown.Item>
-                  <Icon name="shopping bag" />
-                  Wishlist
-                </Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Item>
-                  <Icon name="cog" />
-                  <a href="/settings">Settings</a>
-                </Dropdown.Item>
-                <Dropdown.Item onClick={this.props.logout}>
-                  <Icon name="log out" />
-                  Logout
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          ) : (
-            <LogIn />
-          )}
-          <Menu.Item fitted={"vertically"}>
-            <GameSearch />
-          </Menu.Item>
-        </Menu.Menu>
-      </Menu>
+          <Menu.Menu position={"right"}>
+            <Menu.Item
+              name="games"
+              active={activeItem === "games"}
+              color={"violet"}
+              onClick={this.handleItemClick}
+            />
+            <Menu.Item
+              name="lists"
+              active={activeItem === "lists"}
+              color={"green"}
+              onClick={this.handleItemClick}
+            />
+            <Menu.Item
+              name="people"
+              active={activeItem === "people"}
+              color={"pink"}
+              onClick={this.handleItemClick}
+            />
+            {this.props.isAuthenticated ? (
+              <Dropdown
+                text={`${this.props.user.username}`}
+                pointing
+                className="link item"
+              >
+                <Dropdown.Menu>
+                  <Dropdown.Item>
+                    <Icon name="user circle" />
+                    <a href={`/${this.props.user.username}`}>Profile</a>
+                  </Dropdown.Item>
+                  <Dropdown.Item>
+                    <Icon name="gamepad" />
+                    Games
+                  </Dropdown.Item>
+                  <Dropdown.Item>
+                    <Icon name="list alternate" />
+                    Lists
+                  </Dropdown.Item>
+                  <Dropdown.Item>
+                    <Icon name="book" />
+                    Reviews
+                  </Dropdown.Item>
+                  <Dropdown.Item>
+                    <Icon name="clock" />
+                    Backlog
+                  </Dropdown.Item>
+                  <Dropdown.Item>
+                    <Icon name="shopping bag" />
+                    Wishlist
+                  </Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item>
+                    <Icon name="cog" />
+                    <a href="/settings">Settings</a>
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={this.props.logout}>
+                    <Icon name="log out" />
+                    Logout
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            ) : (
+              <LogIn />
+            )}
+            <Menu.Item fitted={"vertically"}>
+              <GameSearch />
+            </Menu.Item>
+          </Menu.Menu>
+        </Menu>
+      </Container>
     );
   }
 }
