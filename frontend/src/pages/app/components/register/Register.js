@@ -80,7 +80,7 @@ class Register extends React.Component {
       >
         <Modal.Content>
           <Modal.Description>
-            <Header>Join</Header>
+            <Header>Join Overworld</Header>
           </Modal.Description>
           <RegistrationForm
             validateForm={this.validateForm}

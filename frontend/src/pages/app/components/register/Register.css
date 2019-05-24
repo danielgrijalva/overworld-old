@@ -30,6 +30,11 @@
   background: #9ab;
   transition: 0.2s;
   border: none !important;
+  color: #000 !important;
+}
+
+.register .ui.form input::placeholder {
+ color: #456;
 }
 
 .ui.checkbox input:focus ~ label {
@@ -51,7 +56,7 @@
 }
 
 .register .button.positive {
-  margin: 0.7rem 0 1rem;
+  margin: 0.7rem 0 1.5rem;
   text-shadow: 0 0 7px rgba(0, 0, 0, 0.35);
 }
 

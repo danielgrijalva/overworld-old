@@ -16,7 +16,7 @@ export const RegistrationForm = ({
       <input name="username" onChange={handleChange} />
     </Form.Field>
     <Form.Field>
-      <label>Password</label>
+      <label>Password (at least 8 characters)</label>
       <input type="password" name="password" onChange={handleChange} />
     </Form.Field>
     <Form.Field>

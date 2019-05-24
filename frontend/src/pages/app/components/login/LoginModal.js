@@ -60,7 +60,7 @@ class LogIn extends React.Component {
       >
         <Modal.Content>
           <Modal.Description>
-            <Header>Log In</Header>
+            <Header>Welcome back</Header>
           </Modal.Description>
           <LoginForm
             validateForm={this.validateForm}
