@@ -6,7 +6,8 @@ import {
   LOGIN_FAIL,
   LOGOUT_SUCCESS,
   REGISTER_SUCCESS,
-  REGISTER_FAIL
+  REGISTER_FAIL,
+  DISMISS_ERRORS
 } from "../actions/types";
 
 const initialState = {
@@ -54,6 +55,11 @@ export default function(state = initialState, action) {
         isAuthenticated: false,
         isLoading: false,
         errors: action.payload
+      };
+    case DISMISS_ERRORS:
+      return {
+        ...state,
+        errors: []
       };
     default:
       return state;
