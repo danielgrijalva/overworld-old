@@ -1,6 +1,6 @@
 # overworld
 
-![logo](logo.png)
+![logo](/media/logo.png)
 
 > *A [letterboxd](https://letterboxd.com) for video games.*
 
@@ -33,9 +33,15 @@ npm start
 ```
 ## Features
 
-So far you can search for any game and view its details in a _letterboxd-styled_ page.  
-  
-![demo](https://user-images.githubusercontent.com/11547406/57188656-d0a82480-6ebf-11e9-990f-bf69a7df0d90.gif)
+So far you can do the following:
+* Create an account
+* Log in/out
+* Search for games
+* View several details of the game
+
+> [Demo](/medio/demo.gif) 
+
+![landing](/media/landing.png)
   
 ## Acknowledgements
 Data from the [Giant Bomb API](https://www.giantbomb.com/api/).  
