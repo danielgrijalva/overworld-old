@@ -19,7 +19,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         user = CustomUser.objects.create_user(
             validated_data['username'],
             validated_data['email'],
-                validated_data['password']
+            validated_data['password']
         )
         return user
 
@@ -29,7 +29,6 @@ class LoginSerializer(serializers.Serializer):
     password = serializers.CharField()
 
     def validate(self, data):
-        print(data)
         user = authenticate(**data)
         if user and user.is_active:
             return user
