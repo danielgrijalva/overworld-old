@@ -161,7 +161,10 @@ class Game extends React.Component {
                     <Grid.Column width={6}>
                       {/* Actions menu */}
                       {!isLoading && (
-                        <Actions isAuthenticated={this.props.isAuthenticated} />
+                        <Actions
+                          game={game}
+                          isAuthenticated={this.props.isAuthenticated}
+                        />
                       )}
                     </Grid.Column>
                   </Grid.Row>
@@ -180,4 +183,6 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(mapStateToProps)(Game);
+export default connect(
+  mapStateToProps,
+)(Game);
