@@ -2,7 +2,7 @@ import React from "react";
 import { Menu } from "semantic-ui-react";
 import Buttons from "./Buttons";
 import Ratings from "./Rating";
-import LogIn from '../../../app/components/login/LoginModal'
+import LogIn from "../../../app/components/login/LoginModal";
 import "./Actions.css";
 
 class Actions extends React.Component {
@@ -23,7 +23,7 @@ class Actions extends React.Component {
         {this.props.isAuthenticated ? (
           <React.Fragment>
             <Menu.Item>
-              <Buttons />
+              <Buttons game={this.props.game} />
             </Menu.Item>
             <Menu.Item className="rate">
               Rate
@@ -42,3 +42,11 @@ class Actions extends React.Component {
 }
 
 export default Actions;
+
+// on Actions mount:
+// backend:
+// check if relation user-game exists in LOGS (or LIKES, etc.) table
+// return boolean for each action
+// { logged: true, liked: false, wishlist: false, backlog: false }
+// frontned
+// store data in redux, keep following same approach
