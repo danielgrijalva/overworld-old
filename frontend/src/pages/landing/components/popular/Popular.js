@@ -24,7 +24,7 @@ export const Popular = ({ isLoading, popular }) => (
       </React.Fragment>
     ) : (
       <React.Fragment>
-        {[...Array(6)].map((_, i) => (
+        {[...Array(7)].map((_, i) => (
           <div key={i} className="placeholder" />
         ))}
       </React.Fragment>
