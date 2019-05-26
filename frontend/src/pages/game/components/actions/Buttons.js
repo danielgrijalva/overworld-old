@@ -55,93 +55,98 @@ class Buttons extends React.Component {
       default:
         break;
     }
-  }, 250);
+  }, 200);
 
   render() {
     const { played, liked, backlog, wishlist } = this.props.actions;
-    return (
-      <Grid className="action-buttons">
-        <Grid.Row columns={4} verticalAlign="middle">
-          <Grid.Column>
-            <Popup
-              trigger={
-                <Icon
-                  link
-                  size="big"
-                  value="played"
-                  color={played ? "green" : null}
-                  name="circle check"
-                  onClick={this.onClick}
-                />
-              }
-              content={"Played"}
-              position="top center"
-              size="tiny"
-              inverted
-            />
-          </Grid.Column>
-          <Grid.Column textAlign="center">
-            <Popup
-              trigger={
-                <Icon
-                  link
-                  size="big"
-                  value="liked"
-                  color={liked ? "orange" : null}
-                  name="heart"
-                  onClick={this.onClick}
-                />
-              }
-              content={"Like"}
-              position="top center"
-              size="tiny"
-              inverted
-            />
-          </Grid.Column>
-          <Grid.Column textAlign="center">
-            <Popup
-              trigger={
-                <Icon
-                  link
-                  size="big"
-                  value="backlog"
-                  color={backlog ? "teal" : null}
-                  name="clock"
-                  onClick={this.onClick}
-                />
-              }
-              content={"Add to backlog"}
-              position="top center"
-              size="tiny"
-              inverted
-            />
-          </Grid.Column>
-          <Grid.Column textAlign="center">
-            <Popup
-              trigger={
-                <Icon
-                  link
-                  size="big"
-                  value="wishlist"
-                  color={wishlist ? "yellow" : null}
-                  name="shop"
-                  onClick={this.onClick}
-                />
-              }
-              content={"Add to wishlist"}
-              position="top center"
-              size="tiny"
-              inverted
-            />
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-    );
+    if (!this.props.loadingActions) {
+      return (
+        <Grid className="action-buttons">
+          <Grid.Row columns={4} verticalAlign="middle">
+            <Grid.Column>
+              <Popup
+                trigger={
+                  <Icon
+                    link
+                    size="big"
+                    value="played"
+                    color={played ? "green" : null}
+                    name="circle check"
+                    onClick={this.onClick}
+                  />
+                }
+                content={"Played"}
+                position="top center"
+                size="tiny"
+                inverted
+              />
+            </Grid.Column>
+            <Grid.Column textAlign="center">
+              <Popup
+                trigger={
+                  <Icon
+                    link
+                    size="big"
+                    value="liked"
+                    color={liked ? "orange" : null}
+                    name="heart"
+                    onClick={this.onClick}
+                  />
+                }
+                content={"Like"}
+                position="top center"
+                size="tiny"
+                inverted
+              />
+            </Grid.Column>
+            <Grid.Column textAlign="center">
+              <Popup
+                trigger={
+                  <Icon
+                    link
+                    size="big"
+                    value="backlog"
+                    color={backlog ? "teal" : null}
+                    name="clock"
+                    onClick={this.onClick}
+                  />
+                }
+                content={"Add to backlog"}
+                position="top center"
+                size="tiny"
+                inverted
+              />
+            </Grid.Column>
+            <Grid.Column textAlign="center">
+              <Popup
+                trigger={
+                  <Icon
+                    link
+                    size="big"
+                    value="wishlist"
+                    color={wishlist ? "yellow" : null}
+                    name="shop"
+                    onClick={this.onClick}
+                  />
+                }
+                content={"Add to wishlist"}
+                position="top center"
+                size="tiny"
+                inverted
+              />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      );
+    } else {
+      return null;
+    }
   }
 }
 
 const mapStateToProps = state => ({
-  actions: state.game.actions
+  actions: state.game.actions,
+  loadingActions: state.game.loadingActions
 });
 
 export default connect(

@@ -46,3 +46,7 @@ rect {
 .stars {
   margin-top: 0.8rem;
 }
+
+.ui.floated.menu .item:last-child:before {
+  display: initial;
+}

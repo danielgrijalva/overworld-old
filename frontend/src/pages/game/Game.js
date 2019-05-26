@@ -2,15 +2,15 @@ import React from "react";
 import axios from "axios";
 import Moment from "react-moment";
 import { Container, Grid } from "semantic-ui-react";
-import { connect } from "react-redux";
 import Backdrop from "./components/backdrop/Backdrop";
-import { External } from "./components/external/External";
 import { Details } from "./components/details/Details";
 import Actions from "./components/actions/Actions";
 import { QuickStats } from "./components/quick-stats/QuickStats";
 import { Cover } from "./components/cover/Cover";
+import { Footer } from "../app/components/footer/Footer";
 import {
   ImageLoader,
+  ActionsLoader,
   TitleLoader,
   TextLoader
 } from "./components/loaders/Loaders";
@@ -96,93 +96,87 @@ class Game extends React.Component {
     const { game, screenshots, isLoading, countries } = this.state;
 
     return (
-      <Container>
-        <Grid className="game" centered>
-          {!isLoading && (
-            <Backdrop
-              placeholder={
-                screenshots.length > 0
-                  ? screenshots[0].thumb_url
-                  : game.images[0].thumb_url
-              }
-              actual={
-                screenshots.length > 0
-                  ? screenshots[0].original_url
-                  : game.images[0].original
-              }
-            />
-          )}
-          <Grid.Row className="game-content">
-            <React.Fragment>
-              <Grid.Column width={4}>
-                {/* Game cover/poster */}
-                {!isLoading ? (
-                  <React.Fragment>
-                    <Cover image={game.image} />
-                    <QuickStats />
-                    <External game={game} />
-                  </React.Fragment>
-                ) : (
-                  <ImageLoader />
-                )}
-              </Grid.Column>
-              <Grid.Column width={12}>
-                {/* Game title */}
-                {!isLoading ? (
-                  <section className="game-header margin-bottom-sm">
-                    <h1>{game.name}</h1>
-                    <small className="release-date">
-                      <a href="/">
-                        <Moment format="YYYY">
-                          {game.original_release_date}
-                        </Moment>
-                      </a>
-                    </small>
-                    <small className="company">
-                      <a href="/">{game.developers[0].name}</a>
-                    </small>
-                  </section>
-                ) : (
-                  <TitleLoader />
-                )}
-                <Grid>
-                  <Grid.Row>
-                    <Grid.Column width={10}>
-                      {/* Game summary & details */}
-                      {!isLoading ? (
-                        <section>
-                          <p className="summary">{game.deck}</p>
-                          <Details game={game} countries={countries} />
-                        </section>
-                      ) : (
-                        <TextLoader />
-                      )}
-                    </Grid.Column>
-                    <Grid.Column width={6}>
-                      {/* Actions menu */}
-                      {!isLoading && (
-                        <Actions
-                          game={game}
-                          isAuthenticated={this.props.isAuthenticated}
-                        />
-                      )}
-                    </Grid.Column>
-                  </Grid.Row>
-                </Grid>
-              </Grid.Column>
-            </React.Fragment>
-          </Grid.Row>
-        </Grid>
-      </Container>
+      <React.Fragment>
+        <Container>
+          <Grid className="game" centered>
+            {!isLoading && (
+              <Backdrop
+                placeholder={
+                  screenshots.length > 0
+                    ? screenshots[0].thumb_url
+                    : game.images[0].thumb_url
+                }
+                actual={
+                  screenshots.length > 0
+                    ? screenshots[0].original_url
+                    : game.images[0].original
+                }
+              />
+            )}
+            <Grid.Row className="game-content">
+              <React.Fragment>
+                <Grid.Column width={4}>
+                  {/* Game cover/poster */}
+                  {!isLoading ? (
+                    <React.Fragment>
+                      <Cover image={game.image} />
+                      <QuickStats />
+                    </React.Fragment>
+                  ) : (
+                    <ImageLoader />
+                  )}
+                </Grid.Column>
+                <Grid.Column width={12}>
+                  {/* Game title */}
+                  {!isLoading ? (
+                    <section className="game-header margin-bottom-sm">
+                      <h1>{game.name}</h1>
+                      <small className="release-date">
+                        <a href="/">
+                          <Moment format="YYYY">
+                            {game.original_release_date}
+                          </Moment>
+                        </a>
+                      </small>
+                      <small className="company">
+                        <a href="/">{game.developers[0].name}</a>
+                      </small>
+                    </section>
+                  ) : (
+                    <TitleLoader />
+                  )}
+                  <Grid>
+                    <Grid.Row>
+                      <Grid.Column width={10}>
+                        {/* Game summary & details */}
+                        {!isLoading ? (
+                          <section>
+                            <p className="summary">{game.deck}</p>
+                            <Details game={game} countries={countries} />
+                          </section>
+                        ) : (
+                          <TextLoader />
+                        )}
+                      </Grid.Column>
+                      <Grid.Column width={6}>
+                        {/* Actions menu */}
+                        {!isLoading ? (
+                          <Actions game={game} />
+                        ) : (
+                          <ActionsLoader />
+                        )}
+                      </Grid.Column>
+                    </Grid.Row>
+                  </Grid>
+                </Grid.Column>
+              </React.Fragment>
+            </Grid.Row>
+          </Grid>
+        </Container>
+        {!isLoading && (<Footer />)}
+      </React.Fragment>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  user: state.auth.user,
-  isAuthenticated: state.auth.isAuthenticated
-});
-
-export default connect(
-  mapStateToProps,
-)(Game);
+export default Game;
