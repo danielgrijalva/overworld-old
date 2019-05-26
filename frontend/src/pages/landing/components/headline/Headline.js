@@ -10,7 +10,7 @@ export const Headline = () => (
     <p>
       Start your gaming journal now, it's free!
       <Register />
-      Or <LogIn /> if you're already a member.
+      Or <LogIn loginText="sign in"/> if you're already a member.
     </p>
   </section>
 );

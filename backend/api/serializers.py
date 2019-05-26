@@ -1,10 +1,15 @@
 from .models import Game
 from rest_framework import serializers
+from .models import Game, Ratings
 
 
-class GameSerializer(serializers.Serializer):
-    igdb = serializers.IntegerField()
-    name = serializers.CharField()
+class GameSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Game
+        fields = ('gb', 'name',)
 
-    def create(self, validated_data):
-        return Game.objects.create(**validated_data)    
+
+class RatingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ratings
+        fields = ('game', 'user', 'rating')

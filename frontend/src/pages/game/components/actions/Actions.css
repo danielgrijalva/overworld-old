@@ -11,6 +11,10 @@
   background: #456 !important;
 }
 
+.ui.menu.actions .item:hover {
+  color: #def !important;
+}
+
 .action-buttons {
   padding: 0 1rem !important;
   margin: auto !important;
@@ -41,4 +45,8 @@ rect {
 
 .stars {
   margin-top: 0.8rem;
+}
+
+.ui.floated.menu .item:last-child:before {
+  display: initial;
 }
