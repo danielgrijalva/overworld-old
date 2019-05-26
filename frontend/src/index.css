@@ -70,3 +70,8 @@ a:hover {
 .padding-top-xs {
   padding-top: 0.75rem !important;
 }
+
+::selection {
+  color: #fff;
+  background: #48c5ff;
+}
