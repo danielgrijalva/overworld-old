@@ -15,6 +15,7 @@ urlpatterns = [
     path('actions/remove-wishlist/', views.RemoveWishlist.as_view()),
     path('actions/backlog/', views.Backlog.as_view()),
     path('actions/remove-backlog/', views.RemoveBacklog.as_view()),
+    path('actions/ratings/', views.Rate.as_view()),
     path('search/<str:name>', views.search_game),
     path('screenshots/<str:guid>', views.get_screenshots),
     path('games/country/<str:publisher_id>', views.get_game_country),

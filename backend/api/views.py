@@ -7,9 +7,9 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from users.serializers import UserSerializer
 from users.models import CustomUser
-from .serializers import GameSerializer
+from .serializers import GameSerializer, RatingSerializer
 from .fields import fields, search_fields
-from .models import Game
+from .models import Game, Ratings
 
 
 @api_view()
@@ -53,7 +53,7 @@ def get_game_country(request, publisher_id):
 
 @api_view()
 def get_popular_games(request):
-    data = 'fields popularity,name,cover; sort popularity desc; limit 6;'
+    data = 'fields popularity,name,cover; sort popularity desc; limit 7;'
     headers = {'user-key': settings.IGDB_KEY}
     url = settings.IGDB_URL.format(endpoint='games')
     r = requests.post(url=url, data=data, headers=headers)
@@ -106,8 +106,6 @@ class Log(generics.GenericAPIView):
         if game in user.backlog.all():
             user.backlog.remove(game)
             serializer['removedFromBacklog'] = True
-    
-        print(serializer)
 
         return Response(serializer)
 
@@ -192,5 +190,38 @@ class RemoveWishlist(generics.GenericAPIView):
         user = CustomUser.objects.get(id=request.user.id)
         user.wishlist.remove(game)
         serializer = GameSerializer(game).data
+
+        return Response(serializer)
+
+
+class Rate(generics.GenericAPIView):
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get(self, request, *args, **kwargs):
+        try:
+            gb = request.GET['game']
+            game = Game.objects.get(gb=gb)
+            user = CustomUser.objects.get(id=request.user.id)
+            r = Ratings.objects.get(game=game, user=user)
+        except ObjectDoesNotExist:
+            return Response([])
+
+        serializer = RatingSerializer(r)
+
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        rating = request.data['rating']
+        gb = request.data['game']
+        game, _ = Game.objects.get_or_create(gb=gb)
+        user = CustomUser.objects.get(id=request.user.id)
+
+        r, _ = Ratings.objects.get_or_create(game=game, user=user)
+        previous_rating = r.rating
+        r.rating = rating
+        r.save()
+
+        serializer = RatingSerializer(r).data
+        serializer['previousRating'] = previous_rating
 
         return Response(serializer)
