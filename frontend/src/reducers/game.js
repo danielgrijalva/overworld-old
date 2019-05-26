@@ -7,11 +7,18 @@ import {
   ADD_TO_BACKLOG,
   REMOVE_FROM_BACKLOG,
   ADD_TO_WISHLIST,
-  REMOVE_FROM_WISHLIST
+  REMOVE_FROM_WISHLIST,
+  LOAD_RATING,
+  RATE_GAME,
+  ACTIONS_LOADING,
+  RATING_LOADING
 } from "../actions/types";
 
 const initialState = {
-  actions: {}
+  actions: {},
+  loadingActions: null,
+  loadingRating: null,
+  rating: 0
 };
 
 export default function(state = initialState, action) {
@@ -19,7 +26,13 @@ export default function(state = initialState, action) {
     case LOAD_ACTIONS:
       return {
         ...state,
-        actions: action.payload
+        actions: action.payload,
+        loadingActions: false
+      };
+    case ACTIONS_LOADING:
+      return {
+        ...state,
+        loadingActions: true
       };
     case LOG_GAME:
       return {
@@ -85,6 +98,19 @@ export default function(state = initialState, action) {
           wishlist: false
         }
       };
+    case RATE_GAME:
+    case LOAD_RATING:
+      return {
+        ...state,
+        rating: action.payload.rating,
+        loadingRating: false
+      };
+    case RATING_LOADING:
+      return {
+        ...state,
+        loadingRating: true,
+        rating: 0
+      }
     default:
       return state;
   }

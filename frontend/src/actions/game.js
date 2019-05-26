@@ -8,11 +8,16 @@ import {
   ADD_TO_BACKLOG,
   REMOVE_FROM_BACKLOG,
   ADD_TO_WISHLIST,
-  REMOVE_FROM_WISHLIST
+  REMOVE_FROM_WISHLIST,
+  LOAD_RATING,
+  RATE_GAME,
+  ACTIONS_LOADING,
+  RATING_LOADING
 } from "./types";
 import { tokenConfig } from "./auth";
 
 export const loadActions = (gameId, name) => (dispatch, getState) => {
+  dispatch({ type: ACTIONS_LOADING });
   axios
     .get(`/api/actions/`, {
       params: {
@@ -198,6 +203,47 @@ export const removeFromWishlist = (gameId, name) => (dispatch, getState) => {
     .then(res => {
       dispatch({
         type: REMOVE_FROM_WISHLIST,
+        payload: res.data
+      });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+export const loadRating = gameId => (dispatch, getState) => {
+  dispatch({ type: RATING_LOADING });
+  axios
+    .get(`/api/actions/ratings`, {
+      params: {
+        game: gameId
+      },
+      headers: tokenConfig(getState).headers
+    })
+    .then(res => {
+      dispatch({
+        type: LOAD_RATING,
+        payload: res.data
+      });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+export const rate = (gameId, rating) => (dispatch, getState) => {
+  axios
+    .post(
+      "/api/actions/ratings/",
+      {
+        game: gameId,
+        rating: rating
+      },
+      tokenConfig(getState)
+    )
+    .then(res => {
+      dispatch({
+        type: RATE_GAME,
         payload: res.data
       });
     })
