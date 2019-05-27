@@ -9,6 +9,18 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'email')
 
 
+class ProfileSerializer(serializers.ModelSerializer):
+    played = serializers.SlugRelatedField(
+        many=True,
+        read_only=True,
+        slug_field='name'
+    )
+
+    class Meta:
+        model = CustomUser
+        fields = ('id', 'username', 'played', 'liked', 'backlog', 'wishlist')
+
+
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
