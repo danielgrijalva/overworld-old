@@ -4,39 +4,34 @@
 
 > ### *A [letterboxd](https://letterboxd.com) for video games.*
 
+* [About](#about)
+  + [Inspiration](#inspiration)
 * [Development](#development)
-  + [Setup](#setup)
+  + [Contributing](#contributing)
 * [Features](#features)
 * [Acknowledgements](#acknowledgements)
+
+## About
+
+If you use Letterboxd you probably know what this project is about. If not...  
   
+**Overworld** is a place where you can share your gaming experiences, keep track of what you play, discover games, manage your backlog, show love to your favorite games, write reviews, compile lists of specific games and *Much More Stuff™*.  
+
+Follow other people to discuss or discover new games, or you can be a lone wolf and use it as a personal gaming journal.  
+  
+The project is still in early development. If you have any suggestions, [file an issue](https://github.com/danielgrijalva/overworld/issues/new/choose) or even better, [start contributing](/CONTRIBUTING.md)!
+
+### Inspiration
+
+Overworld is _heavily_ inspired by [Letterboxd](https://letterboxd.com/), both in functionality, design and the overall user experience.
+
 ## Development
 
-The app is separated into two projects, *frontend* (`React`) and *backend* (`Django REST Framework`).
+Overworld is separated into two projects, *frontend* (`React`) and *backend* (`Django REST Framework`).  
 
-### Setup
+### Contributing
 
-* Obtain your API keys from [Giant Bomb](https://www.giantbomb.com/api/) and [IGDB](https://api.igdb.com) and paste them inside the `.env` file:
-
-```
-cp .env.default .env
-```
-
-* Set up the backend:
-
-```bash
-cd backend/
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py runserver
-```
-
-* Set up the frontend: 
-
-```bash
-cd frontend/
-npm install
-npm start
-```
+Head over to the [contributing guidelines](/CONTRIBUTING.md) for more details.
 
 ## Features
 
@@ -54,7 +49,8 @@ So far you can do the following:
 
 ![landing](/media/landing.png)
   
-## Acknowledgements
+## Acknowledgements 
 
-Data from [Giant Bomb API](https://www.giantbomb.com/api/) and [IGDB](https://api.igdb.com).  
-Icon made by [Freepik](https://www.freepik.com/).
+Thanks to Letterboxd for being the ultimate social network for film lovers and serving as an inspiration to Overworld.  
+  
+Data from [`Giant Bomb API`](https://www.giantbomb.com/api/) and [`IGDB`](https://api.igdb.com). Icon made by [`Freepik`](https://www.freepik.com/). 
