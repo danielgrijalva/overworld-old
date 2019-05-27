@@ -3,7 +3,7 @@ import { Container, List } from "semantic-ui-react";
 import "./Footer.css";
 
 export const Footer = () => (
-  <footer className="margin-top-xs">
+  <footer>
     <Container>
       <List horizontal>
         <List.Item as="a">About</List.Item>
