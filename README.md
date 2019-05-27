@@ -15,7 +15,7 @@
 
 If you use Letterboxd you probably know what this project is about. If not...  
   
-**Overworld** is a place where you can share your gaming experiences, keep track of what you play, discover games, manage your backlog, show love to your favorite games, write reviews, compile lists of specific games and *Much More Stuff™*.  
+**Overworld** is a place where you can share your gaming experiences, keep track of what you play, discover games, manage your backlog, show love to your favorite games, write reviews, compile lists of specific games and *More Stuff™*.  
 
 Follow other people to discuss or discover new games, or you can be a lone wolf and use it as a personal gaming journal.  
   
@@ -35,6 +35,8 @@ Head over to the [contributing guidelines](/CONTRIBUTING.md) for more details.
 
 ## Features
 
+> #### [Demo](https://raw.githubusercontent.com/danielgrijalva/overworld/master/media/demo.gif)  
+  
 So far you can do the following:
 * Create an account
 * Log in/out
@@ -43,14 +45,10 @@ So far you can do the following:
 * Rate a game on a scale of 1 to 10
 * Add a game to your played games
 * Add a game to your backlog and/or wish list
-* Like a game
-
-> #### [Demo](https://raw.githubusercontent.com/danielgrijalva/overworld/master/media/demo.gif) 
-
+* Like a game  
+  
 ![landing](/media/landing.png)
   
 ## Acknowledgements 
-
-Thanks to Letterboxd for being the ultimate social network for film lovers and serving as an inspiration to Overworld.  
-  
-Data from [`Giant Bomb API`](https://www.giantbomb.com/api/) and [`IGDB`](https://api.igdb.com). Icon made by [`Freepik`](https://www.freepik.com/). 
+Data from [`Giant Bomb API`](https://www.giantbomb.com/api/) and [`IGDB`](https://api.igdb.com). Icon made by [`Freepik`](https://www.freepik.com/).  
+And thanks to [`Letterboxd`](https://letterboxd.com/) for being the ultimate social network for film lovers and serving as an inspiration to Overworld.
