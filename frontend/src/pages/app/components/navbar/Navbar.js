@@ -60,7 +60,7 @@ class Navbar extends Component {
               <Dropdown.Menu>
                 <Dropdown.Item>
                   <Icon name="user circle" />
-                  <a href={`/${this.props.user.username}`}>Profile</a>
+                  <a href={`/user/${this.props.user.username}`}>Profile</a>
                 </Dropdown.Item>
                 <Dropdown.Item>
                   <Icon name="gamepad" />
