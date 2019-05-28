@@ -12,7 +12,7 @@ export const Popular = ({ isLoading, popular }) => (
                 className="cover"
                 alt={p.name}
                 src={`https://images.igdb.com/igdb/image/upload/t_cover_big/${
-                  p.image_id
+                  p.cover.image_id
                 }.jpg`}
               />
               <div key={i} className="cover-overlay">

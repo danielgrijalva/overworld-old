@@ -59,18 +59,13 @@ class Game extends React.Component {
   };
 
   loadGame = gameId => {
-    axios.all([this.loadGameInfo(gameId), this.loadScreenshots(gameId)]).then(
-      axios.spread((game, scr) => {
-        this.setState({
-          game: game.data.results,
-          screenshots: scr.data.results,
-          isLoading: false
-        });
-
-        this.getCountry(game.data.results.developers[0].id);
-        this.getCountry(game.data.results.publishers[0].id);
-      })
-    );
+    axios.get(`/api/games/${gameId}`).then(res => {
+      console.log(res.data[0]);
+      this.setState({
+        game: res.data[0],
+        isLoading: false
+      });
+    });
   };
 
   getCountry = publisher_id => {
@@ -93,33 +88,20 @@ class Game extends React.Component {
   };
 
   render() {
-    const { game, screenshots, isLoading, countries } = this.state;
+    const { game, isLoading } = this.state;
 
     return (
       <React.Fragment>
         <Container>
           <Grid className="game" centered>
-            {!isLoading && (
-              <Backdrop
-                placeholder={
-                  screenshots.length > 0
-                    ? screenshots[0].thumb_url
-                    : game.images[0].thumb_url
-                }
-                actual={
-                  screenshots.length > 0
-                    ? screenshots[0].original_url
-                    : game.images[0].original
-                }
-              />
-            )}
+            {!isLoading && <Backdrop imageId={game.screenshots[0].image_id} />}
             <Grid.Row className="game-content">
               <React.Fragment>
                 <Grid.Column width={4}>
                   {/* Game cover/poster */}
                   {!isLoading ? (
                     <React.Fragment>
-                      <Cover image={game.image} />
+                      <Cover imageId={game.cover.image_id} />
                       <QuickStats />
                     </React.Fragment>
                   ) : (
@@ -134,13 +116,13 @@ class Game extends React.Component {
                       <small className="release-date">
                         <a href="/">
                           <Moment format="YYYY">
-                            {game.original_release_date}
+                            {game.first_release_date * 1000}
                           </Moment>
                         </a>
                       </small>
-                      <small className="company">
+                      {/* <small className="company">
                         <a href="/">{game.developers[0].name}</a>
-                      </small>
+                      </small> */}
                     </section>
                   ) : (
                     <TitleLoader />
@@ -151,8 +133,8 @@ class Game extends React.Component {
                         {/* Game summary & details */}
                         {!isLoading ? (
                           <section>
-                            <p className="summary">{game.deck}</p>
-                            <Details game={game} countries={countries} />
+                            <p className="summary">{game.summary}</p>
+                            <Details game={game} />
                           </section>
                         ) : (
                           <TextLoader />
@@ -173,7 +155,7 @@ class Game extends React.Component {
             </Grid.Row>
           </Grid>
         </Container>
-        {!isLoading && (<Footer />)}
+        {!isLoading && <Footer />}
       </React.Fragment>
     );
   }

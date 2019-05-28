@@ -4,56 +4,27 @@ from django.shortcuts import get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import status, generics, permissions
 from rest_framework.response import Response
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view
 from users.serializers import UserSerializer
 from users.models import CustomUser
 from .serializers import GameSerializer, RatingSerializer
-from .fields import fields, search_fields
+from .fields import game_fields, search_fields, popular_fields, backdrop_fields
 from .models import Game, Ratings
 
 
-@api_view()
+@api_view(['GET'])
 def get_game(request, guid):
-    params = {'field_list': fields}
-    headers = {'user-agent': 'LetterboxdForVideogames'}
-    url = settings.GB_GAME_URL.format(guid=guid)
-    r = requests.get(url=url, params=params, headers=headers)
-
+    data = f'fields {game_fields}; where id={guid};'
+    headers = {'user-key': settings.IGDB_KEY}
+    url = settings.IGDB_URL.format(endpoint='games')
+    r = requests.post(url=url, data=data, headers=headers)
+    
     return Response(r.json())
 
 
 @api_view(['GET'])
 def search_game(request, name):
-    params = {'resources': 'game', 'field_list': search_fields, 'query': name}
-    headers = {'user-agent': 'LetterboxdForVideogames'}
-    url = settings.GB_URL.format(endpoint='search')
-    r = requests.get(url=url, params=params, headers=headers)
-    return Response(r.json())
-
-
-@api_view(['GET'])
-def get_screenshots(request, guid):
-    url = settings.GB_IMAGES_URL.format(guid=guid, tag='Screenshots')
-    headers = {'user-agent': 'LetterboxdForVideogames'}
-    r = requests.get(url=url, headers=headers)
-
-    return Response(r.json())
-
-
-@api_view(['GET'])
-def get_game_country(request, publisher_id):
-    company_id = f'3010-{publisher_id}'
-    url = settings.GB_COMPANY_URL.format(guid=company_id, endpoint='company')
-    headers = {'user-agent': 'LetterboxdForVideogames'}
-    params = {'field_list': 'location_country'}
-    r = requests.get(url=url, params=params, headers=headers)
-
-    return Response(r.json())
-
-
-@api_view()
-def get_popular_games(request):
-    data = 'fields popularity,name,cover; sort popularity desc; limit 7;'
+    data = f'fields {search_fields}; search "{name}";'
     headers = {'user-key': settings.IGDB_KEY}
     url = settings.IGDB_URL.format(endpoint='games')
     r = requests.post(url=url, data=data, headers=headers)
@@ -61,14 +32,25 @@ def get_popular_games(request):
     return Response(r.json())
 
 
-@api_view()
-def get_igdb_cover(request, cover_id):
-    data = f'fields image_id; where id={cover_id};'
+@api_view(['GET'])
+def get_popular_games(request):
+    data = f'fields {popular_fields}; sort popularity desc; limit 7;'
     headers = {'user-key': settings.IGDB_KEY}
-    url = settings.IGDB_URL.format(endpoint='covers')
+    url = settings.IGDB_URL.format(endpoint='games')
     r = requests.post(url=url, data=data, headers=headers)
 
     return Response(r.json())
+
+
+@api_view(['GET'])
+def get_backdrop(request, guid):
+    data = f'fields {backdrop_fields}; where id={guid};'
+    headers = {'user-key': settings.IGDB_KEY}
+    url = settings.IGDB_URL.format(endpoint='games')
+    r = requests.post(url=url, data=data, headers=headers)
+    
+    return Response(r.json())
+
 
 
 class Actions(generics.GenericAPIView):
@@ -99,7 +81,12 @@ class Log(generics.GenericAPIView):
         game, created = Game.objects.get_or_create(**request.data)
         user = CustomUser.objects.get(id=request.user.id)
 
-        user.played.add(game)
+        # toggle played value
+        if game not in user.played.all():
+            user.played.add(game)
+        else:
+            user.played.remove(game)
+
         serializer = GameSerializer(game).data
 
         # if the game you just logged was in your backlog, remove it
@@ -110,37 +97,19 @@ class Log(generics.GenericAPIView):
         return Response(serializer)
 
 
-class Unlog(generics.GenericAPIView):
-    permission_classes = (permissions.IsAuthenticated,)
-
-    def post(self, request, *args, **kwargs):
-        game = Game.objects.get(**request.data)
-        user = CustomUser.objects.get(id=request.user.id)
-        user.played.remove(game)
-        serializer = GameSerializer(game).data
-
-        return Response(serializer)
-
-
 class Like(generics.GenericAPIView):
     permission_classes = (permissions.IsAuthenticated,)
 
     def post(self, request, *args, **kwargs):
         game, created = Game.objects.get_or_create(**request.data)
         user = CustomUser.objects.get(id=request.user.id)
-        user.liked.add(game)
-        serializer = GameSerializer(game).data
 
-        return Response(serializer)
+        # toggle liked value
+        if game not in user.liked.all():
+            user.liked.add(game)
+        else:
+            user.liked.remove(game)
 
-
-class Unlike(generics.GenericAPIView):
-    permission_classes = (permissions.IsAuthenticated,)
-
-    def post(self, request, *args, **kwargs):
-        game = Game.objects.get(**request.data)
-        user = CustomUser.objects.get(id=request.user.id)
-        user.liked.remove(game)
         serializer = GameSerializer(game).data
 
         return Response(serializer)
@@ -152,19 +121,13 @@ class Backlog(generics.GenericAPIView):
     def post(self, request, *args, **kwargs):
         game, created = Game.objects.get_or_create(**request.data)
         user = CustomUser.objects.get(id=request.user.id)
-        user.backlog.add(game)
-        serializer = GameSerializer(game).data
 
-        return Response(serializer)
+        # toggle backlog value
+        if game not in user.backlog.all():
+            user.backlog.add(game)
+        else:
+            user.backlog.remove(game)
 
-
-class RemoveBacklog(generics.GenericAPIView):
-    permission_classes = (permissions.IsAuthenticated,)
-
-    def post(self, request, *args, **kwargs):
-        game = Game.objects.get(**request.data)
-        user = CustomUser.objects.get(id=request.user.id)
-        user.backlog.remove(game)
         serializer = GameSerializer(game).data
 
         return Response(serializer)
@@ -176,19 +139,13 @@ class Wishlist(generics.GenericAPIView):
     def post(self, request, *args, **kwargs):
         game, created = Game.objects.get_or_create(**request.data)
         user = CustomUser.objects.get(id=request.user.id)
-        user.wishlist.add(game)
-        serializer = GameSerializer(game).data
 
-        return Response(serializer)
+        # toggle wishlist value
+        if game not in user.wishlist.all():
+            user.wishlist.add(game)
+        else:
+            user.wishlist.remove(game)
 
-
-class RemoveWishlist(generics.GenericAPIView):
-    permission_classes = (permissions.IsAuthenticated,)
-
-    def post(self, request, *args, **kwargs):
-        game = Game.objects.get(**request.data)
-        user = CustomUser.objects.get(id=request.user.id)
-        user.wishlist.remove(game)
         serializer = GameSerializer(game).data
 
         return Response(serializer)
@@ -217,11 +174,9 @@ class Rate(generics.GenericAPIView):
         user = CustomUser.objects.get(id=request.user.id)
 
         r, _ = Ratings.objects.get_or_create(game=game, user=user)
-        previous_rating = r.rating
         r.rating = rating
         r.save()
 
         serializer = RatingSerializer(r).data
-        serializer['previousRating'] = previous_rating
 
         return Response(serializer)

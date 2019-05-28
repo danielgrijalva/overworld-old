@@ -14,7 +14,7 @@ class Landing extends React.Component {
   componentDidMount() {
     const game = options[Math.floor(Math.random() * options.length)];
     if (Object.keys(this.props.backdrop).length === 0) {
-      this.props.getBackdrop(game);
+      this.props.getBackdrop(game.gameId);
     }
 
     if (this.props.popular.length === 0) {
@@ -28,10 +28,7 @@ class Landing extends React.Component {
       <React.Fragment>
         <Container className="padding-bottom">
           {Object.keys(backdrop).length > 0 && (
-            <Backdrop
-              actual={backdrop.actual}
-              placeholder={backdrop.placeholder}
-            />
+            <Backdrop imageId={backdrop.imageId} />
           )}
           <div className="landing">
             <Headline />
@@ -39,7 +36,7 @@ class Landing extends React.Component {
             <Features />
             <section className="backdrop-name">
               Backdrop from{" "}
-              <a href={`/games/${backdrop.gameId}`}>{backdrop.name}</a>
+              <a href={`/games/${backdrop.id}`}>{backdrop.name}</a>
             </section>
           </div>
         </Container>

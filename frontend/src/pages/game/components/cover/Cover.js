@@ -2,11 +2,13 @@ import React from "react";
 import { LazyImage } from "react-lazy-images";
 import "./Cover.css";
 
-export const Cover = ({ image }) => {
+export const Cover = ({ imageId }) => {
+  const thumb = `https://images.igdb.com/igdb/image/upload/t_cover_small/${imageId}.jpg`;
+  const actual = `https://images.igdb.com/igdb/image/upload/t_cover_big/${imageId}.jpg`;
   return (
     <section className="game-cover">
       <LazyImage
-        src={image.small_url}
+        src={actual}
         alt="Game cover"
         placeholder={({ imageProps, ref }) => (
           <img
@@ -14,7 +16,7 @@ export const Cover = ({ image }) => {
             {...imageProps}
             ref={ref}
             className="ui rounded image cover placeholder"
-            src={image.thumb_url}
+            src={thumb}
           />
         )}
         actual={({ imageProps }) => (

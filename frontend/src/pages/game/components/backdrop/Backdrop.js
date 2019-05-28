@@ -1,30 +1,33 @@
 import React from "react";
 import { Container } from "semantic-ui-react";
-import "./Backdrop.css";
 import { LazyImage } from "react-lazy-images";
+import "./Backdrop.css";
 
 export default class Backdrop extends React.Component {
   render() {
+    const { imageId } = this.props;
+    const thumb = `https://images.igdb.com/igdb/image/upload/t_cover_small/${imageId}.jpg`;
+    const actual = `https://images.igdb.com/igdb/image/upload/t_720p/${imageId}.jpg`;
     return (
       <Container>
         <div className="backdrop-container">
           <div className="backdrop-wrapper">
             <LazyImage
-              src={this.props.actual}
+              src={actual}
               placeholder={({ imageProps, ref }) => (
                 <div
                   {...imageProps}
                   ref={ref}
                   className="backdrop-placeholder"
                   style={{
-                    backgroundImage: `url(${this.props.placeholder})`
+                    backgroundImage: `url(${thumb})`
                   }}
                 />
               )}
-              actual={({ imageProps }) => (
+              actual={() => (
                 <div
                   style={{
-                    backgroundImage: `url(${imageProps.src})`
+                    backgroundImage: `url(${actual})`
                   }}
                   className="backdrop-actual"
                 />
