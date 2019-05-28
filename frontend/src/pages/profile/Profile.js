@@ -17,7 +17,9 @@ import "../landing/components/popular/Popular.css";
 import { Footer } from "../app/components/footer/Footer";
 
 class Profile extends Component {
-  state = {};
+  state = {
+    activeItem: 'profile'
+  };
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
@@ -170,8 +172,8 @@ class Profile extends Component {
                     </div>
                     <Divider horizontal>Reviews</Divider>
                     <Message
-                      icon="question circle outline"
-                      content="No reviews yet"
+                      icon="exclamation circle"
+                      content={`${username} doesn't have any reviews yet`}
                     />
                   </Grid.Column>
                   <Grid.Column width={5}>
