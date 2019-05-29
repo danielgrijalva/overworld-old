@@ -1,5 +1,6 @@
 import React from "react";
 import { Container } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getPopular, getBackdrop } from "../../actions/landing";
 import { Footer } from "../app/components/footer/Footer";
@@ -36,7 +37,14 @@ class Landing extends React.Component {
             <Features />
             <section className="backdrop-name">
               Backdrop from{" "}
-              <a href={`/games/${backdrop.id}`}>{backdrop.name}</a>
+              <Link
+                to={{
+                  pathname: `/games/${backdrop.slug}`,
+                  state: backdrop.gameId
+                }}
+              >
+                {backdrop.name}
+              </Link>
             </section>
           </div>
         </Container>

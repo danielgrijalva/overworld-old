@@ -4,7 +4,7 @@ The app is separated into two projects, *frontend* (`React`) and *backend* (`Dja
 
 ## Setup
 
-* Obtain your API keys from [Giant Bomb](https://www.giantbomb.com/api/) and [IGDB](https://api.igdb.com) and paste them inside the `.env` file:
+* Obtain your API keys from [IGDB](https://api.igdb.com) and paste it inside your `.env` file. But first, copy the `.env.default` file:
 
 ```
 cp .env.default .env

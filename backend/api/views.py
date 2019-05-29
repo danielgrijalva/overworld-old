@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from users.serializers import UserSerializer
 from users.models import CustomUser
-from .serializers import GameSerializer, RatingSerializer
+from .serializers import GameSerializer, RatingSerializer, ActionSerializer
 from .fields import game_fields, search_fields, popular_fields, backdrop_fields
 from .models import Game, Ratings
 
@@ -18,7 +18,7 @@ def get_game(request, guid):
     headers = {'user-key': settings.IGDB_KEY}
     url = settings.IGDB_URL.format(endpoint='games')
     r = requests.post(url=url, data=data, headers=headers)
-    
+
     return Response(r.json())
 
 
@@ -34,7 +34,7 @@ def search_game(request, name):
 
 @api_view(['GET'])
 def get_popular_games(request):
-    data = f'fields {popular_fields}; sort popularity desc; limit 7;'
+    data = f'fields {popular_fields}; sort popularity desc; limit 6;'
     headers = {'user-key': settings.IGDB_KEY}
     url = settings.IGDB_URL.format(endpoint='games')
     r = requests.post(url=url, data=data, headers=headers)
@@ -48,9 +48,8 @@ def get_backdrop(request, guid):
     headers = {'user-key': settings.IGDB_KEY}
     url = settings.IGDB_URL.format(endpoint='games')
     r = requests.post(url=url, data=data, headers=headers)
-    
-    return Response(r.json())
 
+    return Response(r.json())
 
 
 class Actions(generics.GenericAPIView):
@@ -58,9 +57,9 @@ class Actions(generics.GenericAPIView):
 
     def get(self, request, *args, **kwargs):
         try:
-            gb = request.GET['gb']
+            igdb = request.GET['igdb']
             name = request.GET['name']
-            game = Game.objects.get(gb=gb, name=name)
+            game = Game.objects.get(igdb=igdb, name=name)
         except ObjectDoesNotExist:
             return Response([])
 
@@ -84,17 +83,25 @@ class Log(generics.GenericAPIView):
         # toggle played value
         if game not in user.played.all():
             user.played.add(game)
+            value = True
         else:
             user.played.remove(game)
+            value = False
 
-        serializer = GameSerializer(game).data
+        data = {'game': game.id, 'user': user.id,
+                'action': 'like', 'value': value}
 
-        # if the game you just logged was in your backlog, remove it
-        if game in user.backlog.all():
-            user.backlog.remove(game)
-            serializer['removedFromBacklog'] = True
+        serializer = ActionSerializer(data=data)
 
-        return Response(serializer)
+        if serializer.is_valid():
+            # if the game you just logged was in your backlog,
+            # then remove it from backlog
+            serializer = serializer.data
+            if game in user.backlog.all() and value:
+                user.backlog.remove(game)
+                serializer['removedFromBacklog'] = True
+
+            return Response(serializer)
 
 
 class Like(generics.GenericAPIView):
@@ -107,12 +114,18 @@ class Like(generics.GenericAPIView):
         # toggle liked value
         if game not in user.liked.all():
             user.liked.add(game)
+            value = True
         else:
             user.liked.remove(game)
+            value = False
 
-        serializer = GameSerializer(game).data
+        data = {'game': game.id, 'user': user.id,
+                'action': 'like', 'value': value}
 
-        return Response(serializer)
+        serializer = ActionSerializer(data=data)
+
+        if serializer.is_valid():
+            return Response(serializer.data)
 
 
 class Backlog(generics.GenericAPIView):
@@ -125,12 +138,18 @@ class Backlog(generics.GenericAPIView):
         # toggle backlog value
         if game not in user.backlog.all():
             user.backlog.add(game)
+            value = True
         else:
             user.backlog.remove(game)
+            value = False
 
-        serializer = GameSerializer(game).data
+        data = {'game': game.id, 'user': user.id,
+                'action': 'backlog', 'value': value}
 
-        return Response(serializer)
+        serializer = ActionSerializer(data=data)
+
+        if serializer.is_valid():
+            return Response(serializer.data)
 
 
 class Wishlist(generics.GenericAPIView):
@@ -143,12 +162,18 @@ class Wishlist(generics.GenericAPIView):
         # toggle wishlist value
         if game not in user.wishlist.all():
             user.wishlist.add(game)
+            value = True
         else:
             user.wishlist.remove(game)
+            value = False
 
-        serializer = GameSerializer(game).data
+        data = {'game': game.id, 'user': user.id,
+                'action': 'wishlist', 'value': value}
 
-        return Response(serializer)
+        serializer = ActionSerializer(data=data)
+
+        if serializer.is_valid():
+            return Response(serializer.data)
 
 
 class Rate(generics.GenericAPIView):
@@ -156,8 +181,8 @@ class Rate(generics.GenericAPIView):
 
     def get(self, request, *args, **kwargs):
         try:
-            gb = request.GET['game']
-            game = Game.objects.get(gb=gb)
+            igdb = request.GET['game']
+            game = Game.objects.get(igdb=igdb)
             user = CustomUser.objects.get(id=request.user.id)
             r = Ratings.objects.get(game=game, user=user)
         except ObjectDoesNotExist:
@@ -169,8 +194,8 @@ class Rate(generics.GenericAPIView):
 
     def post(self, request, *args, **kwargs):
         rating = request.data['rating']
-        gb = request.data['game']
-        game, _ = Game.objects.get_or_create(gb=gb)
+        igdb = request.data['game']
+        game, _ = Game.objects.get_or_create(igdb=igdb)
         user = CustomUser.objects.get(id=request.user.id)
 
         r, _ = Ratings.objects.get_or_create(game=game, user=user)

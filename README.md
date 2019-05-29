@@ -50,5 +50,5 @@ So far you can do the following:
 ![landing](/media/landing.png)
   
 ## Acknowledgements 
-Data from [`Giant Bomb API`](https://www.giantbomb.com/api/) and [`IGDB`](https://api.igdb.com). Icon made by [`Freepik`](https://www.freepik.com/).  
+Data from [`IGDB`](https://api.igdb.com). Icon made [`Freepik`](https://www.freepik.com/).  
 And thanks to [`Letterboxd`](https://letterboxd.com/) for being the ultimate social network for film lovers and serving as an inspiration to Overworld.

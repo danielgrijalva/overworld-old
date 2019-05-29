@@ -1,9 +1,9 @@
 import {
-  LOG_GAME,
+  TOGGLE_PLAYED,
   LOAD_ACTIONS,
-  LIKE_GAME,
-  ADD_TO_BACKLOG,
-  ADD_TO_WISHLIST,
+  TOGGLE_LIKE,
+  TOGGLE_BACKLOG,
+  TOGGLE_WISHLIST,
   LOAD_RATING,
   RATE_GAME,
   ACTIONS_LOADING,
@@ -30,36 +30,36 @@ export default function(state = initialState, action) {
         ...state,
         loadingActions: true
       };
-    case LOG_GAME:
+    case TOGGLE_PLAYED:
       return {
         ...state,
         actions: {
           ...state.actions,
-          played: true
+          played: action.payload.value
         }
       };
-    case LIKE_GAME:
+    case TOGGLE_LIKE:
       return {
         ...state,
         actions: {
           ...state.actions,
-          liked: true
+          liked: action.payload.value
         }
       };
-    case ADD_TO_BACKLOG:
+    case TOGGLE_BACKLOG:
       return {
         ...state,
         actions: {
           ...state.actions,
-          backlog: true
+          backlog: action.payload.value
         }
       };
-    case ADD_TO_WISHLIST:
+    case TOGGLE_WISHLIST:
       return {
         ...state,
         actions: {
           ...state.actions,
-          wishlist: true
+          wishlist: action.payload.value
         }
       };
     case RATE_GAME:

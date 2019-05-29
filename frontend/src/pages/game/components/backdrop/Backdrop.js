@@ -7,7 +7,7 @@ export default class Backdrop extends React.Component {
   render() {
     const { imageId } = this.props;
     const thumb = `https://images.igdb.com/igdb/image/upload/t_cover_small/${imageId}.jpg`;
-    const actual = `https://images.igdb.com/igdb/image/upload/t_720p/${imageId}.jpg`;
+    const actual = `https://images.igdb.com/igdb/image/upload/t_1080p/${imageId}.jpg`;
     return (
       <Container>
         <div className="backdrop-container">

@@ -1,14 +1,19 @@
 export const Backdrops = [
-  { name: "Resident Evil 2", gameId: "19686" }
-  // { name: "The Elder Scrolls IV: Oblivion", gameId: "3030-20238" },
-  // { name: "Marvel's Spider-Man", gameId: "3030-54233" },
-  // { name: "Fortnite", gameId: "3030-37030" },
-  // { name: "Nioh", gameId: "3030-27578" },
-  // { name: "The Last of Us", gameId: "3030-36989" },
-  // { name: "Uncharted 4: A Thief's End", gameId: "3030-44507" },
-  // { name: "Persona 5", gameId: "3030-30486" },
-  // { name: "Firewatch", gameId: "3030-45658" },
-  // { name: "Minecraft", gameId: "3030-30475" },
-  // { name: "Mario Kart 8", gameId: "3030-42929" },
-  // { name: "Castlevania: Symphony of the Night", gameId: "3030-14216" }
+  { name: "Resident Evil 2", gameId: "19686" },
+  { name: "Firewatch", gameId: "9730" },
+  { name: "NieR:Automata", gameId: "11208" },
+  { name: "The Elder Scrolls V: Skyrim", gameId: "472" },
+  { name: "Super Mario Odyssey", gameId: "26758" },
+  { name: "Red Dead Redemption 2", gameId: "25076" },
+  { name: "Horizon Zero Dawn", gameId: "11156" },
+  { name: "Nioh", gameId: "12571" },
+  { name: "Hellblade: Senua's Sacrifice", gameId: "7603" },
+  { name: "Halo 4", gameId: "991" },
+  { name: "The Witness", gameId: "5601" },
+  { name: "The Witcher 3: Wild Hunt", gameId: "22439" },
+  { name: "Bloodborne", gameId: "7334" },
+  { name: "The Banner Saga", gameId: "5508" },
+  { name: "RAGE 2", gameId: "101211" },
+  { name: "Marvel's Spider-Man", gameId: "19565" },
+  { name: "Mario + Rabbids Kingdom Battle", gameId: "28414" }
 ];

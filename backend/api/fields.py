@@ -29,7 +29,8 @@ _popular_fields = [
 
 _backdrop_fields = [
     'name',
-    'screenshots.image_id'
+    'screenshots.image_id',
+    'slug',
 ]
 
 game_fields = ','.join(_game_fields)

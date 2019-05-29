@@ -19,7 +19,8 @@ export const getBackdrop = gameId => dispatch => {
     const backdrop = {
       name: data.name,
       gameId: data.id,
-      imageId: data.screenshots[0].image_id
+      imageId: data.screenshots[1].image_id,
+      slug: data.slug
     };
 
     dispatch({

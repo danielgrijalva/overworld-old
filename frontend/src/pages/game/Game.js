@@ -21,12 +21,8 @@ class Game extends React.Component {
     super(props);
     this.state = {
       gameId: "",
-      countries: [],
       game: {},
-      screenshots: [],
-      isLoading: true,
-      isCoverLoading: true,
-      cover: {}
+      isLoading: true
     };
   }
 
@@ -40,9 +36,6 @@ class Game extends React.Component {
 
   componentWillMount() {
     var gameId = this.props.location.state;
-    if (!gameId) {
-      gameId = this.props.match.params.slug;
-    }
     this.resetState(gameId);
     this.loadGame(gameId);
   }
@@ -51,16 +44,12 @@ class Game extends React.Component {
     this.setState({
       gameId: gameId,
       game: {},
-      countries: [],
-      isLoading: true,
-      isCoverLoading: true,
-      cover: {}
+      isLoading: true
     });
   };
 
   loadGame = gameId => {
     axios.get(`/api/games/${gameId}`).then(res => {
-      console.log(res.data[0]);
       this.setState({
         game: res.data[0],
         isLoading: false
@@ -68,33 +57,21 @@ class Game extends React.Component {
     });
   };
 
-  getCountry = publisher_id => {
-    axios.get(`/api/games/country/${publisher_id}`).then(response => {
-      const c = response.data.results.location_country;
-      if (!this.state.countries.includes(c)) {
-        this.setState(prevState => {
-          prevState.countries.push(c);
-        });
-      }
+  getDeveloperName = companies => {
+    var dev = companies.find(c => {
+      return c.developer === true;
     });
-  };
 
-  loadGameInfo = gameId => {
-    return axios.get(`/api/games/${gameId}`);
-  };
-
-  loadScreenshots = gameId => {
-    return axios.get(`/api/screenshots/${gameId}`);
+    return dev.company.name;
   };
 
   render() {
     const { game, isLoading } = this.state;
-
     return (
       <React.Fragment>
         <Container>
           <Grid className="game" centered>
-            {!isLoading && <Backdrop imageId={game.screenshots[0].image_id} />}
+            {!isLoading && <Backdrop imageId={game.screenshots[1].image_id} />}
             <Grid.Row className="game-content">
               <React.Fragment>
                 <Grid.Column width={4}>
@@ -113,16 +90,20 @@ class Game extends React.Component {
                   {!isLoading ? (
                     <section className="game-header margin-bottom-sm">
                       <h1>{game.name}</h1>
-                      <small className="release-date">
+                      {game.first_release_date && (
+                        <small className="release-date">
+                          <a href="/">
+                            <Moment format="YYYY">
+                              {game.first_release_date * 1000}
+                            </Moment>
+                          </a>
+                        </small>
+                      )}
+                      <small className="company">
                         <a href="/">
-                          <Moment format="YYYY">
-                            {game.first_release_date * 1000}
-                          </Moment>
+                          {this.getDeveloperName(game.involved_companies)}
                         </a>
                       </small>
-                      {/* <small className="company">
-                        <a href="/">{game.developers[0].name}</a>
-                      </small> */}
                     </section>
                   ) : (
                     <TitleLoader />

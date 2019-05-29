@@ -28,7 +28,7 @@ class Actions extends React.Component {
             </Menu.Item>
             <Menu.Item className="rate">
               Rate
-              <Ratings game={this.props.game.guid} />
+              <Ratings game={this.props.game.id} />
             </Menu.Item>
             <Menu.Item content="Review or log" link />
             <Menu.Item content="Add to a list" link />
