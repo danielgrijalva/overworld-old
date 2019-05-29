@@ -1,13 +1,9 @@
 import {
-  LOG_GAME,
-  UNLOG_GAME,
+  TOGGLE_PLAYED,
   LOAD_ACTIONS,
-  LIKE_GAME,
-  UNLIKE_GAME,
-  ADD_TO_BACKLOG,
-  REMOVE_FROM_BACKLOG,
-  ADD_TO_WISHLIST,
-  REMOVE_FROM_WISHLIST,
+  TOGGLE_LIKE,
+  TOGGLE_BACKLOG,
+  TOGGLE_WISHLIST,
   LOAD_RATING,
   RATE_GAME,
   ACTIONS_LOADING,
@@ -34,68 +30,36 @@ export default function(state = initialState, action) {
         ...state,
         loadingActions: true
       };
-    case LOG_GAME:
+    case TOGGLE_PLAYED:
       return {
         ...state,
         actions: {
           ...state.actions,
-          played: true
+          played: action.payload.value
         }
       };
-    case UNLOG_GAME:
+    case TOGGLE_LIKE:
       return {
         ...state,
         actions: {
           ...state.actions,
-          played: false
+          liked: action.payload.value
         }
       };
-    case LIKE_GAME:
+    case TOGGLE_BACKLOG:
       return {
         ...state,
         actions: {
           ...state.actions,
-          liked: true
+          backlog: action.payload.value
         }
       };
-    case UNLIKE_GAME:
+    case TOGGLE_WISHLIST:
       return {
         ...state,
         actions: {
           ...state.actions,
-          liked: false
-        }
-      };
-    case ADD_TO_BACKLOG:
-      return {
-        ...state,
-        actions: {
-          ...state.actions,
-          backlog: true
-        }
-      };
-    case REMOVE_FROM_BACKLOG:
-      return {
-        ...state,
-        actions: {
-          ...state.actions,
-          backlog: false
-        }
-      };
-    case ADD_TO_WISHLIST:
-      return {
-        ...state,
-        actions: {
-          ...state.actions,
-          wishlist: true
-        }
-      };
-    case REMOVE_FROM_WISHLIST:
-      return {
-        ...state,
-        actions: {
-          ...state.actions,
-          wishlist: false
+          wishlist: action.payload.value
         }
       };
     case RATE_GAME:

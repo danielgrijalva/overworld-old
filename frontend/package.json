@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "i18n-iso-countries": "^4.1.0",
     "moment": "^2.24.0",
     "react": "^16.8.6",
     "react-content-loader": "^4.2.1",

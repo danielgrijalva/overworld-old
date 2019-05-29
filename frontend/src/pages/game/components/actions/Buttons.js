@@ -1,61 +1,39 @@
 import React from "react";
 import { Grid, Icon, Popup } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { debounce } from "lodash";
 import {
   loadActions,
   logGame,
-  unlogGame,
   likeGame,
-  unlikeGame,
   addToBacklog,
-  removeFromBacklog,
-  addToWishlist,
-  removeFromWishlist
+  addToWishlist
 } from "../../../../actions/game";
 
 class Buttons extends React.Component {
   componentWillMount() {
-    const { guid, name } = this.props.game;
-    this.props.loadActions(guid, name);
+    const { id, name } = this.props.game;
+    this.props.loadActions(id, name);
   }
 
-  onClick = debounce((e, { value }) => {
-    const { guid, name } = this.props.game;
-    const { played, liked, backlog, wishlist } = this.props.actions;
+  onClick = (e, { value }) => {
+    const { id, name } = this.props.game;
     switch (value) {
       case "played":
-        if (!played) {
-          this.props.logGame(guid, name);
-        } else {
-          this.props.unlogGame(guid, name);
-        }
+        this.props.logGame(id, name);
         break;
       case "liked":
-        if (!liked) {
-          this.props.likeGame(guid, name);
-        } else {
-          this.props.unlikeGame(guid, name);
-        }
+        this.props.likeGame(id, name);
         break;
       case "backlog":
-        if (!backlog) {
-          this.props.addToBacklog(guid, name);
-        } else {
-          this.props.removeFromBacklog(guid, name);
-        }
+        this.props.addToBacklog(id, name);
         break;
       case "wishlist":
-        if (!wishlist) {
-          this.props.addToWishlist(guid, name);
-        } else {
-          this.props.removeFromWishlist(guid, name);
-        }
+        this.props.addToWishlist(id, name);
         break;
       default:
         break;
     }
-  }, 200);
+  };
 
   render() {
     const { played, liked, backlog, wishlist } = this.props.actions;
@@ -154,12 +132,8 @@ export default connect(
   {
     loadActions,
     logGame,
-    unlogGame,
     likeGame,
-    unlikeGame,
     addToBacklog,
-    removeFromBacklog,
-    addToWishlist,
-    removeFromWishlist
+    addToWishlist
   }
 )(Buttons);

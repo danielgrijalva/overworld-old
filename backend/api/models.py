@@ -3,11 +3,11 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class Game(models.Model):
-    gb = models.CharField(max_length=16)
+    igdb = models.CharField(max_length=16)
     name = models.CharField(max_length=255, default='default')
 
     def __str__(self):
-        return '%s - %s' % (self.gb, self.name)
+        return '%s - %s' % (self.igdb, self.name)
 
 
 class Ratings(models.Model):

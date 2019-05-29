@@ -1,29 +1,39 @@
-_fields = [
-    'deck',
-    'description',
-    'developers',
-    'expected_release_year',
-    'genres',
-    'guid',
-    'image',
-    'images',
-    'image_tags',
+_game_fields = [
+    'cover.image_id',
+    'first_release_date',
+    'genres.name',
+    'involved_companies.developer',
+    'involved_companies.publisher',
+    'involved_companies.company.country',
+    'involved_companies.company.name',
     'name',
-    'original_game_rating',
-    'original_release_date',
-    'people',
-    'platforms',
-    'publishers',
-    'site_detail_url',
-    'themes',
+    'platforms.name',
+    'screenshots.image_id',
+    'slug',
+    'summary',
+    'time_to_beat.normally',
+    'themes.name',
 ]
 
 _search_fields = [
-    'expected_release_year',
-    'guid',
+    'first_release_date',
     'name',
-    'original_release_date',
+    'slug',
 ]
 
-fields = ','.join(_fields)
+_popular_fields = [
+    'cover.image_id',
+    'name',
+    'popularity',
+]
+
+_backdrop_fields = [
+    'name',
+    'screenshots.image_id',
+    'slug',
+]
+
+game_fields = ','.join(_game_fields)
 search_fields = ','.join(_search_fields)
+popular_fields = ','.join(_popular_fields)
+backdrop_fields = ','.join(_backdrop_fields)

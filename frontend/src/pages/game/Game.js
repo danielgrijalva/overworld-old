@@ -21,12 +21,8 @@ class Game extends React.Component {
     super(props);
     this.state = {
       gameId: "",
-      countries: [],
       game: {},
-      screenshots: [],
-      isLoading: true,
-      isCoverLoading: true,
-      cover: {}
+      isLoading: true
     };
   }
 
@@ -40,9 +36,6 @@ class Game extends React.Component {
 
   componentWillMount() {
     var gameId = this.props.location.state;
-    if (!gameId) {
-      gameId = this.props.match.params.slug;
-    }
     this.resetState(gameId);
     this.loadGame(gameId);
   }
@@ -51,75 +44,41 @@ class Game extends React.Component {
     this.setState({
       gameId: gameId,
       game: {},
-      countries: [],
-      isLoading: true,
-      isCoverLoading: true,
-      cover: {}
+      isLoading: true
     });
   };
 
   loadGame = gameId => {
-    axios.all([this.loadGameInfo(gameId), this.loadScreenshots(gameId)]).then(
-      axios.spread((game, scr) => {
-        this.setState({
-          game: game.data.results,
-          screenshots: scr.data.results,
-          isLoading: false
-        });
-
-        this.getCountry(game.data.results.developers[0].id);
-        this.getCountry(game.data.results.publishers[0].id);
-      })
-    );
-  };
-
-  getCountry = publisher_id => {
-    axios.get(`/api/games/country/${publisher_id}`).then(response => {
-      const c = response.data.results.location_country;
-      if (!this.state.countries.includes(c)) {
-        this.setState(prevState => {
-          prevState.countries.push(c);
-        });
-      }
+    axios.get(`/api/games/${gameId}`).then(res => {
+      this.setState({
+        game: res.data[0],
+        isLoading: false
+      });
     });
   };
 
-  loadGameInfo = gameId => {
-    return axios.get(`/api/games/${gameId}`);
-  };
+  getDeveloperName = companies => {
+    var dev = companies.find(c => {
+      return c.developer === true;
+    });
 
-  loadScreenshots = gameId => {
-    return axios.get(`/api/screenshots/${gameId}`);
+    return dev.company.name;
   };
 
   render() {
-    const { game, screenshots, isLoading, countries } = this.state;
-
+    const { game, isLoading } = this.state;
     return (
       <React.Fragment>
         <Container>
           <Grid className="game" centered>
-            {!isLoading && (
-              <Backdrop
-                placeholder={
-                  screenshots.length > 0
-                    ? screenshots[0].thumb_url
-                    : game.images[0].thumb_url
-                }
-                actual={
-                  screenshots.length > 0
-                    ? screenshots[0].original_url
-                    : game.images[0].original
-                }
-              />
-            )}
+            {!isLoading && <Backdrop imageId={game.screenshots[1].image_id} />}
             <Grid.Row className="game-content">
               <React.Fragment>
                 <Grid.Column width={4}>
                   {/* Game cover/poster */}
                   {!isLoading ? (
                     <React.Fragment>
-                      <Cover image={game.image} />
+                      <Cover imageId={game.cover.image_id} />
                       <QuickStats />
                     </React.Fragment>
                   ) : (
@@ -131,15 +90,19 @@ class Game extends React.Component {
                   {!isLoading ? (
                     <section className="game-header margin-bottom-sm">
                       <h1>{game.name}</h1>
-                      <small className="release-date">
-                        <a href="/">
-                          <Moment format="YYYY">
-                            {game.original_release_date}
-                          </Moment>
-                        </a>
-                      </small>
+                      {game.first_release_date && (
+                        <small className="release-date">
+                          <a href="/">
+                            <Moment format="YYYY">
+                              {game.first_release_date * 1000}
+                            </Moment>
+                          </a>
+                        </small>
+                      )}
                       <small className="company">
-                        <a href="/">{game.developers[0].name}</a>
+                        <a href="/">
+                          {this.getDeveloperName(game.involved_companies)}
+                        </a>
                       </small>
                     </section>
                   ) : (
@@ -151,8 +114,8 @@ class Game extends React.Component {
                         {/* Game summary & details */}
                         {!isLoading ? (
                           <section>
-                            <p className="summary">{game.deck}</p>
-                            <Details game={game} countries={countries} />
+                            <p className="summary">{game.summary}</p>
+                            <Details game={game} />
                           </section>
                         ) : (
                           <TextLoader />
@@ -173,7 +136,7 @@ class Game extends React.Component {
             </Grid.Row>
           </Grid>
         </Container>
-        {!isLoading && (<Footer />)}
+        {!isLoading && <Footer />}
       </React.Fragment>
     );
   }

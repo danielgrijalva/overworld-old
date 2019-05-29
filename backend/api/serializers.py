@@ -6,7 +6,14 @@ from .models import Game, Ratings
 class GameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Game
-        fields = ('gb', 'name',)
+        fields = ('igdb', 'name',)
+
+
+class ActionSerializer(serializers.Serializer):
+    game = serializers.IntegerField()
+    user = serializers.IntegerField()
+    action = serializers.CharField(max_length=16)
+    value = serializers.BooleanField()
 
 
 class RatingSerializer(serializers.ModelSerializer):

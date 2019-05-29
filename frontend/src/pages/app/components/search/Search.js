@@ -18,16 +18,16 @@ class GameSearch extends Component {
 
   handleResultSelect = (e, { result }) => {
     this.setState({ results: [], isLoading: false, value: "" });
-    this.props.history.push(`/games/${result.guid}`, result.guid);
+    this.props.history.push(`/games/${result.slug}`, result.id);
   };
 
   search = debounce(value => {
     axios
       .get(`/api/search/${value}`)
       .then(response => {
-        const results = response.data.results.map(result => ({
+        const results = response.data.map(result => ({
           ...result,
-          key: result.guid
+          key: result.id
         }));
         this.setState({ results: results, isLoading: false });
       })

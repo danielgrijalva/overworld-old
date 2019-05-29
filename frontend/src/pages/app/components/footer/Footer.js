@@ -13,7 +13,6 @@ export const Footer = () => (
       </List>
       <p className="landing info margin-top-xs">
         Made with ❤ in Planet Earth. Data from{" "}
-        <a href="https://www.giantbomb.com/api/">Giant Bomb</a> &{" "}
         <a href="https://api.igdb.com">IGDB</a>.
       </p>
     </Container>

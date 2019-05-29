@@ -1,14 +1,10 @@
 import axios from "axios";
 import {
-  LOG_GAME,
-  UNLOG_GAME,
-  LIKE_GAME,
-  UNLIKE_GAME,
+  TOGGLE_PLAYED,
+  TOGGLE_LIKE,
   LOAD_ACTIONS,
-  ADD_TO_BACKLOG,
-  REMOVE_FROM_BACKLOG,
-  ADD_TO_WISHLIST,
-  REMOVE_FROM_WISHLIST,
+  TOGGLE_BACKLOG,
+  TOGGLE_WISHLIST,
   LOAD_RATING,
   RATE_GAME,
   ACTIONS_LOADING,
@@ -21,7 +17,7 @@ export const loadActions = (gameId, name) => (dispatch, getState) => {
   axios
     .get(`/api/actions/`, {
       params: {
-        gb: gameId,
+        igdb: gameId,
         name: name
       },
       headers: tokenConfig(getState).headers
@@ -42,7 +38,7 @@ export const logGame = (gameId, name) => (dispatch, getState) => {
     .post(
       "/api/actions/log/",
       {
-        gb: gameId,
+        igdb: gameId,
         name: name
       },
       tokenConfig(getState)
@@ -50,33 +46,12 @@ export const logGame = (gameId, name) => (dispatch, getState) => {
     .then(res => {
       if (res.data.hasOwnProperty("removedFromBacklog")) {
         dispatch({
-          type: REMOVE_FROM_BACKLOG,
-          payload: res.data
+          type: TOGGLE_BACKLOG,
+          payload: { value: false }
         });
       }
       dispatch({
-        type: LOG_GAME,
-        payload: res.data
-      });
-    })
-    .catch(error => {
-      console.log(error);
-    });
-};
-
-export const unlogGame = (gameId, name) => (dispatch, getState) => {
-  axios
-    .post(
-      "/api/actions/unlog/",
-      {
-        gb: gameId,
-        name: name
-      },
-      tokenConfig(getState)
-    )
-    .then(res => {
-      dispatch({
-        type: UNLOG_GAME,
+        type: TOGGLE_PLAYED,
         payload: res.data
       });
     })
@@ -90,35 +65,14 @@ export const likeGame = (gameId, name) => (dispatch, getState) => {
     .post(
       "/api/actions/like/",
       {
-        gb: gameId,
+        igdb: gameId,
         name: name
       },
       tokenConfig(getState)
     )
     .then(res => {
       dispatch({
-        type: LIKE_GAME,
-        payload: res.data
-      });
-    })
-    .catch(error => {
-      console.log(error);
-    });
-};
-
-export const unlikeGame = (gameId, name) => (dispatch, getState) => {
-  axios
-    .post(
-      "/api/actions/unlike/",
-      {
-        gb: gameId,
-        name: name
-      },
-      tokenConfig(getState)
-    )
-    .then(res => {
-      dispatch({
-        type: UNLIKE_GAME,
+        type: TOGGLE_LIKE,
         payload: res.data
       });
     })
@@ -132,35 +86,14 @@ export const addToBacklog = (gameId, name) => (dispatch, getState) => {
     .post(
       "/api/actions/backlog/",
       {
-        gb: gameId,
+        igdb: gameId,
         name: name
       },
       tokenConfig(getState)
     )
     .then(res => {
       dispatch({
-        type: ADD_TO_BACKLOG,
-        payload: res.data
-      });
-    })
-    .catch(error => {
-      console.log(error);
-    });
-};
-
-export const removeFromBacklog = (gameId, name) => (dispatch, getState) => {
-  axios
-    .post(
-      "/api/actions/remove-backlog/",
-      {
-        gb: gameId,
-        name: name
-      },
-      tokenConfig(getState)
-    )
-    .then(res => {
-      dispatch({
-        type: REMOVE_FROM_BACKLOG,
+        type: TOGGLE_BACKLOG,
         payload: res.data
       });
     })
@@ -174,35 +107,14 @@ export const addToWishlist = (gameId, name) => (dispatch, getState) => {
     .post(
       "/api/actions/wishlist/",
       {
-        gb: gameId,
+        igdb: gameId,
         name: name
       },
       tokenConfig(getState)
     )
     .then(res => {
       dispatch({
-        type: ADD_TO_WISHLIST,
-        payload: res.data
-      });
-    })
-    .catch(error => {
-      console.log(error);
-    });
-};
-
-export const removeFromWishlist = (gameId, name) => (dispatch, getState) => {
-  axios
-    .post(
-      "/api/actions/remove-wishlist/",
-      {
-        gb: gameId,
-        name: name
-      },
-      tokenConfig(getState)
-    )
-    .then(res => {
-      dispatch({
-        type: REMOVE_FROM_WISHLIST,
+        type: TOGGLE_WISHLIST,
         payload: res.data
       });
     })
