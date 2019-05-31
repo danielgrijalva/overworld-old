@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { loadProfile } from "../../actions/profile";
+import { loadProfile, follow, unfollow } from "../../actions/profile";
 import {
   Container,
   Segment,
@@ -10,23 +10,27 @@ import {
   Menu,
   Divider,
   Image,
-  Message
+  Message,
+  Button
 } from "semantic-ui-react";
 import "./Profile.css";
 import "../landing/components/popular/Popular.css";
 import { Footer } from "../app/components/footer/Footer";
 
 class Profile extends Component {
-  state = {};
+  state = {
+    activeItem: "profile"
+  };
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   componentWillMount() {
-    this.props.loadProfile();
+    const { username } = this.props.match.params;
+    this.props.loadProfile(username);
   }
 
   render() {
-    const { username } = this.props.profile;
+    const { username, me, following } = this.props.profile;
     const { activeItem } = this.state;
     if (!this.props.isLoading) {
       return (
@@ -35,7 +39,7 @@ class Profile extends Component {
             <Segment basic className="profile-header">
               <Grid>
                 <Grid.Row>
-                  <Grid.Column width={2}>
+                  <Grid.Column width={1} mobile={2}>
                     <Image
                       src="https://react.semantic-ui.com/images/wireframe/square-image.png"
                       circular
@@ -43,7 +47,7 @@ class Profile extends Component {
                       size="tiny"
                     />
                   </Grid.Column>
-                  <Grid.Column verticalAlign="middle" width={8}>
+                  <Grid.Column verticalAlign="middle" width={7} mobile={5}>
                     <h2>{username}</h2>
                     <p>
                       <span>
@@ -55,9 +59,32 @@ class Profile extends Component {
                         <a href="#">PunisherIV</a>
                       </span>
                     </p>
+                    {me && (
+                      <Button compact size="tiny">
+                        Edit Profile
+                      </Button>
+                    )}
+                    {this.props.profile.following ? (
+                      <Button
+                        className="following"
+                        compact
+                        size="tiny"
+                        color="blue"
+                        onClick={() => this.props.unfollow(username)}
+                      />
+                    ) : (
+                      <Button
+                        compact
+                        size="tiny"
+                        color="green"
+                        onClick={() => this.props.follow(username)}
+                      >
+                        Follow
+                      </Button>
+                    )}
                   </Grid.Column>
                   <Grid.Column
-                    width={6}
+                    width={7}
                     className="stats"
                     verticalAlign="middle"
                   >
@@ -151,7 +178,7 @@ class Profile extends Component {
               <Grid>
                 <Grid.Row>
                   <Grid.Column width={11}>
-                    <Divider horizontal>Favorite Games</Divider>
+                    <Divider horizontal>Favorites</Divider>
                     <div className="games-wrapper">
                       <React.Fragment>
                         {[...Array(5)].map((_, i) => (
@@ -161,7 +188,7 @@ class Profile extends Component {
                     </div>
 
                     <Divider horizontal>Recent Activity</Divider>
-                    <div className="games-wrapper">
+                    <div className="recent-wrapper">
                       <React.Fragment>
                         {[...Array(5)].map((_, i) => (
                           <div key={i} className="placeholder" />
@@ -169,10 +196,19 @@ class Profile extends Component {
                       </React.Fragment>
                     </div>
                     <Divider horizontal>Reviews</Divider>
-                    <Message
-                      icon="question circle outline"
-                      content="No reviews yet"
-                    />
+                    <div className="review">
+                      <div className="review-placeholder" />
+                      <h1>Dark Souls</h1>
+                      <Icon name="star" color="yellow"/>
+                      x10
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                        sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua. Ut enim ad minim veniam, quis nostrud
+                        exercitation ullamco laboris nisi ut aliquip ex ea
+                        commodo consequat.
+                      </p>
+                    </div>
                   </Grid.Column>
                   <Grid.Column width={5}>
                     <Divider horizontal>Bio</Divider>
@@ -208,5 +244,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { loadProfile }
+  { loadProfile, follow, unfollow }
 )(Profile);

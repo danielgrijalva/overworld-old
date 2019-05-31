@@ -21,3 +21,5 @@ export const RATE_GAME = "RATE_GAME";
 export const LOAD_RATING = "LOAD_RATING";
 export const RATING_LOADING = "RATING_LOADING";
 export const LOAD_PROFILE = "LOAD_PROFILE";
+export const FOLLOW = "FOLLOW";
+export const UNFOLLOW = "UNFOLLOW";

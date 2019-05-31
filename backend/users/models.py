@@ -8,6 +8,9 @@ class CustomUser(AbstractUser):
     liked = models.ManyToManyField(Game, related_name='liked')
     backlog = models.ManyToManyField(Game, related_name='backlog')
     wishlist = models.ManyToManyField(Game, related_name='wishlist')
+    favorites = models.ManyToManyField(Game, related_name='favorites')
+    following = models.ManyToManyField('self', related_name='following')
+    followers = models.ManyToManyField('self', related_name='followers')
 
     def __str__(self):
         return self.username
