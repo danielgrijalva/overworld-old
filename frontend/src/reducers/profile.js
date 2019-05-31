@@ -1,8 +1,8 @@
-import { LOAD_PROFILE } from "../actions/types";
+import { LOAD_PROFILE, FOLLOW, UNFOLLOW } from "../actions/types";
 
 const initialState = {
   isLoading: true,
-  profile: {}
+  profile: {},
 };
 
 export default function(state = initialState, action) {
@@ -12,6 +12,16 @@ export default function(state = initialState, action) {
         ...state,
         profile: action.payload,
         isLoading: false
+      };
+    case FOLLOW:
+      return {
+        ...state,
+        profile: { ...state.profile, following: true }
+      };
+    case UNFOLLOW:
+      return {
+        ...state,
+        profile: { ...state.profile, following: false }
       };
     default:
       return state;
