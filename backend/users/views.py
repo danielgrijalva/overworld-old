@@ -55,9 +55,8 @@ class ProfileView(generics.GenericAPIView):
 
         if not request.user.is_anonymous:
             me = CustomUser.objects.get(id=request.user.id)
-            if user == me:
-                serializer['me'] = True
-            elif user in me.following.all():
+            serializer['me'] = UserSerializer(me).data
+            if user in me.following.all():
                 serializer['following'] = True
 
         return Response(serializer)

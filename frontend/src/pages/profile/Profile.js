@@ -30,7 +30,7 @@ class Profile extends Component {
   }
 
   render() {
-    const { username, me, following } = this.props.profile;
+    const { username, me } = this.props.profile;
     const { activeItem } = this.state;
     if (!this.props.isLoading) {
       return (
@@ -39,7 +39,7 @@ class Profile extends Component {
             <Segment basic className="profile-header">
               <Grid>
                 <Grid.Row>
-                  <Grid.Column width={1} mobile={2}>
+                  <Grid.Column mobile={2}>
                     <Image
                       src="https://react.semantic-ui.com/images/wireframe/square-image.png"
                       circular
@@ -47,7 +47,7 @@ class Profile extends Component {
                       size="tiny"
                     />
                   </Grid.Column>
-                  <Grid.Column verticalAlign="middle" width={7} mobile={5}>
+                  <Grid.Column verticalAlign="middle" computer={7} mobile={5}>
                     <h2>{username}</h2>
                     <p>
                       <span>
@@ -59,29 +59,33 @@ class Profile extends Component {
                         <a href="#">PunisherIV</a>
                       </span>
                     </p>
-                    {me && (
+                    {me && me.username === username && (
                       <Button compact size="tiny">
                         Edit Profile
                       </Button>
                     )}
-                    {this.props.profile.following ? (
-                      <Button
-                        className="following"
-                        compact
-                        size="tiny"
-                        color="blue"
-                        onClick={() => this.props.unfollow(username)}
-                      />
-                    ) : (
-                      <Button
-                        compact
-                        size="tiny"
-                        color="green"
-                        onClick={() => this.props.follow(username)}
-                      >
-                        Follow
-                      </Button>
-                    )}
+                    {me && me.username !== username ? (
+                      <React.Fragment>
+                        {this.props.profile.following ? (
+                          <Button
+                            className="following"
+                            compact
+                            size="tiny"
+                            color="blue"
+                            onClick={() => this.props.unfollow(username)}
+                          />
+                        ) : (
+                          <Button
+                            compact
+                            size="tiny"
+                            color="green"
+                            onClick={() => this.props.follow(username)}
+                          >
+                            Follow
+                          </Button>
+                        )}
+                      </React.Fragment>
+                    ) : null}
                   </Grid.Column>
                   <Grid.Column
                     width={7}
@@ -199,8 +203,10 @@ class Profile extends Component {
                     <div className="review">
                       <div className="review-placeholder" />
                       <h1>Dark Souls</h1>
-                      <Icon name="star" color="yellow"/>
-                      x10
+                      <Icon.Group size="small">
+                        <Icon size="small" color="yellow" name="star" />
+                        <i>10</i>
+                      </Icon.Group>
                       <p>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                         sed do eiusmod tempor incididunt ut labore et dolore
@@ -212,7 +218,7 @@ class Profile extends Component {
                   </Grid.Column>
                   <Grid.Column width={5}>
                     <Divider horizontal>Bio</Divider>
-                    <p class="profile-bio">
+                    <p className="profile-bio">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore magna
                       aliqua. Ut enim ad minim veniam, quis nostrud exercitation
