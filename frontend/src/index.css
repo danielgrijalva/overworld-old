@@ -8,6 +8,7 @@ body {
   /* background-image: linear-gradient(180deg,#2c3440 0,#14181c 100%); */
   background-repeat: repeat-x;
   background-position: 0 0;
+  min-width: 768px;
 }
 
 h1,
@@ -32,7 +33,7 @@ a:hover {
 }
 
 .margin-bottom-xs {
-  margin-bottom: .75rem !important;
+  margin-bottom: 0.75rem !important;
 }
 
 .padding-bottom {
@@ -44,7 +45,7 @@ a:hover {
 }
 
 .padding-bottom-xs {
-  padding-bottom: .75rem !important;
+  padding-bottom: 0.75rem !important;
 }
 
 .margin-top {
