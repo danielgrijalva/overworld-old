@@ -22,3 +22,7 @@ h1 {
 .backdrop-name a:hover {
   color: #9ab !important;
 }
+
+.landing-header .item {
+  cursor: pointer;
+}
