@@ -50,7 +50,38 @@ class UserView(generics.RetrieveAPIView):
 class ProfileView(generics.GenericAPIView):
 
     def get(self, request, *args, **kwargs):
-        user = CustomUser.objects.get(id=request.user.id)
-        serializer = ProfileSerializer(user)
+        user = CustomUser.objects.get(username=kwargs['username'])
+        serializer = ProfileSerializer(user).data
 
-        return Response(serializer.data)
+        if not request.user.is_anonymous:
+            me = CustomUser.objects.get(id=request.user.id)
+            if user == me:
+                serializer['me'] = True
+            elif user in me.following.all():
+                serializer['following'] = True
+
+        return Response(serializer)
+
+
+class FollowView(generics.GenericAPIView):
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def post(self, request, *args, **kwargs):
+        me = CustomUser.objects.get(id=request.user.id)
+        user = CustomUser.objects.get(username=request.data['username'])
+
+        me.following.add(user)
+
+        return Response([])
+
+
+class UnfollowView(generics.GenericAPIView):
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def post(self, request, *args, **kwargs):
+        me = CustomUser.objects.get(id=request.user.id)
+        user = CustomUser.objects.get(username=request.data['username'])
+
+        me.following.remove(user)
+
+        return Response([])
