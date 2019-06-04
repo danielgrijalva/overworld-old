@@ -50,8 +50,16 @@ class UserView(generics.RetrieveAPIView):
 class ProfileView(generics.GenericAPIView):
 
     def post(self, request, *args, **kwargs):
-        pass
+        me = CustomUser.objects.get(id=request.user.id)
         
+        for key in request.data:
+          setattr(me, key, request.POST[key])
+
+        me.save()
+        serializer = ProfileSerializer(me).data
+
+        return Response(serializer)
+
     def get(self, request, *args, **kwargs):
         user = CustomUser.objects.get(username=kwargs['username'])
         serializer = ProfileSerializer(user).data
