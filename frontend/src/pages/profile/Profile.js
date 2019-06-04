@@ -6,23 +6,17 @@ import {
   Segment,
   Icon,
   Grid,
-  Statistic,
-  Menu,
   Divider,
   Image,
-  Message,
   Button
 } from "semantic-ui-react";
 import "./Profile.css";
 import "../landing/components/popular/Popular.css";
 import { Footer } from "../app/components/footer/Footer";
+import Stats from "./components/stats/Stats";
+import ProfileNav from "./components/nav/ProfileNav";
 
 class Profile extends Component {
-  state = {
-    activeItem: "profile"
-  };
-
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   componentWillMount() {
     const { username } = this.props.match.params;
@@ -30,8 +24,7 @@ class Profile extends Component {
   }
 
   render() {
-    const { username, me } = this.props.profile;
-    const { activeItem } = this.state;
+    const { username, bio, location, twitter, me } = this.props.profile;
     if (!this.props.isLoading) {
       return (
         <React.Fragment>
@@ -49,16 +42,18 @@ class Profile extends Component {
                   </Grid.Column>
                   <Grid.Column verticalAlign="middle" computer={7} mobile={5}>
                     <h2>{username}</h2>
-                    <p>
+                    {location && (
                       <span>
                         <Icon name="map marker alternate" />
-                        Portland, OR
+                        {location}
                       </span>
+                    )}
+                    {twitter && (
                       <span>
                         <Icon name="twitter" />
-                        <a href="#">PunisherIV</a>
+                        <a href="#">{twitter}</a>
                       </span>
-                    </p>
+                    )}
                     {me && me.username === username && (
                       <Button compact size="tiny">
                         Edit Profile
@@ -66,7 +61,7 @@ class Profile extends Component {
                     )}
                     {me && me.username !== username ? (
                       <React.Fragment>
-                        {this.props.profile.following ? (
+                        {this.props.profile.followingUser ? (
                           <Button
                             className="following"
                             compact
@@ -92,90 +87,14 @@ class Profile extends Component {
                     className="stats"
                     verticalAlign="middle"
                   >
-                    <Statistic size="tiny">
-                      <Statistic.Value>1.2k</Statistic.Value>
-                      <Statistic.Label>Games</Statistic.Label>
-                    </Statistic>
-                    <Statistic size="tiny">
-                      <Statistic.Value>10</Statistic.Value>
-                      <Statistic.Label>Backlog</Statistic.Label>
-                    </Statistic>
-                    <Statistic size="tiny">
-                      <Statistic.Value>2</Statistic.Value>
-                      <Statistic.Label>Lists</Statistic.Label>
-                    </Statistic>
-                    <Statistic size="tiny">
-                      <Statistic.Value>16.4k</Statistic.Value>
-                      <Statistic.Label>Followers</Statistic.Label>
-                    </Statistic>
-                    <Statistic size="tiny">
-                      <Statistic.Value>27</Statistic.Value>
-                      <Statistic.Label>Following</Statistic.Label>
-                    </Statistic>
+                    <Stats profile={this.props.profile} />
                   </Grid.Column>
                 </Grid.Row>
               </Grid>
             </Segment>
             <Segment basic>
               <Container className="profile-menu-wrapper" textAlign="center">
-                <Menu borderless compact className="profile-menu">
-                  <Menu.Item
-                    name="profile"
-                    active={activeItem === "profile"}
-                    onClick={this.handleItemClick}
-                  >
-                    Profile
-                  </Menu.Item>
-                  <Menu.Item
-                    name="games"
-                    active={activeItem === "games"}
-                    onClick={this.handleItemClick}
-                  >
-                    Games
-                  </Menu.Item>
-                  <Menu.Item
-                    name="likes"
-                    active={activeItem === "likes"}
-                    onClick={this.handleItemClick}
-                  >
-                    Likes
-                  </Menu.Item>
-                  <Menu.Item
-                    name="reviews"
-                    active={activeItem === "reviews"}
-                    onClick={this.handleItemClick}
-                  >
-                    Reviews
-                  </Menu.Item>
-                  <Menu.Item
-                    name="backlog"
-                    active={activeItem === "backlog"}
-                    onClick={this.handleItemClick}
-                  >
-                    Backlog
-                  </Menu.Item>
-                  <Menu.Item
-                    name="wishlist"
-                    active={activeItem === "wishlist"}
-                    onClick={this.handleItemClick}
-                  >
-                    Wish List
-                  </Menu.Item>
-                  <Menu.Item
-                    name="lists"
-                    active={activeItem === "lists"}
-                    onClick={this.handleItemClick}
-                  >
-                    Lists
-                  </Menu.Item>
-                  <Menu.Item
-                    name="journal"
-                    active={activeItem === "journal"}
-                    onClick={this.handleItemClick}
-                  >
-                    Journal
-                  </Menu.Item>
-                </Menu>
+                <ProfileNav />
               </Container>
             </Segment>
             <Segment className="profile-content" basic>

@@ -18,7 +18,7 @@
   cursor: default;
 }
 
-.profile-header span:not(:first-child) {
+.profile-header span:not(:first-of-type) {
   margin-left: 1.5rem;
 }
 
@@ -30,77 +30,12 @@
   color: #fff !important;
 }
 
-.stats {
-  text-align: right;
-}
-
-.statistic {
-  margin-bottom: 0 !important;
-}
-
-.statistic div {
-  font-weight: 300 !important;
-  color: #9ab !important;
-  text-transform: capitalize !important;
-  text-align: right !important;
-}
-
-.statistic .value {
-  font-family: "Lato", sans-serif !important;
-}
-
-.statistic .label {
-  font-family: "Raleway", sans-serif !important;
-  font-size: 0.9rem !important;
-}
-
-.profile-menu-wrapper {
-  border: 1px solid #24303c !important;
-  transition: 0.2s;
-  border-radius: 0.3rem;
-}
-
-.profile-menu-wrapper:hover {
-  background: #24303c !important;
-}
-
-.profile-menu-wrapper:hover .profile-menu {
-  background: #24303c !important;
-}
-
-.profile-menu {
-  background: #14181c !important;
-  box-shadow: none !important;
-  border: none !important;
-  transition: 0.2s;
-}
-
-.profile-menu .item {
-  color: #9ab !important;
-  text-shadow: none !important;
-}
-
-.profile-menu .item:hover {
-  color: #fff !important;
-}
-
-.profile-menu .active.item {
-  background: #24303c !important;
-  color: #fff !important;
-}
-
-.ui.compact.menu .item:last-child,
-.ui.compact.menu .item:first-child {
-  border-radius: 0 !important;
-}
-
 .ui.horizontal.divider {
   font-size: 0.85rem;
   font-family: "Raleway", sans-serif !important;
   color: #9ab;
   font-weight: 300;
   margin-top: 2rem;
-  /* text-transform: capitalize; */
 }
 
 .ui.horizontal.divider:first-child {
@@ -193,6 +128,7 @@
 .ui.blue.button.following {
   width: 6rem;
 }
+
 .ui.blue.button.following::after {
   content: "Following";
   letter-spacing: 0.02rem;
@@ -206,7 +142,6 @@
 .ui.blue.button.following:hover {
   background-color: #f2711c;
 }
-
 
 .review .review-placeholder {
   float: left;
