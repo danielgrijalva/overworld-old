@@ -10,15 +10,32 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ProfileSerializer(serializers.ModelSerializer):
-    played = serializers.SlugRelatedField(
+    following = serializers.PrimaryKeyRelatedField(
         many=True,
-        read_only=True,
-        slug_field='name'
+        read_only=True
+    )
+
+    followers = serializers.PrimaryKeyRelatedField(
+        many=True,
+        read_only=True
     )
 
     class Meta:
         model = CustomUser
-        fields = ('id', 'username', 'played', 'liked', 'backlog', 'wishlist')
+        depth = 1
+        fields = (
+            'id',
+            'username',
+            'bio',
+            'location',
+            'twitter',
+            'played',
+            'liked',
+            'backlog',
+            'wishlist',
+            'following',
+            'followers',
+        )
 
 
 class RegisterSerializer(serializers.ModelSerializer):

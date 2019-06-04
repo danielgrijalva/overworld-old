@@ -49,6 +49,9 @@ class UserView(generics.RetrieveAPIView):
 
 class ProfileView(generics.GenericAPIView):
 
+    def post(self, request, *args, **kwargs):
+        pass
+        
     def get(self, request, *args, **kwargs):
         user = CustomUser.objects.get(username=kwargs['username'])
         serializer = ProfileSerializer(user).data
@@ -57,7 +60,7 @@ class ProfileView(generics.GenericAPIView):
             me = CustomUser.objects.get(id=request.user.id)
             serializer['me'] = UserSerializer(me).data
             if user in me.following.all():
-                serializer['following'] = True
+                serializer['followingUser'] = True
 
         return Response(serializer)
 
@@ -70,6 +73,7 @@ class FollowView(generics.GenericAPIView):
         user = CustomUser.objects.get(username=request.data['username'])
 
         me.following.add(user)
+        user.followers.add(me)
 
         return Response([])
 
@@ -82,5 +86,6 @@ class UnfollowView(generics.GenericAPIView):
         user = CustomUser.objects.get(username=request.data['username'])
 
         me.following.remove(user)
+        user.followers.remove(me)
 
         return Response([])
