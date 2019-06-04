@@ -16,12 +16,12 @@ export default function(state = initialState, action) {
     case FOLLOW:
       return {
         ...state,
-        profile: { ...state.profile, following: true }
+        profile: { ...state.profile, followingUser: true }
       };
     case UNFOLLOW:
       return {
         ...state,
-        profile: { ...state.profile, following: false }
+        profile: { ...state.profile, followingUser: false }
       };
     default:
       return state;
