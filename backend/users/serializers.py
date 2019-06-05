@@ -26,6 +26,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'username',
+            'email',
             'bio',
             'location',
             'twitter',

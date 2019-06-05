@@ -53,7 +53,7 @@ class ProfileView(generics.GenericAPIView):
         me = CustomUser.objects.get(id=request.user.id)
         
         for key in request.data:
-          setattr(me, key, request.POST[key])
+          setattr(me, key, request.data[key])
 
         me.save()
         serializer = ProfileSerializer(me).data

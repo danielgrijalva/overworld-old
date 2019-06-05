@@ -76,3 +76,42 @@ a:hover {
   color: #fff;
   background: #48c5ff;
 }
+
+.ui.form > .field > label {
+  color: #def;
+  font-weight: 300;
+}
+
+.ui.form > .field > input,
+.ui.form > .field > textarea {
+  background: #9ab;
+  transition: 0.2s;
+  border: none !important;
+  color: #000 !important;
+}
+
+.ui.form > .field > input::placeholder {
+  color: #456;
+}
+
+textarea:focus {
+  background: #fff !important;
+}
+
+.ui.checkbox input:focus ~ label {
+  color: #def !important;
+}
+
+.ui.checkbox .box:before,
+.ui.checkbox label:before {
+  background: #def !important;
+  border: none !important;
+}
+
+.ui.checkbox input:checked ~ label:after {
+  color: #456 !important;
+}
+
+.ui.form .required.field > .checkbox:after {
+  content: "";
+}

@@ -1,5 +1,11 @@
 import axios from "axios";
-import { LOAD_PROFILE, FOLLOW, UNFOLLOW } from "./types";
+import {
+  LOAD_PROFILE,
+  FOLLOW,
+  UNFOLLOW,
+  EDIT_PROFILE_SUCCESS,
+  EDIT_PROFILE_SUBMIT
+} from "./types";
 import { tokenConfig } from "./auth";
 
 export const loadProfile = username => (dispatch, getState) => {
@@ -36,6 +42,31 @@ export const unfollow = username => (dispatch, getState) => {
     .then(res => {
       dispatch({
         type: UNFOLLOW,
+        payload: res.data
+      });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+export const editProfile = profile => (dispatch, getState) => {
+  dispatch({ type: EDIT_PROFILE_SUBMIT });
+  axios
+    .post(
+      `/api/users/profile/${profile.username}`,
+      {
+        username: profile.username,
+        email: profile.email,
+        location: profile.location,
+        twitter: profile.twitter,
+        bio: profile.bio
+      },
+      tokenConfig(getState)
+    )
+    .then(res => {
+      dispatch({
+        type: EDIT_PROFILE_SUCCESS,
         payload: res.data
       });
     })
