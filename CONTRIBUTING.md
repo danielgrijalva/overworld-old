@@ -74,7 +74,7 @@ git add /path/to/specific/file/
 git commit -m 'quick summary of what you did'
 ```
 
-I would go even further and add more details to the commit message with [`git commit --ammend`](https://help.github.com/en/articles/changing-a-commit-message):
+I would go even further and add more details to the commit message with [`git commit --amend`](https://help.github.com/en/articles/changing-a-commit-message):
 
 ```
 quick summary of what you did
