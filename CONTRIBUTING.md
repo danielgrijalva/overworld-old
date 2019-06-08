@@ -15,7 +15,8 @@ The app is separated into two projects, *frontend* (`React`) and *backend* (`Dja
 
 A few things to consider:
 * The frontend was bootsrapped using [`create-react-app`](https://github.com/facebook/create-react-app).
-* We use `Redux` to manage our state across the app.
+* [`Redux`](https://redux.js.org/) is used to manage state across the app.
+* We use [`Semantic UI`](https://react.semantic-ui.com/) for UI components.
 * For user authentication, we use [`django-rest-knox`](https://github.com/James1345/django-rest-knox).
 
 ### Setup
@@ -44,6 +45,16 @@ npm start
 ```
 
 As you can see, both the frontend and backend are two separate entities. To access the backend API go to `localhost:8000`, but most of the time you'll be using the main app (the frontend) by going to `localhost:3000`.
+
+## Code Style
+
+### Python
+
+Please, follow the [PEP 8](https://www.python.org/dev/peps/pep-0008/) style guide. You can read more about the Python code style, conventions and other guidelines [here](https://docs.python-guide.org/writing/style/).
+
+### JavaScript
+
+We follow the [Airbnb style guide](https://github.com/airbnb/javascript) for JavaScript. React specific guidelines can be found [here](https://github.com/airbnb/javascript/tree/master/react).
 
 ## Get in touch
 
