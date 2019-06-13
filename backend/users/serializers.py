@@ -9,6 +9,36 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'email')
 
 
+class ProfileSerializer(serializers.ModelSerializer):
+    following = serializers.PrimaryKeyRelatedField(
+        many=True,
+        read_only=True
+    )
+
+    followers = serializers.PrimaryKeyRelatedField(
+        many=True,
+        read_only=True
+    )
+
+    class Meta:
+        model = CustomUser
+        depth = 1
+        fields = (
+            'id',
+            'username',
+            'email',
+            'bio',
+            'location',
+            'twitter',
+            'played',
+            'liked',
+            'backlog',
+            'wishlist',
+            'following',
+            'followers',
+        )
+
+
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser

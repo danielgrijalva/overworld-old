@@ -87,7 +87,7 @@ export const Details = ({ game }) => {
                     </Grid.Column>
                     <Grid.Column width={8} className="details">
                       <Label>
-                        {Math.floor(game.time_to_beat.normally / 3600)}h
+                        {Math.floor(game.time_to_beat.normally / 3600)} hours
                       </Label>
                     </Grid.Column>
                   </Grid.Row>

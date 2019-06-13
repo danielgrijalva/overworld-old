@@ -1,0 +1,157 @@
+.ui.segment.basic {
+  margin: 0;
+}
+
+.profile-header {
+  text-shadow: 0 0 7px rgba(0, 0, 0, 0.45) !important;
+}
+
+.profile-header h2 {
+  font-family: "Raleway", sans-serif !important;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.profile-header span {
+  font-family: "Raleway", sans-serif !important;
+  font-size: 0.9rem !important;
+  cursor: default;
+}
+
+.profile-header span:not(:first-of-type) {
+  margin-left: 1.5rem;
+}
+
+.profile-header span a {
+  color: #9ab;
+}
+
+.profile-header span a:hover {
+  color: #fff !important;
+}
+
+.ui.horizontal.divider {
+  font-size: 0.85rem;
+  font-family: "Raleway", sans-serif !important;
+  color: #9ab;
+  font-weight: 300;
+  margin-top: 2rem;
+}
+
+.ui.horizontal.divider:first-child {
+  margin-top: 0;
+}
+
+.games-wrapper,
+.recent-wrapper,
+.reviews-wrapper {
+  text-align: center;
+}
+
+.placeholder {
+  display: inline-block;
+  width: 135px;
+  height: 192px;
+  margin: 0 1.25rem 0 0;
+  background: #0c0e10;
+  box-shadow: 0 0 0 1px rgb(48, 56, 64);
+  border-radius: 0.3125rem;
+}
+
+.review-placeholder {
+  display: inline-block;
+  width: 90px;
+  height: 128px;
+  margin: 0 1rem 0 0;
+  background: #0c0e10;
+  box-shadow: 0 0 0 1px rgb(48, 56, 64);
+  border-radius: 0.3125rem;
+}
+
+.placeholder:last-child {
+  margin: 0 !important;
+}
+
+.profile-content .message {
+  background: #24303c;
+  color: #bcd;
+}
+
+.profile-content .message i {
+  font-size: 2rem !important;
+}
+
+.profile-content .message p {
+  text-shadow: 0 0 7px rgba(0, 0, 0, 0.45) !important;
+}
+
+.profile-avatar {
+  width: 100% !important;
+}
+
+@media only screen and (max-width: 767px) and (min-width: 320px) {
+  .placeholder {
+    width: 82px;
+    height: 116.6px;
+  }
+  .ui.tiny.statistic > .value {
+    font-size: 1.47rem !important;
+  }
+
+  .statistic .label {
+    font-size: 0.8rem !important;
+  }
+}
+
+@media only screen and (max-width: 991px) and (min-width: 768px) {
+  .placeholder {
+    width: 79px;
+    height: 112.3px;
+  }
+
+  .ui.tiny.statistic > .value {
+    font-size: 1.47rem !important;
+  }
+
+  .statistic .label {
+    font-size: 0.8rem !important;
+  }
+}
+
+@media only screen and (max-width: 1199px) and (min-width: 992px) {
+  .placeholder {
+    width: 108px;
+    height: 153.6px;
+  }
+}
+
+.ui.blue.button.following {
+  width: 6rem;
+}
+
+.ui.blue.button.following::after {
+  content: "Following";
+  letter-spacing: 0.02rem;
+  text-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
+}
+
+.ui.blue.button.following:hover::after {
+  content: "Unfollow";
+}
+
+.ui.blue.button.following:hover {
+  background-color: #f2711c;
+}
+
+.review .review-placeholder {
+  float: left;
+}
+
+.review h1 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+a.button:hover {
+  color: initial !important;
+}

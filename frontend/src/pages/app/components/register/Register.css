@@ -21,39 +21,7 @@
   padding: 1rem;
 }
 
-.register .ui.form label {
-  color: #def;
-  font-weight: 300;
-}
 
-.register .ui.form input {
-  background: #9ab;
-  transition: 0.2s;
-  border: none !important;
-  color: #000 !important;
-}
-
-.register .ui.form input::placeholder {
- color: #456;
-}
-
-.ui.checkbox input:focus ~ label {
-  color: #def !important;
-}
-
-.ui.checkbox .box:before,
-.ui.checkbox label:before {
-  background: #def !important;
-  border: none !important;
-}
-
-.ui.checkbox input:checked ~ label:after {
-  color: #456 !important;
-}
-
-.ui.form .required.field > .checkbox:after {
-  content: "";
-}
 
 .register .button.positive {
   margin: 0.7rem 0 1.7rem;
