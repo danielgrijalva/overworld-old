@@ -38,6 +38,7 @@ __pycache__/
 .Python
 venv/
 build/
+backend/docs/_build/
 develop-eggs/
 dist/
 downloads/
