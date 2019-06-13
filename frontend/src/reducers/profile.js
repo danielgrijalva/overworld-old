@@ -2,7 +2,6 @@ import {
   LOAD_PROFILE,
   FOLLOW,
   UNFOLLOW,
-  EDIT_PROFILE_SUBMIT,
   EDIT_PROFILE_SUCCESS
 } from "../actions/types";
 
@@ -28,11 +27,6 @@ export default function(state = initialState, action) {
       return {
         ...state,
         profile: { ...state.profile, followingUser: false }
-      };
-    case EDIT_PROFILE_SUBMIT:
-      return {
-        ...state,
-        isLoading: true
       };
     case EDIT_PROFILE_SUCCESS:
       return {

@@ -17,7 +17,6 @@ import Stats from "./components/stats/Stats";
 import ProfileNav from "./components/nav/ProfileNav";
 
 class Profile extends Component {
-
   componentWillMount() {
     const { username } = this.props.match.params;
     this.props.loadProfile(username);
@@ -42,18 +41,20 @@ class Profile extends Component {
                   </Grid.Column>
                   <Grid.Column verticalAlign="middle" computer={7} mobile={5}>
                     <h2>{username}</h2>
-                    {location && (
-                      <span>
-                        <Icon name="map marker alternate" />
-                        {location}
-                      </span>
-                    )}
-                    {twitter && (
-                      <span>
-                        <Icon name="twitter" />
-                        <a href="#">{twitter}</a>
-                      </span>
-                    )}
+                    <p>
+                      {location && (
+                        <span>
+                          <Icon name="map marker alternate" />
+                          {location}
+                        </span>
+                      )}
+                      {twitter && (
+                        <span>
+                          <Icon name="twitter" />
+                          <a href="#">{twitter}</a>
+                        </span>
+                      )}
+                    </p>
                     {me && me.username === username && (
                       <Button compact size="tiny" as="a" href="/settings">
                         Edit Profile
@@ -122,8 +123,8 @@ class Profile extends Component {
                     <div className="review">
                       <div className="review-placeholder" />
                       <h1>Dark Souls</h1>
-                      <Icon.Group size="small">
-                        <Icon size="small" color="yellow" name="star" />
+                      <Icon.Group size="tiny">
+                        <Icon size="tiny" color="yellow" name="star" />
                         <i>10</i>
                       </Icon.Group>
                       <p>
@@ -136,13 +137,14 @@ class Profile extends Component {
                     </div>
                   </Grid.Column>
                   <Grid.Column width={5}>
-                    <Divider horizontal>Bio</Divider>
-                    <p className="profile-bio">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    </p>
+                    {bio && (
+                      <React.Fragment>
+                        <Divider horizontal>Bio</Divider>
+                        <p className="profile-bio">
+                          {bio}
+                        </p>
+                      </React.Fragment>
+                    )}
                     <Divider horizontal>Journal</Divider>
                     <Divider horizontal>Ratings</Divider>
                     <Divider horizontal>Backlog</Divider>

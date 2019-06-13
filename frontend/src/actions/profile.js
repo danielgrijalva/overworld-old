@@ -51,7 +51,6 @@ export const unfollow = username => (dispatch, getState) => {
 };
 
 export const editProfile = profile => (dispatch, getState) => {
-  dispatch({ type: EDIT_PROFILE_SUBMIT });
   axios
     .post(
       `/api/users/profile/${profile.username}`,
