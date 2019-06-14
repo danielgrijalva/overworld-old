@@ -1,8 +1,8 @@
 ---
-description: Overworld's API endpoints.
+description: Endpoints related to auth/users of Overworld.
 ---
 
-# API
+# Users
 
 {% api-method method="post" host="http://localhost:8000" path="/api/users/register/" %}
 {% api-method-summary %}

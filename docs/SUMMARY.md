@@ -8,10 +8,9 @@
 * [Setup](getting-started/setup.md)
 * [Code Style](getting-started/code_style.md)
 
-## Development
+## API
 
-* [API](development/backend.md)
-* [The Frontend](development/frontend.md)
+* [Users](api/users.md)
 
 ## Community
 
