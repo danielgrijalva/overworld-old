@@ -1,25 +1,25 @@
 # Overworld
 
-![logo](.gitbook/assets/logo%20%281%29.png)
+![logo](/media/logo.png)
 
-> ### _A_ [_letterboxd_](https://letterboxd.com) _for video games._
+> ### *A [letterboxd](https://letterboxd.com) for video games.*
 
-* [About](./#about)
-  * [Inspiration](./#inspiration)
-* [Development](./#development)
-  * [Contributing](./#contributing)
-* [Features](./#features)
-* [Acknowledgements](./#acknowledgements)
+* [About](#about)
+  + [Inspiration](#inspiration)
+* [Development](#development)
+  + [Contributing](#contributing)
+* [Features](#features)
+* [Acknowledgements](#acknowledgements)
 
 ## About
 
-If you use Letterboxd you probably know what this project is about. If not...
+If you use Letterboxd you probably know what this project is about. If not...  
+  
+**Overworld** is a place where you can share your gaming experiences, keep track of what you play, discover games, manage your backlog, show love to your favorite games, write reviews, compile lists of specific games and *More Stuff™*.  
 
-**Overworld** is a place where you can share your gaming experiences, keep track of what you play, discover games, manage your backlog, show love to your favorite games, write reviews, compile lists of specific games and _More Stuff™_.
-
-Follow other people to discuss or discover new games, or you can be a lone wolf and use it as a personal gaming journal.
-
-The project is still in early development. If you have any suggestions, [file an issue](https://github.com/danielgrijalva/overworld/issues/new/choose) or even better, [start contributing](contributing.md)!
+Follow other people to discuss or discover new games, or you can be a lone wolf and use it as a personal gaming journal.  
+  
+The project is still in early development. If you have any suggestions, [file an issue](https://github.com/danielgrijalva/overworld/issues/new/choose) or even better, [start contributing](/CONTRIBUTING.md)!
 
 ### Inspiration
 
@@ -27,27 +27,24 @@ Overworld is _heavily_ inspired by [Letterboxd](https://letterboxd.com/), both i
 
 ## Contributing
 
-Head over to the [contributing guidelines](contributing.md) for more details.
+Head over to the [contributing guidelines](/CONTRIBUTING.md) for more details.
 
 ## Features
 
-> #### [Demo](https://raw.githubusercontent.com/danielgrijalva/overworld/master/media/demo.gif)
-
+> #### [Demo](https://raw.githubusercontent.com/danielgrijalva/overworld/master/media/demo.gif)  
+  
 So far you can do the following:
-
 * Create an account
 * Log in/out
 * Search for games
-* View a game's details \(summary, platforms, crew, release date and more\)
+* View a game's details (summary, platforms, crew, release date and more)
 * Rate a game on a scale of 1 to 10
 * Add a game to your played games
 * Add a game to your backlog and/or wish list
 * Like a game  
-
-![landing](.gitbook/assets/landing%20%281%29.png)
-
-## Acknowledgements
-
+  
+![landing](/media/landing.png)
+  
+## Acknowledgements 
 Data from [`IGDB`](https://api.igdb.com). Icon by [`Freepik`](https://www.freepik.com/).  
 And thanks to [`Letterboxd`](https://letterboxd.com/) for being the ultimate social network for film lovers and serving as an inspiration to Overworld.
-
