@@ -1,17 +1,20 @@
-# Summary
+# Table of contents
+
+* [Introduction](README.md)
 
 ## Getting Started
 
-* [Contributing](getting-started/CONTRIBUTING.md)
-* [Setup](getting-started/SETUP.md)
-* [Code Style](getting-started/CODE_STYLE.md)
+* [Contributing](getting-started/contributing.md)
+* [Setup](getting-started/setup.md)
+* [Code Style](getting-started/code_style.md)
 
 ## Development
 
-* [The Backend](development/BACKEND.md)
-* [The Frontend](development/FRONTEND.md)
+* [The Backend](development/backend.md)
+* [The Frontend](development/frontend.md)
 
 ## Community
 
-* [Code of Conduct](community/CODE_OF_CONDUCT.md)
-* [License](community/LICENSE)
+* [Code of Conduct](community/code_of_conduct.md)
+* [License](community/license.md)
+

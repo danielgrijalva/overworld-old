@@ -10,27 +10,28 @@ We follow the [Airbnb style guide](https://github.com/airbnb/javascript) for Jav
 
 ## Commit style
 
-I personally use the [`gitmoji`](https://gitmoji.carloscuesta.me/) guide for my commit messages to keep them clean and simple. This is merely optional; your commits will be [_squashed_](https://github.blog/2016-04-01-squash-your-commits/) into master anyway :information_desk_person:
+I personally use the [`gitmoji`](https://gitmoji.carloscuesta.me/) guide for my commit messages to keep them clean and simple. This is merely optional; your commits will be [_squashed_](https://github.blog/2016-04-01-squash-your-commits/) into master anyway :information\_desk\_person:
 
 Please be thorough and specific with your commits. _Don't_ do anything like this:
 
-```
+```text
  git add .
  git commit -m 'updated a lot of stuff'
 ```
 
 Instead, be more thoughtful and specific:
 
-```
+```text
 git add /path/to/specific/file/
 git commit -m 'quick summary of what you did'
 ```
 
 I would go even further and add more details to the commit message with [`git commit --amend`](https://help.github.com/en/articles/changing-a-commit-message):
 
-```
+```text
 quick summary of what you did
 - added more fields to profile model
 - fixed bug where profile image wouldn't load
 - added documentation to README
 ```
+
