@@ -3,6 +3,8 @@
 ## Development
 
 * [Contributing](CONTRIBUTING.md)
+* [Setup](SETUP.md)
+* [Code Style](CODE_STYLE.md)
 
 ## Community
 
