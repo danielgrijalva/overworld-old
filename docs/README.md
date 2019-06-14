@@ -1,6 +1,6 @@
 # Overworld
 
-![logo](/media/logo.png)
+![](/media/logo.png)
 
 > ### *A [letterboxd](https://letterboxd.com) for video games.*
 
@@ -19,7 +19,7 @@ If you use Letterboxd you probably know what this project is about. If not...
 
 Follow other people to discuss or discover new games, or you can be a lone wolf and use it as a personal gaming journal.  
   
-The project is still in early development. If you have any suggestions, [file an issue](https://github.com/danielgrijalva/overworld/issues/new/choose) or even better, [start contributing](/CONTRIBUTING.md)!
+The project is still in early development. If you have any suggestions, [file an issue](https://github.com/danielgrijalva/overworld/issues/new/choose) or even better, [start contributing](getting-started/CONTRIBUTING.md)!
 
 ### Inspiration
 
@@ -27,7 +27,7 @@ Overworld is _heavily_ inspired by [Letterboxd](https://letterboxd.com/), both i
 
 ## Contributing
 
-Head over to the [contributing guidelines](/CONTRIBUTING.md) for more details.
+Head over to the [contribution guidelines](getting-started/CONTRIBUTING.md) for more details.
 
 ## Features
 
@@ -43,8 +43,8 @@ So far you can do the following:
 * Add a game to your backlog and/or wish list
 * Like a game  
   
-![landing](/media/landing.png)
+![](/media/landing.png)
   
 ## Acknowledgements 
-Data from [`IGDB`](https://api.igdb.com). Icon by [`Freepik`](https://www.freepik.com/).  
-And thanks to [`Letterboxd`](https://letterboxd.com/) for being the ultimate social network for film lovers and serving as an inspiration to Overworld.
+
+Data from [`IGDB`](https://api.igdb.com). Icon by [`Freepik`](https://www.freepik.com/).
