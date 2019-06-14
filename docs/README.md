@@ -1,6 +1,6 @@
 # Overworld
 
-![logo](../../media/logo.png)
+![logo](/media/logo.png)
 
 > ### *A [letterboxd](https://letterboxd.com) for video games.*
 
@@ -25,11 +25,7 @@ The project is still in early development. If you have any suggestions, [file an
 
 Overworld is _heavily_ inspired by [Letterboxd](https://letterboxd.com/), both in functionality, design and the overall user experience.
 
-## Development
-
-Overworld is separated into two projects, *frontend* (`React`) and *backend* (`Django REST Framework`).  
-
-### Contributing
+## Contributing
 
 Head over to the [contributing guidelines](/CONTRIBUTING.md) for more details.
 
@@ -50,5 +46,5 @@ So far you can do the following:
 ![landing](/media/landing.png)
   
 ## Acknowledgements 
-Data from [`IGDB`](https://api.igdb.com). Icon made [`Freepik`](https://www.freepik.com/).  
+Data from [`IGDB`](https://api.igdb.com). Icon by [`Freepik`](https://www.freepik.com/).  
 And thanks to [`Letterboxd`](https://letterboxd.com/) for being the ultimate social network for film lovers and serving as an inspiration to Overworld.
