@@ -1,6 +1,6 @@
 # Setup
 
-The app is separated into two projects, *frontend* (`React`) and *backend* (`Django REST Framework`).
+The app is separated into two projects, `frontend` ([React](https://reactjs.org/)) and `backend` ([Django REST Framework](https://www.django-rest-framework.org/)).
 
 A few things to consider:
 * The frontend was bootsrapped using [`create-react-app`](https://github.com/facebook/create-react-app).
@@ -10,6 +10,7 @@ A few things to consider:
 
 ## Installation
 
+After forking the repository, do the following:
 * Obtain your API keys from [IGDB](https://api.igdb.com) and paste it inside your `.env` file. But first, copy the `.env.default` file to your actual `.env`:
 
 ```
