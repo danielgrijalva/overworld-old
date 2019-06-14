@@ -1,3 +1,7 @@
+---
+description: Welcome to Overworld!
+---
+
 # Introduction
 
 ![](.gitbook/assets/logo%20%282%29.png)

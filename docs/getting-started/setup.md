@@ -1,3 +1,7 @@
+---
+description: Installing Overworld in your machine
+---
+
 # Setup
 
 The app is separated into two projects, `frontend` \([React](https://reactjs.org/)\) and `backend` \([Django REST Framework](https://www.django-rest-framework.org/)\).
@@ -9,7 +13,7 @@ A few things to consider:
 * We use [`Semantic UI`](https://react.semantic-ui.com/) for UI components.
 * For user authentication, we use [`django-rest-knox`](https://github.com/James1345/django-rest-knox).
 
-## Installation
+### Installation
 
 After forking the repository, do the following:
 
