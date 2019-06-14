@@ -6,8 +6,8 @@
 
 * [About](#about)
   + [Inspiration](#inspiration)
-* [Development](#development)
-  + [Contributing](#contributing)
+* [Contributing](#contributing)
+  + [Documentation](#documentation)
 * [Features](#features)
 * [Acknowledgements](#acknowledgements)
 
@@ -28,6 +28,10 @@ Overworld is _heavily_ inspired by [Letterboxd](https://letterboxd.com/), both i
 ## Contributing
 
 Head over to the [contributing guidelines](/CONTRIBUTING.md) for more details.
+
+### Documentation
+
+For a detailed guide of Overworld's development, take a look at the [documentation](https://overworld.gitbook.io/docs/v/docs/) :sparkles:
 
 ## Features
 
