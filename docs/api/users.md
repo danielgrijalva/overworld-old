@@ -10,7 +10,7 @@ Register
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Endpoint for signing up to Overworld.   
+Endpoint for signing up to Overworld.  
 All authentication related functionality in Overworld is handled by `django-rest-knox`.
 {% endapi-method-description %}
 
@@ -72,7 +72,6 @@ Login
 {% endapi-method-summary %}
 
 {% api-method-description %}
-  
 Endpoint for login into Overworld.
 {% endapi-method-description %}
 
@@ -148,7 +147,7 @@ JWT token of the user.
 Successfully logged out.
 {% endapi-method-response-example-description %}
 
-```
+```text
 []
 ```
 {% endapi-method-response-example %}
@@ -168,7 +167,7 @@ No token or invalid token provided.
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="get" host="http://localhost:8000" path="/user/" %}
+{% api-method method="get" host="http://localhost:8000" path="/api/users/user/" %}
 {% api-method-summary %}
 Get User
 {% endapi-method-summary %}
@@ -180,7 +179,7 @@ Retrieves basic data of the logged-in user.
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-headers %}
-{% api-method-parameter name="Authorization" type="string" required=false %}
+{% api-method-parameter name="Authorization" type="string" required=true %}
 JWT token of the user
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
@@ -339,7 +338,7 @@ Your bio
 
 {% endapi-method-response-example-description %}
 
-```
+```text
 
 ```
 {% endapi-method-response-example %}
