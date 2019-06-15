@@ -14,7 +14,7 @@ Game
   
 Makes a call to the `https://api-v3.igdb.com/games` endpoint, specifying the fields \(defined as `game_fields` in the `fields.py` file\) and game ID in the `POST` data.  
   
-For more details read \[https://api-docs.igdb.com/?javascript\#game\]\(https://api-docs.igdb.com/?javascript\#game\)
+For more details read https://api-docs.igdb.com/?javascript\#game
 {% endapi-method-description %}
 
 {% api-method-spec %}
