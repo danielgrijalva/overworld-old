@@ -6,6 +6,7 @@ from . import views
 
 urlpatterns = [
     path('games/<int:guid>/', views.get_game),
+    path('games/search/<str:name>', views.search_game),
     path('games/backdrop/<int:guid>/', views.get_backdrop),
     path('games/popular/', views.get_popular_games),
     path('actions/', views.Actions.as_view()),
@@ -14,6 +15,5 @@ urlpatterns = [
     path('actions/wishlist/', views.Wishlist.as_view()),
     path('actions/backlog/', views.Backlog.as_view()),
     path('actions/ratings/', views.Rate.as_view()),
-    path('search/<str:name>', views.search_game),
     path('users/', include('users.urls')),
 ]
