@@ -10,9 +10,7 @@ User
 {% endapi-method-summary %}
 
 {% api-method-description %}
-**Retrieves basic data of the logged-in user.**  
-  
-This is used to validate requests from the frontend.
+**Retrieves basic data of the logged-in user.**This is used to validate requests from the frontend.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -48,9 +46,7 @@ Profile
 {% endapi-method-summary %}
 
 {% api-method-description %}
-**Endpoint for obtaining a user's profile.**  
-  
-The profile consists of the user's activity, favorite games, bio, reviews, contact information, stats, lists, followers and other stuff.
+**Endpoint for obtaining a user's profile.**The profile consists of the user's activity, favorite games, bio, reviews, contact information, stats, lists, followers and other stuff.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -138,9 +134,7 @@ Update Profile
 {% endapi-method-summary %}
 
 {% api-method-description %}
-**Update your profile information.**  
-  
-A user can update their bio, username, location, twitter username, favorite games...
+**Update your profile information.**A user can update their bio, username, location, twitter username, favorite games...
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -194,9 +188,7 @@ Register
 {% endapi-method-summary %}
 
 {% api-method-description %}
-**Endpoint for signing up to Overworld.**  
-  
-All authentication related functionality in Overworld is handled by `django-rest-knox`.
+**Endpoint for signing up to Overworld.**All authentication related functionality in Overworld is handled by `django-rest-knox`.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -257,9 +249,7 @@ Login
 {% endapi-method-summary %}
 
 {% api-method-description %}
-**Endpoint for login into Overworld.**  
-  
-All authentication related functionality in Overworld is handled by `django-rest-knox`.
+**Endpoint for login into Overworld.**All authentication related functionality in Overworld is handled by `django-rest-knox`.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -316,9 +306,7 @@ Logout
 {% endapi-method-summary %}
 
 {% api-method-description %}
-**Logout a user.**   
-  
-This means destroying their token from the database.
+**Logout a user.**This means destroying their token from the database.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -362,9 +350,7 @@ Follow
 {% endapi-method-summary %}
 
 {% api-method-description %}
-**Endpoint for following a user.**  
-  
-This adds a user to the current user's `following` field, and adds the current user to that user's `followers` field. These fields are a `many-to-many` relationship.
+**Endpoint for following a user.**This adds a user to the current user's `following` field, and adds the current user to that user's `followers` field. These fields are a `many-to-many` relationship.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -402,9 +388,7 @@ Unfollow
 {% endapi-method-summary %}
 
 {% api-method-description %}
-**Endpoint to unfollow a user.**  
-  
-This removes a user from the current user's `following` field, and removes the current user from that user's `followers` field. These fields are a `many-to-many` relationship.
+**Endpoint to unfollow a user.**This removes a user from the current user's `following` field, and removes the current user from that user's `followers` field. These fields are a `many-to-many` relationship.
 {% endapi-method-description %}
 
 {% api-method-spec %}

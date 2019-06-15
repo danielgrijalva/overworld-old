@@ -4,7 +4,7 @@ description: Welcome to Overworld!
 
 # Introduction
 
-![](.gitbook/assets/logo%20%284%29.png)
+![](.gitbook/assets/logo-4%20%281%29.png)
 
 > ### _A_ [_letterboxd_](https://letterboxd.com) _for video games._
 
@@ -48,7 +48,7 @@ So far you can do the following:
 * Add a game to your backlog and/or wish list
 * Like a game  
 
-![](.gitbook/assets/landing%20%284%29.png)
+![](.gitbook/assets/landing-4%20%281%29.png)
 
 ## Acknowledgements
 
