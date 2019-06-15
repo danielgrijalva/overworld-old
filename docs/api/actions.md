@@ -10,7 +10,13 @@ Get Actions
 {% endapi-method-summary %}
 
 {% api-method-description %}
-**Endpoint for obtaining a user's relationship with a game.**Actions are events that link a user and a game. Users can indicate that they have played or liked a game and add a game to their backlog or wishlist. This relationship is represented with `many-to-many` fields.If the requested game does not exist in Overworld's database, that means that no one has interacted with it, and so we return nothing.The user must be authenticated for obvious reasons.
+**Endpoint for obtaining a user's relationship with a game.**  
+  
+Actions are events that link a user and a game. Users can indicate that they have played or liked a game and add a game to their backlog or wishlist. This relationship is represented with `many-to-many` fields.  
+  
+If the requested game does not exist in Overworld's database, that means that no one has interacted with it, and so we return nothing.  
+  
+The user must be authenticated for obvious reasons.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -57,7 +63,11 @@ Log
 {% endapi-method-summary %}
 
 {% api-method-description %}
-**Endpoint for indicating that you've played a game.**This adds/removes a game from the user's `played` field, which is a `many-to-many` relationship. If the game isn't in the database, it is created with the `get_or_create` method.Users must be authenticated to interact with this endpoint.
+**Endpoint for indicating that you've played a game.**  
+  
+This adds/removes a game from the user's `played` field, which is a `many-to-many` relationship. If the game isn't in the database, it is created with the `get_or_create` method.  
+  
+Users must be authenticated to interact with this endpoint.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -104,7 +114,11 @@ Like
 {% endapi-method-summary %}
 
 {% api-method-description %}
-**Endpoint for indicating that you've liked a game.**This adds/removes a game from the users `liked` field, which is a `many-to-many` relationship. If the game isn't in the database, we create it with the `get_or_create` method.Users must be authenticated to interact with this endpoint.
+**Endpoint for indicating that you've liked a game.**  
+  
+This adds/removes a game from the users `liked` field, which is a `many-to-many` relationship. If the game isn't in the database, we create it with the `get_or_create` method.  
+  
+Users must be authenticated to interact with this endpoint.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -151,7 +165,11 @@ Backlog
 {% endapi-method-summary %}
 
 {% api-method-description %}
-**Endpoint for adding a game to your backlog.**This adds/removes a game from the users `backlog` field, which is a `many-to-many` relationship. If the game isn't in the database, we create it with the `get_or_create` method.Users must be authenticated to interact with this endpoint.
+**Endpoint for adding a game to your backlog.**  
+  
+This adds/removes a game from the users `backlog` field, which is a `many-to-many` relationship. If the game isn't in the database, we create it with the `get_or_create` method.  
+  
+Users must be authenticated to interact with this endpoint.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -198,7 +216,11 @@ Wishlist
 {% endapi-method-summary %}
 
 {% api-method-description %}
-**Endpoint for adding a game to your wishlist.**This adds/removes a game from the users `wishlist` field, which is a many-to-many relationship. If the game isn't in the database, we create it with the `get_or_create` method.Users must be authenticated to interact with this endpoint.
+**Endpoint for adding a game to your wishlist.**  
+  
+This adds/removes a game from the users `wishlist` field, which is a many-to-many relationship. If the game isn't in the database, we create it with the `get_or_create` method.  
+  
+Users must be authenticated to interact with this endpoint.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -245,7 +267,9 @@ Rate
 {% endapi-method-summary %}
 
 {% api-method-description %}
-**Rate a game.**Creates a `Rating` object, which consists of a user, a game and a rating value. If the game or rating don't exist in the database, create them using the `get_or_create` method.
+**Rate a game.**Creates a `Rating` object, which consists of a user, a game and a rating value.   
+  
+If the game or rating don't exist in the database, create them using the `get_or_create` method.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -291,7 +315,9 @@ Get Rating
 {% endapi-method-summary %}
 
 {% api-method-description %}
-**Get rating for a specific game by the logged-in user.**If the game or rating don't exist in the database, no rating exists, so it returns nothing.
+**Get rating for a specific game by the logged-in user.**  
+  
+If the game or rating don't exist in the database, no rating exists, so it returns nothing.
 {% endapi-method-description %}
 
 {% api-method-spec %}
