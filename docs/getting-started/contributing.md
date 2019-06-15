@@ -16,7 +16,3 @@ All contributors are expected to follow our [Code of Conduct](../community/code_
 * Before contributing, take a look at the current [issues](https://github.com/danielgrijalva/overworld/issues) and comment on the ones you'll work on.
 * You will be assigned to the issue and all the code you submit will get reviewed before merging.
 
-### Get in touch
-
-You can reach out to me on [Twitter](https://twitter.com/danielgrijalvas) or by [creating a new issue](https://github.com/danielgrijalva/overworld/issues/new/choose) ⚡
-

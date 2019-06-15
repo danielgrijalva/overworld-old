@@ -17,5 +17,6 @@
 ## Community
 
 * [Code of Conduct](community/code_of_conduct.md)
+* [Get in touch](community/get-in-touch.md)
 * [License](community/license.md)
 
