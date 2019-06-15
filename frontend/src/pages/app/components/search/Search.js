@@ -23,7 +23,7 @@ class GameSearch extends Component {
 
   search = debounce(value => {
     axios
-      .get(`/api/search/${value}`)
+      .get(`/api/games/search/${value}`)
       .then(response => {
         const results = response.data.map(result => ({
           ...result,
