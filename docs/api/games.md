@@ -12,9 +12,9 @@ Game
 {% api-method-description %}
 **Get a game from IGDB.**  
   
-Makes a call to the `https://api-v3.igdb.com/games` endpoint, specifying the fields \(defined as `game_fields` in the `fields.py` file\) and game ID in the `POST` data.  
+Makes a call to the [`https://api-v3.igdb.com/games`](https://api-v3.igdb.com/games) endpoint, specifying the fields \(defined as `game_fields` in the `fields.py` file\) and game ID in the `POST` data.  
   
-For more details read https://api-docs.igdb.com/?javascript\#game
+For more details read [https://api-docs.igdb.com/?javascript\#game](https://api-docs.igdb.com/?javascript\#game)
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -128,9 +128,9 @@ Search
 {% api-method-description %}
 **Search for a game.**  
   
-Calls `https://api-v3.igdb.com/games`. The search term must be a string: the name of the game you want to search. The fields shown in the results are defined as `search_fields` in the `fields.py` file.  
+Calls [`https://api-v3.igdb.com/games`](https://api-v3.igdb.com/games). The search term must be a string: the name of the game you want to search. The fields shown in the results are defined as `search_fields` in the `fields.py` file.  
   
-For more details on how to search the IGDB API, read https://api-docs.igdb.com/?javascript\#search-176
+For more details on how to search the IGDB API, read [https://api-docs.igdb.com/?javascript\#search-176](https://api-docs.igdb.com/?javascript\#search-176)
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -191,7 +191,7 @@ Popular
   
 Calls the `games` endpoint, sorting the results by popularity \(desc\). This endpoint is called in Overworld's landing page.   
   
-An example of this is documented on IGDB https://api-docs.igdb.com/?javascript\#examples-12.
+An example of this is documented on IGDB [https://api-docs.igdb.com/?javascript\#examples-12](https://api-docs.igdb.com/?javascript\#examples-12)
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -256,9 +256,9 @@ Backdrop
 {% api-method-description %}
 **Gets the background image for the landing page.**  
   
-Makes a call to `https://api-v3.igdb.com/games`, with image-related fields only. The game the backdrop is selected from is randomly selected in the frontend.  
+Makes a call to [`https://api-v3.igdb.com/games`](https://api-v3.igdb.com/games), with image-related fields only. The game the backdrop is selected from is randomly selected in the frontend.  
   
-Documentation for building images from the `image_id` is here: https://api-docs.igdb.com/\#images
+Documentation for building images from the `image_id` is here: [https://api-docs.igdb.com/\#images](https://api-docs.igdb.com/\#images)
 {% endapi-method-description %}
 
 {% api-method-spec %}
