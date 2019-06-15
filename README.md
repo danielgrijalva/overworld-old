@@ -31,7 +31,7 @@ Head over to the [contributing guidelines](/CONTRIBUTING.md) for more details.
 
 ### Documentation
 
-For a detailed guide of Overworld's development, take a look at the [documentation](https://overworld.gitbook.io/docs/v/docs/) :sparkles:
+For a detailed guide of Overworld's development, take a look at the [documentation](https://overworld.gitbook.io/docs/v/documentation/) :sparkles:
 
 ## Features
 
