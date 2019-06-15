@@ -11,6 +11,7 @@
 ## API
 
 * [Users](api/users.md)
+* [Actions](api/actions.md)
 
 ## Community
 
