@@ -1,3 +1,7 @@
+---
+description: Endpoints related to game data.
+---
+
 # Games
 
 {% api-method method="get" host="http://localhost:8000" path="/api/games/:guid" %}
@@ -6,7 +10,7 @@ Game
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Get a game from IGDB.  
+**Get a game from IGDB.**  
   
 Makes a call to the `https://api-v3.igdb.com/games` endpoint, specifying the fields \(defined as `game_fields` in the `fields.py` file\) and game ID in the `POST` data.  
   
@@ -122,7 +126,7 @@ Search
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Search for a game.  
+**Search for a game.**  
   
 Calls `https://api-v3.igdb.com/games`. The search term must be a string: the name of the game you want to search. The fields shown in the results are defined as `search_fields` in the `fields.py` file.  
   
@@ -183,7 +187,7 @@ Popular
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Gets popular or trending games.  
+**Gets popular or trending games.**  
   
 Calls the `games` endpoint, sorting the results by popularity \(desc\). This endpoint is called in Overworld's landing page.   
   
@@ -250,7 +254,7 @@ Backdrop
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Gets the background image for the landing page.  
+**Gets the background image for the landing page.**  
   
 Makes a call to `https://api-v3.igdb.com/games`, with image-related fields only. The game the backdrop is selected from is randomly selected in the frontend.  
   

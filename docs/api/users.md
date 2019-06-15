@@ -4,176 +4,15 @@ description: Endpoints related to auth/users of Overworld.
 
 # Users
 
-{% api-method method="post" host="http://localhost:8000" path="/api/users/register/" %}
-{% api-method-summary %}
-Register
-{% endapi-method-summary %}
-
-{% api-method-description %}
-Endpoint for signing up to Overworld.  
-All authentication related functionality in Overworld is handled by `django-rest-knox`.
-{% endapi-method-description %}
-
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-body-parameters %}
-{% api-method-parameter name="email" type="string" required=true %}
-Email necessary for registering.
-{% endapi-method-parameter %}
-
-{% api-method-parameter name="username" type="string" required=true %}
-The Overworld username.
-{% endapi-method-parameter %}
-
-{% api-method-parameter name="password" type="string" required=true %}
-Password, 8 characters minimum.
-{% endapi-method-parameter %}
-{% endapi-method-body-parameters %}
-{% endapi-method-request %}
-
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
-User registered successfully.
-{% endapi-method-response-example-description %}
-
-```javascript
-{
-    "user": {
-        "id": 1,
-        "username": "madeline",
-        "email": "email@example.com"
-    },
-    "token": "fda1fa3519fcf097aa0643c2594dfb46ea6e66f730c661"
-}
-```
-{% endapi-method-response-example %}
-
-{% api-method-response-example httpCode=400 %}
-{% api-method-response-example-description %}
-Username already exists.
-{% endapi-method-response-example-description %}
-
-```javascript
-{
-    "username": [
-        "A user with that username already exists."
-    ]
-}
-```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
-
-{% api-method method="post" host="http://localhost:8000" path="/api/users/login/" %}
-{% api-method-summary %}
-Login
-{% endapi-method-summary %}
-
-{% api-method-description %}
-Endpoint for login into Overworld.
-{% endapi-method-description %}
-
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-body-parameters %}
-{% api-method-parameter name="username" type="string" required=true %}
-The Overworld username.
-{% endapi-method-parameter %}
-
-{% api-method-parameter name="password" type="string" required=true %}
-The user's password.
-{% endapi-method-parameter %}
-{% endapi-method-body-parameters %}
-{% endapi-method-request %}
-
-{% api-method-response %}
-{% api-method-response-example httpCode=200 %}
-{% api-method-response-example-description %}
-Logged in successfully.
-{% endapi-method-response-example-description %}
-
-```javascript
-{
-    "user": {
-        "id": 1,
-        "username": "madeline",
-        "email": "email@example.com"
-    },
-    "token": "fda1fa3519fcf097aa0643c2594dfb46ea6e66f730c661"
-}
-```
-{% endapi-method-response-example %}
-
-{% api-method-response-example httpCode=400 %}
-{% api-method-response-example-description %}
-Incorrect username/password.
-{% endapi-method-response-example-description %}
-
-```javascript
-{
-    "non_field_errors": [
-        "Incorrect username/password."
-    ]
-}
-```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
-
-{% api-method method="post" host="http://localhost:8000" path="/api/users/logout/" %}
-{% api-method-summary %}
-Logout
-{% endapi-method-summary %}
-
-{% api-method-description %}
-Logout a user. This means destroying their token from the database.
-{% endapi-method-description %}
-
-{% api-method-spec %}
-{% api-method-request %}
-{% api-method-headers %}
-{% api-method-parameter name="Authorization" type="string" required=true %}
-JWT token of the user.
-{% endapi-method-parameter %}
-{% endapi-method-headers %}
-{% endapi-method-request %}
-
-{% api-method-response %}
-{% api-method-response-example httpCode=204 %}
-{% api-method-response-example-description %}
-Successfully logged out.
-{% endapi-method-response-example-description %}
-
-```text
-[]
-```
-{% endapi-method-response-example %}
-
-{% api-method-response-example httpCode=401 %}
-{% api-method-response-example-description %}
-No token or invalid token provided.
-{% endapi-method-response-example-description %}
-
-```javascript
-{
-    "detail": "Invalid token."
-}
-```
-{% endapi-method-response-example %}
-{% endapi-method-response %}
-{% endapi-method-spec %}
-{% endapi-method %}
-
 {% api-method method="get" host="http://localhost:8000" path="/api/users/user/" %}
 {% api-method-summary %}
-Get User
+User
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Retrieves basic data of the logged-in user.
+**Retrieves basic data of the logged-in user.**  
+  
+This is used to validate requests from the frontend.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -205,11 +44,12 @@ JWT token of the user
 
 {% api-method method="get" host="http://localhost:8000" path="/api/users/:username" %}
 {% api-method-summary %}
-Get Profile
+Profile
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Endpoint for obtaining a user's profile.  
+**Endpoint for obtaining a user's profile.**  
+  
 The profile consists of the user's activity, favorite games, bio, reviews, contact information, stats, lists, followers and other stuff.
 {% endapi-method-description %}
 
@@ -298,7 +138,9 @@ Update Profile
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Update your profile information, such as bio, username, location, twitter username, favorite games...
+**Update your profile information.**  
+  
+A user can update their bio, username, location, twitter username, favorite games...
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -346,14 +188,183 @@ Your bio
 {% endapi-method-spec %}
 {% endapi-method %}
 
+{% api-method method="post" host="http://localhost:8000" path="/api/users/register/" %}
+{% api-method-summary %}
+Register
+{% endapi-method-summary %}
+
+{% api-method-description %}
+**Endpoint for signing up to Overworld.**  
+  
+All authentication related functionality in Overworld is handled by `django-rest-knox`.
+{% endapi-method-description %}
+
+{% api-method-spec %}
+{% api-method-request %}
+{% api-method-body-parameters %}
+{% api-method-parameter name="email" type="string" required=true %}
+Email necessary for registering.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="username" type="string" required=true %}
+The Overworld username.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="password" type="string" required=true %}
+Password, 8 characters minimum.
+{% endapi-method-parameter %}
+{% endapi-method-body-parameters %}
+{% endapi-method-request %}
+
+{% api-method-response %}
+{% api-method-response-example httpCode=200 %}
+{% api-method-response-example-description %}
+User registered successfully.
+{% endapi-method-response-example-description %}
+
+```javascript
+{
+    "user": {
+        "id": 1,
+        "username": "madeline",
+        "email": "email@example.com"
+    },
+    "token": "fda1fa3519fcf097aa0643c2594dfb46ea6e66f730c661"
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=400 %}
+{% api-method-response-example-description %}
+Username already exists.
+{% endapi-method-response-example-description %}
+
+```javascript
+{
+    "username": [
+        "A user with that username already exists."
+    ]
+}
+```
+{% endapi-method-response-example %}
+{% endapi-method-response %}
+{% endapi-method-spec %}
+{% endapi-method %}
+
+{% api-method method="post" host="http://localhost:8000" path="/api/users/login/" %}
+{% api-method-summary %}
+Login
+{% endapi-method-summary %}
+
+{% api-method-description %}
+**Endpoint for login into Overworld.**  
+  
+All authentication related functionality in Overworld is handled by `django-rest-knox`.
+{% endapi-method-description %}
+
+{% api-method-spec %}
+{% api-method-request %}
+{% api-method-body-parameters %}
+{% api-method-parameter name="username" type="string" required=true %}
+The Overworld username.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="password" type="string" required=true %}
+The user's password.
+{% endapi-method-parameter %}
+{% endapi-method-body-parameters %}
+{% endapi-method-request %}
+
+{% api-method-response %}
+{% api-method-response-example httpCode=200 %}
+{% api-method-response-example-description %}
+Logged in successfully.
+{% endapi-method-response-example-description %}
+
+```javascript
+{
+    "user": {
+        "id": 1,
+        "username": "madeline",
+        "email": "email@example.com"
+    },
+    "token": "fda1fa3519fcf097aa0643c2594dfb46ea6e66f730c661"
+}
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=400 %}
+{% api-method-response-example-description %}
+Incorrect username/password.
+{% endapi-method-response-example-description %}
+
+```javascript
+{
+    "non_field_errors": [
+        "Incorrect username/password."
+    ]
+}
+```
+{% endapi-method-response-example %}
+{% endapi-method-response %}
+{% endapi-method-spec %}
+{% endapi-method %}
+
+{% api-method method="post" host="http://localhost:8000" path="/api/users/logout/" %}
+{% api-method-summary %}
+Logout
+{% endapi-method-summary %}
+
+{% api-method-description %}
+**Logout a user.**   
+  
+This means destroying their token from the database.
+{% endapi-method-description %}
+
+{% api-method-spec %}
+{% api-method-request %}
+{% api-method-headers %}
+{% api-method-parameter name="Authorization" type="string" required=true %}
+JWT token of the user.
+{% endapi-method-parameter %}
+{% endapi-method-headers %}
+{% endapi-method-request %}
+
+{% api-method-response %}
+{% api-method-response-example httpCode=204 %}
+{% api-method-response-example-description %}
+Successfully logged out.
+{% endapi-method-response-example-description %}
+
+```text
+[]
+```
+{% endapi-method-response-example %}
+
+{% api-method-response-example httpCode=401 %}
+{% api-method-response-example-description %}
+No token or invalid token provided.
+{% endapi-method-response-example-description %}
+
+```javascript
+{
+    "detail": "Invalid token."
+}
+```
+{% endapi-method-response-example %}
+{% endapi-method-response %}
+{% endapi-method-spec %}
+{% endapi-method %}
+
 {% api-method method="post" host="http://localhost:8000" path="/api/users/follow/" %}
 {% api-method-summary %}
 Follow
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Endpoint to follow a user.  
-This adds a user to the current user's `following` field, and adds the current user to that user's `followers` field. These fields are a many-to-many relationship.
+**Endpoint for following a user.**  
+  
+This adds a user to the current user's `following` field, and adds the current user to that user's `followers` field. These fields are a `many-to-many` relationship.
 {% endapi-method-description %}
 
 {% api-method-spec %}
@@ -391,8 +402,9 @@ Unfollow
 {% endapi-method-summary %}
 
 {% api-method-description %}
-Endpoint to unfollow a user.  
-This removes a user from the current user's `following` field, and removes the current user from that user's `followers` field. These fields are a many-to-many relationship.
+**Endpoint to unfollow a user.**  
+  
+This removes a user from the current user's `following` field, and removes the current user from that user's `followers` field. These fields are a `many-to-many` relationship.
 {% endapi-method-description %}
 
 {% api-method-spec %}
