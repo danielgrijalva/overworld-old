@@ -12,6 +12,7 @@
 
 * [Users](api/users.md)
 * [Actions](api/actions.md)
+* [Games](api/games.md)
 
 ## Community
 

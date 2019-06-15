@@ -1,3 +1,7 @@
+---
+description: Endpoints related to events between users and games.
+---
+
 # Actions
 
 {% api-method method="get" host="http://localhost:8000" path="/api/actions/" %}
