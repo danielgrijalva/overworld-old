@@ -6,16 +6,7 @@ description: Welcome to Overworld!
 
 ![](.gitbook/assets/logo-4%20%281%29.png)
 
-> ### _A_ [_letterboxd_](https://letterboxd.com) _for video games._
-
-* [About](./#about)
-  * [Inspiration](./#inspiration)
-* [Development](./#development)
-  * [Contributing](./#contributing)
-* [Features](./#features)
-* [Acknowledgements](./#acknowledgements)
-
-## About
+### About
 
 If you use Letterboxd you probably know what this project is about. If not...
 
@@ -25,15 +16,15 @@ Follow other people to discuss or discover new games, or you can be a lone wolf 
 
 The project is still in early development. If you have any suggestions, [file an issue](https://github.com/danielgrijalva/overworld/issues/new/choose) or even better, [start contributing](getting-started/contributing.md)!
 
-### Inspiration
+#### Inspiration
 
 Overworld is _heavily_ inspired by [Letterboxd](https://letterboxd.com/), both in functionality, design and the overall user experience.
 
-## Contributing
+### Contributing
 
 Head over to the [contribution guidelines](getting-started/contributing.md) for more details.
 
-## Features
+### Features
 
 > #### [Demo](https://raw.githubusercontent.com/danielgrijalva/overworld/master/media/demo.gif)
 
@@ -50,7 +41,7 @@ So far you can do the following:
 
 ![](.gitbook/assets/landing-4%20%281%29.png)
 
-## Acknowledgements
+### Acknowledgements
 
 Data from [`IGDB`](https://api.igdb.com). Icon by [`Freepik`](https://www.freepik.com/).
 

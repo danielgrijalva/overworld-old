@@ -10,13 +10,13 @@ You will need to [fork this project](https://help.github.com/en/articles/fork-a-
 
 All contributors are expected to follow our [Code of Conduct](../community/code_of_conduct.md). Please make sure you are welcoming and friendly in our community.
 
-## The process
+### The process
 
 * To ask any question related to the project, propose a new feature or report a bug, [create a new issue](https://github.com/danielgrijalva/overworld/issues/new/choose).
 * Before contributing, take a look at the current [issues](https://github.com/danielgrijalva/overworld/issues) and comment on the ones you'll work on.
 * You will be assigned to the issue and all the code you submit will get reviewed before merging.
 
-## Get in touch
+### Get in touch
 
 You can reach out to me on [Twitter](https://twitter.com/danielgrijalvas) or by [creating a new issue](https://github.com/danielgrijalva/overworld/issues/new/choose) ⚡
 

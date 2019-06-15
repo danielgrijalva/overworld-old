@@ -4,15 +4,15 @@ description: Guidelines and best practices used in Overworld
 
 # Code Style
 
-## Python
+### Python
 
 Please, follow the [PEP 8](https://www.python.org/dev/peps/pep-0008/) style guide. For more information about the Python code style, refer to [The Hitchhiker’s Guide to Python](https://docs.python-guide.org/writing/style/).
 
-## JavaScript
+### JavaScript
 
 We follow the [Airbnb style guide](https://github.com/airbnb/javascript) for JavaScript. React specific guidelines can be found [here](https://github.com/airbnb/javascript/tree/master/react).
 
-## Commit style
+### Commit style
 
 I personally use the [`gitmoji`](https://gitmoji.carloscuesta.me/) guide for my commit messages to keep them clean and simple. This is merely optional; your commits will be [_squashed_](https://github.blog/2016-04-01-squash-your-commits/) into master anyway 💁
 
