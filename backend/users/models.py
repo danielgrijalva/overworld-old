@@ -1,6 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from api.models import Game
+from games.models import Game
 
 
 class CustomUser(AbstractUser):
