@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loadProfile, follow, unfollow } from "../../actions/profile";
 import {
@@ -51,7 +52,9 @@ class Profile extends Component {
                       {twitter && (
                         <span>
                           <Icon name="twitter" />
-                          <a href="#">{twitter}</a>
+                          <a href={`http://twitter.com/${twitter}`}>
+                            {twitter}
+                          </a>
                         </span>
                       )}
                     </p>
@@ -88,7 +91,12 @@ class Profile extends Component {
                     className="stats"
                     verticalAlign="middle"
                   >
-                    <Stats profile={this.props.profile} />
+                    <Stats
+                      played={this.props.profile.played}
+                      backlog={this.props.profile.backlog}
+                      followers={this.props.profile.followers}
+                      following={this.props.profile.following}
+                    />
                   </Grid.Column>
                 </Grid.Row>
               </Grid>
@@ -140,9 +148,7 @@ class Profile extends Component {
                     {bio && (
                       <React.Fragment>
                         <Divider horizontal>Bio</Divider>
-                        <p className="profile-bio">
-                          {bio}
-                        </p>
+                        <p className="profile-bio">{bio}</p>
                       </React.Fragment>
                     )}
                     <Divider horizontal>Journal</Divider>
@@ -163,6 +169,26 @@ class Profile extends Component {
     }
   }
 }
+
+Profile.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+  loadProfile: PropTypes.func.isRequired,
+  follow: PropTypes.func.isRequired,
+  unfollow: PropTypes.func.isRequired,
+  profile: PropTypes.shape({
+    username: PropTypes.string,
+    id: PropTypes.number,
+    bio: PropTypes.string,
+    twitter: PropTypes.string,
+    location: PropTypes.string,
+    email: PropTypes.string,
+    played: PropTypes.array,
+    backlog: PropTypes.array,
+    lists: PropTypes.array,
+    followers: PropTypes.array,
+    following: PropTypes.array
+  }).isRequired
+};
 
 const mapStateToProps = state => ({
   profile: state.profile.profile,

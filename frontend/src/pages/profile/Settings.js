@@ -20,7 +20,13 @@ export default class Settings extends Component {
             },
             {
               menuItem: "connections",
-              render: () => <h1>🚧</h1>
+              render: () => (
+                <h1>
+                  <span role="img" aria-label="construction">
+                    🚧
+                  </span>
+                </h1>
+              )
             }
           ]}
         />

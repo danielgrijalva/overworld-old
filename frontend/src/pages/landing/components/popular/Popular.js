@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./Popular.css";
 
 export const Popular = ({ isLoading, popular }) => (
@@ -31,3 +32,8 @@ export const Popular = ({ isLoading, popular }) => (
     )}
   </section>
 );
+
+Popular.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+  popular: PropTypes.array.isRequired
+};

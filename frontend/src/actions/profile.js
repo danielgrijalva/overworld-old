@@ -4,7 +4,6 @@ import {
   FOLLOW,
   UNFOLLOW,
   EDIT_PROFILE_SUCCESS,
-  EDIT_PROFILE_SUBMIT
 } from "./types";
 import { tokenConfig } from "./auth";
 
