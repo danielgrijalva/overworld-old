@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Tab, Container } from "semantic-ui-react";
-import EditProfile from "./EditProfile";
+import EditProfile from "./components/edit-profile/EditProfile";
 
 export default class Settings extends Component {
   render() {

@@ -6,7 +6,7 @@ import Game from "./pages/game/Game";
 import Navbar from "./pages/app/components/navbar/Navbar";
 import App from "./pages/app/App";
 import Profile from "./pages/profile/Profile";
-import Settings from "./pages/profile/Settings";
+import Settings from "./pages/settings/Settings";
 import { loadUser } from "./actions/auth";
 
 const notFound = () => {
