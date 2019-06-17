@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Modal, Button, Header } from "semantic-ui-react";
 import Error from "../errors/Error.js";
 import { connect } from "react-redux";
@@ -100,6 +101,13 @@ class Register extends React.Component {
     );
   }
 }
+
+Register.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  errors: PropTypes.array,
+  register: PropTypes.func.isRequired,
+  dismissErrors: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
   errors: state.auth.errors,

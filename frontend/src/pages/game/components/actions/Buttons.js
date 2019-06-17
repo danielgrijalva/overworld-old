@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import { Grid, Icon, Popup } from "semantic-ui-react";
 import { connect } from "react-redux";
 import {
@@ -121,6 +122,17 @@ class Buttons extends React.Component {
     }
   }
 }
+
+Buttons.propTypes = {
+  loadingActions: PropTypes.bool.isRequired,
+  actions: PropTypes.object.isRequired,
+  game: PropTypes.object.isRequired,
+  loadActions: PropTypes.func.isRequired,
+  logGame: PropTypes.func.isRequired,
+  likeGame: PropTypes.func.isRequired,
+  addToBacklog: PropTypes.func.isRequired,
+  addToWishlist: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
   actions: state.game.actions,

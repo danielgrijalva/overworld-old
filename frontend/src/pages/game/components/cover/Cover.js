@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { LazyImage } from "react-lazy-images";
 import "./Cover.css";
 
@@ -29,4 +30,8 @@ export const Cover = ({ imageId }) => {
       />
     </section>
   );
+};
+
+Cover.propTypes = {
+  imageId: PropTypes.string.isRequired
 };

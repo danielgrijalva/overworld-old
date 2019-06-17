@@ -1,10 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Statistic } from "semantic-ui-react";
 import "./Stats.css";
 
 class Stats extends React.Component {
   render() {
-    const { played, backlog, followers, following } = this.props.profile;
+    const { played, backlog, followers, following } = this.props;
     return (
       <React.Fragment>
         <Statistic size="tiny">
@@ -31,5 +32,12 @@ class Stats extends React.Component {
     );
   }
 }
+
+Stats.propTypes = {
+  played: PropTypes.array,
+  backlog: PropTypes.array,
+  followers: PropTypes.array,
+  following: PropTypes.array
+};
 
 export default Stats;

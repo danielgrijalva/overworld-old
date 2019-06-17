@@ -1,11 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Button, Form } from "semantic-ui-react";
 
-export const LoginForm = ({
-  handleChange,
-  handleSubmit,
-  validateForm
-}) => (
+export const LoginForm = ({ handleChange, handleSubmit, validateForm }) => (
   <Form onSubmit={handleSubmit}>
     <Form.Field>
       <label>Username</label>
@@ -26,3 +23,9 @@ export const LoginForm = ({
     </Button>
   </Form>
 );
+
+LoginForm.propTypes = {
+  handleChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  validateForm: PropTypes.func.isRequired
+};

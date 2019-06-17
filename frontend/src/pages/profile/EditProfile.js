@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Button, Form, Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { loadProfile, editProfile } from "../../actions/profile";
@@ -67,7 +68,7 @@ class EditProfile extends Component {
                 <label>Location</label>
                 <input
                   name="location"
-                  value={location}
+                  value={location ? location : ""}
                   onChange={this.handleChange}
                 />
               </Form.Field>
@@ -75,13 +76,17 @@ class EditProfile extends Component {
                 <label>Twitter</label>
                 <input
                   name="twitter"
-                  value={twitter}
+                  value={twitter ? twitter : ""}
                   onChange={this.handleChange}
                 />
               </Form.Field>
               <Form.Field>
                 <label>Bio</label>
-                <textarea name="bio" value={bio} onChange={this.handleChange} />
+                <textarea
+                  name="bio"
+                  value={bio ? bio : ""}
+                  onChange={this.handleChange}
+                />
               </Form.Field>
               <Button
                 floated="right"
@@ -102,6 +107,14 @@ class EditProfile extends Component {
     );
   }
 }
+
+EditProfile.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+  profile: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
+  loadProfile: PropTypes.func.isRequired,
+  editProfile: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
   profile: state.profile.profile,

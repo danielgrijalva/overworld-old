@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Label } from "semantic-ui-react";
 
 export const ResultRenderer = ({ id, name, first_release_date }) => {
@@ -8,4 +9,10 @@ export const ResultRenderer = ({ id, name, first_release_date }) => {
   } else {
     return <Label key={id} content={name} />;
   }
+};
+
+ResultRenderer.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  first_release_date: PropTypes.string
 };

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Button, Form } from "semantic-ui-react";
 
 export const RegistrationForm = ({
@@ -34,3 +35,9 @@ export const RegistrationForm = ({
     </Button>
   </Form>
 );
+
+RegistrationForm.propTypes = {
+  handleChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  validateForm: PropTypes.func.isRequired
+};

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Landing from "../landing/Landing";
 
@@ -13,6 +14,10 @@ class App extends Component {
     }
   }
 }
+
+App.propTypes = {
+  auth: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => ({
   auth: state.auth

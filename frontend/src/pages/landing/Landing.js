@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Container } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
@@ -53,6 +54,14 @@ class Landing extends React.Component {
     );
   }
 }
+
+Landing.propTypes = {
+  isLoadingPopular: PropTypes.bool.isRequired,
+  getBackdrop: PropTypes.func.isRequired,
+  getPopular: PropTypes.func.isRequired,
+  backdrop: PropTypes.object.isRequired,
+  popular: PropTypes.array.isRequired
+};
 
 const mapStateToProps = state => ({
   backdrop: state.landing.backdrop,
