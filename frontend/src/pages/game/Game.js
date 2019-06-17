@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import Moment from "react-moment";
 import { Container, Grid } from "semantic-ui-react";
-import Backdrop from "./components/backdrop/Backdrop";
+import Backdrop from "../app/components/backdrop/Backdrop";
 import { Details } from "./components/details/Details";
 import Actions from "./components/actions/Actions";
 import { QuickStats } from "./components/quick-stats/QuickStats";
@@ -145,7 +145,7 @@ class Game extends React.Component {
 
 Game.propTypes = {
   location: PropTypes.shape({
-    state: PropTypes.number.isRequired,
+    state: PropTypes.number.isRequired
   })
 };
 

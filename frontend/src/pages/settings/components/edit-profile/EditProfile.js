@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Button, Form, Grid } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { loadProfile, editProfile } from "../../actions/profile";
+import { loadProfile, editProfile } from "../../../../actions/profile";
 import "./EditProfile.css";
 
 class EditProfile extends Component {

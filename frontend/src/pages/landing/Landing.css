@@ -26,3 +26,19 @@ h1 {
 .landing-header .item {
   cursor: pointer;
 }
+
+.landing-header {
+  text-align: center;
+}
+
+.landing-header a {
+  color: #def;
+}
+
+.landing-header a:hover {
+  color: #fff !important;
+}
+
+.landing-header .button {
+  text-shadow: 0 0 7px rgba(0, 0, 0, 0.45) !important;
+}

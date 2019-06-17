@@ -87,9 +87,9 @@ class Navbar extends Component {
                   Wishlist
                 </Dropdown.Item>
                 <Dropdown.Divider />
-                <Dropdown.Item>
+                <Dropdown.Item as="a" href="/settings">
                   <Icon name="cog" />
-                  <a href="/settings">Settings</a>
+                  Settings
                 </Dropdown.Item>
                 <Dropdown.Item onClick={this.props.logout}>
                   <Icon name="log out" />

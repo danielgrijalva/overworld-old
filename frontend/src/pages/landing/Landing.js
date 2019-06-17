@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getPopular, getBackdrop } from "../../actions/landing";
 import { Footer } from "../app/components/footer/Footer";
+import Register from "../app/components/register/Register";
+import LogIn from "../app/components/login/LoginModal";
 import { Features } from "./components/features/Features";
-import { Headline } from "./components/headline/Headline";
 import { Popular } from "./components/popular/Popular";
 import { Backdrops as options } from "./Backdrops";
-import Backdrop from "../game/components/backdrop/Backdrop";
+import Backdrop from "../app/components/backdrop/Backdrop";
 import "./Landing.css";
 
 class Landing extends React.Component {
@@ -33,7 +34,14 @@ class Landing extends React.Component {
             <Backdrop imageId={backdrop.imageId} />
           )}
           <div className="landing">
-            <Headline />
+            <section className="landing-header">
+              <h1>The social network for video game lovers.</h1>
+              <p>
+                Start your gaming journal now, it's free!
+                <Register />
+                Or <LogIn loginText="sign in" /> if you're already a member.
+              </p>
+            </section>
             <Popular isLoading={isLoadingPopular} popular={popular} />
             <Features />
             <section className="backdrop-name">
