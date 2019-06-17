@@ -59,23 +59,8 @@ Landing.propTypes = {
   isLoadingPopular: PropTypes.bool.isRequired,
   getBackdrop: PropTypes.func.isRequired,
   getPopular: PropTypes.func.isRequired,
-  backdrop: PropTypes.shape({
-    gameId: PropTypes.number,
-    imageId: PropTypes.string,
-    name: PropTypes.string,
-    slug: PropTypes.string
-  }).isRequired,
-  popular: PropTypes.arrayOf(
-    PropTypes.shape({
-      cover: PropTypes.shape({
-        id: PropTypes.number,
-        imageId: PropTypes.string
-      }),
-      id: PropTypes.number,
-      name: PropTypes.string,
-      popularity: PropTypes.number
-    })
-  ).isRequired
+  backdrop: PropTypes.object.isRequired,
+  popular: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({

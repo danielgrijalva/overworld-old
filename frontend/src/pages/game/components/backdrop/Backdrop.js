@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Container } from "semantic-ui-react";
 import { LazyImage } from "react-lazy-images";
 import "./Backdrop.css";
@@ -40,3 +41,7 @@ export default class Backdrop extends React.Component {
     );
   }
 }
+
+Backdrop.propTypes = {
+  imageId: PropTypes.string.isRequired
+};

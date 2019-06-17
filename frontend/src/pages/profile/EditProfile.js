@@ -68,7 +68,7 @@ class EditProfile extends Component {
                 <label>Location</label>
                 <input
                   name="location"
-                  value={location}
+                  value={location ? location : ""}
                   onChange={this.handleChange}
                 />
               </Form.Field>
@@ -76,13 +76,17 @@ class EditProfile extends Component {
                 <label>Twitter</label>
                 <input
                   name="twitter"
-                  value={twitter}
+                  value={twitter ? twitter : ""}
                   onChange={this.handleChange}
                 />
               </Form.Field>
               <Form.Field>
                 <label>Bio</label>
-                <textarea name="bio" value={bio} onChange={this.handleChange} />
+                <textarea
+                  name="bio"
+                  value={bio ? bio : ""}
+                  onChange={this.handleChange}
+                />
               </Form.Field>
               <Button
                 floated="right"

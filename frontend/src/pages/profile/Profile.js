@@ -172,22 +172,10 @@ class Profile extends Component {
 
 Profile.propTypes = {
   isLoading: PropTypes.bool.isRequired,
+  profile: PropTypes.object.isRequired,
   loadProfile: PropTypes.func.isRequired,
   follow: PropTypes.func.isRequired,
-  unfollow: PropTypes.func.isRequired,
-  profile: PropTypes.shape({
-    username: PropTypes.string,
-    id: PropTypes.number,
-    bio: PropTypes.string,
-    twitter: PropTypes.string,
-    location: PropTypes.string,
-    email: PropTypes.string,
-    played: PropTypes.array,
-    backlog: PropTypes.array,
-    lists: PropTypes.array,
-    followers: PropTypes.array,
-    following: PropTypes.array
-  }).isRequired
+  unfollow: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

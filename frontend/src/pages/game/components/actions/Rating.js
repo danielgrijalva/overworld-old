@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Icon } from "semantic-ui-react";
 import { connect } from "react-redux";
 import Rating from "react-rating";
@@ -33,6 +34,13 @@ class Ratings extends React.Component {
     }
   }
 }
+
+Rating.propTypes = {
+  rating: PropTypes.number.isRequired,
+  loadingRating: PropTypes.bool.isRequired,
+  loadRating: PropTypes.func.isRequired,
+  rate: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
   rating: state.game.rating,

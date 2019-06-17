@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import { Menu } from "semantic-ui-react";
 import { connect } from "react-redux";
 import Buttons from "./Buttons";
@@ -41,6 +42,12 @@ class Actions extends React.Component {
     );
   }
 }
+
+Actions.propTypes = {
+  isAuthenticated: PropTypes.bool,
+  user: PropTypes.object,
+  game: PropTypes.object.isRequired
+};
 
 const mapStateToProps = state => ({
   user: state.auth.user,

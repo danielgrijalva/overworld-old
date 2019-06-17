@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Modal, Header, Menu } from "semantic-ui-react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
@@ -52,7 +53,7 @@ class LogIn extends React.Component {
     if (this.props.isAuthenticated) {
       return <Redirect to={`/${this.props.user.username}`} />;
     }
-    
+
     const { open } = this.state;
     const { errors } = this.props;
     return (
@@ -88,6 +89,14 @@ class LogIn extends React.Component {
     );
   }
 }
+
+LogIn.propTypes = {
+  isAuthenticated: PropTypes.bool,
+  errors: PropTypes.array,
+  user: PropTypes.object,
+  login: PropTypes.func.isRequired,
+  dismissErrors: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
   errors: state.auth.errors,

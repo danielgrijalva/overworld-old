@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Tab, Grid, Label } from "semantic-ui-react";
 import countries from "i18n-iso-countries";
 import Moment from "react-moment";
@@ -122,4 +123,8 @@ export const Details = ({ game }) => {
       ]}
     />
   );
+};
+
+Details.propTypes = {
+  game: PropTypes.object.isRequired
 };
