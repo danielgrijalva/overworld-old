@@ -13,7 +13,7 @@ export const Cover = ({ imageId }) => {
         alt="Game cover"
         placeholder={({ imageProps, ref }) => (
           <img
-            alt="Loading backdrop..."
+            alt="Loading cover..."
             {...imageProps}
             ref={ref}
             className="ui rounded image cover placeholder"
@@ -22,7 +22,7 @@ export const Cover = ({ imageId }) => {
         )}
         actual={({ imageProps }) => (
           <img
-            alt="Game backdrop"
+            alt="Game cover"
             className="ui rounded image cover"
             {...imageProps}
           />
