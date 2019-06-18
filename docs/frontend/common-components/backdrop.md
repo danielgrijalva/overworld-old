@@ -34,6 +34,10 @@ class Gitbook extends React.Component {
 
 ```
 
+{% hint style="info" %}
+The `imageId` comes from the `screenshots` field inside a `game` object \(see [GET Game](https://overworld.gitbook.io/docs/api/games#game)\).
+{% endhint %}
+
 ### Props
 
 | Property | Type | Required | Description |

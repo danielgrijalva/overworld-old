@@ -10,7 +10,7 @@ A simple `footer` component. It provides links to important/informative places i
 
 ### Usage
 
-Just import it and use it as any other component, just make sure it sits at the bottom of the page:
+Use it like any other component:
 
 ```jsx
 import React from "react";
@@ -26,4 +26,6 @@ class Gitbook extends React.Component {
 }
 
 ```
+
+It's a footer, make sure it sits at the bottom of page!
 
