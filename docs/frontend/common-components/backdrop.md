@@ -34,7 +34,3 @@ import { Backdrop } from "./modules/app/components/";
 | :--- | :--- | :--- | :--- |
 | `imageId` | `string` | `true` | ID of the image for the backdrop. |
 
-```jsx
-
-```
-
