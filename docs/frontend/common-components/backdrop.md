@@ -23,10 +23,20 @@ As you can see, just provide the image ID and the size. We use `t_cover_small` f
 To render a backdrop, simply pass in the `imageId` prop.
 
 ```jsx
+import React from "react";
 import { Backdrop } from "./modules/app/components/";
 
-<Backdrop imageId="jjn6e6ivua5u142iukql" />
+class Gitbook extends React.Component {
+    render(){
+        return <Backdrop imageId="jjn6e6ivua5u142iukql" />;
+    }
+}
+
 ```
+
+{% hint style="info" %}
+The `imageId` comes from the `screenshots` field inside a `game` object \(see [GET Game](https://overworld.gitbook.io/docs/api/games#game)\).
+{% endhint %}
 
 ### Props
 

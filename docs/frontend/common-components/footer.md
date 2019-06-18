@@ -10,11 +10,20 @@ A simple `footer` component. It provides links to important/informative places i
 
 ### Usage
 
-Just import it and use it as any other component:
+Just import it and use it as any other component, just make sure it sits at the bottom of the page:
 
 ```jsx
+import React from "react";
 import { Footer } from "./modules/app/components/";
 
-<Footer />
+class Gitbook extends React.Component {
+    render(){
+        return (
+            // Other content
+            <Footer />
+        );
+    }
+}
+
 ```
 
