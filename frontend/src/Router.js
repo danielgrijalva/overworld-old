@@ -2,12 +2,12 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
-import Game from "./pages/game/Game";
-import Navbar from "./pages/app/components/navbar/Navbar";
-import App from "./pages/app/App";
-import Profile from "./pages/profile/Profile";
-import Settings from "./pages/settings/Settings";
-import { loadUser } from "./actions/auth";
+import Game from "./modules/game/";
+import { Navbar } from "./modules/app/components/";
+import App from "./modules/app/";
+import Profile from "./modules/profile/";
+import Settings from "./modules/settings/";
+import { loadUser } from "./modules/app/actions";
 
 const notFound = () => {
   return <p>Not Found</p>;
