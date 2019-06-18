@@ -12,7 +12,10 @@ A few things to consider:
 * [`Redux`](https://redux.js.org/) is used to manage state across the app.
 * We use [`Semantic UI`](https://react.semantic-ui.com/) for UI components.
 * For user authentication, we use [`django-rest-knox`](https://github.com/James1345/django-rest-knox).
-* Overworld needs Python 3.4+ to run.
+
+{% hint style="info" %}
+Overworld needs Python 3.4+ to run.
+{% endhint %}
 
 ### Installation
 
