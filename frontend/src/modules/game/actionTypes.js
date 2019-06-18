@@ -1,0 +1,9 @@
+export const LOAD_ACTIONS = "LOAD_ACTIONS";
+export const ACTIONS_LOADING = "ACTIONS_LOADING";
+export const TOGGLE_PLAYED = "TOGGLE_PLAYED";
+export const TOGGLE_LIKE = "TOGGLE_LIKE";
+export const TOGGLE_BACKLOG = "TOGGLE_BACKLOG";
+export const TOGGLE_WISHLIST = "TOGGLE_WISHLIST";
+export const RATE_GAME = "RATE_GAME";
+export const LOAD_RATING = "LOAD_RATING";
+export const RATING_LOADING = "RATING_LOADING";
