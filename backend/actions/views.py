@@ -1,6 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, status
 from rest_framework.response import Response
+from rest_framework.exceptions import NotFound
 from games.models import Game
 from users.models import CustomUser
 from .serializers import RatingSerializer, ActionSerializer
@@ -34,10 +35,10 @@ class Actions(generics.GenericAPIView):
             name = request.GET['name']
             game = Game.objects.get(igdb=igdb, name=name)
         except ObjectDoesNotExist:
-            return Response([])
+            return Response({})
 
-        user = CustomUser.objects.get(id=request.user.id)
         actions = {}
+        user = CustomUser.objects.get(id=request.user.id)
         actions['played'] = True if game in user.played.all() else False
         actions['liked'] = True if game in user.liked.all() else False
         actions['backlog'] = True if game in user.backlog.all() else False
@@ -231,7 +232,7 @@ class Rate(generics.GenericAPIView):
         so we return nothing.
 
         Args:
-            igdb: the game ID.
+            game: the game ID.
 
         Returns:
             response: a RatingSerializer indicating the user, game and rating.
@@ -242,7 +243,7 @@ class Rate(generics.GenericAPIView):
             user = CustomUser.objects.get(id=request.user.id)
             r = Ratings.objects.get(game=game, user=user)
         except ObjectDoesNotExist:
-            return Response([])
+            return Response({})
 
         serializer = RatingSerializer(r)
 
@@ -263,6 +264,9 @@ class Rate(generics.GenericAPIView):
             response: a RatingSerializer indicating the user, game and rating.
         """
         rating = request.data['rating']
+        if rating <= 0 or rating > 10:
+            return Response({'detail': 'Invalid rating!'}, status.HTTP_400_BAD_REQUEST)
+
         igdb = request.data['game']
         game, _ = Game.objects.get_or_create(igdb=igdb)
         user = CustomUser.objects.get(id=request.user.id)
