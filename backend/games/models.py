@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Game(models.Model):
-    igdb = models.CharField(max_length=16)
+    igdb = models.IntegerField()
     name = models.CharField(max_length=255, default='default')
 
     def __str__(self):
