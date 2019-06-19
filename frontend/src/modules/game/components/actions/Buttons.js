@@ -124,10 +124,10 @@ class Buttons extends React.Component {
 }
 
 Buttons.propTypes = {
-  loadingActions: PropTypes.bool.isRequired,
+  loadingActions: PropTypes.bool,
   actions: PropTypes.object.isRequired,
   game: PropTypes.object.isRequired,
-  loadActions: PropTypes.func.isRequired,
+  loadActions: PropTypes.func,
   logGame: PropTypes.func.isRequired,
   likeGame: PropTypes.func.isRequired,
   addToBacklog: PropTypes.func.isRequired,

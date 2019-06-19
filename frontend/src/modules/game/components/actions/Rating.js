@@ -36,10 +36,10 @@ class Ratings extends React.Component {
 }
 
 Rating.propTypes = {
-  rating: PropTypes.number.isRequired,
-  loadingRating: PropTypes.bool.isRequired,
-  loadRating: PropTypes.func.isRequired,
-  rate: PropTypes.func.isRequired
+  rating: PropTypes.number,
+  loadingRating: PropTypes.bool,
+  loadRating: PropTypes.func,
+  rate: PropTypes.func
 };
 
 const mapStateToProps = state => ({
