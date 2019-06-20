@@ -1,0 +1,9 @@
+dist: xenial
+language: python
+python:
+  - "3.7"
+install:
+  - pip install -r backend/requirements.txt
+script:
+  - python manage.py test
+  
