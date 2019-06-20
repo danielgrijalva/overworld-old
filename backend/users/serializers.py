@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate
+from rest_framework.validators import UniqueValidator
 from rest_framework import serializers
 from .models import CustomUser
 
@@ -40,9 +41,14 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 
 class RegisterSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(min_length=8)
+    email = serializers.EmailField(
+                validators=[UniqueValidator(queryset=CustomUser.objects.all())])
+
     class Meta:
         model = CustomUser
-        fields = ('id', 'username', 'email', 'password')
+        fields = ('id', 'username', 'email', 'password'
+    )   
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):

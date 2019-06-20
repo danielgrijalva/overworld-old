@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, status
 from rest_framework. response import Response
 from rest_framework.exceptions import PermissionDenied
 from knox.models import AuthToken
@@ -28,7 +28,7 @@ class RegisterView(generics.GenericAPIView):
         return Response({
             'user': user_data.data,
             'token': AuthToken.objects.create(user)[1]
-        })
+        }, status=status.HTTP_201_CREATED)
 
 
 class LoginView(generics.GenericAPIView):
@@ -75,7 +75,7 @@ class UserView(generics.RetrieveAPIView):
 class ProfileView(generics.GenericAPIView):
     """Endpoint for obtaining a user's profile.
     
-    The profile consists of the user's activity, faborite games, bio, reviews,
+    The profile consists of the user's activity, favorite games, bio, reviews,
     contact information, stats, lists, followers and other stuff. This endpoint
     accepts both GET and POST methods.
     """

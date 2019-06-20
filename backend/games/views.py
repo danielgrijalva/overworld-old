@@ -1,7 +1,8 @@
 import requests
 from django.conf import settings
-from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from rest_framework.exceptions import NotFound
+from rest_framework.response import Response
 from .fields import game_fields, search_fields, popular_fields, backdrop_fields
 from .models import Game
 
@@ -24,9 +25,12 @@ def get_game(request, guid):
     data = f'fields {game_fields}; where id={guid};'
     headers = {'user-key': settings.IGDB_KEY}
     url = settings.IGDB_URL.format(endpoint='games')
-    r = requests.post(url=url, data=data, headers=headers)
+    r = requests.post(url=url, data=data, headers=headers).json()
 
-    return Response(r.json())
+    if not r:
+        raise NotFound(detail='Game not found.')
+
+    return Response(r)
 
 
 @api_view(['GET'])
