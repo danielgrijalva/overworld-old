@@ -5,5 +5,4 @@ python:
 install:
   - pip install -r backend/requirements.txt
 script:
-  - python manage.py test
-  
+  - python backend/manage.py test
