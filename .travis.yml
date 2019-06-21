@@ -12,6 +12,6 @@ before_script:
   - psql -c "CREATE DATABASE overworld;" -U postgres  
 script:
   - python backend/manage.py migrate
-  - python backend/manage.py test actions games users
+  - coverage run backend/manage.py test actions games users
 after_success:
   - codecov
