@@ -4,5 +4,11 @@ python:
   - "3.7"
 install:
   - pip install -r backend/requirements.txt
+  - pip install codecov
 script:
   - python backend/manage.py test
+before_script:
+  - psql -c 'create database travis_overworld;' -U postgres
+after_success:
+  - codecov
+  
