@@ -4,6 +4,8 @@
 
 > ### *A [letterboxd](https://letterboxd.com) for video games.*
 
+&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://travis-ci.com/danielgrijalva/overworld.svg?branch=master)](https://travis-ci.com/danielgrijalva/overworld) [![codecov](https://codecov.io/gh/danielgrijalva/overworld/branch/master/graph/badge.svg)](https://codecov.io/gh/danielgrijalva/overworld)
+
 * [About](#about)
   + [Inspiration](#inspiration)
 * [Contributing](#contributing)
