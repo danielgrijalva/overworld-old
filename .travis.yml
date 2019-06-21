@@ -4,11 +4,14 @@ python:
   - "3.7"
 install:
   - pip install -r backend/requirements.txt
+  - pip install psycopg2 --quiet
   - pip install codecov
-script:
-  - python backend/manage.py test
+services:
+  - postgresql
 before_script:
-  - psql -c 'create database travis_overworld;' -U postgres
+  - psql -c "CREATE DATABASE overworld;" -U postgres  
+script:
+  - python backend/manage.py migrate
+  - python backend/manage.py test actions games users
 after_success:
   - codecov
-  
