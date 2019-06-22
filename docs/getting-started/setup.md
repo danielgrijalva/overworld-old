@@ -17,7 +17,7 @@ A few things to consider:
 Overworld needs Python 3.7+ to run.
 {% endhint %}
 
-### Installation
+## Installation
 
 After forking the repository, do the following:
 
@@ -42,9 +42,11 @@ python manage.py runserver
 cd frontend/
 npm ci
 ```
+
 This will build the project dependencies based off of the `package-lock.json`.
 
-[`Semantic UI`](https://react.semantic-ui.com/) has an interactive installer and may prompt you for input in the console. Choose the default options if prompted:
+[`Semantic UI`](https://react.semantic-ui.com/) has an interactive installer and may prompt you for input in the console. Choose the default options if prompted: 
+
 1. Set-up Semantic UI: `Automatic (Use default locations and all components)`
 2. Is this your project folder?: Confirm it is the project folder and choose `Yes`
 3. Where should we put Semantic UI inside your project?: `semantic/`
@@ -56,3 +58,4 @@ npm start
 ```
 
 As you can see, both the frontend and backend are two separate entities. To access the backend API go to `localhost:8000`, but most of the time you'll be using the main app \(the frontend\) by going to `localhost:3000`.
+
