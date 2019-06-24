@@ -1,0 +1,3 @@
+[run]
+source = backend/
+omit = backend/venv/*, backend/games/*, */migrations/*, */manage.py, */wsgi.py, */__init__.py, */urls.py, */settings.py
