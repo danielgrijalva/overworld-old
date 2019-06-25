@@ -18,7 +18,7 @@ class GameSearch extends Component {
 
   handleResultSelect = (e, { result }) => {
     this.setState({ results: [], isLoading: false, value: "" });
-    this.props.history.push(`/games/${result.slug}`, result.id);
+    this.props.history.push(`/games/${result.slug}`, result.slug);
   };
 
   search = debounce(value => {
