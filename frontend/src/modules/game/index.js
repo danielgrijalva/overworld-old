@@ -20,36 +20,36 @@ class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      gameId: "",
+      gameSlug: "",
       game: {},
       isLoading: true
     };
   }
 
   componentWillReceiveProps(props) {
-    if (props.location.state !== this.state.gameId) {
-      const gameId = props.location.state;
-      this.resetState(gameId);
-      this.loadGame(gameId);
+    if (props.match.params.slug !== this.state.gameSlug) {
+      const gameSlug = props.match.params.slug;
+      this.resetState(gameSlug);
+      this.loadGame(gameSlug);
     }
   }
 
   componentWillMount() {
-    var gameId = this.props.location.state;
-    this.resetState(gameId);
-    this.loadGame(gameId);
+    var gameSlug = this.props.match.params.slug;
+    this.resetState(gameSlug);
+    this.loadGame(gameSlug);
   }
 
-  resetState = gameId => {
+  resetState = gameSlug => {
     this.setState({
-      gameId: gameId,
+      gameSlug: gameSlug,
       game: {},
       isLoading: true
     });
   };
 
-  loadGame = gameId => {
-    axios.get(`/api/games/${gameId}`).then(res => {
+  loadGame = gameSlug => {
+    axios.get(`/api/games/${gameSlug}`).then(res => {
       this.setState({
         game: res.data[0],
         isLoading: false
@@ -143,8 +143,10 @@ class Game extends React.Component {
 }
 
 Game.propTypes = {
-  location: PropTypes.shape({
-    state: PropTypes.number.isRequired
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      slug: PropTypes.string.isRequired
+    })
   })
 };
 
