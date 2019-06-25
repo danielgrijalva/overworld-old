@@ -23,6 +23,11 @@
   text-shadow: none !important;
 }
 
+.ui.inverted.menu .active {
+  font-weight: 700 !important;
+  font-family: "Raleway", sans-serif !important;
+}
+
 .navbar {
   width: 1200px;
   margin: auto !important;
