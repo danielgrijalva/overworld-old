@@ -8,7 +8,7 @@ from .models import Game
 
 
 @api_view(['GET'])
-def get_game(request, guid):
+def get_game(request, slug):
     """Get a game from IGDB.
 
     Makes a call to the `https://api-v3.igdb.com/games` endpoint, specifying the
@@ -17,12 +17,12 @@ def get_game(request, guid):
     For more details read https://api-docs.igdb.com/?javascript#game.
 
     Args:
-        guid: the game id.
+        slug: unique name of the game e.g. dark-souls, prey, prey--1.
 
     Returns:
         game: a JSON response containing the details of a game.
     """
-    data = f'fields {game_fields}; where id={guid};'
+    data = f'fields {game_fields}; where slug="{slug}";'
     headers = {'user-key': settings.IGDB_KEY}
     url = settings.IGDB_URL.format(endpoint='games')
     r = requests.post(url=url, data=data, headers=headers).json()
