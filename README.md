@@ -1,5 +1,5 @@
 # Overworld
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
 
 ![logo](/media/logo.png)
 
@@ -65,7 +65,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
-<table><tr><td align="center"><a href="https://github.com/danielgrijalva"><img src="https://avatars1.githubusercontent.com/u/11547406?v=4" width="100px;" alt="Daniel Grijalva"/><br /><sub><b>Daniel Grijalva</b></sub></a><br /><a href="https://github.com/danielgrijalva/overworld/commits?author=danielgrijalva" title="Code">💻</a> <a href="https://github.com/danielgrijalva/overworld/commits?author=danielgrijalva" title="Tests">⚠️</a> <a href="#infra-danielgrijalva" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#ideas-danielgrijalva" title="Ideas, Planning, & Feedback">🤔</a> <a href="#maintenance-danielgrijalva" title="Maintenance">🚧</a></td></tr></table>
+<table><tr><td align="center"><a href="https://github.com/danielgrijalva"><img src="https://avatars1.githubusercontent.com/u/11547406?v=4" width="100px;" alt="Daniel Grijalva"/><br /><sub><b>Daniel Grijalva</b></sub></a><br /><a href="https://github.com/danielgrijalva/overworld/commits?author=danielgrijalva" title="Code">💻</a> <a href="https://github.com/danielgrijalva/overworld/commits?author=danielgrijalva" title="Tests">⚠️</a> <a href="#infra-danielgrijalva" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#ideas-danielgrijalva" title="Ideas, Planning, & Feedback">🤔</a> <a href="#maintenance-danielgrijalva" title="Maintenance">🚧</a></td><td align="center"><a href="https://github.com/mikesmith"><img src="https://avatars0.githubusercontent.com/u/46382795?v=4" width="100px;" alt="Mike Smith"/><br /><sub><b>Mike Smith</b></sub></a><br /><a href="https://github.com/danielgrijalva/overworld/commits?author=mikesmith" title="Tests">⚠️</a> <a href="https://github.com/danielgrijalva/overworld/commits?author=mikesmith" title="Documentation">📖</a> <a href="https://github.com/danielgrijalva/overworld/issues?q=author%3Amikesmith" title="Bug reports">🐛</a></td></tr></table>
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
