@@ -1,4 +1,5 @@
 # Overworld
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 
 ![logo](/media/logo.png)
 
@@ -57,3 +58,15 @@ So far you can do the following:
 ## Acknowledgements
 
 Data from [`IGDB`](https://api.igdb.com). Icon by [`Freepik`](https://www.freepik.com/).
+
+## Contributors
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+<table><tr><td align="center"><a href="https://github.com/danielgrijalva"><img src="https://avatars1.githubusercontent.com/u/11547406?v=4" width="100px;" alt="Daniel Grijalva"/><br /><sub><b>Daniel Grijalva</b></sub></a><br /><a href="https://github.com/danielgrijalva/overworld/commits?author=danielgrijalva" title="Code">💻</a> <a href="https://github.com/danielgrijalva/overworld/commits?author=danielgrijalva" title="Tests">⚠️</a> <a href="#infra-danielgrijalva" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#ideas-danielgrijalva" title="Ideas, Planning, & Feedback">🤔</a> <a href="#maintenance-danielgrijalva" title="Maintenance">🚧</a></td></tr></table>
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
