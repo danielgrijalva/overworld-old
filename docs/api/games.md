@@ -4,7 +4,7 @@ description: Endpoints related to game data.
 
 # Games
 
-{% api-method method="get" host="http://localhost:8000" path="/api/games/:guid" %}
+{% api-method method="get" host="http://localhost:8000" path="/api/games/:slug" %}
 {% api-method-summary %}
 Game
 {% endapi-method-summary %}
@@ -20,8 +20,8 @@ For more details read https://api-docs.igdb.com/?javascript\#game
 {% api-method-spec %}
 {% api-method-request %}
 {% api-method-path-parameters %}
-{% api-method-parameter name="guid" type="integer" required=true %}
-ID of the game from IGDB.
+{% api-method-parameter name="slug" type="string" required=true %}
+Slugified name of the game.
 {% endapi-method-parameter %}
 {% endapi-method-path-parameters %}
 {% endapi-method-request %}
