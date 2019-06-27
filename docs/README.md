@@ -4,7 +4,7 @@ description: Welcome to Overworld!
 
 # Introduction
 
-![](.gitbook/assets/logo-4%20%281%29.png)
+![](.gitbook/assets/overworld.png)
 
 ### About
 
