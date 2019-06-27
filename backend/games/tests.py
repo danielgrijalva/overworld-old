@@ -10,6 +10,7 @@ class GameTests(APITestCase):
     @patch('games.views.requests.post')
     def test_get_game(self, mock_post):
 
+        """Ensure we can obtain a game from IGDB."""
         # Create Mock post and response return value
         mock_response = Mock()
         expected_dict = [{
@@ -22,7 +23,6 @@ class GameTests(APITestCase):
         mock_response.json.return_value = expected_dict
         mock_post.return_value = mock_response
 
-        """Ensure we can obtain a game from IGDB."""
         url = reverse('get-game', kwargs={'slug': 'dark-souls'})
         response = self.client.get(url, format='json')
 
@@ -39,12 +39,12 @@ class GameTests(APITestCase):
     @patch('games.views.requests.post')
     def test_game_not_found(self, mock_post):
 
+        """Ensure that the API returns 404 status with an unknown game."""
         # Create Mock post and response return value
         mock_response = Mock()
         mock_response.json.return_value = []
         mock_post.return_value = mock_response
 
-        """Ensure that the API returns 404 status with an unknown game."""
         url = reverse('get-game', kwargs={'slug': '0'})
         response = self.client.get(url, format='json')
 
@@ -62,6 +62,7 @@ class GameTests(APITestCase):
     @patch('games.views.requests.post')
     def test_search_game(self, mock_post):
 
+        """Ensure we can search a game given a name."""
         # Create Mock post and response return value
         mock_response = Mock()
         expected_dict = [{
@@ -85,7 +86,6 @@ class GameTests(APITestCase):
         mock_response.json.return_value = expected_dict
         mock_post.return_value = mock_response
 
-        """Ensure we can search a game given a name."""
         url = reverse('search-game', kwargs={'name': 'Dark Souls'})
         response = self.client.get(url, format='json')
 
@@ -102,6 +102,7 @@ class GameTests(APITestCase):
     @patch('games.views.requests.post')
     def test_get_popular(self, mock_post):
 
+        """Ensure we can obtain a list of popular games."""
         # Create Mock post and response return value
         mock_response = Mock()
         expected_dict = [
@@ -113,57 +114,55 @@ class GameTests(APITestCase):
             },
             "name": "Cyberpunk 2077",
             "popularity": 1735.401818908951
+        },
+        {
+            "id": 119207,
+            "cover": {
+                "id": 74840,
+                "image_id": "co1lqw"
             },
-            {
-                "id": 119207,
-                "cover": {
-                    "id": 74840,
-                    "image_id": "co1lqw"
-                },
-                "name": "Aquapark.io",
-                "popularity": 1380.091049131278
+            "name": "Aquapark.io",
+            "popularity": 1380.091049131278
+        },
+        {
+            "id": 38967,
+            "cover": {
+                "id": 75151,
+                "image_id": "co1lzj"
             },
-            {
-                "id": 38967,
-                "cover": {
-                    "id": 75151,
-                    "image_id": "co1lzj"
-                },
-                "name": "Cooking Simulator",
-                "popularity": 1332.181668715655
+            "name": "Cooking Simulator",
+            "popularity": 1332.181668715655
+        },
+        {
+            "id": 114455,
+            "cover": {
+                "id": 71287,
+                "image_id": "co1j07"
             },
-            {
-                "id": 114455,
-                "cover": {
-                    "id": 71287,
-                    "image_id": "co1j07"
-                },
-                "name": "Pacify",
-                "popularity": 536.4335905677425
+            "name": "Pacify",
+            "popularity": 536.4335905677425
+        },
+        {
+            "id": 115276,
+            "cover": {
+                "id": 71673,
+                "image_id": "co1jax"
             },
-            {
-                "id": 115276,
-                "cover": {
-                    "id": 71673,
-                    "image_id": "co1jax"
-                },
-                "name": "Super Mario Maker 2",
-                "popularity": 339.6555774443441
+            "name": "Super Mario Maker 2",
+            "popularity": 339.6555774443441
+        },
+        {
+            "id": 10760,
+            "cover": {
+                "id": 24758,
+                "image_id": "jt5ypn4a00wf4bmqrhre"
             },
-            {
-                "id": 10760,
-                "cover": {
-                    "id": 24758,
-                    "image_id": "jt5ypn4a00wf4bmqrhre"
-                },
-                "name": "Bloodstained: Ritual of the Night",
-                "popularity": 330.4026928147172
-            }
-        ]
+            "name": "Bloodstained: Ritual of the Night",
+            "popularity": 330.4026928147172
+        }]
         mock_response.json.return_value = expected_dict
         mock_post.return_value = mock_response
 
-        """Ensure we can obtain a list of popular games."""
         url = reverse('get-popular')
         response = self.client.get(url, format='json')
 
@@ -180,6 +179,7 @@ class GameTests(APITestCase):
     @patch('games.views.requests.post')
     def test_get_backdrop(self, mock_post):
 
+        """Ensure we can retrieve a game's screenshots/artwork."""
         # Create Mock post and response return value
         mock_response = Mock()
         expected_dict = [{
@@ -200,7 +200,6 @@ class GameTests(APITestCase):
         mock_response.json.return_value = expected_dict
         mock_post.return_value = mock_response
 
-        """Ensure we can retrieve a game's screenshots/artwork."""
         url = reverse('get-backdrop', kwargs={'guid': 2155})
         response = self.client.get(url, format='json')
 
