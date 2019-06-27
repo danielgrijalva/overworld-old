@@ -9,9 +9,9 @@ install:
 services:
   - postgresql
 before_script:
-  - psql -c "CREATE DATABASE overworld;" -U postgres  
+  - psql -c "CREATE DATABASE overworld;" -U postgres
 script:
   - python backend/manage.py migrate
-  - coverage run backend/manage.py test actions users
+  - coverage run backend/manage.py test games actions users
 after_success:
   - codecov
