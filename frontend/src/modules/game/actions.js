@@ -8,17 +8,17 @@ import {
   LOAD_RATING,
   RATE_GAME,
   ACTIONS_LOADING,
-  RATING_LOADING
+  RATING_LOADING,
+  ADD_JOURNAL_ENTRY
 } from "./actionTypes";
 import { tokenConfig } from "../app/actions";
 
-export const loadActions = (gameId, name) => (dispatch, getState) => {
+export const loadActions = gameId => (dispatch, getState) => {
   dispatch({ type: ACTIONS_LOADING });
   axios
     .get(`/api/actions/`, {
       params: {
-        igdb: gameId,
-        name: name
+        igdb: gameId
       },
       headers: tokenConfig(getState).headers
     })
@@ -33,13 +33,14 @@ export const loadActions = (gameId, name) => (dispatch, getState) => {
     });
 };
 
-export const logGame = (gameId, name) => (dispatch, getState) => {
+export const logGame = (gameId, name, slug) => (dispatch, getState) => {
   axios
     .post(
       "/api/actions/log/",
       {
         igdb: gameId,
-        name: name
+        name: name,
+        slug: slug
       },
       tokenConfig(getState)
     )
@@ -60,13 +61,14 @@ export const logGame = (gameId, name) => (dispatch, getState) => {
     });
 };
 
-export const likeGame = (gameId, name) => (dispatch, getState) => {
+export const likeGame = (gameId, name, slug) => (dispatch, getState) => {
   axios
     .post(
       "/api/actions/like/",
       {
         igdb: gameId,
-        name: name
+        name: name,
+        slug: slug
       },
       tokenConfig(getState)
     )
@@ -81,13 +83,14 @@ export const likeGame = (gameId, name) => (dispatch, getState) => {
     });
 };
 
-export const addToBacklog = (gameId, name) => (dispatch, getState) => {
+export const addToBacklog = (gameId, name, slug) => (dispatch, getState) => {
   axios
     .post(
       "/api/actions/backlog/",
       {
         igdb: gameId,
-        name: name
+        name: name,
+        slug: slug
       },
       tokenConfig(getState)
     )
@@ -102,13 +105,14 @@ export const addToBacklog = (gameId, name) => (dispatch, getState) => {
     });
 };
 
-export const addToWishlist = (gameId, name) => (dispatch, getState) => {
+export const addToWishlist = (gameId, name, slug) => (dispatch, getState) => {
   axios
     .post(
       "/api/actions/wishlist/",
       {
         igdb: gameId,
-        name: name
+        name: name,
+        slug: slug
       },
       tokenConfig(getState)
     )
@@ -128,7 +132,7 @@ export const loadRating = gameId => (dispatch, getState) => {
   axios
     .get(`/api/actions/ratings`, {
       params: {
-        game: gameId
+        igdb: gameId
       },
       headers: tokenConfig(getState).headers
     })
@@ -143,12 +147,14 @@ export const loadRating = gameId => (dispatch, getState) => {
     });
 };
 
-export const rate = (gameId, rating) => (dispatch, getState) => {
+export const rate = (game, rating) => (dispatch, getState) => {
   axios
     .post(
       "/api/actions/ratings/",
       {
-        game: gameId,
+        igdb: game.id,
+        name: game.name,
+        slug: game.slug,
         rating: rating
       },
       tokenConfig(getState)
@@ -158,6 +164,19 @@ export const rate = (gameId, rating) => (dispatch, getState) => {
         type: RATE_GAME,
         payload: res.data
       });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+export const addJournalEntry = data => (dispatch, getState) => {
+  axios
+    .post("/api/actions/journal/", data, tokenConfig(getState))
+    .then(res => {
+      dispatch({ type: ADD_JOURNAL_ENTRY });
+      dispatch(loadActions(data.game.id));
+      dispatch(loadRating(data.game.id));
     })
     .catch(error => {
       console.log(error);
