@@ -77,7 +77,7 @@ a:hover {
   background: #48c5ff;
 }
 
-.ui.form > .field > label {
+.ui.form .field > label {
   color: #def;
   font-weight: 300;
 }
