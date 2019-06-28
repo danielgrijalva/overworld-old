@@ -1,10 +1,11 @@
 # Overworld
 
-![logo](/media/logo.png)
+![logo](/media/overworld.png)
 
 > ### *A [letterboxd](https://letterboxd.com) for video games.*
 
-&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://travis-ci.com/danielgrijalva/overworld.svg?branch=master)](https://travis-ci.com/danielgrijalva/overworld) [![codecov](https://codecov.io/gh/danielgrijalva/overworld/branch/master/graph/badge.svg)](https://codecov.io/gh/danielgrijalva/overworld)
+&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://travis-ci.com/danielgrijalva/overworld.svg?branch=master)](https://travis-ci.com/danielgrijalva/overworld) [![codecov](https://codecov.io/gh/danielgrijalva/overworld/branch/master/graph/badge.svg)](https://codecov.io/gh/danielgrijalva/overworld) [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
+
 
 * [About](#about)
   + [Inspiration](#inspiration)
@@ -57,3 +58,15 @@ So far you can do the following:
 ## Acknowledgements
 
 Data from [`IGDB`](https://api.igdb.com). Icon by [`Freepik`](https://www.freepik.com/).
+
+## Contributors
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+<table><tr><td align="center"><a href="https://github.com/danielgrijalva"><img src="https://avatars1.githubusercontent.com/u/11547406?v=4" width="100px;" alt="Daniel Grijalva"/><br /><sub><b>Daniel Grijalva</b></sub></a><br /><a href="https://github.com/danielgrijalva/overworld/commits?author=danielgrijalva" title="Code">💻</a> <a href="https://github.com/danielgrijalva/overworld/commits?author=danielgrijalva" title="Tests">⚠️</a> <a href="#infra-danielgrijalva" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#ideas-danielgrijalva" title="Ideas, Planning, & Feedback">🤔</a> <a href="#maintenance-danielgrijalva" title="Maintenance">🚧</a></td><td align="center"><a href="https://github.com/mikesmith"><img src="https://avatars0.githubusercontent.com/u/46382795?v=4" width="100px;" alt="Mike Smith"/><br /><sub><b>Mike Smith</b></sub></a><br /><a href="https://github.com/danielgrijalva/overworld/commits?author=mikesmith" title="Tests">⚠️</a> <a href="https://github.com/danielgrijalva/overworld/commits?author=mikesmith" title="Documentation">📖</a> <a href="https://github.com/danielgrijalva/overworld/issues?q=author%3Amikesmith" title="Bug reports">🐛</a></td></tr></table>
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
