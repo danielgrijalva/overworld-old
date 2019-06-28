@@ -51,10 +51,6 @@ rect {
   display: initial;
 }
 
-.modal .game-header h2 {
-  text-shadow: 2px 0 7px rgba(0, 0, 0, .6);
-}
-
 .ui.checkbox label {
   color: #def !important;
 }
