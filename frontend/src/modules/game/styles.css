@@ -2,7 +2,7 @@
   margin-bottom: 10rem !important;
 }
 
-.game-header > h1 {
+.game-header > h1, h2 {
   color: #fff;
   text-shadow: #000 2px 0 5px;
   display: inline;

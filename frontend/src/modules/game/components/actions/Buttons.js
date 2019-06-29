@@ -12,24 +12,24 @@ import {
 
 class Buttons extends React.Component {
   componentWillMount() {
-    const { id, name } = this.props.game;
-    this.props.loadActions(id, name);
+    const { id } = this.props.game;
+    this.props.loadActions(id);
   }
 
   onClick = (e, { value }) => {
-    const { id, name } = this.props.game;
+    const { id, name, slug} = this.props.game;
     switch (value) {
       case "played":
-        this.props.logGame(id, name);
+        this.props.logGame(id, name, slug);
         break;
       case "liked":
-        this.props.likeGame(id, name);
+        this.props.likeGame(id, name, slug);
         break;
       case "backlog":
-        this.props.addToBacklog(id, name);
+        this.props.addToBacklog(id, name, slug);
         break;
       case "wishlist":
-        this.props.addToWishlist(id, name);
+        this.props.addToWishlist(id, name, slug);
         break;
       default:
         break;

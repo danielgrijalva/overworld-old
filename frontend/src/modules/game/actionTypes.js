@@ -7,3 +7,4 @@ export const TOGGLE_WISHLIST = "TOGGLE_WISHLIST";
 export const RATE_GAME = "RATE_GAME";
 export const LOAD_RATING = "LOAD_RATING";
 export const RATING_LOADING = "RATING_LOADING";
+export const ADD_JOURNAL_ENTRY = "ADD_JOURNAL_ENTRY";
