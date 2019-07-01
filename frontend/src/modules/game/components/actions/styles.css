@@ -50,3 +50,7 @@ rect {
 .ui.floated.menu .item:last-child:before {
   display: initial;
 }
+
+.ui.checkbox label {
+  color: #def !important;
+}

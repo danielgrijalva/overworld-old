@@ -7,7 +7,8 @@ import {
   LOAD_RATING,
   RATE_GAME,
   ACTIONS_LOADING,
-  RATING_LOADING
+  RATING_LOADING,
+  ADD_JOURNAL_ENTRY
 } from "./actionTypes";
 
 const initialState = {
@@ -74,6 +75,10 @@ export default function(state = initialState, action) {
         ...state,
         loadingRating: true,
         rating: 0
+      };
+    case ADD_JOURNAL_ENTRY:
+      return {
+        ...state
       };
     default:
       return state;

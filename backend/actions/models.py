@@ -14,3 +14,16 @@ class Ratings(models.Model):
     class Meta:
         unique_together = ['game', 'user']
         
+
+class Journal(models.Model):
+    game = models.ForeignKey('games.Game', on_delete=models.CASCADE)
+    user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE)
+    date = models.DateField()
+    review = models.TextField(null=True)
+    spoilers = models.BooleanField(null=True)
+    liked = models.BooleanField(null=True)
+    rating = models.IntegerField(null=True,
+                                 validators=[MinValueValidator(0), MaxValueValidator(10)])
+
+    def __str__(self):
+        return '%s - %s - %s' % (self.date, self.game, self.user)

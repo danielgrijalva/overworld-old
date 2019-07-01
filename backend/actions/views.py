@@ -1,11 +1,12 @@
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models.functions import ExtractMonth, ExtractYear
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound
 from games.models import Game
 from users.models import CustomUser
-from .serializers import RatingSerializer, ActionSerializer
-from .models import Ratings
+from .serializers import RatingSerializer, ActionSerializer, JournalSerializer
+from .models import Ratings, Journal
 
 
 class Actions(generics.GenericAPIView):
@@ -22,7 +23,6 @@ class Actions(generics.GenericAPIView):
 
     Args:
         igdb: the ID of the game.
-        name: the name of the game.
 
     Returns:
         actions: a JSON indicating each action with True/False values.
@@ -32,8 +32,7 @@ class Actions(generics.GenericAPIView):
     def get(self, request, *args, **kwargs):
         try:
             igdb = request.GET['igdb']
-            name = request.GET['name']
-            game = Game.objects.get(igdb=igdb, name=name)
+            game = Game.objects.get(igdb=igdb)
         except ObjectDoesNotExist:
             return Response({})
 
@@ -238,7 +237,7 @@ class Rate(generics.GenericAPIView):
             response: a RatingSerializer indicating the user, game and rating.
         """
         try:
-            igdb = request.GET['game']
+            igdb = request.GET['igdb']
             game = Game.objects.get(igdb=igdb)
             user = CustomUser.objects.get(id=request.user.id)
             r = Ratings.objects.get(game=game, user=user)
@@ -267,8 +266,10 @@ class Rate(generics.GenericAPIView):
         if rating <= 0 or rating > 10:
             return Response({'detail': 'Invalid rating!'}, status.HTTP_400_BAD_REQUEST)
 
-        igdb = request.data['game']
-        game, _ = Game.objects.get_or_create(igdb=igdb)
+        igdb = request.data['igdb']
+        name = request.data['name']
+        slug = request.data['slug']
+        game, _ = Game.objects.get_or_create(igdb=igdb, name=name, slug=slug)
         user = CustomUser.objects.get(id=request.user.id)
 
         r, _ = Ratings.objects.get_or_create(game=game, user=user)
@@ -278,3 +279,87 @@ class Rate(generics.GenericAPIView):
         serializer = RatingSerializer(r).data
 
         return Response(serializer)
+
+
+class JournalView(generics.GenericAPIView):
+    """Endpoint for the gaming journal."""
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def post(self, request, *args, **kwargs):
+        """Creates a journal entry.
+        
+        Journal entries are tipycally created when a user finishes a game and
+        wants to register that event in their profile. A journal entry must
+        have a date, a user and a game. 
+
+        Args:
+            game: id of the game
+            date: the day you finished the game (format YYYY-MM-DD)
+            review: a game review (optional)
+            spoilers: whether the review contains spoilers or not (optional)
+            liked: whether the user liked the game or not (optional)
+            rating: the rating value (1-10) (optional)
+        """
+        igdb = request.data['game']['id']
+        name = request.data['game']['name']
+        slug = request.data['game']['slug']
+        game, _ = Game.objects.get_or_create(igdb=igdb, name=name, slug=slug)
+
+        user = CustomUser.objects.get(id=request.user.id)
+        request.data['game'] = game 
+
+        if request.data.get('rating'):
+            r, _ = Ratings.objects.get_or_create(game=game, user=user)
+            r.rating = request.data['rating']
+            r.save()
+
+        if request.data.get('liked'):
+            user.liked.add(game)
+
+        if game in user.backlog.all():
+            user.backlog.remove(game)
+
+        entry = Journal.objects.create(user=user, **request.data)
+        user.played.add(game)
+        
+        return Response(JournalSerializer(entry).data)
+
+    def get(self, request, *args, **kwargs):
+        """Get the gaming journal of a user.
+
+        It's a timeline of finished games, grouped by year and month, sorted
+        from newest to oldest.
+
+        Args:
+            username: username requested
+            limit: number of entries to return
+        """
+        limit = int(request.GET.get('limit', 0))
+        if limit <= 0:
+            limit = None
+
+        user = CustomUser.objects.get(username=request.GET['username'])
+        entries = Journal.objects.filter(user=user).annotate(
+                    month=ExtractMonth('date'), 
+                    year=ExtractYear('date')).order_by('-date')[:limit]
+
+        # group by year
+        response = {}
+        for e in entries:
+            if e.year not in response:
+                response[e.year] = {'entries': [e]}
+            else:
+                response[e.year]['entries'].append(e)
+
+        # group entries of each year by month
+        for year, data in response.items():
+            entries = data['entries']
+            for e in entries:
+                entry = JournalSerializer(e).data
+                if e.month not in data:
+                    data[e.month] = [entry]
+                else:
+                    data[e.month].append(entry)
+            del data['entries']
+
+        return Response(response)

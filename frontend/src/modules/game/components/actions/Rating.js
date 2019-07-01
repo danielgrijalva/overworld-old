@@ -1,19 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Icon } from "semantic-ui-react";
+import { Rating } from "semantic-ui-react";
 import { connect } from "react-redux";
-import Rating from "react-rating";
 import { loadRating, rate } from "../../actions";
 
 class Ratings extends React.Component {
   componentWillMount() {
     const { game } = this.props;
-    this.props.loadRating(game);
+    this.props.loadRating(game.id);
   }
 
-  onStarClick = nextValue => {
+  onStarClick = (e, { rating }) => {
     const { game } = this.props;
-    this.props.rate(game, nextValue);
+    this.props.rate(game, rating);
   };
 
   render() {
@@ -21,12 +20,13 @@ class Ratings extends React.Component {
     if (!loadingRating) {
       return (
         <Rating
+          clearable
+          icon="star"
+          size="large"
           className="stars"
-          emptySymbol={<Icon className="half-star" name="star" />}
-          fullSymbol={[<Icon color="yellow" name="star" />]}
-          onChange={this.onStarClick}
-          initialRating={rating}
-          stop={10}
+          maxRating={10}
+          rating={rating}
+          onRate={this.onStarClick}
         />
       );
     } else {

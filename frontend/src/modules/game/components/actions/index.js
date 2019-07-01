@@ -2,21 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Menu } from "semantic-ui-react";
 import { connect } from "react-redux";
+import { LogIn } from "../../../app/components";
+import LogModal from "../log-modal";
 import Buttons from "./Buttons";
 import Ratings from "./Rating";
-import { LogIn } from "../../../app/components";
 import "./styles.css";
 
 class Actions extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      isModalActive: false
-    };
-  }
-
-  closeModal = () => {
-    this.setState({ isModalActive: false });
+  handleChange = (event, { name, value }) => {
+    if (this.state.hasOwnProperty(name)) {
+      this.setState({ [name]: value });
+    }
   };
 
   render() {
@@ -29,9 +25,9 @@ class Actions extends React.Component {
             </Menu.Item>
             <Menu.Item className="rate">
               Rate
-              <Ratings game={this.props.game.id} />
+              <Ratings game={this.props.game} />
             </Menu.Item>
-            <Menu.Item content="Review or log" link />
+            <LogModal game={this.props.game} />
             <Menu.Item content="Add to a list" link />
           </React.Fragment>
         ) : (
