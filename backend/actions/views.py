@@ -1,3 +1,4 @@
+import itertools
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models.functions import ExtractMonth, ExtractYear
 from rest_framework import generics, permissions, status
@@ -7,7 +8,7 @@ from games.models import Game
 from users.models import CustomUser
 from .serializers import RatingSerializer, ActionSerializer, JournalSerializer
 from .models import Ratings, Journal
-
+from .utils import AllowAnyGet
 
 class Actions(generics.GenericAPIView):
     """Endpoint for obtaining a user's relationship with a game.
@@ -283,8 +284,9 @@ class Rate(generics.GenericAPIView):
 
 class JournalView(generics.GenericAPIView):
     """Endpoint for the gaming journal."""
-    permission_classes = (permissions.IsAuthenticated,)
-
+    permission_classews = (AllowAnyGet,)
+    serializer_class = JournalSerializer
+    
     def post(self, request, *args, **kwargs):
         """Creates a journal entry.
         
@@ -343,23 +345,17 @@ class JournalView(generics.GenericAPIView):
                     month=ExtractMonth('date'), 
                     year=ExtractYear('date')).order_by('-date')[:limit]
 
-        # group by year
-        response = {}
-        for e in entries:
-            if e.year not in response:
-                response[e.year] = {'entries': [e]}
-            else:
-                response[e.year]['entries'].append(e)
+        # http://ls.pwd.io/2013/05/create-groups-from-lists-with-itertools-groupby/
+        response = []
+        year_getter = lambda x: x.year
+        month_getter = lambda x: x.month
+        for year, year_entries in itertools.groupby(entries, key=year_getter):
+            year = {'year': year, 'months': []}
+            for month, group in itertools.groupby(list(year_entries), key=month_getter):
+                month_entries = JournalSerializer(list(group), many=True)
+                month = {'month': month, 'entries': month_entries.data}
+                year['months'].append(month)
 
-        # group entries of each year by month
-        for year, data in response.items():
-            entries = data['entries']
-            for e in entries:
-                entry = JournalSerializer(e).data
-                if e.month not in data:
-                    data[e.month] = [entry]
-                else:
-                    data[e.month].append(entry)
-            del data['entries']
+            response.append(year)
 
         return Response(response)
