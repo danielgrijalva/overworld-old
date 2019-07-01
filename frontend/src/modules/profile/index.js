@@ -12,7 +12,7 @@ import {
 } from "semantic-ui-react";
 import { Footer } from "../app/components/";
 import { loadProfile, follow, unfollow } from "./actions";
-import { ProfileNav, Stats } from "./components";
+import { ProfileNav, Stats, Journal } from "./components";
 import "./styles.css";
 
 class Profile extends Component {
@@ -150,6 +150,7 @@ class Profile extends Component {
                       </React.Fragment>
                     )}
                     <Divider horizontal>Journal</Divider>
+                    <Journal username={username} />
                     <Divider horizontal>Ratings</Divider>
                     <Divider horizontal>Backlog</Divider>
                     <Divider horizontal>Wish List</Divider>
