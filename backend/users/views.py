@@ -9,9 +9,9 @@ from .serializers import UserSerializer, ProfileSerializer, RegisterSerializer, 
 
 class RegisterView(generics.GenericAPIView):
     """Endpoint for signing up to Overworld.
-    
+
     All authentication related functionality in Overworld is handled by
-    django-rest-knox. 
+    django-rest-knox.
 
     Returns:
         user: object with user-related data.
@@ -33,14 +33,14 @@ class RegisterView(generics.GenericAPIView):
 
 class LoginView(generics.GenericAPIView):
     """Endpoint for login in to Overworld.
-    
+
     All authentication related functionality in Overworld is handled by
-    django-rest-knox. 
+    django-rest-knox.
 
     Returns:
         user: object with user-related data.
         token: JWT token for handling the session in the browser.
-    """    
+    """
     serializer_class = LoginSerializer
     permission_classes = (permissions.AllowAny,)
 
@@ -74,7 +74,7 @@ class UserView(generics.RetrieveAPIView):
 
 class ProfileView(generics.GenericAPIView):
     """Endpoint for obtaining a user's profile.
-    
+
     The profile consists of the user's activity, favorite games, bio, reviews,
     contact information, stats, lists, followers and other stuff. This endpoint
     accepts both GET and POST methods.
@@ -109,9 +109,9 @@ class ProfileView(generics.GenericAPIView):
 
 class FollowView(generics.GenericAPIView):
     """Endpoint to follow a user.
-    
+
     This adds a user to the current user's `following` field, and adds the
-    current user to that user's `followers` field. These fields are a 
+    current user to that user's `followers` field. These fields are a
     many-to-many relationship.
 
     The user calling this endpoint must be authenticated.
@@ -123,7 +123,11 @@ class FollowView(generics.GenericAPIView):
 
     def post(self, request, *args, **kwargs):
         me = CustomUser.objects.get(id=request.user.id)
-        user = CustomUser.objects.get(username=request.data['username'])
+        try:
+            user = CustomUser.objects.get(username=request.data['username'])
+        except CustomUser.DoesNotExist:
+            return Response({'detail': 'User does not exist'},
+                            status.HTTP_404_NOT_FOUND)
 
         me.following.add(user)
         user.followers.add(me)
@@ -133,21 +137,25 @@ class FollowView(generics.GenericAPIView):
 
 class UnfollowView(generics.GenericAPIView):
     """Endpoint to unfollow a user.
-    
+
     This removes a user from the current user's `following` field, and removes
-    the current user from that user's `followers` field. These fields are a 
+    the current user from that user's `followers` field. These fields are a
     many-to-many relationship.
 
     The user calling this endpoint must be authenticated.
 
     Args:
         username: the user to unfollow.
-    """    
+    """
     permission_classes = (permissions.IsAuthenticated,)
 
     def post(self, request, *args, **kwargs):
         me = CustomUser.objects.get(id=request.user.id)
-        user = CustomUser.objects.get(username=request.data['username'])
+        try:
+            user = CustomUser.objects.get(username=request.data['username'])
+        except CustomUser.DoesNotExist:
+            return Response({'detail': 'User does not exist'},
+                            status.HTTP_404_NOT_FOUND)
 
         me.following.remove(user)
         user.followers.remove(me)

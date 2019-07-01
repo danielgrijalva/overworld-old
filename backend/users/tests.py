@@ -10,7 +10,7 @@ def create_user(client, data=None):
             'username': 'testing',
             'email': 'testing@overworld.com',
             'password': 'testingOverworld'
-        }    
+        }
     register_url = reverse('register')
     client.post(register_url, data, format='json')
 
@@ -25,7 +25,7 @@ class RegisterTests(APITestCase):
             'password': 'testingOverworld'
         }
         self.url = reverse('register')
-    
+
     def test_register_success(self):
         response = self.client.post(self.url, self.data, format='json')
 
@@ -46,7 +46,7 @@ class RegisterTests(APITestCase):
         response = self.client.post(self.url, invalid_data, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-    
+
 
 class LoginTests(APITestCase):
     def setUp(self):
@@ -80,14 +80,14 @@ class UserTests(APITestCase):
         response = self.client.get(self.url)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-            
+
 
     def test_get_user_unauthorized(self):
         self.client.force_authenticate(user=None)
         response = self.client.get(self.url)
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
-            
+
 
 class ProfileTests(APITestCase):
     def setUp(self):
@@ -119,19 +119,48 @@ class FollowTests(APITestCase):
             'password': 'myPassword123'
         }
         my_username = create_user(self.client)['username']
-        self.friend = create_user(self.client, data=friend_data)['username']
+        self.friend_username = create_user(self.client,
+                                           data=friend_data)['username']
         self.follow_url = reverse('follow')
         self.unfollow_url = reverse('unfollow')
         self.me = CustomUser.objects.get(username=my_username)
-        self.client.force_authenticate(user=self.me)        
+        self.friend = CustomUser.objects.get(username=self.friend_username)
+        self.client.force_authenticate(user=self.me)
 
     def test_follow(self):
-        data = {'username': self.friend}
+        data = {'username': self.friend_username}
         response = self.client.post(self.follow_url, data)
+
+        self.assertTrue(self.friend in self.me.following.all())
+        self.assertTrue(self.me in self.friend.followers.all())
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    def test_follow_nonexistant_user(self):
+        data = {'username': 'doesntexist'}
+
+        response = self.client.post(self.follow_url, data)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
     def test_unfollow(self):
-        data = {'username': self.friend}
+        data = {'username': self.friend_username}
+        # Setup me to follow friends before unfollowing
+        self.client.post(self.follow_url, data)
         response = self.client.post(self.unfollow_url, data)
+
+        self.assertFalse(self.friend in self.me.following.all())
+        self.assertFalse(self.me in self.friend.followers.all())
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-                
+
+    def test_unfollow_user_not_being_followed(self):
+        data = {'username': self.friend_username}
+        response = self.client.post(self.unfollow_url, data)
+
+        self.assertFalse(self.friend in self.me.following.all())
+        self.assertFalse(self.me in self.friend.followers.all())
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_unfollow_nonexistant_user(self):
+        data = {'username': 'doesntexist'}
+
+        response = self.client.post(self.unfollow_url, data)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
