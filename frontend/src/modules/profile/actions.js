@@ -3,7 +3,8 @@ import {
   LOAD_PROFILE,
   FOLLOW,
   UNFOLLOW,
-  EDIT_PROFILE_SUCCESS
+  EDIT_PROFILE_SUCCESS,
+  LOAD_JOURNAL
 } from "./actionTypes";
 import { tokenConfig } from "../app/actions";
 
@@ -65,6 +66,26 @@ export const editProfile = profile => (dispatch, getState) => {
     .then(res => {
       dispatch({
         type: EDIT_PROFILE_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+export const loadJournal = username => dispatch => {
+  axios
+    .get("/api/actions/journal/", {
+      params: {
+        username: username,
+        limit: 10
+      }
+    })
+    .then(res => {
+      console.log(res.data)
+      dispatch({
+        type: LOAD_JOURNAL,
         payload: res.data
       });
     })
