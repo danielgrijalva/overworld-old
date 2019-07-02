@@ -149,7 +149,6 @@ class Profile extends Component {
                         <p className="profile-bio">{bio}</p>
                       </React.Fragment>
                     )}
-                    <Divider horizontal>Journal</Divider>
                     <Journal username={username} />
                     <Divider horizontal>Ratings</Divider>
                     <Divider horizontal>Backlog</Divider>
