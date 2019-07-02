@@ -83,7 +83,6 @@ export const loadJournal = username => dispatch => {
       }
     })
     .then(res => {
-      console.log(res.data)
       dispatch({
         type: LOAD_JOURNAL,
         payload: res.data
