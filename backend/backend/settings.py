@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import django_heroku
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -119,9 +120,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 # User authentication
 
 AUTH_USER_MODEL = 'users.CustomUser'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
@@ -142,7 +145,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
 # IGDB
 
 IGDB_KEY = os.getenv('IGDB_KEY')
 IGDB_URL = 'https://api-v3.igdb.com/{endpoint}/'
+
+
+# Django Heroku
+
+django_heroku.settings(locals())
