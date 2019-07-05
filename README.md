@@ -4,7 +4,7 @@
 
 > ### *A [letterboxd](https://letterboxd.com) for video games.*
 
-&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://travis-ci.com/danielgrijalva/overworld.svg?branch=master)](https://travis-ci.com/danielgrijalva/overworld) [![codecov](https://codecov.io/gh/danielgrijalva/overworld/branch/master/graph/badge.svg)](https://codecov.io/gh/danielgrijalva/overworld) [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
+&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://travis-ci.com/danielgrijalva/overworld.svg?branch=master)](https://travis-ci.com/danielgrijalva/overworld) [![codecov](https://codecov.io/gh/danielgrijalva/overworld/branch/master/graph/badge.svg)](https://codecov.io/gh/danielgrijalva/overworld) [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors) [![Netlify Status](https://api.netlify.com/api/v1/badges/33b0b37b-b9ac-4077-9cd3-731e470a948a/deploy-status)](https://overworld.netlify.com/)
 
 
 * [About](#about)
@@ -38,7 +38,7 @@ For a detailed guide of Overworld's development, take a look at the [documentati
 
 ## Features
 
-> #### [Demo](https://raw.githubusercontent.com/danielgrijalva/overworld/master/media/demo.gif)  
+> #### [Demo](https://raw.githubusercontent.com/danielgrijalva/overworld/master/media/demo.gif) | [Log feature](https://user-images.githubusercontent.com/11547406/60747500-7ae10e80-9f3a-11e9-83c2-cad2dfe0f870.gif)
   
 So far you can do the following:
 * Create an account
@@ -48,16 +48,15 @@ So far you can do the following:
 * Rate a game on a scale of 1 to 10
 * Add a game to your played games
 * Add a game to your backlog and/or wish list
-* Like a game  
+* Like a game
+* Add antries to your gaming journal
 * View your profile
 * Edit basic profile info
 * Follow other users
   
-![landing](/media/landing.png)
+Try it now, join the [testing environment](https://overworld.netlify.com)! 🌎✨  
   
-## Acknowledgements
-
-Data from [`IGDB`](https://api.igdb.com). Icon by [`Freepik`](https://www.freepik.com/).
+![landing](/media/landing.png)
 
 ## Contributors
 
@@ -70,3 +69,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+## Acknowledgements
+
+Data from [`IGDB`](https://api.igdb.com). Icon by [`Freepik`](https://www.freepik.com/).
