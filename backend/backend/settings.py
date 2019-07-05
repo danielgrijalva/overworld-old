@@ -34,7 +34,7 @@ ALLOWED_HOSTS = ['.netlify.com', 'localhost', '127.0.0.1']
 
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
-    'overworld.netlify.com',
+    'https://overworld.netlify.com/',
 )
 
 # Application definition
