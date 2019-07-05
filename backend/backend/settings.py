@@ -30,7 +30,7 @@ SECRET_KEY = 'mp=7%x4y3*b2*ehgc!*xslh*c9$$edf6bqdr6m9xx35=fb_zx%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.netlify.com', 'localhost', '127.0.0.1']
 
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
