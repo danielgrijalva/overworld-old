@@ -154,6 +154,6 @@ IGDB_URL = 'https://api-v3.igdb.com/{endpoint}/'
 
 # Django Heroku
 
-if not DEBUG:
+if '/app' in os.environ['HOME']:
     import django_heroku
     django_heroku.settings(locals())
