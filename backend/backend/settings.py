@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import django_heroku
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -155,4 +154,6 @@ IGDB_URL = 'https://api-v3.igdb.com/{endpoint}/'
 
 # Django Heroku
 
-django_heroku.settings(locals())
+if not DEBUG:
+    import django_heroku
+    django_heroku.settings(locals())
