@@ -3,3 +3,4 @@ export const FOLLOW = "FOLLOW";
 export const UNFOLLOW = "UNFOLLOW";
 export const EDIT_PROFILE_SUBMIT = "EDIT_PROFILE_SUBMIT";
 export const EDIT_PROFILE_SUCCESS = "EDIT_PROFILE_SUCCESS";
+export const LOAD_JOURNAL = "LOAD_JOURNAL";

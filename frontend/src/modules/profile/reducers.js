@@ -2,12 +2,14 @@ import {
   LOAD_PROFILE,
   FOLLOW,
   UNFOLLOW,
-  EDIT_PROFILE_SUCCESS
+  EDIT_PROFILE_SUCCESS,
+  LOAD_JOURNAL
 } from "./actionTypes";
 
 const initialState = {
   isLoading: true,
-  profile: {}
+  profile: {},
+  journal: []
 };
 
 export default function(state = initialState, action) {
@@ -33,6 +35,11 @@ export default function(state = initialState, action) {
         ...state,
         profile: action.payload,
         isLoading: false
+      };
+    case LOAD_JOURNAL:
+      return {
+        ...state,
+        journal: action.payload
       };
     default:
       return state;
