@@ -19,6 +19,7 @@ load_dotenv()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+HEROKU = '/app' in os.environ['HOME']
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -27,12 +28,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'mp=7%x4y3*b2*ehgc!*xslh*c9$$edf6bqdr6m9xx35=fb_zx%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG')
 
-ALLOWED_HOSTS = []
+if HEROKU:
+    ALLOWED_HOSTS = ['.netlify.com']
+else:
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
+    'https://overworld.netlify.com',
 )
 
 # Application definition
@@ -119,9 +124,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 # User authentication
 
 AUTH_USER_MODEL = 'users.CustomUser'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
@@ -142,7 +149,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
 # IGDB
 
 IGDB_KEY = os.getenv('IGDB_KEY')
 IGDB_URL = 'https://api-v3.igdb.com/{endpoint}/'
+
+
+# Django Heroku
+
+if HEROKU:
+    import django_heroku
+    django_heroku.settings(locals())
