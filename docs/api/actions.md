@@ -353,3 +353,202 @@ Successfully retrieved rating.
 {% endapi-method-spec %}
 {% endapi-method %}
 
+{% api-method method="post" host="http://localhost:8000" path="/api/actions/journal/" %}
+{% api-method-summary %}
+Add to Journal
+{% endapi-method-summary %}
+
+{% api-method-description %}
+**Add an entry to the gaming journal.**  
+  
+The Journal is where users can log all the games they finished as they finish them by specifying the date, along with a review or a rating.   
+  
+For example, suppose you just beat the game _God of War_ and now you're done with it. Now, you want to save this event for the future, so you go to the game's page on Overworld, click on "Log or review", maybe you write a review or rate it, and click on "Save".
+{% endapi-method-description %}
+
+{% api-method-spec %}
+{% api-method-request %}
+{% api-method-headers %}
+{% api-method-parameter name="Authorization" type="string" required=true %}
+Auth token
+{% endapi-method-parameter %}
+{% endapi-method-headers %}
+
+{% api-method-body-parameters %}
+{% api-method-parameter name="id" type="string" required=true %}
+Game ID from IGDB
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="name" type="string" required=true %}
+Full name of the game
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="slug" type="string" required=true %}
+Slugified name of the game
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="date" type="string" required=true %}
+The day the user finished the game \(YYYY-MM-DD\)
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="review" type="string" required=false %}
+Any thoughts the user had about the game
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="spoilers" type="boolean" required=false %}
+Whether the review contains spoilers or not
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="liked" type="boolean" required=false %}
+Whether the user liked the game or not
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="rating" type="number" required=false %}
+Rating value from 1 to 10
+{% endapi-method-parameter %}
+{% endapi-method-body-parameters %}
+{% endapi-method-request %}
+
+{% api-method-response %}
+{% api-method-response-example httpCode=200 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```javascript
+{
+    "id": 1,
+    "game": {
+        "igdb": 2155,
+        "name": "Dark Souls",
+        "slug": "dark-souls"
+    },
+    "date": "2019-07-01",
+    "review": "cool game",
+    "spoilers": false,
+    "liked": true,
+    "rating": 9,
+    "user": 1
+}
+```
+{% endapi-method-response-example %}
+{% endapi-method-response %}
+{% endapi-method-spec %}
+{% endapi-method %}
+
+{% api-method method="get" host="http://localhost:8000" path="/api/actions/journal/" %}
+{% api-method-summary %}
+Get Journal
+{% endapi-method-summary %}
+
+{% api-method-description %}
+**Retrieve a user's gaming journal.**  
+  
+The Journal is where users can log all the games they finished as they finish them by specifying the date, along with a review or a rating.
+{% endapi-method-description %}
+
+{% api-method-spec %}
+{% api-method-request %}
+{% api-method-query-parameters %}
+{% api-method-parameter name="username" type="string" required=true %}
+Requested user's username.
+{% endapi-method-parameter %}
+{% endapi-method-query-parameters %}
+{% endapi-method-request %}
+
+{% api-method-response %}
+{% api-method-response-example httpCode=200 %}
+{% api-method-response-example-description %}
+
+{% endapi-method-response-example-description %}
+
+```javascript
+[
+    {
+        "year": 2019,
+        "months": [
+            {
+                "month": 7,
+                "entries": [
+                    {
+                        "id": 2,
+                        "game": {
+                            "igdb": 431,
+                            "name": "Uncharted: Drake's Fortune",
+                            "slug": "uncharted-drake-s-fortune"
+                        },
+                        "date": "2019-07-03",
+                        "review": "",
+                        "spoilers": false,
+                        "liked": false,
+                        "rating": 6,
+                        "user": 1
+                    },
+                    {
+                        "id": 1,
+                        "game": {
+                            "igdb": 2155,
+                            "name": "Dark Souls",
+                            "slug": "dark-souls"
+                        },
+                        "date": "2019-07-01",
+                        "review": "cool game",
+                        "spoilers": false,
+                        "liked": true,
+                        "rating": 9,
+                        "user": 1
+                    }
+                ]
+            },
+            {
+                "month": 4,
+                "entries": [
+                    {
+                        "id": 4,
+                        "game": {
+                            "igdb": 76882,
+                            "name": "Sekiro: Shadows Die Twice",
+                            "slug": "sekiro-shadows-die-twice"
+                        },
+                        "date": "2019-04-26",
+                        "review": "",
+                        "spoilers": false,
+                        "liked": true,
+                        "rating": 8,
+                        "user": 1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "year": 2018,
+        "months": [
+            {
+                "month": 5,
+                "entries": [
+                    {
+                        "id": 3,
+                        "game": {
+                            "igdb": 23248,
+                            "name": "Frostpunk",
+                            "slug": "frostpunk"
+                        },
+                        "date": "2018-05-25",
+                        "review": "",
+                        "spoilers": false,
+                        "liked": true,
+                        "rating": 10,
+                        "user": 1
+                    }
+                ]
+            }
+        ]
+    }
+]
+```
+{% endapi-method-response-example %}
+{% endapi-method-response %}
+{% endapi-method-spec %}
+{% endapi-method %}
+

@@ -42,7 +42,7 @@ JWT token of the user
 {% endapi-method-spec %}
 {% endapi-method %}
 
-{% api-method method="get" host="http://localhost:8000" path="/api/users/:username" %}
+{% api-method method="get" host="http://localhost:8000" path="/api/users/profile/:username" %}
 {% api-method-summary %}
 Profile
 {% endapi-method-summary %}

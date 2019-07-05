@@ -11,7 +11,7 @@ From the `backend` folder:
 ```text
 python manage.py test
 
->>> Ran 19 tests in 2.51s
+>>> Ran 34 tests in 3.51s
 ```
 
 ### Coverage

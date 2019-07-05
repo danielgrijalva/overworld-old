@@ -26,7 +26,7 @@ Head over to the [contribution guidelines](getting-started/contributing.md) for 
 
 ### Features
 
-> #### [Demo](https://raw.githubusercontent.com/danielgrijalva/overworld/master/media/demo.gif)
+> #### [Demo](https://raw.githubusercontent.com/danielgrijalva/overworld/master/media/demo.gif) \| [Log feature](https://user-images.githubusercontent.com/11547406/60747500-7ae10e80-9f3a-11e9-83c2-cad2dfe0f870.gif)
 
 So far you can do the following:
 
@@ -37,10 +37,13 @@ So far you can do the following:
 * Rate a game on a scale of 1 to 10
 * Add a game to your played games
 * Add a game to your backlog and/or wish list
+* Add entries to your gaming journal
 * Like a game 
 * View your profile
 * Edit basic profile info
 * Follow other users
+
+Try it now, join our [testing environment](https://overworld.netlify.com)! 🌎✨ 
 
 ![](.gitbook/assets/landing-4%20%281%29.png)
 
