@@ -33,7 +33,7 @@ DEBUG = os.getenv('DEBUG')
 if HEROKU:
     ALLOWED_HOSTS = ['.netlify.com']
 else:
-    ALLOWED_HOSTS['localhost', '127.0.0.1']
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
