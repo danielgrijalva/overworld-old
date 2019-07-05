@@ -141,9 +141,12 @@ class ActionsTests(APITestCase):
             'liked': True,
             'rating': 8
         }
-        expected = {
-            2019: {
-                6: [
+        expected = [{
+            'year': 2019,
+            'months': [
+                {
+                    'month': 6,
+                    'entries': [
                     {
                         'id': 1,
                         'game': {
@@ -158,9 +161,10 @@ class ActionsTests(APITestCase):
                         'rating': 8,
                         'user': 1
                     }
-                ]
-            }
-        }
+                    ]
+                }
+            ]
+        }]
         response = self.client.post(url, data, format='json')
         response = self.client.get(url,{'username': 'testing'} ,format='json')
 
