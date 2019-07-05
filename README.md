@@ -54,7 +54,7 @@ So far you can do the following:
 * Edit basic profile info
 * Follow other users
   
-Try it now, join the [testing environment](overworld.netlify.com)! 🌎✨  
+Try it now, join the [testing environment](https://overworld.netlify.com)! 🌎✨  
   
 ![landing](/media/landing.png)
 
