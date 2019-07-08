@@ -7,6 +7,7 @@ class CustomUser(AbstractUser):
     bio = models.CharField(max_length=255, null=True)
     twitter = models.CharField(max_length=15, null=True)
     location = models.CharField(max_length=50, null=True)
+    gravatar = models.CharField(max_length=255, null=True)
     following = models.ManyToManyField('self', symmetrical=False, related_name='fing')
     followers = models.ManyToManyField('self', symmetrical=False, related_name='fers')
     played = models.ManyToManyField(Game, related_name='played')
