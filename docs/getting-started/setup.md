@@ -29,7 +29,7 @@ cp .env.default .env
 
 * Now, set up the backend:
 
-```bash
+```text
 cd backend/
 pip install -r requirements.txt
 python manage.py migrate
@@ -38,8 +38,16 @@ python manage.py runserver
 
 * Set up the frontend:
 
-```bash
+    1. Create the `.env` file:
+
+```text
 cd frontend/
+cp .env.default .env
+```
+
+    2. Install the dependencies:
+
+```text
 npm ci
 ```
 
@@ -53,7 +61,7 @@ This will build the project dependencies based off of the `package-lock.json`.
 
 After the build completes:
 
-```bash
+```text
 npm start
 ```
 
