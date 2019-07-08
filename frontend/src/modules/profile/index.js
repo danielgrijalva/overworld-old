@@ -22,7 +22,7 @@ class Profile extends Component {
   }
 
   render() {
-    const { username, bio, location, twitter, me } = this.props.profile;
+    const { username, gravatar, bio, location, twitter, me } = this.props.profile;
     if (!this.props.isLoading) {
       return (
         <React.Fragment>
@@ -32,7 +32,7 @@ class Profile extends Component {
                 <Grid.Row>
                   <Grid.Column mobile={2}>
                     <Image
-                      src="https://react.semantic-ui.com/images/wireframe/square-image.png"
+                      src={gravatar}
                       circular
                       className="profile-avatar"
                       size="tiny"
