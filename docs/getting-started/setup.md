@@ -14,7 +14,7 @@ A few things to consider:
 * For user authentication, we use [`django-rest-knox`](https://github.com/James1345/django-rest-knox).
 
 {% hint style="info" %}
-Overworld needs Python 3.7+ to run.
+Overworld needs Python 3.6+ to run.
 {% endhint %}
 
 ## Installation
