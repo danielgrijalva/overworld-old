@@ -5,7 +5,7 @@ import "./styles.css";
 
 class Stats extends React.Component {
   render() {
-    const { played, backlog, followers, following } = this.props;
+    const { played, backlog, wishlist, followers, following } = this.props;
     return (
       <React.Fragment>
         <Statistic size="tiny">
@@ -17,8 +17,8 @@ class Stats extends React.Component {
           <Statistic.Label>Backlog</Statistic.Label>
         </Statistic>
         <Statistic size="tiny">
-          <Statistic.Value>0</Statistic.Value>
-          <Statistic.Label>Lists</Statistic.Label>
+          <Statistic.Value>{wishlist.length}</Statistic.Value>
+          <Statistic.Label>Wishlist</Statistic.Label>
         </Statistic>
         <Statistic size="tiny">
           <Statistic.Value>{followers.length}</Statistic.Value>

@@ -92,6 +92,7 @@ class Profile extends Component {
                     <Stats
                       played={this.props.profile.played}
                       backlog={this.props.profile.backlog}
+                      wishlist={this.props.profile.wishlist}
                       followers={this.props.profile.followers}
                       following={this.props.profile.following}
                     />
