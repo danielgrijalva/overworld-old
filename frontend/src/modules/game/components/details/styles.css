@@ -4,7 +4,7 @@
   background: #14181c !important;
 }
 
-.tabs a {
+.tabs > .menu > a {
   font-family: "Segoe UI", sans-serif;
   font-size: 14px;
   letter-spacing: 1px;
@@ -12,11 +12,11 @@
   color: #00e054 !important;
 }
 
-.tabs a:hover {
+.tabs > .menu > a:hover {
   border-bottom: 2px solid #00e054 !important;
 }
 
-.tabs a.active {
+.tabs > .menu > a.active {
   color: #fff !important;
   font-weight: 400 !important;
   border-bottom: 2px solid #fff !important;

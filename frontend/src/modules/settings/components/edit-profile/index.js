@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Button, Form, Grid } from "semantic-ui-react";
+import { Button, Form, Grid, Image } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { loadProfile, editProfile } from "../../../profile/actions";
+import {
+  loadProfile,
+  editProfile,
+  refreshAvatar
+} from "../../../profile/actions";
 import "./styles.css";
 
 class EditProfile extends Component {
@@ -39,9 +43,14 @@ class EditProfile extends Component {
     this.props.editProfile(this.state);
   };
 
+  refreshAvatar = () => {
+    this.props.refreshAvatar(this.props.auth.user.username);
+    window.location.reload()
+  };
+
   render() {
     const { email, username, location, twitter, bio } = this.state;
-
+    const { gravatar } = this.props.profile;
     return (
       <Grid>
         <Grid.Row>
@@ -100,7 +109,32 @@ class EditProfile extends Component {
             </Form>
           </Grid.Column>
           <Grid.Column width={8}>
-            <p>Edit favorite games here</p>
+            <Grid>
+              <Grid.Row>
+                <Grid.Column mobile={4}>
+                  <Image
+                    src={gravatar}
+                    circular
+                    className="profile-avatar"
+                    size="tiny"
+                  />
+                </Grid.Column>
+                <Grid.Column verticalAlign="middle" computer={7} mobile={5}>
+                  <Form onSubmit={this.refreshAvatar}>
+                    <Form.Field>
+                      <label>Avatar</label>
+                      We use a <a href="https://en.gravatar.com/">
+                        Gravatar
+                      </a>{" "}
+                      that matches the email address on your account.
+                    </Form.Field>
+                    <Button floated="right" fluid type="submit">
+                      Refresh Avatar
+                    </Button>
+                  </Form>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
           </Grid.Column>
         </Grid.Row>
       </Grid>
@@ -113,7 +147,8 @@ EditProfile.propTypes = {
   profile: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   loadProfile: PropTypes.func.isRequired,
-  editProfile: PropTypes.func.isRequired
+  editProfile: PropTypes.func.isRequired,
+  refreshAvatar: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -124,5 +159,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { loadProfile, editProfile }
+  { loadProfile, editProfile, refreshAvatar }
 )(EditProfile);

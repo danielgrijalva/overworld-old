@@ -4,7 +4,8 @@ import {
   FOLLOW,
   UNFOLLOW,
   EDIT_PROFILE_SUCCESS,
-  LOAD_JOURNAL
+  LOAD_JOURNAL,
+  REFRESH_AVATAR
 } from "./actionTypes";
 import { tokenConfig } from "../app/actions";
 
@@ -85,6 +86,26 @@ export const loadJournal = username => dispatch => {
     .then(res => {
       dispatch({
         type: LOAD_JOURNAL,
+        payload: res.data
+      });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+export const refreshAvatar = username => (dispatch, getState) => {
+  axios
+    .post(
+      `/api/users/profile/${username}`,
+      {
+        refreshAvatar: true
+      },
+      tokenConfig(getState)
+    )
+    .then(res => {
+      dispatch({
+        type: REFRESH_AVATAR,
         payload: res.data
       });
     })

@@ -161,7 +161,17 @@ class ProfileTests(APITestCase):
         self.assertEqual(response.json()['location'], 'The Moon')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    def test_refresh_gravatar(self):
+        data = {
+            'refreshAvatar': True
+        }
+        gravatar = ('https://secure.gravatar.com/avatar/5fd672f491c7081f0ecdd'
+        '5990a318b31?size=120&default=retro')
+        response = self.client.post(self.url, data)
 
+        self.assertEqual(response.json()['gravatar'], gravatar)
+        
+        
 class FollowTests(APITestCase):
     def setUp(self):
         friend_data = {

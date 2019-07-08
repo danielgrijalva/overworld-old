@@ -3,6 +3,7 @@ from rest_framework import generics, permissions, status
 from rest_framework. response import Response
 from rest_framework.exceptions import PermissionDenied
 from knox.models import AuthToken
+from libgravatar import Gravatar
 from .models import CustomUser
 from .serializers import UserSerializer, ProfileSerializer, RegisterSerializer, LoginSerializer
 
@@ -82,6 +83,10 @@ class ProfileView(generics.GenericAPIView):
     def post(self, request, *args, **kwargs):
         """Method for updating your profile."""
         me = get_object_or_404(CustomUser, id=request.user.id)
+
+        if 'refreshAvatar' in request.data:
+            g = Gravatar(me.email)
+            me.gravatar = g.get_image(size=120, default='retro', use_ssl=True)
 
         for key in request.data:
           setattr(me, key, request.data[key])

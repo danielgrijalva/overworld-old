@@ -12,6 +12,7 @@ django-rest-knox==4.1.0
 djangorestframework==3.9.4
 gunicorn==19.9.0
 idna==2.8
+libgravatar==0.2.3
 psycopg2==2.8.3
 pycparser==2.19
 python-dotenv==0.10.3
