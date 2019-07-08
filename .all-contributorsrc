@@ -30,6 +30,15 @@
         "bug",
         "code"
       ]
+    },
+    {
+      "login": "drsherlock",
+      "name": "Zain Ul Haq",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/10760508?v=4",
+      "profile": "https://github.com/drsherlock",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
