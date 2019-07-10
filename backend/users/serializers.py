@@ -37,6 +37,7 @@ class ProfileSerializer(serializers.ModelSerializer):
             'liked',
             'backlog',
             'wishlist',
+            'favorites',
             'following',
             'followers',
         )
