@@ -8,7 +8,7 @@ const Popular = ({ isLoading, popular }) => (
       <React.Fragment>
         {popular.map((p, i) => {
           return (
-            <div key={p.id} className="cover-wrapper">
+            <a href={`/games/${p.slug}`} key={p.id} className="cover-wrapper">
               <img
                 className="cover"
                 alt={p.name}
@@ -19,7 +19,7 @@ const Popular = ({ isLoading, popular }) => (
               <div key={i} className="cover-overlay">
                 <strong>{p.name}</strong>
               </div>
-            </div>
+            </a>
           );
         })}
       </React.Fragment>
