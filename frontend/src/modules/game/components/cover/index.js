@@ -1,34 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { LazyImage } from "react-lazy-images";
+import { Link } from "react-router-dom";
+import { Image } from "semantic-ui-react";
 import "./styles.css";
 
-const Cover = ({ imageId }) => {
-  const thumb = `https://images.igdb.com/igdb/image/upload/t_cover_small/${imageId}.jpg`;
-  const actual = `https://images.igdb.com/igdb/image/upload/t_cover_big/${imageId}.jpg`;
+const Cover = ({ imageId, slug, className }) => {
+  const cover = `https://images.igdb.com/igdb/image/upload/t_cover_big/${imageId}.jpg`;
   return (
-    <section className="game-cover">
-      <LazyImage
-        src={actual}
-        alt="Game cover"
-        placeholder={({ imageProps, ref }) => (
-          <img
-            alt="Loading cover..."
-            {...imageProps}
-            ref={ref}
-            className="ui rounded image cover placeholder"
-            src={thumb}
-          />
-        )}
-        actual={({ imageProps }) => (
-          <img
-            alt="Game cover"
-            className="ui rounded image cover"
-            {...imageProps}
-          />
-        )}
-      />
-    </section>
+    <div className={className}>
+      <Link to={`/games/${slug}`}>
+        <Image src={cover} rounded fluid className="cover" />
+      </Link>
+    </div>
   );
 };
 
