@@ -16,6 +16,10 @@ class Navbar extends Component {
     this.props.history.push(`/${name}`);
   };
 
+  handleResultSelect = result => {
+    this.props.history.push(`/games/${result.slug}`, result.slug);
+  };
+
   render() {
     const { activeItem } = this.state;
 
@@ -101,7 +105,7 @@ class Navbar extends Component {
             <LogIn loginText={"Sign In"} />
           )}
           <Menu.Item fitted={"vertically"}>
-            <GameSearch />
+            <GameSearch onResultSelect={this.handleResultSelect} />
           </Menu.Item>
         </Menu.Menu>
       </Menu>
