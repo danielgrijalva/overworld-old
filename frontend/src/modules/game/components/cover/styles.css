@@ -1,9 +1,55 @@
 .cover {
   box-shadow: 0 0 0 1px rgb(48, 56, 64);
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
 }
 
-.cover.placeholder {
-  /* width: 250px;
-  height: 600px; */
-  image-rendering: pixelated;
+.choose-favorite-wrapper {
+  width: 100px;
+  height: 142.2px;
+
+}
+
+.cover-in-log {
+  width: 218px;
+  height: 308.83px;
+}
+
+.small-cover-wrapper {
+  width: 135px;
+  height: 192px;
+  text-align: center;
+  display: inline-block;
+  margin: 0 1.25rem 0 0;
+}
+
+.small-cover-wrapper:last-child{
+  margin: 0;
+}
+
+.cover-wrapper {
+  width: 245px;
+  height: 347.05px;
+}
+
+@media only screen and (max-width: 767px) and (min-width: 320px) {
+  .cover-wrapper {
+    width: 165px;
+    height: 233.75px;
+  } 
+}
+
+@media only screen and (max-width: 991px) and (min-width: 768px) {
+  .cover-wrapper {
+    width: 165px;
+    height: 233.75px;
+  }  
+}
+
+@media only screen and (max-width: 1199px) and (min-width: 992px) {
+  .cover-wrapper {
+    width: 212px;
+    height: 300.3px;
+  }  
 }

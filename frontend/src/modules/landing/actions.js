@@ -14,7 +14,7 @@ export const getPopular = () => dispatch => {
 };
 
 export const getBackdrop = gameId => dispatch => {
-  axios.get(`/api/games/backdrop/${gameId}`).then(res => {
+  axios.get(`/api/games/backdrop/${gameId}/`).then(res => {
     const data = res.data[0];
     const backdrop = {
       name: data.name,
@@ -22,7 +22,6 @@ export const getBackdrop = gameId => dispatch => {
       imageId: data.screenshots[1].image_id,
       slug: data.slug
     };
-
     dispatch({
       type: GET_BACKDROP,
       payload: backdrop

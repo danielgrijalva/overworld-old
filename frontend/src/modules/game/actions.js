@@ -33,14 +33,15 @@ export const loadActions = gameId => (dispatch, getState) => {
     });
 };
 
-export const logGame = (gameId, name, slug) => (dispatch, getState) => {
+export const logGame = (gameId, name, slug, coverId) => (dispatch, getState) => {
   axios
     .post(
       "/api/actions/log/",
       {
         igdb: gameId,
         name: name,
-        slug: slug
+        slug: slug,
+        cover_id: coverId
       },
       tokenConfig(getState)
     )
@@ -61,14 +62,15 @@ export const logGame = (gameId, name, slug) => (dispatch, getState) => {
     });
 };
 
-export const likeGame = (gameId, name, slug) => (dispatch, getState) => {
+export const likeGame = (gameId, name, slug, coverId) => (dispatch, getState) => {
   axios
     .post(
       "/api/actions/like/",
       {
         igdb: gameId,
         name: name,
-        slug: slug
+        slug: slug,
+        cover_id: coverId
       },
       tokenConfig(getState)
     )
@@ -83,14 +85,15 @@ export const likeGame = (gameId, name, slug) => (dispatch, getState) => {
     });
 };
 
-export const addToBacklog = (gameId, name, slug) => (dispatch, getState) => {
+export const addToBacklog = (gameId, name, slug, coverId) => (dispatch, getState) => {
   axios
     .post(
       "/api/actions/backlog/",
       {
         igdb: gameId,
         name: name,
-        slug: slug
+        slug: slug,
+        cover_id: coverId
       },
       tokenConfig(getState)
     )
@@ -105,14 +108,15 @@ export const addToBacklog = (gameId, name, slug) => (dispatch, getState) => {
     });
 };
 
-export const addToWishlist = (gameId, name, slug) => (dispatch, getState) => {
+export const addToWishlist = (gameId, name, slug, coverId) => (dispatch, getState) => {
   axios
     .post(
       "/api/actions/wishlist/",
       {
         igdb: gameId,
         name: name,
-        slug: slug
+        slug: slug,
+        cover_id: coverId
       },
       tokenConfig(getState)
     )
@@ -155,6 +159,7 @@ export const rate = (game, rating) => (dispatch, getState) => {
         igdb: game.id,
         name: game.name,
         slug: game.slug,
+        cover_id: game.cover.image_id,
         rating: rating
       },
       tokenConfig(getState)

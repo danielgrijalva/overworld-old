@@ -6,7 +6,6 @@ import { Container, Grid } from "semantic-ui-react";
 import { Backdrop, Footer } from "../app/components/";
 import {
   Details,
-  QuickStats,
   Cover,
   CoverLoader,
   Actions,
@@ -78,8 +77,11 @@ class Game extends React.Component {
                   {/* Game cover/poster */}
                   {!isLoading ? (
                     <React.Fragment>
-                      <Cover imageId={game.cover.image_id} />
-                      <QuickStats />
+                      <Cover
+                        imageId={game.cover.image_id}
+                        slug={game.slug}
+                        className="cover-wrapper"
+                      />
                     </React.Fragment>
                   ) : (
                     <CoverLoader />

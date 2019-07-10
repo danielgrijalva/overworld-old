@@ -10,6 +10,7 @@ import {
   Image,
   Button
 } from "semantic-ui-react";
+import { Cover } from "../game/components";
 import { Footer } from "../app/components/";
 import { loadProfile, follow, unfollow } from "./actions";
 import { ProfileNav, Stats, Journal } from "./components";
@@ -22,7 +23,15 @@ class Profile extends Component {
   }
 
   render() {
-    const { username, gravatar, bio, location, twitter, me } = this.props.profile;
+    const {
+      username,
+      gravatar,
+      bio,
+      location,
+      twitter,
+      favorites,
+      me
+    } = this.props.profile;
     if (!this.props.isLoading) {
       return (
         <React.Fragment>
@@ -110,14 +119,18 @@ class Profile extends Component {
                 <Grid.Row>
                   <Grid.Column width={11}>
                     <Divider horizontal>Favorites</Divider>
-                    <div className="games-wrapper">
-                      <React.Fragment>
-                        {[...Array(5)].map((_, i) => (
-                          <div key={i} className="placeholder" />
-                        ))}
-                      </React.Fragment>
+                    <div class="games-wrapper">
+                      {favorites.map((g, i) => {
+                        return (
+                          <Cover
+                            key={i}
+                            imageId={g.cover_id}
+                            slug={g.slug}
+                            className="small-cover-wrapper"
+                          />
+                        );
+                      })}
                     </div>
-
                     <Divider horizontal>Recent Activity</Divider>
                     <div className="recent-wrapper">
                       <React.Fragment>
@@ -129,11 +142,7 @@ class Profile extends Component {
                     <Divider horizontal>Reviews</Divider>
                     <div className="review">
                       <div className="review-placeholder" />
-                      <h1>Dark Souls</h1>
-                      <Icon.Group size="tiny">
-                        <Icon size="tiny" color="yellow" name="star" />
-                        <i>10</i>
-                      </Icon.Group>
+                      <h1>A review</h1>
                       <p>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                         sed do eiusmod tempor incididunt ut labore et dolore
