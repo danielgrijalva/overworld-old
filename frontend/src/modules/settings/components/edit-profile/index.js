@@ -7,6 +7,7 @@ import {
   editProfile,
   refreshAvatar
 } from "../../../profile/actions";
+import { ChooseFavorites } from "../../components";
 import "./styles.css";
 
 class EditProfile extends Component {
@@ -45,12 +46,12 @@ class EditProfile extends Component {
 
   refreshAvatar = () => {
     this.props.refreshAvatar(this.props.auth.user.username);
-    window.location.reload()
+    window.location.reload();
   };
 
   render() {
     const { email, username, location, twitter, bio } = this.state;
-    const { gravatar } = this.props.profile;
+    const { gravatar, favorites } = this.props.profile;
     return (
       <Grid>
         <Grid.Row>
@@ -109,6 +110,7 @@ class EditProfile extends Component {
             </Form>
           </Grid.Column>
           <Grid.Column width={8}>
+            <ChooseFavorites favorites={favorites}/>
             <Grid>
               <Grid.Row>
                 <Grid.Column mobile={4}>
