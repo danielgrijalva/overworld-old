@@ -39,6 +39,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "BenNF",
+      "name": "Benjamin Nichols-Farquhar",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/9667215?v=4",
+      "profile": "http://bennf.github.io",
+      "contributions": [
+        "bug",
+        "maintenance"
+      ]
     }
   ],
   "contributorsPerLine": 7,
