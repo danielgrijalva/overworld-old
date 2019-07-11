@@ -88,7 +88,8 @@ class LogModal extends React.Component {
           id: this.props.game.id,
           name: this.props.game.name,
           slug: this.props.game.slug,
-          coverId: this.props.game.cover.image_id
+          coverId: this.props.game.cover.image_id,
+          backdropId: this.props.game.screenshots[1].image_id
         },
         date: date.format("YYYY-MM-DD"),
         liked,
