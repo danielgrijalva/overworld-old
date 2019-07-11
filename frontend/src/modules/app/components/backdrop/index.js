@@ -10,7 +10,7 @@ export default class Backdrop extends React.Component {
     const thumb = `https://images.igdb.com/igdb/image/upload/t_cover_small/${imageId}.jpg`;
     const actual = `https://images.igdb.com/igdb/image/upload/t_1080p/${imageId}.jpg`;
     return (
-      <Container>
+      <Container className="backdrop">
         <div className="backdrop-container">
           <div className="backdrop-wrapper">
             <LazyImage
