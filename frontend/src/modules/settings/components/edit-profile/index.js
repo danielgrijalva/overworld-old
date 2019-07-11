@@ -110,7 +110,7 @@ class EditProfile extends Component {
             </Form>
           </Grid.Column>
           <Grid.Column width={8}>
-            <ChooseFavorites favorites={favorites}/>
+            <ChooseFavorites favorites={favorites} />
             <Grid>
               <Grid.Row>
                 <Grid.Column mobile={4}>
