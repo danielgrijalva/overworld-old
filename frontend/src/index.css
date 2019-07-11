@@ -115,3 +115,15 @@ textarea:focus {
 .ui.form .required.field > .checkbox:after {
   content: "";
 }
+
+a.button,
+.ui.button:not(.circular):not(.positive) {
+  background: #345;
+  color: #9ab;
+}
+
+a.button:hover,
+.ui.button:hover:not(.circular):not(.positive) {
+  background: #234;
+  color: #9ab !important;
+}
