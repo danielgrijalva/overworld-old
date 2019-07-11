@@ -38,7 +38,7 @@ For a detailed guide of Overworld's development, take a look at the [documentati
 
 ## Features
 
-> #### [Demo](https://raw.githubusercontent.com/danielgrijalva/overworld/master/media/demo.gif) | [Log feature](https://user-images.githubusercontent.com/11547406/60747500-7ae10e80-9f3a-11e9-83c2-cad2dfe0f870.gif)
+> #### [Demo](/media/demo.gif) | [Log feature](/media/log.gif) | [Favorite Games](/media/favorites.gif)
   
 So far you can do the following:
 * Create an account
