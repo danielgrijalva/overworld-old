@@ -5,4 +5,4 @@ from .models import Game
 class GameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Game
-        fields = ('igdb', 'name', 'slug', 'cover_id')
+        fields = ('igdb', 'name', 'slug', 'cover_id', 'backdrop_id')
