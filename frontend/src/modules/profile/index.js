@@ -13,7 +13,7 @@ import {
 import { Cover } from "../game/components";
 import { Footer } from "../app/components/";
 import { loadProfile, follow, unfollow } from "./actions";
-import { ProfileNav, Stats, Journal } from "./components";
+import { ProfileNav, Stats, Journal, Ratings } from "./components";
 import "./styles.css";
 
 class Profile extends Component {
@@ -160,7 +160,10 @@ class Profile extends Component {
                       </React.Fragment>
                     )}
                     <Journal username={username} />
-                    <Divider horizontal>Ratings</Divider>
+                    <React.Fragment>
+                      <Divider horizontal>Ratings </Divider>
+                      <Ratings />
+                    </React.Fragment>
                     <Divider horizontal>Backlog</Divider>
                     <Divider horizontal>Wish List</Divider>
                     <Divider horizontal>Lists</Divider>

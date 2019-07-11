@@ -94,6 +94,9 @@ export const loadJournal = username => dispatch => {
     });
 };
 
+export const loadRatings = username => dispatch => {
+  //TODO get user ratings
+}
 export const refreshAvatar = username => (dispatch, getState) => {
   axios
     .post(
