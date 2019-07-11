@@ -33,7 +33,7 @@ export const loadActions = gameId => (dispatch, getState) => {
     });
 };
 
-export const logGame = (gameId, name, slug, coverId) => (dispatch, getState) => {
+export const logGame = (gameId, name, slug, coverId, backdropId) => (dispatch, getState) => {
   axios
     .post(
       "/api/actions/log/",
@@ -41,7 +41,8 @@ export const logGame = (gameId, name, slug, coverId) => (dispatch, getState) => 
         igdb: gameId,
         name: name,
         slug: slug,
-        cover_id: coverId
+        cover_id: coverId,
+        backdrop_id: backdropId
       },
       tokenConfig(getState)
     )
@@ -62,7 +63,7 @@ export const logGame = (gameId, name, slug, coverId) => (dispatch, getState) => 
     });
 };
 
-export const likeGame = (gameId, name, slug, coverId) => (dispatch, getState) => {
+export const likeGame = (gameId, name, slug, coverId, backdropId) => (dispatch, getState) => {
   axios
     .post(
       "/api/actions/like/",
@@ -70,7 +71,8 @@ export const likeGame = (gameId, name, slug, coverId) => (dispatch, getState) =>
         igdb: gameId,
         name: name,
         slug: slug,
-        cover_id: coverId
+        cover_id: coverId,
+        backdrop_id: backdropId
       },
       tokenConfig(getState)
     )
@@ -85,7 +87,7 @@ export const likeGame = (gameId, name, slug, coverId) => (dispatch, getState) =>
     });
 };
 
-export const addToBacklog = (gameId, name, slug, coverId) => (dispatch, getState) => {
+export const addToBacklog = (gameId, name, slug, coverId, backdropId) => (dispatch, getState) => {
   axios
     .post(
       "/api/actions/backlog/",
@@ -93,7 +95,8 @@ export const addToBacklog = (gameId, name, slug, coverId) => (dispatch, getState
         igdb: gameId,
         name: name,
         slug: slug,
-        cover_id: coverId
+        cover_id: coverId,
+        backdrop_id: backdropId
       },
       tokenConfig(getState)
     )
@@ -108,7 +111,7 @@ export const addToBacklog = (gameId, name, slug, coverId) => (dispatch, getState
     });
 };
 
-export const addToWishlist = (gameId, name, slug, coverId) => (dispatch, getState) => {
+export const addToWishlist = (gameId, name, slug, coverId, backdropId) => (dispatch, getState) => {
   axios
     .post(
       "/api/actions/wishlist/",
@@ -116,7 +119,8 @@ export const addToWishlist = (gameId, name, slug, coverId) => (dispatch, getStat
         igdb: gameId,
         name: name,
         slug: slug,
-        cover_id: coverId
+        cover_id: coverId,
+        backdrop_id: backdropId
       },
       tokenConfig(getState)
     )
@@ -160,6 +164,7 @@ export const rate = (game, rating) => (dispatch, getState) => {
         name: game.name,
         slug: game.slug,
         cover_id: game.cover.image_id,
+        backdrop_id: game.screenshots[1].image_id,
         rating: rating
       },
       tokenConfig(getState)

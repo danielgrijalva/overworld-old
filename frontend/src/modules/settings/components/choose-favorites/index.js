@@ -13,8 +13,8 @@ class ChooseFavorites extends React.Component {
     };
   }
 
-  handleRemove = game => {
-    this.props.removeFavorite(game);
+  handleRemove = gameId => {
+    this.props.removeFavorite(gameId);
   };
 
   handleResultSelect = result => {
@@ -48,7 +48,7 @@ class ChooseFavorites extends React.Component {
 
                   <div key={i} className="favorite-overlay">
                     <Button
-                      onClick={() => this.handleRemove(g)}
+                      onClick={() => this.handleRemove(g.igdb)}
                       circular
                       className="remove-favorite"
                       icon="remove"
@@ -78,7 +78,10 @@ class ChooseFavorites extends React.Component {
                     <Modal.Description>
                       <Header>Add a favorite game</Header>
                     </Modal.Description>
-                    <GameSearch onResultSelect={this.handleResultSelect} />
+                    <GameSearch
+                      autoFocus
+                      onResultSelect={this.handleResultSelect}
+                    />
                   </Modal.Content>
                 </Modal>
               </div>

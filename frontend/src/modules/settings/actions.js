@@ -11,7 +11,8 @@ export const addFavorite = game => (dispatch, getState) => {
         igdb: game.id,
         name: game.name,
         slug: game.slug,
-        cover_id: game.cover.image_id
+        cover_id: game.cover.image_id,
+        backdrop_id: game.screenshots[1].image_id
       },
       tokenConfig(getState)
     )
@@ -27,15 +28,12 @@ export const addFavorite = game => (dispatch, getState) => {
     });
 };
 
-export const removeFavorite = game => (dispatch, getState) => {
+export const removeFavorite = gameId => (dispatch, getState) => {
   axios
     .post(
       "/api/actions/favorites/remove/",
       {
-        igdb: game.igdb,
-        name: game.name,
-        slug: game.slug,
-        cover_id: game.cover_id
+        igdb: gameId
       },
       tokenConfig(getState)
     )
