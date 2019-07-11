@@ -46,7 +46,7 @@ cp .env.default .env
 ```
 
     2. Install the dependencies:
-
+#### Note: Due to a bug in Semantic UI on Windows 10 node version 10.10.0 or lower is required to install it. 
 ```text
 npm ci
 ```
