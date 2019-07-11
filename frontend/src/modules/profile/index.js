@@ -70,7 +70,13 @@ class Profile extends Component {
                       )}
                     </div>
                     {me && me.username === username && (
-                      <Button compact size="tiny" as="a" href="/settings">
+                      <Button
+                        className="default"
+                        compact
+                        size="tiny"
+                        as="a"
+                        href="/settings"
+                      >
                         Edit Profile
                       </Button>
                     )}
