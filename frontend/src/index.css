@@ -118,7 +118,7 @@ textarea:focus {
 
 a.button,
 .ui.button:not(.circular):not(.positive) {
-  background: #345;
+  background: #24303c;
   color: #9ab;
 }
 
