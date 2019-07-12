@@ -11,7 +11,8 @@ import {
 const initialState = {
   isLoading: true,
   profile: {},
-  journal: []
+  journal: [],
+  ratings: []
 };
 
 export default function(state = initialState, action) {

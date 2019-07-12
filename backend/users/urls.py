@@ -10,5 +10,6 @@ urlpatterns = [
     path('user/', views.UserView.as_view(), name='get-user'),
     path('profile/<str:username>', views.ProfileView.as_view(), name='get-profile'),
     path('follow/', views.FollowView.as_view(), name='follow'),
-    path('unfollow/', views.UnfollowView.as_view(), name='unfollow')
+    path('unfollow/', views.UnfollowView.as_view(), name='unfollow'),
+    path('ratings/', views.RatingsView.as_view(), name='get-ratings')
 ]

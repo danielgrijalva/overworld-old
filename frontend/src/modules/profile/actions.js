@@ -95,20 +95,23 @@ export const loadJournal = username => dispatch => {
     });
 };
 
-export const loadRatings = username => dispatch => {
-  //TODO get user ratings,{}
-  axios.get("/api/users/reviews/", {
-    params: {
-      username: username,
-    }
-  }).then(res => {
-    dispatch({
-      type: LOAD_RATINGS,
-      payload: res.data
+export const loadRatings = user_id => dispatch => {
+  axios
+    .get("/api/users/ratings/", {
+      params: {
+        user_id: user_id
+      }
     })
-  })
-}
-
+    .then(res => {
+      dispatch({
+        type: LOAD_RATINGS,
+        payload: res.data
+      });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
 
 export const refreshAvatar = username => (dispatch, getState) => {
   axios

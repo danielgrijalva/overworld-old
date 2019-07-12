@@ -1,53 +1,54 @@
 import React from "react";
 import "./styles.css"
+import {loadRatings} from '../../actions'
+import { connect } from "react-redux";
 
 class Ratings extends React.Component {
-  constructor(props) {
-    super(props);
-    const { username=null, height = 100, width = 250 } = props;
+
+  constructor(props){
+    super(props)
     this.state = {
-      username: username,
-      data: null,
-      height: height,
-      width: width
-    };
+      total: 0,
+      average: 0
+    }
   }
 
-  componentDidMount(){
-    const data = [1,0,0,0,3,0,7,7, 3,5]; //hard coded test data
-    const total = data.reduce((acum, current) => acum+current,0)
+  componentWillMount(){
+    this.props.loadRatings(this.props.user_id)
 
-    let average = 0
-    data.forEach((val,index) => {
-        average += (val * (index+1))/total //scale to 10 point scale
+  }
+
+  processRatings = (data) => {
+    const chartData = Array(10).fill(0)
+    const total_length = data.length
+    let total_val = 0
+    data.forEach(val => {
+      chartData[val.rating -1] +=1
+      total_val += val.rating
     })
-    average = Math.round(average*100) / 100 //round too two decimal places
 
-    this.setState( {
-      ...this.state,
-      data: data,
-      total: total,
-      average: average
-    });
+    const average = Math.round((total_val/total_length)*100)/100 //round to two decimal
+    
+    return {chartData: chartData, average: average, total: total_length}
   }
 
   render() {
-    console.log(this.state)
-    if (this.state.data) {
+    if (this.props.ratings.length > 0) {
+      const {chartData, average, total} = this.processRatings(this.props.ratings)
       return (
         <div className="rating">
         <span className="star">★</span>
         <div
           className="rating-chart"
-          style={{ height: this.state.height, width: this.state.width }}
+          style={{ height: this.props.height, width: this.props.width }}
         >
-          {this.state.data.map((val,i) => {
-            const percent = val / this.state.total;
-            return( <div className ="rating-bar" key={"rating" +i} style={{height: percent * (this.state.height-10) + 10, width: (this.state.width/this.state.data.length)}}></div>)
+          {chartData.map((val,i) => {
+            const percent = total ? val / total : 0; //calculate percent if total is non zero 
+            return( <div className ="rating-bar" key={"rating" +i} style={{height: percent * (this.props.height-10) + 10, width: (this.props.width/chartData.length)}}></div>)
           })}
         </div>
         <div className="rating-label">
-            <span className="rating-average">{this.state.average}</span><br/>
+            <span className="rating-average">{average}</span><br/>
             <span className="star">★★★★★</span>
         </div>
         </div>
@@ -60,4 +61,12 @@ class Ratings extends React.Component {
   }
 }
 
-export default Ratings;
+const mapStateToProps = state => ({
+  ratings: state.profile.ratings
+});
+
+export default connect(
+  mapStateToProps,
+  { loadRatings }
+)(Ratings);
+
