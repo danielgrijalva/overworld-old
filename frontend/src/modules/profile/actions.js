@@ -5,7 +5,8 @@ import {
   UNFOLLOW,
   EDIT_PROFILE_SUCCESS,
   LOAD_JOURNAL,
-  REFRESH_AVATAR
+  REFRESH_AVATAR,
+  LOAD_RATINGS
 } from "./actionTypes";
 import { tokenConfig } from "../app/actions";
 
@@ -95,8 +96,20 @@ export const loadJournal = username => dispatch => {
 };
 
 export const loadRatings = username => dispatch => {
-  //TODO get user ratings
+  //TODO get user ratings,{}
+  axios.get("/api/users/reviews/", {
+    params: {
+      username: username,
+    }
+  }).then(res => {
+    dispatch({
+      type: LOAD_RATINGS,
+      payload: res.data
+    })
+  })
 }
+
+
 export const refreshAvatar = username => (dispatch, getState) => {
   axios
     .post(
