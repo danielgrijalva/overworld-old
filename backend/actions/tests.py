@@ -17,7 +17,8 @@ class ActionsTests(APITestCase):
                         igdb=1074,
                         name='Super Mario 64',
                         slug='super-mario-64',
-                        cover_id='iwe8jlk21lmf'
+                        cover_id='iwe8jlk21lmf',
+                        backdrop_id='i43a2ksd901R43'
                     )
         self.client.force_authenticate(user=self.user)
 
@@ -36,7 +37,8 @@ class ActionsTests(APITestCase):
                 'igdb': self.game.igdb,
                 'name': self.game.name,
                 'slug': self.game.slug,
-                'cover_id': self.game.cover_id
+                'cover_id': self.game.cover_id,
+                'backdrop_id': self.game.backdrop_id
             }
 
         log = self.client.post(url, data, format='json')
@@ -52,7 +54,8 @@ class ActionsTests(APITestCase):
                 'igdb': self.game.igdb,
                 'name': self.game.name,
                 'slug': self.game.slug,
-                'cover_id': self.game.cover_id
+                'cover_id': self.game.cover_id,
+                'backdrop_id': self.game.backdrop_id
             }
 
         like = self.client.post(url, data, format='json')
@@ -68,7 +71,8 @@ class ActionsTests(APITestCase):
                 'igdb': self.game.igdb,
                 'name': self.game.name,
                 'slug': self.game.slug,
-                'cover_id': self.game.cover_id
+                'cover_id': self.game.cover_id,
+                'backdrop_id': self.game.backdrop_id
             }
 
         add = self.client.post(url, data, format='json')
@@ -84,7 +88,8 @@ class ActionsTests(APITestCase):
                 'igdb': self.game.igdb,
                 'name': self.game.name,
                 'slug': self.game.slug,
-                'cover_id': self.game.cover_id
+                'cover_id': self.game.cover_id,
+                'backdrop_id': self.game.backdrop_id
             }
 
         add = self.client.post(url, data, format='json')
@@ -109,6 +114,7 @@ class ActionsTests(APITestCase):
             'name': self.game.name,
             'slug': self.game.slug,
             'cover_id': self.game.cover_id,
+            'backdrop_id': self.game.backdrop_id,
             'rating': 10
         }
         response = self.client.post(url, data, format='json')
@@ -123,6 +129,7 @@ class ActionsTests(APITestCase):
             'name': self.game.name,
             'slug': self.game.slug,
             'cover_id': self.game.cover_id,
+            'backdrop_id': self.game.backdrop_id,
             'rating': -1
         }
         big_rating = negative_rating
@@ -142,7 +149,8 @@ class ActionsTests(APITestCase):
                 'id': self.game.igdb,
                 'name': self.game.name,
                 'slug': self.game.slug,
-                'coverId': self.game.cover_id
+                'coverId': self.game.cover_id,
+                'backdropId': self.game.backdrop_id
             },
             'date': '2019-06-28',
             'review': 'cool game',
@@ -162,7 +170,8 @@ class ActionsTests(APITestCase):
                 'id': self.game.igdb,
                 'name': self.game.name,
                 'slug': self.game.slug,
-                'coverId': self.game.cover_id
+                'coverId': self.game.cover_id,
+                'backdropId': self.game.backdrop_id
             },
             'date': '2019-06-28',
             'review': 'cool game',
@@ -182,7 +191,8 @@ class ActionsTests(APITestCase):
                             'igdb': 1074,
                             'name': 'Super Mario 64',
                             'slug': 'super-mario-64',
-                            'cover_id': 'iwe8jlk21lmf'
+                            'cover_id': 'iwe8jlk21lmf',
+                            'backdrop_id': 'i43a2ksd901R43'
                         },
                         'date': '2019-06-28',
                         'review': 'cool game',
@@ -207,7 +217,8 @@ class ActionsTests(APITestCase):
                 'igdb': self.game.igdb,
                 'name': self.game.name,
                 'slug': self.game.slug,
-                'cover_id': self.game.cover_id
+                'cover_id': self.game.cover_id,
+                'backdrop_id': self.game.backdrop_id
             }
 
         response = self.client.post(url, data, format='json')
@@ -219,7 +230,8 @@ class ActionsTests(APITestCase):
                 'igdb': self.game.igdb,
                 'name': self.game.name,
                 'slug': self.game.slug,
-                'cover_id': self.game.cover_id
+                'cover_id': self.game.cover_id,
+                'backdrop_id': self.game.backdrop_id
             }
         # add the game first
         self.client.post(reverse('add-favorite'), data, format='json')
@@ -233,7 +245,8 @@ class ActionsTests(APITestCase):
                 'igdb': self.game.igdb,
                 'name': self.game.name,
                 'slug': self.game.slug,
-                'cover_id': self.game.cover_id
+                'cover_id': self.game.cover_id,
+                'backdrop_id': self.game.backdrop_id
             }
         # add the game first
         self.client.post(reverse('add-favorite'), data, format='json')

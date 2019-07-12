@@ -30,6 +30,10 @@
   color: #fff !important;
 }
 
+.profile-info {
+  margin: .5rem 0;
+}
+
 .ui.horizontal.divider {
   font-size: 0.85rem;
   font-family: "Raleway", sans-serif !important;
@@ -90,6 +94,42 @@
   width: 100% !important;
 }
 
+.ui.blue.button.following {
+  width: 6rem;
+}
+
+.ui.blue.button.following::after {
+  content: "Following";
+  letter-spacing: 0.02rem;
+  text-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
+}
+
+.ui.blue.button.following:hover::after {
+  content: "Unfollow";
+}
+
+.ui.blue.button.following:hover {
+  background-color: #f2711c;
+}
+
+.review .review-placeholder {
+  float: left;
+}
+
+.review h1 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.ui.message.no-content {
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+  background: #0c0e10;
+  color: #9ab;
+  border: none;
+  box-shadow: 0 0 0 1px rgb(48, 56, 64);
+}
+
 @media only screen and (max-width: 767px) and (min-width: 320px) {
   .placeholder {
     width: 82px;
@@ -124,35 +164,4 @@
     width: 108px;
     height: 153.6px;
   }
-}
-
-.ui.blue.button.following {
-  width: 6rem;
-}
-
-.ui.blue.button.following::after {
-  content: "Following";
-  letter-spacing: 0.02rem;
-  text-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
-}
-
-.ui.blue.button.following:hover::after {
-  content: "Unfollow";
-}
-
-.ui.blue.button.following:hover {
-  background-color: #f2711c;
-}
-
-.review .review-placeholder {
-  float: left;
-}
-
-.review h1 {
-  font-size: 1.5rem;
-  margin: 0;
-}
-
-a.button:hover {
-  color: initial !important;
 }

@@ -272,7 +272,8 @@ class Rate(generics.GenericAPIView):
             'igdb': request.data['igdb'],
             'name': request.data['name'],
             'slug': request.data['slug'],
-            'cover_id': request.data['cover_id']
+            'cover_id': request.data['cover_id'],
+            'backdrop_id': request.data['backdrop_id']
         }
         game, _ = Game.objects.get_or_create(**data)
         user = CustomUser.objects.get(id=request.user.id)
@@ -310,7 +311,8 @@ class JournalView(generics.GenericAPIView):
             'igdb': request.data['game']['id'],
             'name': request.data['game']['name'],
             'slug': request.data['game']['slug'],
-            'cover_id': request.data['game']['coverId']
+            'cover_id': request.data['game']['coverId'],
+            'backdrop_id': request.data['game']['backdropId']
         }
         game, _ = Game.objects.get_or_create(**data)
         user = CustomUser.objects.get(id=request.user.id)
@@ -392,8 +394,8 @@ class RemoveFavoriteGame(generics.GenericAPIView):
     permission_classes = (permissions.IsAuthenticated,)
 
     def post(self, request, *args, **kwargs):
-        user = CustomUser.objects.get(id=request.user.id)                
-        game, _ = Game.objects.get_or_create(**request.data)
+        user = CustomUser.objects.get(id=request.user.id)
+        game = Game.objects.get(igdb=request.data.get('igdb'))
         user.favorites.remove(game)
 
         return Response({})

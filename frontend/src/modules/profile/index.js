@@ -8,10 +8,11 @@ import {
   Grid,
   Divider,
   Image,
-  Button
+  Button,
+  Message
 } from "semantic-ui-react";
 import { Cover } from "../game/components";
-import { Footer } from "../app/components/";
+import { Backdrop, Footer } from "../app/components/";
 import { loadProfile, follow, unfollow } from "./actions";
 import { ProfileNav, Stats, Journal } from "./components";
 import "./styles.css";
@@ -36,9 +37,12 @@ class Profile extends Component {
       return (
         <React.Fragment>
           <Container>
+            {favorites.length > 0 && (
+              <Backdrop imageId={favorites[0].backdrop_id} />
+            )}
             <Segment basic className="profile-header">
               <Grid>
-                <Grid.Row>
+                <Grid.Row className="">
                   <Grid.Column mobile={2}>
                     <Image
                       src={gravatar}
@@ -49,7 +53,7 @@ class Profile extends Component {
                   </Grid.Column>
                   <Grid.Column verticalAlign="middle" computer={7} mobile={5}>
                     <h2>{username}</h2>
-                    <p>
+                    <div className="profile-info">
                       {location && (
                         <span>
                           <Icon name="map marker alternate" />
@@ -64,9 +68,15 @@ class Profile extends Component {
                           </a>
                         </span>
                       )}
-                    </p>
+                    </div>
                     {me && me.username === username && (
-                      <Button compact size="tiny" as="a" href="/settings">
+                      <Button
+                        className="default"
+                        compact
+                        size="tiny"
+                        as="a"
+                        href="/settings"
+                      >
                         Edit Profile
                       </Button>
                     )}
@@ -119,18 +129,24 @@ class Profile extends Component {
                 <Grid.Row>
                   <Grid.Column width={11}>
                     <Divider horizontal>Favorites</Divider>
-                    <div class="games-wrapper">
-                      {favorites.map((g, i) => {
-                        return (
-                          <Cover
-                            key={i}
-                            imageId={g.cover_id}
-                            slug={g.slug}
-                            className="small-cover-wrapper"
-                          />
-                        );
-                      })}
-                    </div>
+                    {favorites.length > 0 ? (
+                      <div class="games-wrapper">
+                        {favorites.map((g, i) => {
+                          return (
+                            <Cover
+                              key={i}
+                              imageId={g.cover_id}
+                              slug={g.slug}
+                              className="small-cover-wrapper"
+                            />
+                          );
+                        })}
+                      </div>
+                    ) : (
+                      <Message className="no-content">
+                        {username} has no favorite games yet.
+                      </Message>
+                    )}
                     <Divider horizontal>Recent Activity</Divider>
                     <div className="recent-wrapper">
                       <React.Fragment>

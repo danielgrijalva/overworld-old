@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, List, Icon } from "semantic-ui-react";
+import { Container, List } from "semantic-ui-react";
 import "./styles.css";
 
 const Footer = () => (
