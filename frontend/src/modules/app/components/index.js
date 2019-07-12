@@ -5,3 +5,5 @@ export { default as LogIn } from "./login";
 export { default as Navbar } from "./navbar";
 export { default as Register } from "./register";
 export { default as GameSearch } from "./search";
+export { default as ListPreview } from "./list-preview";
+export { default as Cover } from "./cover";

@@ -17,7 +17,7 @@ import {
   Grid,
   Rating
 } from "semantic-ui-react";
-import Cover from "../cover";
+import { Cover } from "../../../app/components/";
 import Moment from "react-moment";
 import "./styles.css";
 
@@ -122,6 +122,7 @@ class LogModal extends React.Component {
                 <Grid.Column width={6}>
                   <Cover
                     className="cover-in-log"
+                    size="big"
                     imageId={this.props.game.cover.image_id}
                     slug={this.props.game.slug}
                   />
