@@ -11,8 +11,7 @@ import {
   Button,
   Message
 } from "semantic-ui-react";
-import { Cover } from "../game/components";
-import { Backdrop, Footer } from "../app/components/";
+import { Backdrop, Footer, Cover, ListPreview } from "../app/components/";
 import { loadProfile, follow, unfollow } from "./actions";
 import { ProfileNav, Stats, Journal } from "./components";
 import "./styles.css";
@@ -31,6 +30,8 @@ class Profile extends Component {
       location,
       twitter,
       favorites,
+      backlog,
+      wishlist,
       me
     } = this.props.profile;
     if (!this.props.isLoading) {
@@ -130,7 +131,7 @@ class Profile extends Component {
                   <Grid.Column width={11}>
                     <Divider horizontal>Favorites</Divider>
                     {favorites.length > 0 ? (
-                      <div class="games-wrapper">
+                      <div className="games-wrapper">
                         {favorites.map((g, i) => {
                           return (
                             <Cover
@@ -138,6 +139,7 @@ class Profile extends Component {
                               imageId={g.cover_id}
                               slug={g.slug}
                               className="small-cover-wrapper"
+                              size="big"
                             />
                           );
                         })}
@@ -176,9 +178,19 @@ class Profile extends Component {
                       </React.Fragment>
                     )}
                     <Journal username={username} />
+                    {backlog.length > 0 && (
+                      <React.Fragment>
+                        <Divider horizontal>Backlog</Divider>
+                        <ListPreview games={backlog} />
+                      </React.Fragment>
+                    )}
+                    {wishlist.length > 0 && (
+                      <React.Fragment>
+                        <Divider horizontal>Wish List</Divider>
+                        <ListPreview games={wishlist} />
+                      </React.Fragment>
+                    )}
                     <Divider horizontal>Ratings</Divider>
-                    <Divider horizontal>Backlog</Divider>
-                    <Divider horizontal>Wish List</Divider>
                     <Divider horizontal>Lists</Divider>
                   </Grid.Column>
                 </Grid.Row>
