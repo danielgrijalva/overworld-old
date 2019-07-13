@@ -6,6 +6,7 @@ description: Endpoints related to events between users and games.
 
 {% api-method method="get" host="http://localhost:8000" path="/api/actions/" %}
 {% api-method-summary %}
+  
 Get Actions
 {% endapi-method-summary %}
 
@@ -77,15 +78,15 @@ ID of the game from IGDB.
 Name of the game.
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="name" type="string" required=true %}
+{% api-method-parameter name="slug" type="string" required=true %}
 Slugified name of the game.
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="name" type="string" required=true %}
+{% api-method-parameter name="cover\_id" type="string" required=true %}
 Image ID of the game's cover, from IGDB.
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="name" type="string" required=true %}
+{% api-method-parameter name="backdrop\_id" type="string" required=true %}
 Image ID for the main screenshot of the game.
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
@@ -136,15 +137,15 @@ ID of the game from IGDB.
 Name of the game.
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="name" type="string" required=true %}
+{% api-method-parameter name="slug" type="string" required=true %}
 Slugified name of the game.
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="name" type="string" required=true %}
+{% api-method-parameter name="cover\_id" type="string" required=true %}
 Image ID of the game's cover, from IGDB.
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="name" type="string" required=true %}
+{% api-method-parameter name="backdrop\_Id" type="string" required=true %}
 Image ID for the main screenshot of the game.
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
@@ -195,15 +196,15 @@ ID of the game from IGDB.
 Name of the game
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="name" type="string" required=true %}
+{% api-method-parameter name="slug" type="string" required=true %}
 Slugified name of the game.
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="name" type="string" required=true %}
+{% api-method-parameter name="cover\_id" type="string" required=true %}
 Image ID of the game's cover, from IGDB.
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="name" type="string" required=true %}
+{% api-method-parameter name="backdrop\_id" type="string" required=true %}
 Image ID for the main screenshot of the game.
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
@@ -254,15 +255,15 @@ ID of the game from IGDB.
 Name of the game.
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="name" type="string" required=true %}
+{% api-method-parameter name="slug" type="string" required=true %}
 Slugified name of the game.
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="name" type="string" required=true %}
+{% api-method-parameter name="cover\_id" type="string" required=true %}
 Image ID of the game's cover, from IGDB.
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="name" type="string" required=true %}
+{% api-method-parameter name="backdrop\_id" type="string" required=true %}
 Image ID for the main screenshot of the game.
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
@@ -317,15 +318,15 @@ Rating value from 1 to 10.
 Name of the game.
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="name" type="string" required=true %}
+{% api-method-parameter name="slug" type="string" required=true %}
 Slugified name of the game.
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="name" type="string" required=true %}
+{% api-method-parameter name="cover\_id" type="string" required=true %}
 Image ID of the game's cover, from IGDB.
 {% endapi-method-parameter %}
 
-{% api-method-parameter name="name" type="string" required=true %}
+{% api-method-parameter name="backdrop\_Id" type="string" required=true %}
 Image ID for the main screenshot of the game.
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
