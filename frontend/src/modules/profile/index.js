@@ -146,7 +146,14 @@ class Profile extends Component {
                       </div>
                     ) : (
                       <Message className="no-content">
-                        {username} has no favorite games yet.
+                        {me && me.username === username ? (
+                          <p>
+                            Remember to add your{" "}
+                            <a href="/settings">favorite games!</a>
+                          </p>
+                        ) : (
+                          <p>{username} has no favorite games yet.</p>
+                        )}
                       </Message>
                     )}
                     <Divider horizontal>Recent Activity</Divider>
@@ -177,18 +184,36 @@ class Profile extends Component {
                         <p className="profile-bio">{bio}</p>
                       </React.Fragment>
                     )}
-                    <Journal username={username} />
-                    {backlog.length > 0 && (
-                      <React.Fragment>
-                        <Divider horizontal>Backlog</Divider>
-                        <ListPreview games={backlog} />
-                      </React.Fragment>
+                    <Journal me={me} username={username} />
+                    <Divider horizontal>Backlog</Divider>
+                    {backlog.length > 0 ? (
+                      <ListPreview games={backlog} />
+                    ) : (
+                      <Message className="no-content">
+                        {me && me.username === username ? (
+                          <p>
+                            Keep track of what you want to play. <br />
+                            <a href="/games">Add some games now?</a>
+                          </p>
+                        ) : (
+                          <p>Wow, {username} has an empty backlog!</p>
+                        )}
+                      </Message>
                     )}
-                    {wishlist.length > 0 && (
-                      <React.Fragment>
-                        <Divider horizontal>Wish List</Divider>
-                        <ListPreview games={wishlist} />
-                      </React.Fragment>
+                    <Divider horizontal>Wish List</Divider>
+                    {wishlist.length > 0 ? (
+                      <ListPreview games={wishlist} />
+                    ) : (
+                      <Message className="no-content">
+                        {me && me.username === username ? (
+                          <p>
+                            The games you wanna buy go here. <br />
+                            <a href="/games">Browse or search games?</a>
+                          </p>
+                        ) : (
+                          <p>Nothing here yet!</p>
+                        )}
+                      </Message>
                     )}
                     <Divider horizontal>Ratings</Divider>
                     <Divider horizontal>Lists</Divider>
