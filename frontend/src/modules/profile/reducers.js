@@ -3,7 +3,8 @@ import {
   FOLLOW,
   UNFOLLOW,
   EDIT_PROFILE_SUCCESS,
-  LOAD_JOURNAL
+  LOAD_JOURNAL,
+  LOAD_FAVORITES
 } from "./actionTypes";
 
 const initialState = {
@@ -40,6 +41,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         journal: action.payload
+      };
+    case LOAD_FAVORITES:
+      return {
+        ...state,
+        profile: { ...state.profile, favorites: action.payload }
       };
     default:
       return state;

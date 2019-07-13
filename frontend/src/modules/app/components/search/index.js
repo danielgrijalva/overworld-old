@@ -18,7 +18,7 @@ class GameSearch extends Component {
 
   handleResultSelect = (e, { result }) => {
     this.setState({ results: [], isLoading: false, value: "" });
-    this.props.history.push(`/games/${result.slug}`, result.slug);
+    this.props.onResultSelect(result);
   };
 
   search = debounce(value => {
@@ -47,6 +47,7 @@ class GameSearch extends Component {
 
   render() {
     const { results, isLoading, value } = this.state;
+    const { autoFocus } = this.props;
     return (
       <Grid>
         <Grid.Column width={6}>
@@ -58,6 +59,7 @@ class GameSearch extends Component {
             resultRenderer={ResultRenderer}
             value={value}
             noResultsMessage={"No games found"}
+            autoFocus={autoFocus}
           />
         </Grid.Column>
       </Grid>

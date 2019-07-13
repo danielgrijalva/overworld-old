@@ -8,9 +8,10 @@ import {
   Grid,
   Divider,
   Image,
-  Button
+  Button,
+  Message
 } from "semantic-ui-react";
-import { Footer } from "../app/components/";
+import { Backdrop, Footer, Cover, ListPreview } from "../app/components/";
 import { loadProfile, follow, unfollow } from "./actions";
 import { ProfileNav, Stats, Journal } from "./components";
 import "./styles.css";
@@ -22,14 +23,27 @@ class Profile extends Component {
   }
 
   render() {
-    const { username, gravatar, bio, location, twitter, me } = this.props.profile;
+    const {
+      username,
+      gravatar,
+      bio,
+      location,
+      twitter,
+      favorites,
+      backlog,
+      wishlist,
+      me
+    } = this.props.profile;
     if (!this.props.isLoading) {
       return (
         <React.Fragment>
           <Container>
+            {favorites.length > 0 && (
+              <Backdrop imageId={favorites[0].backdrop_id} />
+            )}
             <Segment basic className="profile-header">
               <Grid>
-                <Grid.Row>
+                <Grid.Row className="">
                   <Grid.Column mobile={2}>
                     <Image
                       src={gravatar}
@@ -40,7 +54,7 @@ class Profile extends Component {
                   </Grid.Column>
                   <Grid.Column verticalAlign="middle" computer={7} mobile={5}>
                     <h2>{username}</h2>
-                    <p>
+                    <div className="profile-info">
                       {location && (
                         <span>
                           <Icon name="map marker alternate" />
@@ -55,9 +69,15 @@ class Profile extends Component {
                           </a>
                         </span>
                       )}
-                    </p>
+                    </div>
                     {me && me.username === username && (
-                      <Button compact size="tiny" as="a" href="/settings">
+                      <Button
+                        className="default"
+                        compact
+                        size="tiny"
+                        as="a"
+                        href="/settings"
+                      >
                         Edit Profile
                       </Button>
                     )}
@@ -110,14 +130,25 @@ class Profile extends Component {
                 <Grid.Row>
                   <Grid.Column width={11}>
                     <Divider horizontal>Favorites</Divider>
-                    <div className="games-wrapper">
-                      <React.Fragment>
-                        {[...Array(5)].map((_, i) => (
-                          <div key={i} className="placeholder" />
-                        ))}
-                      </React.Fragment>
-                    </div>
-
+                    {favorites.length > 0 ? (
+                      <div className="games-wrapper">
+                        {favorites.map((g, i) => {
+                          return (
+                            <Cover
+                              key={i}
+                              imageId={g.cover_id}
+                              slug={g.slug}
+                              className="small-cover-wrapper"
+                              size="big"
+                            />
+                          );
+                        })}
+                      </div>
+                    ) : (
+                      <Message className="no-content">
+                        {username} has no favorite games yet.
+                      </Message>
+                    )}
                     <Divider horizontal>Recent Activity</Divider>
                     <div className="recent-wrapper">
                       <React.Fragment>
@@ -129,11 +160,7 @@ class Profile extends Component {
                     <Divider horizontal>Reviews</Divider>
                     <div className="review">
                       <div className="review-placeholder" />
-                      <h1>Dark Souls</h1>
-                      <Icon.Group size="tiny">
-                        <Icon size="tiny" color="yellow" name="star" />
-                        <i>10</i>
-                      </Icon.Group>
+                      <h1>A review</h1>
                       <p>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                         sed do eiusmod tempor incididunt ut labore et dolore
@@ -151,9 +178,19 @@ class Profile extends Component {
                       </React.Fragment>
                     )}
                     <Journal username={username} />
+                    {backlog.length > 0 && (
+                      <React.Fragment>
+                        <Divider horizontal>Backlog</Divider>
+                        <ListPreview games={backlog} />
+                      </React.Fragment>
+                    )}
+                    {wishlist.length > 0 && (
+                      <React.Fragment>
+                        <Divider horizontal>Wish List</Divider>
+                        <ListPreview games={wishlist} />
+                      </React.Fragment>
+                    )}
                     <Divider horizontal>Ratings</Divider>
-                    <Divider horizontal>Backlog</Divider>
-                    <Divider horizontal>Wish List</Divider>
                     <Divider horizontal>Lists</Divider>
                   </Grid.Column>
                 </Grid.Row>

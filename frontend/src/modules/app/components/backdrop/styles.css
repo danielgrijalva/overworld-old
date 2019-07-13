@@ -1,3 +1,7 @@
+.backdrop {
+  padding-bottom: 400px;
+}
+
 .backdrop-container {
   position: absolute;
   z-index: -1;

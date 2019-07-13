@@ -4,6 +4,7 @@ from django.db.models.functions import ExtractMonth, ExtractYear
 from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework.exceptions import NotFound
+from games.serializers import GameSerializer
 from games.models import Game
 from users.models import CustomUser
 from .serializers import RatingSerializer, ActionSerializer, JournalSerializer
@@ -267,10 +268,14 @@ class Rate(generics.GenericAPIView):
         if rating <= 0 or rating > 10:
             return Response({'detail': 'Invalid rating!'}, status.HTTP_400_BAD_REQUEST)
 
-        igdb = request.data['igdb']
-        name = request.data['name']
-        slug = request.data['slug']
-        game, _ = Game.objects.get_or_create(igdb=igdb, name=name, slug=slug)
+        data = {
+            'igdb': request.data['igdb'],
+            'name': request.data['name'],
+            'slug': request.data['slug'],
+            'cover_id': request.data['cover_id'],
+            'backdrop_id': request.data['backdrop_id']
+        }
+        game, _ = Game.objects.get_or_create(**data)
         user = CustomUser.objects.get(id=request.user.id)
 
         r, _ = Ratings.objects.get_or_create(game=game, user=user)
@@ -295,18 +300,21 @@ class JournalView(generics.GenericAPIView):
         have a date, a user and a game. 
 
         Args:
-            game: id of the game
+            game: game object containing game information
             date: the day you finished the game (format YYYY-MM-DD)
             review: a game review (optional)
             spoilers: whether the review contains spoilers or not (optional)
             liked: whether the user liked the game or not (optional)
             rating: the rating value (1-10) (optional)
         """
-        igdb = request.data['game']['id']
-        name = request.data['game']['name']
-        slug = request.data['game']['slug']
-        game, _ = Game.objects.get_or_create(igdb=igdb, name=name, slug=slug)
-
+        data = {
+            'igdb': request.data['game']['id'],
+            'name': request.data['game']['name'],
+            'slug': request.data['game']['slug'],
+            'cover_id': request.data['game']['coverId'],
+            'backdrop_id': request.data['game']['backdropId']
+        }
+        game, _ = Game.objects.get_or_create(**data)
         user = CustomUser.objects.get(id=request.user.id)
         request.data['game'] = game 
 
@@ -359,3 +367,36 @@ class JournalView(generics.GenericAPIView):
             response.append(year)
 
         return Response(response)
+
+
+class FavoriteGames(generics.GenericAPIView):
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get(self, request, *args, **kwargs):
+        user = CustomUser.objects.get(id=request.user.id)                
+        favorites = GameSerializer(user.favorites.all(), many=True)
+        
+        return Response(favorites.data)
+        
+        
+class AddFavoriteGame(generics.GenericAPIView):
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def post(self, request, *args, **kwargs):
+        user = CustomUser.objects.get(id=request.user.id)                
+        game, _ = Game.objects.get_or_create(**request.data)
+        user.favorites.add(game)
+
+        return Response({})
+
+
+class RemoveFavoriteGame(generics.GenericAPIView):
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def post(self, request, *args, **kwargs):
+        user = CustomUser.objects.get(id=request.user.id)
+        game = Game.objects.get(igdb=request.data.get('igdb'))
+        user.favorites.remove(game)
+
+        return Response({})
+        

@@ -9,7 +9,7 @@ const CoverLoader = () => (
     primaryColor="#242b34"
     secondaryColor="#343d4c"
   >
-    <rect x="0" y="0" rx="4" ry="4" width="200" height="240" />
+    <rect x="0" y="0" rx="4" ry="4" width="190" height="265" />
   </ContentLoader>
 );
 

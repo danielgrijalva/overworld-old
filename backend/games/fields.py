@@ -16,8 +16,10 @@ _game_fields = [
 ]
 
 _search_fields = [
+    'cover.image_id',
     'first_release_date',
     'name',
+    'screenshots.image_id',
     'slug',
 ]
 
@@ -25,6 +27,7 @@ _popular_fields = [
     'cover.image_id',
     'name',
     'popularity',
+    'slug',
 ]
 
 _backdrop_fields = [

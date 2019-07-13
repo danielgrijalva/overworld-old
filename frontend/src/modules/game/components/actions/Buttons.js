@@ -17,19 +17,20 @@ class Buttons extends React.Component {
   }
 
   onClick = (e, { value }) => {
-    const { id, name, slug} = this.props.game;
+    const { id, name, slug, cover, screenshots } = this.props.game;
+    const backdropId = screenshots[1].image_id
     switch (value) {
       case "played":
-        this.props.logGame(id, name, slug);
+        this.props.logGame(id, name, slug, cover.image_id, backdropId);
         break;
       case "liked":
-        this.props.likeGame(id, name, slug);
+        this.props.likeGame(id, name, slug, cover.image_id, backdropId);
         break;
       case "backlog":
-        this.props.addToBacklog(id, name, slug);
+        this.props.addToBacklog(id, name, slug, cover.image_id, backdropId);
         break;
       case "wishlist":
-        this.props.addToWishlist(id, name, slug);
+        this.props.addToWishlist(id, name, slug, cover.image_id, backdropId);
         break;
       default:
         break;
