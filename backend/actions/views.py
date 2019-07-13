@@ -60,7 +60,9 @@ class Log(generics.GenericAPIView):
     Args:
         igdb: the ID of the game.
         name: the name of the game.
-
+        slug: slugified name of the game.
+        cover_id: image id from igdb for the game's cover.
+        backdrop_id: image id from igdb for the game's main screnshot.
     Returns:
         response: an ActionSerializer indicating who logged what and the
         boolean value of the action.
@@ -107,6 +109,9 @@ class Like(generics.GenericAPIView):
     Args:
         igdb: the ID of the game.
         name: the name of the game.
+        slug: slugified name of the game.
+        cover_id: image id from igdb for the game's cover.
+        backdrop_id: image id from igdb for the game's main screnshot.
 
     Returns:
         response: an ActionSerializer indicating who liked what and the
@@ -147,6 +152,9 @@ class Backlog(generics.GenericAPIView):
     Args:
         igdb: the ID of the game.
         name: the name of the game.
+        slug: slugified name of the game.
+        cover_id: image id from igdb for the game's cover.
+        backdrop_id: image id from igdb for the game's main screnshot.
 
     Returns:
         response: an ActionSerializer indicating who backlogged what and the
@@ -187,6 +195,9 @@ class Wishlist(generics.GenericAPIView):
     Args:
         igdb: the ID of the game.
         name: the name of the game.
+        slug: slugified name of the game.
+        cover_id: image id from igdb for the game's cover.
+        backdrop_id: image id from igdb for the game's main screnshot.
 
     Returns:
         response: an ActionSerializer indicating who wishlisted what and the
@@ -260,6 +271,10 @@ class Rate(generics.GenericAPIView):
         Args:
             rating: the rating value (1-10)
             igdb: the ID of the game
+            name: name of the game
+            slug: slugified name of the game
+            cover_id: image id from igdb for the game's cover.
+            backdrop_id: image id from igdb for the game's main screnshot.
 
         Returns:
             response: a RatingSerializer indicating the user, game and rating.
@@ -300,7 +315,7 @@ class JournalView(generics.GenericAPIView):
         have a date, a user and a game. 
 
         Args:
-            game: game object containing game information
+            game: game object with igdb id, name, slug, cover_id and backdrop_id
             date: the day you finished the game (format YYYY-MM-DD)
             review: a game review (optional)
             spoilers: whether the review contains spoilers or not (optional)
@@ -370,6 +385,17 @@ class JournalView(generics.GenericAPIView):
 
 
 class FavoriteGames(generics.GenericAPIView):
+    """Endpoint for obtaining a user's favorite games.
+
+    This is called within the /settings section, so users must be
+    authenticated to access with this endpoint.
+
+    Args:
+        user: user object with auth token/user id (you)
+
+    Returns:
+        response: a list of game objects
+    """  
     permission_classes = (permissions.IsAuthenticated,)
 
     def get(self, request, *args, **kwargs):
@@ -380,6 +406,21 @@ class FavoriteGames(generics.GenericAPIView):
         
         
 class AddFavoriteGame(generics.GenericAPIView):
+    """Endpoint for favoriting a game.
+
+    This adds a game to the users `favorites` field, which is a
+    many-to-many relationship. If the game isn't in the database, we create
+    it with the `get_or_create` method.
+
+    Users must be authenticated to interact with this endpoint.
+
+    Args:
+        igdb: the ID of the game.
+        name: the name of the game.
+        slug: slugified name of the game.
+        cover_id: image id from igdb for the game's cover.
+        backdrop_id: image id from igdb for the game's main screnshot.
+    """
     permission_classes = (permissions.IsAuthenticated,)
 
     def post(self, request, *args, **kwargs):
@@ -391,6 +432,16 @@ class AddFavoriteGame(generics.GenericAPIView):
 
 
 class RemoveFavoriteGame(generics.GenericAPIView):
+    """Endpoint for removing a game from favorites.
+
+    This removes a game from the users `favorites` field, which is a
+    many-to-many relationship.
+
+    Users must be authenticated to interact with this endpoint.
+
+    Args:
+        igdb: the ID of the game.
+    """
     permission_classes = (permissions.IsAuthenticated,)
 
     def post(self, request, *args, **kwargs):
