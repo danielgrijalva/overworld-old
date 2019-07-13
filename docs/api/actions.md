@@ -86,6 +86,18 @@ ID of the game from IGDB.
 {% api-method-parameter name="name" type="string" required=true %}
 Name of the game.
 {% endapi-method-parameter %}
+
+{% api-method-parameter name="name" type="string" required=true %}
+Slugified name of the game.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="name" type="string" required=true %}
+Image ID of the game's cover, from IGDB.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="name" type="string" required=true %}
+Image ID for the main screenshot of the game.
+{% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
 {% endapi-method-request %}
 
@@ -136,6 +148,18 @@ ID of the game from IGDB.
 
 {% api-method-parameter name="name" type="string" required=true %}
 Name of the game.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="name" type="string" required=true %}
+Slugified name of the game.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="name" type="string" required=true %}
+Image ID of the game's cover, from IGDB.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="name" type="string" required=true %}
+Image ID for the main screenshot of the game.
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
 {% endapi-method-request %}
@@ -188,6 +212,18 @@ ID of the game from IGDB.
 {% api-method-parameter name="name" type="string" required=true %}
 Name of the game
 {% endapi-method-parameter %}
+
+{% api-method-parameter name="name" type="string" required=true %}
+Slugified name of the game.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="name" type="string" required=true %}
+Image ID of the game's cover, from IGDB.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="name" type="string" required=true %}
+Image ID for the main screenshot of the game.
+{% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
 {% endapi-method-request %}
 
@@ -239,6 +275,18 @@ ID of the game from IGDB.
 {% api-method-parameter name="name" type="string" required=true %}
 Name of the game.
 {% endapi-method-parameter %}
+
+{% api-method-parameter name="name" type="string" required=true %}
+Slugified name of the game.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="name" type="string" required=true %}
+Image ID of the game's cover, from IGDB.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="name" type="string" required=true %}
+Image ID for the main screenshot of the game.
+{% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
 {% endapi-method-request %}
 
@@ -287,6 +335,22 @@ ID of the game from IGDB.
 
 {% api-method-parameter name="rating" type="integer" required=true %}
 Rating value from 1 to 10.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="name" type="string" required=true %}
+Name of the game.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="name" type="string" required=true %}
+Slugified name of the game.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="name" type="string" required=true %}
+Image ID of the game's cover, from IGDB.
+{% endapi-method-parameter %}
+
+{% api-method-parameter name="name" type="string" required=true %}
+Image ID for the main screenshot of the game.
 {% endapi-method-parameter %}
 {% endapi-method-body-parameters %}
 {% endapi-method-request %}
@@ -375,16 +439,8 @@ Auth token
 {% endapi-method-headers %}
 
 {% api-method-body-parameters %}
-{% api-method-parameter name="id" type="string" required=true %}
-Game ID from IGDB
-{% endapi-method-parameter %}
-
-{% api-method-parameter name="name" type="string" required=true %}
-Full name of the game
-{% endapi-method-parameter %}
-
-{% api-method-parameter name="slug" type="string" required=true %}
-Slugified name of the game
+{% api-method-parameter name="game" type="object" required=true %}
+Game object with igdb ID, name, slug, cover_id and backdrop_id.
 {% endapi-method-parameter %}
 
 {% api-method-parameter name="date" type="string" required=true %}
