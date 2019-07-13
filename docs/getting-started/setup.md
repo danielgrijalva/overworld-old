@@ -37,23 +37,24 @@ python manage.py runserver
 ```
 
 * Set up the frontend:
-
-    1. Create the `.env` file:
+  1. Create the `.env` file:
 
 ```text
 cd frontend/
 cp .env.default .env
 ```
 
-    2. Install the dependencies:
-#### Note: Due to a bug in Semantic UI on Windows 10 node version 10.10.0 or lower is required to install it. 
-```text
-npm ci
-```
+1. Install the dependencies:
+
+   **Note: Due to a bug in Semantic UI on Windows 10 node version 10.10.0 or lower is required to install it.**
+
+   ```text
+   npm ci
+   ```
 
 This will build the project dependencies based off of the `package-lock.json`.
 
-[`Semantic UI`](https://react.semantic-ui.com/) has an interactive installer and may prompt you for input in the console. Choose the default options if prompted: 
+[`Semantic UI`](https://react.semantic-ui.com/) has an interactive installer and may prompt you for input in the console. Choose the default options if prompted:
 
 1. Set-up Semantic UI: `Automatic (Use default locations and all components)`
 2. Is this your project folder?: Confirm it is the project folder and choose `Yes`

@@ -126,9 +126,11 @@ Search
 {% endapi-method-summary %}
 
 {% api-method-description %}
-**Search for a game.**Calls `https://api-v3.igdb.com/games`.   
+**Search for a game.**  
   
-The search term must be a string: the name of the game you want to search. The fields shown in the results are defined as `search_fields` in the `fields.py` file.  
+Calls `https://api-v3.igdb.com/games`.   
+  
+The search term must be a string: the name of the game you're searching for. The fields shown in the results are defined as `search_fields` in the `fields.py` file.  
   
 For more details on how to search the IGDB API, read https://api-docs.igdb.com/?javascript\#search-176
 {% endapi-method-description %}
@@ -154,25 +156,37 @@ Search term
         "id": 431,
         "first_release_date": 1195171200,
         "name": "Uncharted: Drake's Fortune",
-        "slug": "uncharted-drake-s-fortune"
+        "slug": "uncharted-drake-s-fortune",
+        "cover": {
+            "image_id": "j31Hty23ap9f"
+        }
     },
     {
         "id": 565,
         "first_release_date": 1246320000,
         "name": "Uncharted 2: Among Thieves",
-        "slug": "uncharted-2-among-thieves"
+        "slug": "uncharted-2-among-thieves",
+        "cover": {
+            "image_id": "pL8ajdmeKm72"
+        }
     },    
     {
         "id": 512,
         "first_release_date": 1319760000,
         "name": "Uncharted 3: Drake's Deception",
-        "slug": "uncharted-3-drake-s-deception"
+        "slug": "uncharted-3-drake-s-deception",
+        "cover": {
+            "image_id": "f6sgahAl0lbM7"
+        }
     },
     {
         "id": 7331,
         "first_release_date": 1462838400,
         "name": "Uncharted 4: A Thief's End",
-        "slug": "uncharted-4-a-thief-s-end"
+        "slug": "uncharted-4-a-thief-s-end",
+        "cover": {
+            "image_id": "loa09djf2mMIa"
+        }
     }
 ]
 ```

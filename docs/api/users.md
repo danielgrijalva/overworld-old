@@ -409,17 +409,17 @@ This removes a user from the current user's `following` field, and removes the c
 
 {% api-method-spec %}
 {% api-method-request %}
-{% api-method-path-parameters %}
-{% api-method-parameter name="Authorization" type="string" required=true %}
-A JWT token. You must be authenticated.
-{% endapi-method-parameter %}
-{% endapi-method-path-parameters %}
-
 {% api-method-headers %}
-{% api-method-parameter name="username" type="string" required=true %}
-The user you want to unfollow.
+{% api-method-parameter name="Authorization" type="string" required=true %}
+The JWT token. You must be authenticated.
 {% endapi-method-parameter %}
 {% endapi-method-headers %}
+
+{% api-method-body-parameters %}
+{% api-method-parameter name="username" type="string" required=true %}
+The user you want to unfollow
+{% endapi-method-parameter %}
+{% endapi-method-body-parameters %}
 {% endapi-method-request %}
 
 {% api-method-response %}
