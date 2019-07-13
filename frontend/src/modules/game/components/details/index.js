@@ -30,6 +30,7 @@ const Details = ({ game }) => {
                         game.involved_companies[0].company.country,
                         "en"
                       )}
+                      {console.log(game)}
                     </Label>
                   </Grid.Column>
                 </Grid.Row>

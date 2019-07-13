@@ -40,6 +40,7 @@ class Game extends React.Component {
     this.loadGame(gameSlug);
   }
 
+  //resets game state
   resetState = gameSlug => {
     this.setState({
       gameSlug: gameSlug,
@@ -48,6 +49,7 @@ class Game extends React.Component {
     });
   };
 
+  //loads the new game
   loadGame = gameSlug => {
     axios.get(`/api/games/${gameSlug}`).then(res => {
       this.setState({
@@ -59,7 +61,7 @@ class Game extends React.Component {
 
   getDeveloperName = companies => {
     var dev = companies.find(c => {
-      return c.developer === true;
+      return c.developer === true || {};
     });
 
     return dev.company.name;
