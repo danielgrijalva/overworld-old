@@ -1,0 +1,36 @@
+.rating-chart {
+    background-color: #14181c;
+    /* border: 2px solid white; */
+    margin: auto;
+    display: flex;
+    
+}
+
+.rating-chart > .rating-bar{
+   background-color: #435566;
+   margin-top: auto;
+   border-top-right-radius: 3px;
+   border-top-left-radius: 3px;
+   border-right: 1px solid #14181c;
+}
+
+.rating-chart > .rating-bar:hover{
+    background-color: #667788;
+    margin-top: auto
+ }
+
+ .rating{
+     display: flex;
+ }
+.rating-average {
+    margin-top: auto;
+}
+
+.rating-label{
+    margin-top: auto;
+
+}
+ .star {
+     color: green;
+     margin-top: auto;
+ }

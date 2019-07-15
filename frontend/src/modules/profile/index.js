@@ -13,7 +13,7 @@ import {
 } from "semantic-ui-react";
 import { Backdrop, Footer, Cover, ListPreview } from "../app/components/";
 import { loadProfile, follow, unfollow } from "./actions";
-import { ProfileNav, Stats, Journal } from "./components";
+import { ProfileNav, Stats, Journal, Ratings } from "./components";
 import "./styles.css";
 
 class Profile extends Component {
@@ -184,6 +184,7 @@ class Profile extends Component {
                         <p className="profile-bio">{bio}</p>
                       </React.Fragment>
                     )}
+                    <Ratings user_id={me.id} height={75} width={250}/>
                     <Journal me={me} username={username} />
                     <Divider horizontal>Backlog</Divider>
                     {backlog.length > 0 ? (

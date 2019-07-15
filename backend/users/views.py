@@ -6,7 +6,22 @@ from knox.models import AuthToken
 from libgravatar import Gravatar
 from .models import CustomUser
 from .serializers import UserSerializer, ProfileSerializer, RegisterSerializer, LoginSerializer
+from actions.serializers import RatingSerializer
+from actions.models import Ratings
 
+
+class RatingsView(generics.GenericAPIView):
+    """Endpoint for getting ratings by user for all games
+
+    supports only get
+    Returns:
+        data: [{game, user_id, rating}.....]
+    """
+    def get(self, request, *args, **kwargs):
+        id = request.GET["user_id"]
+        ratings = Ratings.objects.filter(user=id)
+        serializer = RatingSerializer(list(ratings), many = True).data
+        return Response(serializer)
 
 class RegisterView(generics.GenericAPIView):
     """Endpoint for signing up to Overworld.
