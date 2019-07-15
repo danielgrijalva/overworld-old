@@ -184,8 +184,13 @@ class Profile extends Component {
                         <p className="profile-bio">{bio}</p>
                       </React.Fragment>
                     )}
-                    <Ratings user_id={me.id} height={75} width={250}/>
                     <Journal me={me} username={username} />
+                    <Ratings
+                      showAverage={false}
+                      userId={me.id}
+                      height={55}
+                      width={225}
+                    />
                     <Divider horizontal>Backlog</Divider>
                     {backlog.length > 0 ? (
                       <ListPreview games={backlog} />
