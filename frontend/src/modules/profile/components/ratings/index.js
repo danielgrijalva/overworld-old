@@ -1,8 +1,8 @@
 import React from "react";
-import "./styles.css";
-import { loadRatings } from "../../actions";
 import { connect } from "react-redux";
-import { Divider } from "semantic-ui-react";
+import { Divider, Popup } from "semantic-ui-react";
+import { loadRatings } from "../../actions";
+import "./styles.css";
 
 class Ratings extends React.Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class Ratings extends React.Component {
   }
 
   componentWillMount() {
-    this.props.loadRatings(this.props.user_id);
+    this.props.loadRatings(this.props.userId);
   }
 
   processRatings = data => {
@@ -39,7 +39,6 @@ class Ratings extends React.Component {
       return (
         <React.Fragment>
           <Divider horizontal>Ratings</Divider>
-
           <div className="rating">
             <div
               className="rating-chart"
@@ -48,20 +47,30 @@ class Ratings extends React.Component {
               {chartData.map((val, i) => {
                 const percent = total ? val / total : 0; //calculate percent if total is non zero
                 return (
-                  <div
-                    className="rating-bar"
-                    key={"rating" + i}
-                    style={{
-                      height: (percent * this.props.height) +1,
-                      width: this.props.width / chartData.length
-                    }}
+                  <Popup
+                    content={`${i + 1} star ratings: ${val}`}
+                    position="top center"
+                    size="tiny"
+                    inverted
+                    trigger={
+                      <div
+                        className="rating-bar"
+                        key={"rating" + i}
+                        style={{
+                          height: percent * this.props.height + 1,
+                          width: this.props.width / chartData.length
+                        }}
+                      />
+                    }
                   />
                 );
               })}
             </div>
-            <div className="rating-label">
-              <span className="rating-average">{average}★</span>
-            </div>
+            {this.props.showAverage && (
+              <div className="rating-label">
+                <span className="rating-average">{average}</span>
+              </div>
+            )}
           </div>
         </React.Fragment>
       );
