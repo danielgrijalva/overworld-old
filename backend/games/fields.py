@@ -19,6 +19,7 @@ _search_fields = [
     'cover.image_id',
     'first_release_date',
     'name',
+    'screenshots.image_id',
     'slug',
 ]
 

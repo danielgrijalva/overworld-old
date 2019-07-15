@@ -110,7 +110,7 @@ class EditProfile extends Component {
             </Form>
           </Grid.Column>
           <Grid.Column width={8}>
-            <ChooseFavorites favorites={favorites}/>
+            <ChooseFavorites favorites={favorites} />
             <Grid>
               <Grid.Row>
                 <Grid.Column mobile={4}>
@@ -130,7 +130,12 @@ class EditProfile extends Component {
                       </a>{" "}
                       that matches the email address on your account.
                     </Form.Field>
-                    <Button floated="right" fluid type="submit">
+                    <Button
+                      className="default"
+                      floated="right"
+                      fluid
+                      type="submit"
+                    >
                       Refresh Avatar
                     </Button>
                   </Form>
