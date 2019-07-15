@@ -115,7 +115,7 @@ class ActionsTests(APITestCase):
             'slug': self.game.slug,
             'cover_id': self.game.cover_id,
             'backdrop_id': self.game.backdrop_id,
-            'rating': 10
+            'rating': 4.5
         }
         response = self.client.post(url, data, format='json')
 
@@ -133,7 +133,7 @@ class ActionsTests(APITestCase):
             'rating': -1
         }
         big_rating = negative_rating
-        big_rating['rating'] = 11
+        big_rating['rating'] = 6
 
         negative = self.client.post(url, negative_rating, format='json')
         big = self.client.post(url, big_rating, format='json')
