@@ -1,6 +1,6 @@
 .rating-chart {
   background-color: #14181c;
-  margin: auto;
+  margin: 0 0.5rem;
   display: flex;
 }
 
@@ -33,7 +33,9 @@
   margin-top: auto;
 }
 
-.star {
-  color: green;
+.rating-label .star {
+  color: rgba(247, 187, 8, 0.85);
+  display: block;
+  height: 15px;
   margin-top: auto;
 }

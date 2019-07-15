@@ -18,17 +18,35 @@ class Ratings extends React.Component {
   }
 
   processRatings = data => {
-    const chartData = Array(10).fill(0);
+    let chartData = {
+      "0.5": 0,
+      "1.0": 0,
+      "1.5": 0,
+      "2.0": 0,
+      "2.5": 0,
+      "3.0": 0,
+      "3.5": 0,
+      "4.0": 0,
+      "4.5": 0,
+      "5.0": 0
+    };
     const total_length = data.length;
     let total_val = 0;
     data.forEach(val => {
-      chartData[val.rating - 1] += 1;
-      total_val += val.rating;
+      chartData[val.rating] += 1;
+      total_val += parseFloat(val.rating);
     });
-
-    const average = Math.round((total_val / total_length) * 100) / 100; //round to two decimal
+    const average = Math.round((total_val / total_length) * 100) / 100;
 
     return { chartData: chartData, average: average, total: total_length };
+  };
+
+  stringifyStars = value => {
+    let stars = "★".repeat(value);
+    if (value % 1) {
+      stars += "½";
+    }
+    return stars;
   };
 
   render() {
@@ -40,15 +58,21 @@ class Ratings extends React.Component {
         <React.Fragment>
           <Divider horizontal>Ratings</Divider>
           <div className="rating">
+            <span className="rating-label">
+              <span className="star">★</span>
+            </span>
             <div
               className="rating-chart"
               style={{ height: this.props.height, width: this.props.width }}
             >
-              {chartData.map((val, i) => {
-                const percent = total ? val / total : 0; //calculate percent if total is non zero
+              {Object.keys(chartData).map((key, i) => {
+                const percent = total ? chartData[key] / total : 0;
                 return (
                   <Popup
-                    content={`${i + 1} star ratings: ${val}`}
+                    key={i}
+                    content={`${chartData[key]} ${this.stringifyStars(
+                      key
+                    )} ratings`}
                     position="top center"
                     size="tiny"
                     inverted
@@ -58,7 +82,7 @@ class Ratings extends React.Component {
                         key={"rating" + i}
                         style={{
                           height: percent * this.props.height + 1,
-                          width: this.props.width / chartData.length
+                          width: this.props.width / 10
                         }}
                       />
                     }
@@ -66,11 +90,12 @@ class Ratings extends React.Component {
                 );
               })}
             </div>
-            {this.props.showAverage && (
-              <div className="rating-label">
+            <div className="rating-label">
+              {this.props.showAverage && (
                 <span className="rating-average">{average}</span>
-              </div>
-            )}
+              )}
+              <span className="star">★★★★★</span>
+            </div>
           </div>
         </React.Fragment>
       );
