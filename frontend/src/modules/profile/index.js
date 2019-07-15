@@ -11,8 +11,7 @@ import {
   Button,
   Message
 } from "semantic-ui-react";
-import { Cover } from "../game/components";
-import { Backdrop, Footer } from "../app/components/";
+import { Backdrop, Footer, Cover, ListPreview } from "../app/components/";
 import { loadProfile, follow, unfollow } from "./actions";
 import { ProfileNav, Stats, Journal } from "./components";
 import "./styles.css";
@@ -31,6 +30,8 @@ class Profile extends Component {
       location,
       twitter,
       favorites,
+      backlog,
+      wishlist,
       me
     } = this.props.profile;
     if (!this.props.isLoading) {
@@ -130,7 +131,7 @@ class Profile extends Component {
                   <Grid.Column width={11}>
                     <Divider horizontal>Favorites</Divider>
                     {favorites.length > 0 ? (
-                      <div class="games-wrapper">
+                      <div className="games-wrapper">
                         {favorites.map((g, i) => {
                           return (
                             <Cover
@@ -138,13 +139,21 @@ class Profile extends Component {
                               imageId={g.cover_id}
                               slug={g.slug}
                               className="small-cover-wrapper"
+                              size="big"
                             />
                           );
                         })}
                       </div>
                     ) : (
                       <Message className="no-content">
-                        {username} has no favorite games yet.
+                        {me && me.username === username ? (
+                          <p>
+                            Remember to add your{" "}
+                            <a href="/settings">favorite games!</a>
+                          </p>
+                        ) : (
+                          <p>{username} has no favorite games yet.</p>
+                        )}
                       </Message>
                     )}
                     <Divider horizontal>Recent Activity</Divider>
@@ -175,10 +184,38 @@ class Profile extends Component {
                         <p className="profile-bio">{bio}</p>
                       </React.Fragment>
                     )}
-                    <Journal username={username} />
-                    <Divider horizontal>Ratings</Divider>
+                    <Journal me={me} username={username} />
                     <Divider horizontal>Backlog</Divider>
+                    {backlog.length > 0 ? (
+                      <ListPreview games={backlog} />
+                    ) : (
+                      <Message className="no-content">
+                        {me && me.username === username ? (
+                          <p>
+                            Keep track of what you want to play. <br />
+                            <a href="/games">Add some games now?</a>
+                          </p>
+                        ) : (
+                          <p>Wow, {username} has an empty backlog!</p>
+                        )}
+                      </Message>
+                    )}
                     <Divider horizontal>Wish List</Divider>
+                    {wishlist.length > 0 ? (
+                      <ListPreview games={wishlist} />
+                    ) : (
+                      <Message className="no-content">
+                        {me && me.username === username ? (
+                          <p>
+                            The games you wanna buy go here. <br />
+                            <a href="/games">Browse or search games?</a>
+                          </p>
+                        ) : (
+                          <p>Nothing here yet!</p>
+                        )}
+                      </Message>
+                    )}
+                    <Divider horizontal>Ratings</Divider>
                     <Divider horizontal>Lists</Divider>
                   </Grid.Column>
                 </Grid.Row>

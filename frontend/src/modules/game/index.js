@@ -3,10 +3,9 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import Moment from "react-moment";
 import { Container, Grid } from "semantic-ui-react";
-import { Backdrop, Footer } from "../app/components/";
+import { Backdrop, Footer, Cover } from "../app/components/";
 import {
   Details,
-  Cover,
   CoverLoader,
   Actions,
   TitleLoader,
@@ -81,6 +80,7 @@ class Game extends React.Component {
                         imageId={game.cover.image_id}
                         slug={game.slug}
                         className="cover-wrapper"
+                        size="big"
                       />
                     </React.Fragment>
                   ) : (

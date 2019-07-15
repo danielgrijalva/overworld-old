@@ -2,14 +2,12 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 from unittest.mock import Mock, MagicMock, patch
-
 from .fields import game_fields, search_fields, popular_fields, backdrop_fields
 
 class GameTests(APITestCase):
 
     @patch('games.views.requests.post')
     def test_get_game(self, mock_post):
-
         """Ensure we can obtain a game from IGDB."""
         # Create Mock post and response return value
         mock_response = Mock()
@@ -38,7 +36,6 @@ class GameTests(APITestCase):
 
     @patch('games.views.requests.post')
     def test_game_not_found(self, mock_post):
-
         """Ensure that the API returns 404 status with an unknown game."""
         # Create Mock post and response return value
         mock_response = Mock()
@@ -61,7 +58,6 @@ class GameTests(APITestCase):
 
     @patch('games.views.requests.post')
     def test_search_game(self, mock_post):
-
         """Ensure we can search a game given a name."""
         # Create Mock post and response return value
         mock_response = Mock()
@@ -101,7 +97,6 @@ class GameTests(APITestCase):
 
     @patch('games.views.requests.post')
     def test_get_popular(self, mock_post):
-
         """Ensure we can obtain a list of popular games."""
         # Create Mock post and response return value
         mock_response = Mock()
@@ -178,7 +173,6 @@ class GameTests(APITestCase):
 
     @patch('games.views.requests.post')
     def test_get_backdrop(self, mock_post):
-
         """Ensure we can retrieve a game's screenshots/artwork."""
         # Create Mock post and response return value
         mock_response = Mock()
