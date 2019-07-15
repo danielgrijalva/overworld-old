@@ -11,17 +11,19 @@ from actions.models import Ratings
 
 
 class RatingsView(generics.GenericAPIView):
-    """Endpoint for getting ratings by user for all games
+    """Endpoint for getting ratings by user for all games.
 
-    supports only get
+    Supports only GET.
     Returns:
-        data: [{game, user_id, rating}.....]
+        data: [{game, user_id, rating}...]
     """
     def get(self, request, *args, **kwargs):
-        id = request.GET["user_id"]
-        ratings = Ratings.objects.filter(user=id)
-        serializer = RatingSerializer(list(ratings), many = True).data
+        user_id = request.GET["user_id"]
+        ratings = Ratings.objects.filter(user=user_id)
+        serializer = RatingSerializer(list(ratings), many=True).data
+        
         return Response(serializer)
+
 
 class RegisterView(generics.GenericAPIView):
     """Endpoint for signing up to Overworld.
