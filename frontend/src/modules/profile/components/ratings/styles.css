@@ -9,8 +9,9 @@
 .rating-chart > .rating-bar{
    background-color: #435566;
    margin-top: auto;
-   border-top-right-radius: 15%;
-   border-top-left-radius: 15%;
+   border-top-right-radius: 3px;
+   border-top-left-radius: 3px;
+   border-right: 1px solid #14181c;
 }
 
 .rating-chart > .rating-bar:hover{

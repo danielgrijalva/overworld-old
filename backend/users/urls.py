@@ -8,8 +8,9 @@ urlpatterns = [
     path('logout/', knox_views.LogoutView.as_view(), name='knox-logout'),
     path('logoutall/', knox_views.LogoutAllView.as_view(), name='knox-logoutall'),
     path('user/', views.UserView.as_view(), name='get-user'),
+    path('profile/ratings', views.RatingsView.as_view(), name='get-ratings'),
     path('profile/<str:username>', views.ProfileView.as_view(), name='get-profile'),
     path('follow/', views.FollowView.as_view(), name='follow'),
-    path('unfollow/', views.UnfollowView.as_view(), name='unfollow'),
-    path('ratings/', views.RatingsView.as_view(), name='get-ratings')
+    path('unfollow/', views.UnfollowView.as_view(), name='unfollow')
+    
 ]

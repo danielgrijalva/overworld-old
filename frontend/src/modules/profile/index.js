@@ -160,10 +160,7 @@ class Profile extends Component {
                       </React.Fragment>
                     )}
                     <Journal username={username} />
-                    <React.Fragment>
-                      <Divider horizontal>Ratings </Divider>
-                      <Ratings user_id={me.id} height={75} width={250}/>
-                    </React.Fragment>
+                    <Ratings user_id={me.id} height={75} width={250}/>
                     <Divider horizontal>Backlog</Divider>
                     <Divider horizontal>Wish List</Divider>
                     <Divider horizontal>Lists</Divider>

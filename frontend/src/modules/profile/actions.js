@@ -97,7 +97,7 @@ export const loadJournal = username => dispatch => {
 
 export const loadRatings = user_id => dispatch => {
   axios
-    .get("/api/users/ratings/", {
+    .get("/api/users/profile/ratings", {
       params: {
         user_id: user_id
       }
