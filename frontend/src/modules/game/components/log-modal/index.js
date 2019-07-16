@@ -21,6 +21,14 @@ import { Cover } from "../../../app/components/";
 import Moment from "react-moment";
 import "./styles.css";
 
+const options = [
+  { key: "f", text: "Finished", value: "F" },
+  { key: "p", text: "Played", value: "P" },
+  { key: "s", text: "Started", value: "S" },
+  { key: "a", text: "Abandoned", value: "A" },
+  { key: "r", text: "Replayed", value: "R" }
+];
+
 class LogModal extends React.Component {
   constructor() {
     super();
@@ -32,7 +40,8 @@ class LogModal extends React.Component {
       liked: false,
       spoilers: false,
       rating: null,
-      review: ""
+      review: "",
+      type: "Finished"
     };
   }
 
@@ -78,15 +87,32 @@ class LogModal extends React.Component {
     });
   };
 
+  handleTypeChange = e => {
+    e.persist();
+    if (e.target.outerText.length < 10) {
+      // prevent bug where if you don't select anything, all options are
+      // concatenated and sent, creating a 42 length string.
+      // 10 is the length of "Abandoned", the longest option
+      this.setState({ type: e.target.outerText });
+    }
+  };
+
   handleSubmit = () => {
-    const { specifyDate, date, liked, review, spoilers, rating } = this.state;
+    const {
+      specifyDate,
+      date,
+      liked,
+      review,
+      spoilers,
+      rating,
+      type
+    } = this.state;
 
     if (!specifyDate) {
       // if specifyDate is false, then it's not a journal entry
       // if there's no date but the user wrote a review, then it's a review
       // if there isn't neither a review or a date, then it's a normal log and the logGame
       // function should be called, along with the rateGame and likeGame if appropiate
-
       // TODO: this.props.createReview(something, something);
     } else {
       const data = {
@@ -101,7 +127,8 @@ class LogModal extends React.Component {
         liked,
         review,
         spoilers,
-        rating
+        rating,
+        entry_type: type.charAt(0)
       };
       this.props.addJournalEntry(data);
     }
@@ -134,7 +161,7 @@ class LogModal extends React.Component {
                   />
                 </Grid.Column>
                 <Grid.Column width={10}>
-                  <Header>I finished...</Header>
+                  <Header>I {this.state.type}...</Header>
                   <section className="game-header margin-bottom-sm">
                     <h2>{this.props.game.name}</h2>
                     <small className="release-date">
@@ -148,7 +175,7 @@ class LogModal extends React.Component {
                       <Form.Field>
                         {!this.state.specifyDate && (
                           <Checkbox
-                            label="Specify the day you finished it"
+                            label={`Specify the day you ${this.state.type.toLowerCase()} it`}
                             onClick={this.showDateCheckbox}
                           />
                         )}
@@ -184,7 +211,15 @@ class LogModal extends React.Component {
                         )}
                       </Form.Field>
                       <Form.Field>
-                        <label>Review</label>
+                        <Form.Select
+                          onChange={this.handleTypeChange}
+                          label={`Type (I ${this.state.type.toLowerCase()}...)`}
+                          options={options}
+                          placeholder="Finished"
+                        />
+                      </Form.Field>
+                      <Form.Field>
+                        <label>Review or thoughts?</label>
                         <textarea name="review" onChange={this.handleReview} />
                       </Form.Field>
                       <Grid>
