@@ -269,7 +269,7 @@ class Rate(generics.GenericAPIView):
         using the `get_or_create` method.
 
         Args:
-            rating: the rating value (1-10)
+            rating: the rating value (0-5, half values allowed)
             igdb: the ID of the game
             name: name of the game
             slug: slugified name of the game
@@ -280,7 +280,7 @@ class Rate(generics.GenericAPIView):
             response: a RatingSerializer indicating the user, game and rating.
         """
         rating = request.data['rating']
-        if rating <= 0 or rating > 10:
+        if rating < 0 or rating > 5:
             return Response({'detail': 'Invalid rating!'}, status.HTTP_400_BAD_REQUEST)
 
         data = {

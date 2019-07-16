@@ -7,7 +7,7 @@
 
 .ui.menu.actions .item {
   text-shadow: 0 0 7px rgba(0, 0, 0, 0.45);
-  color: #bcd !important;
+  color: #bcd;
   background: #456 !important;
 }
 
@@ -53,4 +53,13 @@ rect {
 
 .ui.checkbox label {
   color: #def !important;
+}
+
+.stars {
+  color: #fbbd08;
+}
+
+.stars > span > .fa.fa-star {
+  color: #345;
+  text-shadow: none;
 }

@@ -115,7 +115,7 @@ class ActionsTests(APITestCase):
             'slug': self.game.slug,
             'cover_id': self.game.cover_id,
             'backdrop_id': self.game.backdrop_id,
-            'rating': 10
+            'rating': 4.5
         }
         response = self.client.post(url, data, format='json')
 
@@ -133,7 +133,7 @@ class ActionsTests(APITestCase):
             'rating': -1
         }
         big_rating = negative_rating
-        big_rating['rating'] = 11
+        big_rating['rating'] = 6
 
         negative = self.client.post(url, negative_rating, format='json')
         big = self.client.post(url, big_rating, format='json')
@@ -156,7 +156,7 @@ class ActionsTests(APITestCase):
             'review': 'cool game',
             'spoilers': False,
             'liked': True,
-            'rating': 8
+            'rating': 5
         }
         response = self.client.post(url, data, format='json')
 
@@ -177,7 +177,7 @@ class ActionsTests(APITestCase):
             'review': 'cool game',
             'spoilers': False,
             'liked': True,
-            'rating': 8
+            'rating': 5
         }
         expected = [{
             'year': 2019,
@@ -198,7 +198,7 @@ class ActionsTests(APITestCase):
                         'review': 'cool game',
                         'spoilers': False,
                         'liked': True,
-                        'rating': 8,
+                        'rating': '5.0',
                         'user': 1
                     }
                     ]
@@ -206,7 +206,7 @@ class ActionsTests(APITestCase):
             ]
         }]
         response = self.client.post(url, data, format='json')
-        response = self.client.get(url,{'username': 'testing'} ,format='json')
+        response = self.client.get(url, {'username': 'testing'} ,format='json')
 
         self.assertEqual(response.data, expected)             
         self.assertEqual(response.status_code, status.HTTP_200_OK)     

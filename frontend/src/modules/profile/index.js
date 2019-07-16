@@ -13,7 +13,7 @@ import {
 } from "semantic-ui-react";
 import { Backdrop, Footer, Cover, ListPreview } from "../app/components/";
 import { loadProfile, follow, unfollow } from "./actions";
-import { ProfileNav, Stats, Journal } from "./components";
+import { ProfileNav, Stats, Journal, Ratings } from "./components";
 import "./styles.css";
 
 class Profile extends Component {
@@ -185,6 +185,12 @@ class Profile extends Component {
                       </React.Fragment>
                     )}
                     <Journal me={me} username={username} />
+                    <Ratings
+                      showAverage={false}
+                      userId={me.id}
+                      height={55}
+                      width={225}
+                    />
                     <Divider horizontal>Backlog</Divider>
                     {backlog.length > 0 ? (
                       <ListPreview games={backlog} />

@@ -4,13 +4,15 @@ import {
   UNFOLLOW,
   EDIT_PROFILE_SUCCESS,
   LOAD_JOURNAL,
-  LOAD_FAVORITES
+  LOAD_FAVORITES,
+  LOAD_RATINGS
 } from "./actionTypes";
 
 const initialState = {
   isLoading: true,
   profile: {},
-  journal: []
+  journal: [],
+  ratings: []
 };
 
 export default function(state = initialState, action) {
@@ -47,6 +49,11 @@ export default function(state = initialState, action) {
         ...state,
         profile: { ...state.profile, favorites: action.payload }
       };
+    case LOAD_RATINGS:
+      return {
+        ...state,
+        ratings: action.payload
+      }
     default:
       return state;
   }
