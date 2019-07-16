@@ -23,14 +23,23 @@ class Game extends React.Component {
       isLoading: true
     };
   }
+  //call this function to update state of a new game
 
+  componentDidUpdate() {
+    if (this.props.match.params.slug !== this.state.gameSlug) {
+      const gameSlug = this.props.match.params.slug;
+      this.resetState(gameSlug);
+      this.loadGame(gameSlug);
+    }
+  }
+  /*
   componentWillReceiveProps(props) {
     if (props.match.params.slug !== this.state.gameSlug) {
       const gameSlug = props.match.params.slug;
       this.resetState(gameSlug);
       this.loadGame(gameSlug);
     }
-  }
+  }*/
 
   componentWillMount() {
     var gameSlug = this.props.match.params.slug;
@@ -71,7 +80,9 @@ class Game extends React.Component {
       <React.Fragment>
         <Container>
           <Grid className="game" centered>
-            {!isLoading && <Backdrop imageId={game.screenshots[1].image_id} />}
+            {!isLoading && game.screenshots[1] && (
+              <Backdrop imageId={game.screenshots[1].image_id} />
+            )}
             <Grid.Row className="game-content">
               <React.Fragment>
                 <Grid.Column width={4}>

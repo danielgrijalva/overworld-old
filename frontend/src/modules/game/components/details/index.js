@@ -30,7 +30,6 @@ const Details = ({ game }) => {
                         game.involved_companies[0].company.country,
                         "en"
                       )}
-                      {console.log(game)}
                     </Label>
                   </Grid.Column>
                 </Grid.Row>
@@ -55,13 +54,14 @@ const Details = ({ game }) => {
                     </h3>
                   </Grid.Column>
                   <Grid.Column width={8} className="details">
-                    {game.involved_companies.map(d => {
-                      return (
-                        d.developer && (
-                          <Label key={d.id}>{d.company.name}</Label>
-                        )
-                      );
-                    })}
+                    {game.involved_companies &&
+                      game.involved_companies.map(d => {
+                        return (
+                          d.developer && (
+                            <Label key={d.id}>{d.company.name}</Label>
+                          )
+                        );
+                      })}
                   </Grid.Column>
                 </Grid.Row>
                 <Grid.Row>
@@ -71,13 +71,14 @@ const Details = ({ game }) => {
                     </h3>
                   </Grid.Column>
                   <Grid.Column width={8} className="details">
-                    {game.involved_companies.map(d => {
-                      return (
-                        d.publisher && (
-                          <Label key={d.id}>{d.company.name}</Label>
-                        )
-                      );
-                    })}
+                    {game.involved_companies &&
+                      game.involved_companies.map(d => {
+                        return (
+                          d.publisher && (
+                            <Label key={d.id}>{d.company.name}</Label>
+                          )
+                        );
+                      })}
                   </Grid.Column>
                 </Grid.Row>
                 {game.time_to_beat && (
@@ -102,9 +103,10 @@ const Details = ({ game }) => {
           menuItem: "platforms",
           render: () => (
             <Tab.Pane attached={false}>
-              {game.platforms.map(p => {
-                return <Label key={p.id}>{p.name}</Label>;
-              })}
+              {game.platforms &&
+                game.platforms.map(p => {
+                  return <Label key={p.id}>{p.name}</Label>;
+                })}
             </Tab.Pane>
           )
         },
@@ -112,12 +114,16 @@ const Details = ({ game }) => {
           menuItem: "genres",
           render: () => (
             <Tab.Pane attached={false}>
-              {game.genres.map(g => {
-                return <Label key={g.id}>{g.name}</Label>;
-              })}
-              {game.themes.map(t => {
-                return <Label key={t.id}>{t.name}</Label>;
-              })}
+              {game.genres &&
+                game.genres.map(g => {
+                  console.log(typeof game.genres && game);
+                  return <Label key={g.index}>{g.name}</Label>;
+                })}
+              {game.themes &&
+                game.themes.map(t => {
+                  console.log(typeof game.themes);
+                  return <Label key={t.id}>{t.name}</Label>;
+                })}
             </Tab.Pane>
           )
         }

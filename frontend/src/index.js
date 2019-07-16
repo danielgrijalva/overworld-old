@@ -4,10 +4,16 @@ import axios from "axios";
 import "./index.css";
 import AppRouter from "./Router";
 import * as serviceWorker from "./serviceWorker";
+import ErrorBoundary from "./modules/app/components/error";
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
-ReactDOM.render(<AppRouter />, document.getElementById("root"));
+ReactDOM.render(
+  <ErrorBoundary>
+    <AppRouter />
+  </ErrorBoundary>,
+  document.getElementById("root")
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
