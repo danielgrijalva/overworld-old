@@ -11,8 +11,7 @@ const Details = ({ game }) => {
 
   const gameCountries = [...new Set(game.involved_companies
     .filter(companyInfo => companyInfo.company.country !== undefined)
-    .map(companyInfo => countries.getName(companyInfo.company.country, "en")))]
-    .join(", ");
+    .map(companyInfo => countries.getName(companyInfo.company.country, "en")))];
 
   return (
     <Tab
@@ -32,9 +31,12 @@ const Details = ({ game }) => {
                       </h3>
                     </Grid.Column>
                     <Grid.Column width={8} className="details">
-                      <Label>
-                        {gameCountries}
-                      </Label>
+                      {gameCountries.map(country => (
+                         <Label>
+                         {country}
+                       </Label>
+                      ))}
+                     
                     </Grid.Column>
                   </Grid.Row>
                 )}
