@@ -8,6 +8,11 @@ import "./styles.css";
 countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
 
 const Details = ({ game }) => {
+
+  const gameCountries = [...new Set(game.involved_companies
+    .filter(companyInfo => companyInfo.company.country !== undefined)
+    .map(companyInfo => countries.getName(companyInfo.company.country, "en")))];
+
   return (
     <Tab
       className="tabs margin-top"
@@ -18,21 +23,23 @@ const Details = ({ game }) => {
           render: () => (
             <Tab.Pane className="details" attached={false}>
               <Grid>
-                <Grid.Row>
-                  <Grid.Column width={8}>
-                    <h3>
-                      <span>Country</span>
-                    </h3>
-                  </Grid.Column>
-                  <Grid.Column width={8} className="details">
-                    <Label>
-                      {countries.getName(
-                        game.involved_companies[0].company.country,
-                        "en"
-                      )}
-                    </Label>
-                  </Grid.Column>
-                </Grid.Row>
+                {gameCountries.length > 0 && (
+                  <Grid.Row>
+                    <Grid.Column width={8}>
+                      <h3>
+                        <span>Country</span>
+                      </h3>
+                    </Grid.Column>
+                    <Grid.Column width={8} className="details">
+                      {gameCountries.map(country => (
+                         <Label>
+                         {country}
+                       </Label>
+                      ))}
+                     
+                    </Grid.Column>
+                  </Grid.Row>
+                )}
                 <Grid.Row>
                   <Grid.Column width={8}>
                     <h3>
@@ -81,7 +88,7 @@ const Details = ({ game }) => {
                       })}
                   </Grid.Column>
                 </Grid.Row>
-                {game.time_to_beat && (
+                {game.time_to_beat && game.time_to_beat.normally !== undefined && (
                   <Grid.Row>
                     <Grid.Column width={8}>
                       <h3>

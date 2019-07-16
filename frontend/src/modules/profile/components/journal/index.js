@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Divider } from "semantic-ui-react";
+import { Divider, Message } from "semantic-ui-react";
 import moment from "moment";
 import Moment from "react-moment";
 import { loadJournal } from "../../actions";
@@ -47,7 +47,21 @@ class Journal extends Component {
         </ul>
       );
     } else {
-      return null;
+      return (
+        <React.Fragment>
+          <Divider horizontal>Journal</Divider>
+          <Message className="no-content">
+            {this.props.me && this.props.me.username === this.props.username ? (
+              <p>
+                Save and record everything you play. <br />
+                <a href="/games">Start by logging a game!</a>
+              </p>
+            ) : (
+              <p>{this.props.username}'s gaming journal is blank.</p>
+            )}
+          </Message>
+        </React.Fragment>
+      );
     }
   }
 }
