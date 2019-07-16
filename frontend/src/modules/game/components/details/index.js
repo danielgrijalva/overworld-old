@@ -9,9 +9,10 @@ countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
 
 const Details = ({ game }) => {
 
-  const gameCountries = game.involved_companies
+  const gameCountries = [...new Set(game.involved_companies
     .filter(companyInfo => companyInfo.company.country !== undefined)
-    .map(companyInfo => companyInfo.company.country);
+    .map(companyInfo => countries.getName(companyInfo.company.country, "en")))]
+    .join(", ");
 
   return (
     <Tab
@@ -32,10 +33,7 @@ const Details = ({ game }) => {
                     </Grid.Column>
                     <Grid.Column width={8} className="details">
                       <Label>
-                        {countries.getName(
-                          gameCountries[0],
-                          "en"
-                        )}
+                        {gameCountries}
                       </Label>
                     </Grid.Column>
                   </Grid.Row>
