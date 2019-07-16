@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test <Popular /> when isLoading is true renders correctly and matches snapshot 1`] = `
+<section
+  className="popular margin-top-xs margin-bottom"
+>
+  <div
+    className="placeholder"
+    key="0"
+  />
+  <div
+    className="placeholder"
+    key="1"
+  />
+  <div
+    className="placeholder"
+    key="2"
+  />
+  <div
+    className="placeholder"
+    key="3"
+  />
+  <div
+    className="placeholder"
+    key="4"
+  />
+  <div
+    className="placeholder"
+    key="5"
+  />
+</section>
+`;

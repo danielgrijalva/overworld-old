@@ -7,21 +7,25 @@ describe('Test <Features />', () => {
 
   let wrap;
 
-  beforeEach(() => {
+  beforeAll(() => {
     wrap = shallow(<Features />);
   });
 
   it('renders without crashing', () => {
-    expect(wrap.exists()).toBe(true)
+    expect(wrap.exists()).toBe(true);
   });
+
+  it('renders correctly and matches snapshot', () => {
+    expect(toJson(wrap)).toMatchSnapshot();
+  })
 
   it('renders with 1 section with class features', () => {
     expect(wrap.find('section.features')).toHaveLength(1);
   });
 
   it('renders with 1 grid', () => {
-    const grids = wrap.find('Grid')
-    expect(grids).toHaveLength(1)
+    const grids = wrap.find('Grid');
+    expect(grids).toHaveLength(1);
   });
 });
 
@@ -29,7 +33,7 @@ describe('Test Feature Messages', () => {
 
   let wrap;
 
-  beforeEach(() => {
+  beforeAll(() => {
     wrap = shallow(<Features />);
   });
 
@@ -41,7 +45,7 @@ describe('Test Feature Messages', () => {
     const messages = wrap.find('Message.track');
     expect(messages).toHaveLength(1);
 
-    const message = messages.get(0)
+    const message = messages.get(0);
     expect(message).toBeDefined();
     expect(message.props.className).toEqual('track');
     expect(message.props.icon).toEqual('gamepad');
@@ -51,7 +55,7 @@ describe('Test Feature Messages', () => {
     const messages = wrap.find('Message.like');
     expect(messages).toHaveLength(1);
 
-    const message = messages.get(0)
+    const message = messages.get(0);
     expect(message).toBeDefined();
     expect(message.props.className).toEqual('like');
     expect(message.props.icon).toEqual('heart');
@@ -71,7 +75,7 @@ describe('Test Feature Messages', () => {
     const messages = wrap.find('Message.rate');
     expect(messages).toHaveLength(1);
 
-    const message = messages.get(0)
+    const message = messages.get(0);
     expect(message).toBeDefined();
     expect(message.props.className).toEqual('rate');
     expect(message.props.icon).toEqual('star');
@@ -81,7 +85,7 @@ describe('Test Feature Messages', () => {
     const messages = wrap.find('Message.lists');
     expect(messages).toHaveLength(1);
 
-    const message = messages.get(0)
+    const message = messages.get(0);
     expect(message).toBeDefined();
     expect(message.props.className).toEqual('lists');
     expect(message.props.icon).toEqual('list alternate');
@@ -91,7 +95,7 @@ describe('Test Feature Messages', () => {
     const messages = wrap.find('Message.journal');
     expect(messages).toHaveLength(1);
 
-    const message = messages.get(0)
+    const message = messages.get(0);
     expect(message).toBeDefined();
     expect(message.props.className).toEqual('journal');
     expect(message.props.icon).toEqual('calendar');

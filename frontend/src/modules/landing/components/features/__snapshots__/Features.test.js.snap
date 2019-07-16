@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test <Features /> renders correctly and matches snapshot 1`] = `
+<section
+  className="features"
+>
+  <Grid
+    centered={true}
+  >
+    <p
+      style={
+        Object {
+          "letterSpacing": ".6rem",
+        }
+      }
+    >
+      •••
+    </p>
+    <GridRow
+      width={12}
+    >
+      <GridColumn
+        computer={4}
+        mobile={12}
+      >
+        <Message
+          className="track"
+          content="Keep track of every game you've played or want to play."
+          icon="gamepad"
+        />
+      </GridColumn>
+      <GridColumn
+        computer={4}
+        mobile={12}
+      >
+        <Message
+          className="like"
+          content="Show some love for your favorite games, lists and reviews."
+          icon="heart"
+        />
+      </GridColumn>
+      <GridColumn
+        computer={4}
+        mobile={12}
+      >
+        <Message
+          className="reviews"
+          content="Write and share reviews, and follow other members to read theirs."
+          icon="book"
+        />
+      </GridColumn>
+    </GridRow>
+    <GridRow
+      width={12}
+    >
+      <GridColumn
+        computer={4}
+        mobile={12}
+      >
+        <Message
+          className="rate"
+          content="Rate games in a ten-star scale to record and share your reaction."
+          icon="star"
+        />
+      </GridColumn>
+      <GridColumn
+        computer={4}
+        mobile={12}
+      >
+        <Message
+          className="lists"
+          content="Create and share lists of games and keep a wishlist of games."
+          icon="list alternate"
+        />
+      </GridColumn>
+      <GridColumn
+        computer={4}
+        mobile={12}
+      >
+        <Message
+          className="journal"
+          content="Keep a gaming journal to record what you've played along the year."
+          icon="calendar"
+        />
+      </GridColumn>
+    </GridRow>
+  </Grid>
+</section>
+`;
