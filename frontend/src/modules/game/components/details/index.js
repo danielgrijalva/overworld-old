@@ -86,7 +86,7 @@ const Details = ({ game }) => {
                     })}
                   </Grid.Column>
                 </Grid.Row>
-                {game.time_to_beat && (
+                {game.time_to_beat && game.time_to_beat.normally !== undefined && (
                   <Grid.Row>
                     <Grid.Column width={8}>
                       <h3>
