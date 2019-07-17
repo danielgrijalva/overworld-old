@@ -4,7 +4,7 @@ import { getPopular, getGameData } from "../../actions";
 import { connect } from "react-redux";
 import Moment from "react-moment";
 import { Container, Grid } from "semantic-ui-react";
-import { Cover } from "../../../app/components";
+import { Cover, Backdrop } from "../../../app/components";
 import {
   Details,
   CoverLoader,
@@ -108,11 +108,30 @@ class GameBrowser extends React.Component {
     }
   };
 
+  getRandomBackground = () => {
+    const getRandomInt = (min,max) => {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    const backgrounds = this.props.games.map(game => {
+      if(game.screenshots) {
+        return[game.screenshots.map(screenshot => {
+          return screenshot.image_id
+        })].flat()
+      }
+      return [];
+    }).flat()
+    return(backgrounds[getRandomInt(0, backgrounds.length)])
+  }
+
   render() {
     if (this.props.games.length > 0) {
       return (
         <React.Fragment>
           <h1 className="title">Check out some current popular games!</h1>
+          <Backdrop imageId={this.getRandomBackground()}></Backdrop>
           <div className="game-grid">
             {this.props.games.map((game, index) => {
               return (
@@ -130,6 +149,8 @@ class GameBrowser extends React.Component {
       );
     } else {
       return (
+        <React.Fragment>
+        <h1 className="title">Check out some current popular games!</h1>
         <div className="game-grid">
           {[...Array(21).keys()].map((val, index) => {
             return (
@@ -139,6 +160,7 @@ class GameBrowser extends React.Component {
             );
           })}
         </div>
+        </React.Fragment>
       );
     }
   }
