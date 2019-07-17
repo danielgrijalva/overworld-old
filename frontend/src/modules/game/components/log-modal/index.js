@@ -3,6 +3,7 @@ import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
 import moment from "moment";
 import { connect } from "react-redux";
+import Rating from "react-rating";
 import { addJournalEntry } from "../../actions";
 import { SingleDatePicker, isInclusivelyBeforeDay } from "react-dates";
 import {
@@ -14,8 +15,7 @@ import {
   Checkbox,
   Icon,
   FormField,
-  Grid,
-  Rating
+  Grid
 } from "semantic-ui-react";
 import { Cover } from "../../../app/components/";
 import Moment from "react-moment";
@@ -45,7 +45,7 @@ class LogModal extends React.Component {
       focused: false,
       liked: false,
       spoilers: false,
-      rating: null,
+      rating: 0,
       review: ""
     });
   };
@@ -58,8 +58,12 @@ class LogModal extends React.Component {
     this.setState(prevState => ({ liked: !prevState.liked }));
   };
 
-  handleRate = (e, { rating }) => {
-    this.setState({ rating });
+  handleRate = rating => {
+    if (this.state.rating === rating) {
+      this.setState({ rating: 0 });
+    } else {
+      this.setState({ rating });
+    }
   };
 
   handleSpoilers = () => {
@@ -82,6 +86,8 @@ class LogModal extends React.Component {
       // if there's no date but the user wrote a review, then it's a review
       // if there isn't neither a review or a date, then it's a normal log and the logGame
       // function should be called, along with the rateGame and likeGame if appropiate
+
+      // TODO: this.props.createReview(something, something);
     } else {
       const data = {
         game: {
@@ -187,13 +193,14 @@ class LogModal extends React.Component {
                             <FormField>
                               <label>Rating</label>
                               <Rating
-                                clearable
-                                size="large"
-                                icon="star"
+                                start={0}
+                                stop={5}
                                 className="stars"
-                                onRate={this.handleRate}
-                                defaultRating={0}
-                                maxRating={10}
+                                emptySymbol="fa fa-star fa-2x"
+                                fullSymbol="fa fa-star fa-2x"
+                                fractions={2}
+                                onClick={this.handleRate}
+                                initialRating={this.state.rating}
                               />
                             </FormField>
                             <FormField>

@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Rating } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { loadRating, rate } from "../../actions";
+import Rating from "react-rating";
+import "font-awesome/css/font-awesome.min.css";
 
 class Ratings extends React.Component {
   componentWillMount() {
@@ -10,9 +11,19 @@ class Ratings extends React.Component {
     this.props.loadRating(game.id);
   }
 
-  onStarClick = (e, { rating }) => {
+  onStarClick = rate => {
     const { game } = this.props;
-    this.props.rate(game, rating);
+    if (this.props.rating == rate) {
+      this.props.rate(game, 0);
+    } else {
+      this.props.rate(game, rate);
+    }
+  };
+
+  onChange = rate => {
+    const { game } = this.props;
+    this.setState({ rate: rate });
+    this.props.rate(game, rate);
   };
 
   render() {
@@ -20,13 +31,14 @@ class Ratings extends React.Component {
     if (!loadingRating) {
       return (
         <Rating
-          clearable
-          icon="star"
-          size="large"
+          start={0}
+          stop={5}
           className="stars"
-          maxRating={10}
-          rating={rating}
-          onRate={this.onStarClick}
+          emptySymbol="fa fa-star fa-2x"
+          fullSymbol="fa fa-star fa-2x"
+          fractions={2}
+          onClick={this.onStarClick}
+          initialRating={rating}
         />
       );
     } else {

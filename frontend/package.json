@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "font-awesome": "^4.7.0",
     "i18n-iso-countries": "^4.1.0",
     "moment": "^2.24.0",
     "react": "^16.8.6",
@@ -12,6 +13,7 @@
     "react-dom": "^16.8.6",
     "react-lazy-images": "^1.1.0",
     "react-moment": "^0.9.2",
+    "react-rating": "^1.7.2",
     "react-redux": "^7.0.3",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
