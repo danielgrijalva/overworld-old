@@ -69,7 +69,9 @@ def get_popular_games(request):
     Returns:
         games: six games sorted by popularity.
     """
-    data = f'fields {popular_fields}; sort popularity desc; limit 6;'
+    limit = int(request.GET['limit'])
+    limit = limit if limit and limit < 50 else 6 #take limit from request with default and max
+    data = f'fields {popular_fields}; sort popularity desc; limit {limit};'
     headers = {'user-key': settings.IGDB_KEY}
     url = settings.IGDB_URL.format(endpoint='games')
     r = requests.post(url=url, data=data, headers=headers)
