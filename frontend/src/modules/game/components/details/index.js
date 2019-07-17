@@ -26,10 +26,11 @@ const Details = ({ game }) => {
                   </Grid.Column>
                   <Grid.Column width={8} className="details">
                     <Label>
-                      {countries.getName(
-                        game.involved_companies[0].company.country,
-                        "en"
-                      )}
+                      {game.involved_companies &&
+                        countries.getName(
+                          game.involved_companies[0].company.country,
+                          "en"
+                        )}
                     </Label>
                   </Grid.Column>
                 </Grid.Row>

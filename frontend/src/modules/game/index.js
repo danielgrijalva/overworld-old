@@ -59,6 +59,7 @@ class Game extends React.Component {
   //loads the new game
   loadGame = gameSlug => {
     axios.get(`/api/games/${gameSlug}`).then(res => {
+      console.log(res.data[0]);
       this.setState({
         game: res.data[0],
         isLoading: false
@@ -80,9 +81,7 @@ class Game extends React.Component {
       <React.Fragment>
         <Container>
           <Grid className="game" centered>
-            {!isLoading && game.screenshots[1] && (
-              <Backdrop imageId={game.screenshots[1].image_id} />
-            )}
+            {!isLoading && <Backdrop imageId={game.cover.image_id} />}
             <Grid.Row className="game-content">
               <React.Fragment>
                 <Grid.Column width={4}>
@@ -116,7 +115,8 @@ class Game extends React.Component {
                       )}
                       <small className="company">
                         <a href="/">
-                          {this.getDeveloperName(game.involved_companies)}
+                          {game.involved_companies &&
+                            this.getDeveloperName(game.involved_companies)}
                         </a>
                       </small>
                     </section>
