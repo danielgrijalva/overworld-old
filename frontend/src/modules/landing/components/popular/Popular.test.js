@@ -33,10 +33,6 @@ describe('Test <Popular /> when isLoading is true', () => {
     wrap = shallow(<Popular {...props}/>);
   });
 
-  it('renders correctly and matches snapshot', () => {
-    expect(toJson(wrap)).toMatchSnapshot();
-  })
-
   it('renders a section with popular margin-top-xs margin-bottom classes', () => {
     const section = wrap.find('section');
     expect(section.hasClass('popular margin-top-xs margin-bottom')).toEqual(true);

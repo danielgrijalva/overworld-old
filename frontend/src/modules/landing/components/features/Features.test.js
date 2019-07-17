@@ -15,10 +15,6 @@ describe('Test <Features />', () => {
     expect(wrap.exists()).toBe(true);
   });
 
-  it('renders correctly and matches snapshot', () => {
-    expect(toJson(wrap)).toMatchSnapshot();
-  })
-
   it('renders with 1 section with class features', () => {
     expect(wrap.find('section.features')).toHaveLength(1);
   });
