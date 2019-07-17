@@ -9,7 +9,11 @@ countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
 
 const Details = ({ game }) => {
 
-  const gameCountries = [...new Set(game.involved_companies
+  const gameCompanies = game.involved_companies ? game.involved_companies : []
+  const themes = game.themes ? game.themes : []
+  const platforms = game.platforms ? game.platforms : []
+  const genres = game.genres ? game.genres : []
+  const gameCountries = [...new Set(gameCompanies
     .filter(companyInfo => companyInfo.company.country !== undefined)
     .map(companyInfo => countries.getName(companyInfo.company.country, "en")))];
 
@@ -32,7 +36,7 @@ const Details = ({ game }) => {
                     </Grid.Column>
                     <Grid.Column width={8} className="details">
                       {gameCountries.map(country => (
-                         <Label>
+                         <Label key={country}>
                          {country}
                        </Label>
                       ))}
@@ -61,7 +65,7 @@ const Details = ({ game }) => {
                     </h3>
                   </Grid.Column>
                   <Grid.Column width={8} className="details">
-                    {game.involved_companies.map(d => {
+                    {gameCompanies.map(d => {
                       return (
                         d.developer && (
                           <Label key={d.id}>{d.company.name}</Label>
@@ -77,7 +81,7 @@ const Details = ({ game }) => {
                     </h3>
                   </Grid.Column>
                   <Grid.Column width={8} className="details">
-                    {game.involved_companies.map(d => {
+                    {gameCompanies.map(d => {
                       return (
                         d.publisher && (
                           <Label key={d.id}>{d.company.name}</Label>
@@ -108,7 +112,7 @@ const Details = ({ game }) => {
           menuItem: "platforms",
           render: () => (
             <Tab.Pane attached={false}>
-              {game.platforms.map(p => {
+              {platforms.map(p => {
                 return <Label key={p.id}>{p.name}</Label>;
               })}
             </Tab.Pane>
@@ -118,10 +122,10 @@ const Details = ({ game }) => {
           menuItem: "genres",
           render: () => (
             <Tab.Pane attached={false}>
-              {game.genres.map(g => {
+              {genres.map(g => {
                 return <Label key={g.id}>{g.name}</Label>;
               })}
-              {game.themes.map(t => {
+              {themes.map(t => {
                 return <Label key={t.id}>{t.name}</Label>;
               })}
             </Tab.Pane>
