@@ -21,12 +21,12 @@ import { Cover } from "../../../app/components/";
 import Moment from "react-moment";
 import "./styles.css";
 
-const options = [
-  { key: "f", text: "Finished", value: "F" },
-  { key: "p", text: "Played", value: "P" },
-  { key: "s", text: "Started", value: "S" },
-  { key: "a", text: "Abandoned", value: "A" },
-  { key: "r", text: "Replayed", value: "R" }
+const entryOptions = [
+  { key: "f", text: "Finished", value: "Finished" },
+  { key: "s", text: "Started", value: "Started" },
+  { key: "p", text: "Played", value: "Played" },
+  { key: "r", text: "Replayed", value: "Replayed" },
+  { key: "a", text: "Abandoned", value: "Abandoned" }
 ];
 
 class LogModal extends React.Component {
@@ -41,7 +41,8 @@ class LogModal extends React.Component {
       spoilers: false,
       rating: null,
       review: "",
-      type: "Finished"
+      type: "Finished",
+      platform: ""
     };
   }
 
@@ -55,7 +56,9 @@ class LogModal extends React.Component {
       liked: false,
       spoilers: false,
       rating: 0,
-      review: ""
+      review: "",
+      type: "Finished",
+      platform: ""
     });
   };
 
@@ -87,14 +90,12 @@ class LogModal extends React.Component {
     });
   };
 
-  handleTypeChange = e => {
-    e.persist();
-    if (e.target.outerText.length < 10) {
-      // prevent bug where if you don't select anything, all options are
-      // concatenated and sent, creating a 42 length string.
-      // 10 is the length of "Abandoned", the longest option
-      this.setState({ type: e.target.outerText });
-    }
+  handleTypeChange = (e, { value }) => {
+    this.setState({ type: value });
+  };
+
+  handlePlatformChange = (e, { value }) => {
+    this.setState({ platform: value });
   };
 
   handleSubmit = () => {
@@ -105,7 +106,8 @@ class LogModal extends React.Component {
       review,
       spoilers,
       rating,
-      type
+      type,
+      platform
     } = this.state;
 
     if (!specifyDate) {
@@ -128,12 +130,20 @@ class LogModal extends React.Component {
         review,
         spoilers,
         rating,
-        entry_type: type.charAt(0)
+        entry_type: type.charAt(0),
+        platform
       };
       this.props.addJournalEntry(data);
     }
 
     this.setState({ isModalActive: false });
+  };
+
+  getPlatformOptions = platforms => {
+    const options = platforms.map(p => {
+      return { key: p.id, text: p.name, value: p.name };
+    });
+    return options;
   };
 
   render() {
@@ -210,14 +220,26 @@ class LogModal extends React.Component {
                           </React.Fragment>
                         )}
                       </Form.Field>
-                      <Form.Field>
-                        <Form.Select
-                          onChange={this.handleTypeChange}
-                          label={`Type (I ${this.state.type.toLowerCase()}...)`}
-                          options={options}
-                          placeholder="Finished"
-                        />
-                      </Form.Field>
+                      <Form.Group widths="equal">
+                        <Form.Field>
+                          <Form.Select
+                            onChange={this.handleTypeChange}
+                            label={`Type (I ${this.state.type.toLowerCase()}...)`}
+                            options={entryOptions}
+                            placeholder="Finished"
+                          />
+                        </Form.Field>
+                        <Form.Field>
+                          <Form.Select
+                            onChange={this.handlePlatformChange}
+                            label="Platform"
+                            options={this.getPlatformOptions(
+                              this.props.game.platforms
+                            )}
+                            placeholder="Choose platform..."
+                          />
+                        </Form.Field>
+                      </Form.Group>
                       <Form.Field>
                         <label>Review or thoughts?</label>
                         <textarea name="review" onChange={this.handleReview} />
