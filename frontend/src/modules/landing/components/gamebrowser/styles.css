@@ -1,0 +1,46 @@
+.game-grid{
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+    /* grid-template-rows: 1fr 1fr 1fr 1fr; */
+    grid-gap: 40px;
+    margin-right: 2%;
+    margin-left: 2%;
+}
+
+.game-box{
+    max-width: 100%;
+    max-height: 100%;
+    border: 2px solid #373a3e;
+}
+
+.game-box:hover{
+  box-shadow: 0 0 30px #373a3e;
+}
+
+.summary {
+    text-align: justify;
+    font-size: 16px;
+    line-height: 1.75rem;
+    letter-spacing: 0.025rem;
+    text-shadow: 0 0 7px rgba(0, 0, 0, 0.45);
+    font-family: Georgia, serif;
+    width: 80%;
+    margin-left: 20px;
+  }
+
+  .game-header > h1, h2 {
+    color: #fff;
+    text-shadow: #000 2px 0 5px;
+    display: inline;
+    margin-right: 0.7rem;
+  }
+
+  
+.game-header{
+    width: 80%;
+    margin-left: 20px;
+}
+
+.title {
+  text-align: center;
+}

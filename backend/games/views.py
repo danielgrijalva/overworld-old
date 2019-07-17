@@ -23,8 +23,8 @@ def get_games(request, ):
     """
     slugs = request.GET['slugs']
     slugs = (",").join([f'"{x}"' for x in slugs.split(",")][:10])
+    
     data = f'fields {game_fields}; where slug=({slugs});'
-    print(data)
     headers = {'user-key': settings.IGDB_KEY}
     url = settings.IGDB_URL.format(endpoint='games')
     r = requests.post(url=url, data=data, headers=headers).json()
