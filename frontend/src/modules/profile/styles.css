@@ -31,7 +31,7 @@
 }
 
 .profile-info {
-  margin: .5rem 0;
+  margin: 0.5rem 0 1rem;
 }
 
 .ui.horizontal.divider {
@@ -123,11 +123,14 @@
 
 .ui.message.no-content {
   text-align: center;
-  font-family: "Raleway", sans-serif;
+  font-family: "Segoe UI", sans-serif;
   background: #0c0e10;
   color: #9ab;
   border: none;
   box-shadow: 0 0 0 1px rgb(48, 56, 64);
+}
+.ui.message.no-content a {
+  color: #fff;
 }
 
 @media only screen and (max-width: 767px) and (min-width: 320px) {

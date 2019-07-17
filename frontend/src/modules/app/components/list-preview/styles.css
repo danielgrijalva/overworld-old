@@ -4,6 +4,33 @@
   margin-bottom: 2rem;
 }
 
+.list-link,
+.list-link::after {
+  display: block;
+  -webkit-transition: background-color, border-color 0.1s linear;
+  -o-transition: background-color, border-color 0.1s linear;
+  transition: background-color, border-color 0.1s linear;
+  position: relative;
+}
+
+.list-link::after {
+  content: "";
+  position: absolute;
+  -webkit-transition: border 0.1s linear;
+  -o-transition: border 0.1s linear;
+  transition: border 0.1s linear;
+  z-index: 6;
+  border-radius: 0.3125rem;
+}
+
+.list-link:hover:after {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 3px solid #40bcf4 ;
+}
+
 ul.cover-list {
   list-style: none;
 }

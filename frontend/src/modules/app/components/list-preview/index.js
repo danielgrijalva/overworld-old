@@ -3,7 +3,7 @@ import "./styles.css";
 
 const ListPreview = ({ games }) => (
   <div className="list-preview">
-    <a href="/">
+    <a className="list-link" href="/">
       <ul className="cover-list overlapped">
         {games.slice(0, 5).map(g => {
           return (
