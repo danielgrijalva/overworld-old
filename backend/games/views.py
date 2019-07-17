@@ -6,6 +6,33 @@ from rest_framework.response import Response
 from .fields import game_fields, search_fields, popular_fields, backdrop_fields
 from .models import Game
 
+@api_view(['GET'])
+def get_games(request, ):
+    """Get a list of games from IGDB.
+
+    Makes a call to the `https://api-v3.igdb.com/games` endpoint, specifying the
+    fields (defined as `game_fields` in fields.py) and game IDs in the POST data.
+    
+    For more details read https://api-docs.igdb.com/?javascript#game.
+
+    Args:
+        slugs: a list of unique name of the game e.g. dark-souls, prey, prey--1. maximum of 10 per request
+
+    Returns:
+        game: a JSON response containing a list of the details of the games.
+    """
+    slugs = request.GET['slugs']
+    slugs = (",").join([f'"{x}"' for x in slugs.split(",")][:10])
+    data = f'fields {game_fields}; where slug=({slugs});'
+    print(data)
+    headers = {'user-key': settings.IGDB_KEY}
+    url = settings.IGDB_URL.format(endpoint='games')
+    r = requests.post(url=url, data=data, headers=headers).json()
+
+    if not r:
+        raise NotFound(detail='Game not found.')
+
+    return Response(r)
 
 @api_view(['GET'])
 def get_game(request, slug):
