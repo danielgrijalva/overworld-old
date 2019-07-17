@@ -5,9 +5,10 @@ from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 from .fields import game_fields, search_fields, popular_fields, backdrop_fields
 from .models import Game
+from django.utils.datastructures import MultiValueDictKeyError
 
 @api_view(['GET'])
-def get_games(request, ):
+def get_games(request):
     """Get a list of games from IGDB.
 
     Makes a call to the `https://api-v3.igdb.com/games` endpoint, specifying the
@@ -93,11 +94,16 @@ def get_popular_games(request):
     This endpoint is called in Overworld's landing page. An example of this
     is documented on IGDB https://api-docs.igdb.com/?javascript#examples-12. 
 
+    Takes limit parameter with max of 50, min 1 and default of 6 if not passed
     Returns:
-        games: six games sorted by popularity.
+        games: games sorted by popularity.
     """
-    limit = int(request.GET['limit'])
-    limit = limit if limit and limit < 50 else 6 #take limit from request with default and max
+    try: 
+        limit = int(request.GET['limit']) #Try and get limit
+        limit = limit if limit < 50 and limit > 0 else 6
+    except MultiValueDictKeyError:
+        limit =6 #default to 6 if not passed on params
+
     data = f'fields {popular_fields}; sort popularity desc; limit {limit};'
     headers = {'user-key': settings.IGDB_KEY}
     url = settings.IGDB_URL.format(endpoint='games')
