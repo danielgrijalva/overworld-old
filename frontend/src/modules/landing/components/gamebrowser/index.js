@@ -3,7 +3,7 @@ import "./styles.css";
 import { getPopular, getGameData } from "../../actions";
 import { connect } from "react-redux";
 import Moment from "react-moment";
-import { Container, Grid } from "semantic-ui-react";
+import { Container, Grid, Button, Card } from "semantic-ui-react";
 import { Cover, Backdrop } from "../../../app/components";
 import {
   Details,
@@ -34,8 +34,7 @@ class GameBrowser extends React.Component {
         var dev = companies.find(c => {
           return c.developer === true;
         });
-
-        return dev.company.name;
+        if (dev) return dev.company.name
       }
       return "Not Found";
     };
@@ -126,6 +125,10 @@ class GameBrowser extends React.Component {
     return(backgrounds[getRandomInt(0, backgrounds.length)])
   }
 
+  loadMore = () => {
+    this.props.getPopular(21, this.props.games.length) //get 21 games with offset of current length of games
+  }
+
   render() {
     if (this.props.games.length > 0) {
       return (
@@ -144,6 +147,9 @@ class GameBrowser extends React.Component {
                 </div>
               );
             })}
+          </div>
+          <div className="center">
+            <Button onClick={this.loadMore}>Load More!</Button>
           </div>
         </React.Fragment>
       );
