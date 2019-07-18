@@ -98,13 +98,16 @@ def get_popular_games(request):
     Returns:
         games: games sorted by popularity.
     """
-    try: 
-        limit = int(request.GET['limit']) #Try and get limit
-        limit = limit if limit < 50 and limit > 0 else 6
-    except MultiValueDictKeyError:
-        limit =6 #default to 6 if not passed on params
+    
 
-    data = f'fields {popular_fields}; sort popularity desc; limit {limit};'
+    #get parameters with defaults and check 
+    limit = int(request.GET.get("limit", 6)) 
+    limit = limit if limit < 50 and limit > 0 else 6 
+
+    offset = int(request.GET.get("offset", 0))
+    offset = offset if offset >= 0 and offset < 150 else 0
+
+    data = f'fields {popular_fields}; sort popularity desc; limit {limit}; offset {offset};'
     headers = {'user-key': settings.IGDB_KEY}
     url = settings.IGDB_URL.format(endpoint='games')
     r = requests.post(url=url, data=data, headers=headers)

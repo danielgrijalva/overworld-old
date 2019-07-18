@@ -151,8 +151,8 @@ class GameTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     @patch('games.views.requests.post')
-    def test_get_popular_with_limit(self, mock_post):
-        """Ensure we can obtain a list of popular games with invalid limit."""
+    def test_get_popular_with_params(self, mock_post):
+        """Ensure we can obtain a list of popular games with invalid params of limit and offset."""
         # Create Mock post and response return value
         mock_response = Mock()
         expected_dict = [
@@ -214,12 +214,12 @@ class GameTests(APITestCase):
         mock_post.return_value = mock_response
 
         url = reverse('get-popular')
-        response = self.client.get(url, {"limit": 100}, format='json')
+        response = self.client.get(url, {"limit": 100, "offset": 200}, format='json')
 
         # Test mock is called with correct arguments
         self.assertEqual(mock_post.call_count, 1)
         self.assertEqual(mock_post.call_args[1]['data'],
-                         f'fields {popular_fields}; sort popularity desc; limit 6;')
+                         f'fields {popular_fields}; sort popularity desc; limit 6; offset 0;')
         self.assertEqual(mock_post.call_args[1]['url'],
                          'https://api-v3.igdb.com/games/')
         # Test response contains expected result
@@ -227,8 +227,8 @@ class GameTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     @patch('games.views.requests.post')
-    def test_get_popular_without_limit(self, mock_post):
-        """Ensure we can obtain a list of popular games without limit."""
+    def test_get_popular_without_params(self, mock_post):
+        """Ensure we can obtain a list of popular games without params."""
         # Create Mock post and response return value
         mock_response = Mock()
         expected_dict = [
@@ -295,8 +295,8 @@ class GameTests(APITestCase):
         # Test mock is called with correct arguments
         self.assertEqual(mock_post.call_count, 1)
         self.assertEqual(mock_post.call_args[1]['data'],
-                         f'fields {popular_fields}; sort popularity desc; limit 6;')
-        self.assertEqual(mock_post.call_args[1]['url'],
+                         f'fields {popular_fields}; sort popularity desc; limit 6; offset 0;')
+        self.assertEqual(mock_post.call_args[1]['url'], 
                          'https://api-v3.igdb.com/games/')
         # Test response contains expected result
         self.assertEqual(response.json(), expected_dict)
