@@ -49,3 +49,35 @@
 .modal .stars {
   margin-top: 0;
 }
+
+.modal .ui.selection.dropdown {
+  box-shadow: inset 1px 0 5px rgba(0, 0, 0, 0.1) !important;
+  min-height: 1rem;
+  padding: 0.5em 2.1em 0.5em 1em;
+}
+
+.modal .ui.selection.dropdown > .dropdown.icon {
+  top: 0.5em;
+}
+
+.modal .ui.selection.dropdown,
+.modal .ui.selection.dropdown .menu {
+  background: #9ab;
+  border: 1px solid #9ab !important;
+}
+
+.ui.active.visible.selection.dropdown > .text{
+  color: #234 !important;
+}
+
+.modal .ui.selection.dropdown .text {
+  text-shadow: none;
+  font-family: "Segoe UI", sans-serif;
+  font-weight: 300;
+  font-size: 0.9rem;
+  color: #234;
+}
+
+.ui.selection.dropdown .menu > .item {
+  border-top: none;
+}
