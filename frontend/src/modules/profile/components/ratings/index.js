@@ -14,7 +14,7 @@ class Ratings extends React.Component {
   }
 
   componentWillMount() {
-    this.props.loadRatings(this.props.userId);
+    this.props.loadRatings(this.props.username);
   }
 
   processRatings = data => {
