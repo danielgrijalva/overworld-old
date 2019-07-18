@@ -14,18 +14,19 @@ class ActionsTests(APITestCase):
         }
         self.user = CustomUser.objects.create(**user_data)
         self.game = Game.objects.create(
-                        igdb=1074,
-                        name='Super Mario 64',
-                        slug='super-mario-64',
-                        cover_id='iwe8jlk21lmf',
-                        backdrop_id='i43a2ksd901R43'
-                    )
+            igdb=1074,
+            name='Super Mario 64',
+            slug='super-mario-64',
+            cover_id='iwe8jlk21lmf',
+            backdrop_id='i43a2ksd901R43'
+        )
         self.client.force_authenticate(user=self.user)
 
     def test_get_actions(self):
         """Ensure we can retrieve the actions between a user and a game."""
         url = reverse('get-actions')
-        data = {'igdb': self.game.igdb, 'name': self.game.name, 'slug': self.game.slug}
+        data = {'igdb': self.game.igdb,
+                'name': self.game.name, 'slug': self.game.slug}
         response = self.client.get(url, data, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -34,12 +35,12 @@ class ActionsTests(APITestCase):
         """Ensure we can log and unlog a game."""
         url = reverse('log-game')
         data = {
-                'igdb': self.game.igdb,
-                'name': self.game.name,
-                'slug': self.game.slug,
-                'cover_id': self.game.cover_id,
-                'backdrop_id': self.game.backdrop_id
-            }
+            'igdb': self.game.igdb,
+            'name': self.game.name,
+            'slug': self.game.slug,
+            'cover_id': self.game.cover_id,
+            'backdrop_id': self.game.backdrop_id
+        }
 
         log = self.client.post(url, data, format='json')
         self.assertEqual(True, log.data['value'])
@@ -51,12 +52,12 @@ class ActionsTests(APITestCase):
         """Ensure we can like and unlike a game."""
         url = reverse('like-game')
         data = {
-                'igdb': self.game.igdb,
-                'name': self.game.name,
-                'slug': self.game.slug,
-                'cover_id': self.game.cover_id,
-                'backdrop_id': self.game.backdrop_id
-            }
+            'igdb': self.game.igdb,
+            'name': self.game.name,
+            'slug': self.game.slug,
+            'cover_id': self.game.cover_id,
+            'backdrop_id': self.game.backdrop_id
+        }
 
         like = self.client.post(url, data, format='json')
         self.assertEqual(True, like.data['value'])
@@ -68,12 +69,12 @@ class ActionsTests(APITestCase):
         """Ensure we can add and remove a game from our backlog."""
         url = reverse('add-to-backlog')
         data = {
-                'igdb': self.game.igdb,
-                'name': self.game.name,
-                'slug': self.game.slug,
-                'cover_id': self.game.cover_id,
-                'backdrop_id': self.game.backdrop_id
-            }
+            'igdb': self.game.igdb,
+            'name': self.game.name,
+            'slug': self.game.slug,
+            'cover_id': self.game.cover_id,
+            'backdrop_id': self.game.backdrop_id
+        }
 
         add = self.client.post(url, data, format='json')
         self.assertEqual(True, add.data['value'])
@@ -85,12 +86,12 @@ class ActionsTests(APITestCase):
         """Ensure we can add and remove a game from our wishlist."""
         url = reverse('add-to-wishlist')
         data = {
-                'igdb': self.game.igdb,
-                'name': self.game.name,
-                'slug': self.game.slug,
-                'cover_id': self.game.cover_id,
-                'backdrop_id': self.game.backdrop_id
-            }
+            'igdb': self.game.igdb,
+            'name': self.game.name,
+            'slug': self.game.slug,
+            'cover_id': self.game.cover_id,
+            'backdrop_id': self.game.backdrop_id
+        }
 
         add = self.client.post(url, data, format='json')
         self.assertEqual(True, add.data['value'])
@@ -140,7 +141,7 @@ class ActionsTests(APITestCase):
 
         self.assertEqual(negative.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(big.status_code, status.HTTP_400_BAD_REQUEST)
-    
+
     def test_add_journal_entry(self):
         """Ensure we can add a journal entry."""
         url = reverse('journal')
@@ -156,11 +157,13 @@ class ActionsTests(APITestCase):
             'review': 'cool game',
             'spoilers': False,
             'liked': True,
-            'rating': 5
+            'rating': 5,
+            'entry_type': 'Finished',
+            'platform': 'PC',
         }
         response = self.client.post(url, data, format='json')
 
-        self.assertEqual(response.status_code, status.HTTP_200_OK)     
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_get_journal_entries(self):
         """Ensure we can obtain a user's journal."""
@@ -177,7 +180,9 @@ class ActionsTests(APITestCase):
             'review': 'cool game',
             'spoilers': False,
             'liked': True,
-            'rating': 5
+            'rating': 5,
+            'entry_type': 'Finished',
+            'platform': 'PC',
         }
         expected = [{
             'year': 2019,
@@ -185,72 +190,73 @@ class ActionsTests(APITestCase):
                 {
                     'month': 6,
                     'entries': [
-                    {
-                        'id': 1,
-                        'game': {
-                            'igdb': 1074,
-                            'name': 'Super Mario 64',
-                            'slug': 'super-mario-64',
-                            'cover_id': 'iwe8jlk21lmf',
-                            'backdrop_id': 'i43a2ksd901R43'
-                        },
-                        'date': '2019-06-28',
-                        'review': 'cool game',
-                        'spoilers': False,
-                        'liked': True,
-                        'rating': '5.0',
-                        'user': 1
-                    }
+                        {
+                            'id': 1,
+                            'game': {
+                                'igdb': 1074,
+                                'name': 'Super Mario 64',
+                                'slug': 'super-mario-64',
+                                'cover_id': 'iwe8jlk21lmf',
+                                'backdrop_id': 'i43a2ksd901R43'
+                            },
+                            'date': '2019-06-28',
+                            'review': 'cool game',
+                            'spoilers': False,
+                            'liked': True,
+                            'rating': '5.0',
+                            'user': 1,
+                            'entry_type': 'Finished',
+                            'platform': 'PC',
+                        }
                     ]
                 }
             ]
         }]
         response = self.client.post(url, data, format='json')
-        response = self.client.get(url, {'username': 'testing'} ,format='json')
+        response = self.client.get(url, {'username': 'testing'}, format='json')
 
-        self.assertEqual(response.data, expected)             
-        self.assertEqual(response.status_code, status.HTTP_200_OK)     
-        
+        self.assertEqual(response.data, expected)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
     def test_add_favorite_game(self):
         url = reverse('add-favorite')
-        data =  {
-                'igdb': self.game.igdb,
-                'name': self.game.name,
-                'slug': self.game.slug,
-                'cover_id': self.game.cover_id,
-                'backdrop_id': self.game.backdrop_id
-            }
+        data = {
+            'igdb': self.game.igdb,
+            'name': self.game.name,
+            'slug': self.game.slug,
+            'cover_id': self.game.cover_id,
+            'backdrop_id': self.game.backdrop_id
+        }
 
         response = self.client.post(url, data, format='json')
         self.assertEqual(self.game, self.user.favorites.all()[0])
 
     def test_remove_favorite_game(self):
         url = reverse('remove-favorite')
-        data =  {
-                'igdb': self.game.igdb,
-                'name': self.game.name,
-                'slug': self.game.slug,
-                'cover_id': self.game.cover_id,
-                'backdrop_id': self.game.backdrop_id
-            }
+        data = {
+            'igdb': self.game.igdb,
+            'name': self.game.name,
+            'slug': self.game.slug,
+            'cover_id': self.game.cover_id,
+            'backdrop_id': self.game.backdrop_id
+        }
         # add the game first
         self.client.post(reverse('add-favorite'), data, format='json')
         response = self.client.post(url, data, format='json')
 
         self.assertFalse(len(self.user.favorites.all()))
-    
+
     def test_get_favorite_games(self):
         url = reverse('get-favorites')
-        data =  {
-                'igdb': self.game.igdb,
-                'name': self.game.name,
-                'slug': self.game.slug,
-                'cover_id': self.game.cover_id,
-                'backdrop_id': self.game.backdrop_id
-            }
+        data = {
+            'igdb': self.game.igdb,
+            'name': self.game.name,
+            'slug': self.game.slug,
+            'cover_id': self.game.cover_id,
+            'backdrop_id': self.game.backdrop_id
+        }
         # add the game first
         self.client.post(reverse('add-favorite'), data, format='json')
         response = self.client.get(url, format='json')
 
         self.assertEqual(response.json(), [data])
-                
