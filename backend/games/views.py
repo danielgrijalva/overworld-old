@@ -108,7 +108,7 @@ def get_popular_games(request):
     offset = int(request.GET.get("offset", 0))
     offset = offset if offset >= 0 and offset < 150 else 0
 
-    filters = request.GET.get("filters", {})
+    filters = request.GET.get("filters", '{}')
     filters = json.loads(filters)
 
     conditions = ""
