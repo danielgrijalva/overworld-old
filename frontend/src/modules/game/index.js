@@ -23,20 +23,20 @@ export default class Game extends React.Component {
       isLoading: true
     };
   }
-  //call this function to update state of a new game
 
+  componentWillMount() {
+    var gameSlug = this.props.match.params.slug;
+    this.resetState(gameSlug);
+    this.loadGame(gameSlug);
+  }
+  
+  //call this function to update state of a new game
   componentDidUpdate() {
     if (this.props.match.params.slug !== this.state.gameSlug) {
       const gameSlug = this.props.match.params.slug;
       this.resetState(gameSlug);
       this.loadGame(gameSlug);
     }
-  }
-
-  componentWillMount() {
-    var gameSlug = this.props.match.params.slug;
-    this.resetState(gameSlug);
-    this.loadGame(gameSlug);
   }
 
   //resets game state
@@ -55,9 +55,9 @@ export default class Game extends React.Component {
         game: res.data[0],
         isLoading: false
       });
-      console.log(this.state.game);
     });
   };
+  
   //either returns a developer or an empty array
   getDeveloperName = companies => {
     var dev = companies.find(c => {
