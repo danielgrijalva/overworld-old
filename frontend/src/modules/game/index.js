@@ -74,7 +74,7 @@ export default class Game extends React.Component {
         <Container>
           <Grid className="game" centered>
             {!isLoading && this.state.game.screenshots && (
-              <Backdrop image_id={game.screenshots[0].image_id} />
+              <Backdrop imageId={game.screenshots[0].image_id} />
             )}
             <Grid.Row className="game-content">
               <React.Fragment>
