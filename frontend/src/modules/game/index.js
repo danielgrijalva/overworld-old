@@ -14,7 +14,7 @@ import {
 } from "./components/";
 import "./styles.css";
 
-class Game extends React.Component {
+export default class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,10 +23,11 @@ class Game extends React.Component {
       isLoading: true
     };
   }
+  //call this function to update state of a new game
 
-  componentWillReceiveProps(props) {
-    if (props.match.params.slug !== this.state.gameSlug) {
-      const gameSlug = props.match.params.slug;
+  componentDidUpdate() {
+    if (this.props.match.params.slug !== this.state.gameSlug) {
+      const gameSlug = this.props.match.params.slug;
       this.resetState(gameSlug);
       this.loadGame(gameSlug);
     }
@@ -38,6 +39,7 @@ class Game extends React.Component {
     this.loadGame(gameSlug);
   }
 
+  //resets game state
   resetState = gameSlug => {
     this.setState({
       gameSlug: gameSlug,
@@ -46,18 +48,20 @@ class Game extends React.Component {
     });
   };
 
+  //loads the new game
   loadGame = gameSlug => {
     axios.get(`/api/games/${gameSlug}`).then(res => {
       this.setState({
         game: res.data[0],
         isLoading: false
       });
+      console.log(this.state.game);
     });
   };
-
+  //either returns a developer or an empty array
   getDeveloperName = companies => {
     var dev = companies.find(c => {
-      return c.developer === true;
+      return c.developer === true || {};
     });
 
     return dev.company.name;
@@ -69,7 +73,9 @@ class Game extends React.Component {
       <React.Fragment>
         <Container>
           <Grid className="game" centered>
-            {!isLoading && <Backdrop imageId={game.screenshots[1].image_id} />}
+            {!isLoading && this.state.game.screenshots && (
+              <Backdrop image_id={game.screenshots[0].image_id} />
+            )}
             <Grid.Row className="game-content">
               <React.Fragment>
                 <Grid.Column width={4}>
@@ -103,7 +109,8 @@ class Game extends React.Component {
                       )}
                       <small className="company">
                         <a href="/">
-                          {this.getDeveloperName(game.involved_companies)}
+                          {game.involved_companies &&
+                            this.getDeveloperName(game.involved_companies)}
                         </a>
                       </small>
                     </section>
@@ -151,5 +158,3 @@ Game.propTypes = {
     })
   })
 };
-
-export default Game;

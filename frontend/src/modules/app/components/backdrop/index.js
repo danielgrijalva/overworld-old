@@ -6,42 +6,47 @@ import "./styles.css";
 
 export default class Backdrop extends React.Component {
   render() {
-    const { imageId } = this.props;
-    const thumb = `https://images.igdb.com/igdb/image/upload/t_cover_small/${imageId}.jpg`;
-    const actual = `https://images.igdb.com/igdb/image/upload/t_1080p/${imageId}.jpg`;
-    return (
-      <Container className="backdrop">
-        <div className="backdrop-container">
-          <div className="backdrop-wrapper">
-            <LazyImage
-              src={actual}
-              placeholder={({ imageProps, ref }) => (
-                <div
-                  {...imageProps}
-                  ref={ref}
-                  className="backdrop-placeholder"
-                  style={{
-                    backgroundImage: `url(${thumb})`
-                  }}
-                />
-              )}
-              actual={() => (
-                <div
-                  style={{
-                    backgroundImage: `url(${actual})`
-                  }}
-                  className="backdrop-actual"
-                />
-              )}
-            />
-            <div className="backdrop-mask" />
+    const { image_id } = this.props || {};
+    const thumb = `https://images.igdb.com/igdb/image/upload/t_cover_small/${image_id}.jpg`;
+    const actual = `https://images.igdb.com/igdb/image/upload/t_1080p/${image_id}.jpg`;
+    if (this.props.image_id) {
+      console.log("image is available!");
+      return (
+        <Container className="backdrop">
+          <div className="backdrop-container">
+            <div className="backdrop-wrapper">
+              <LazyImage
+                src={actual}
+                placeholder={({ imageProps, ref }) => (
+                  <div
+                    {...imageProps}
+                    ref={ref}
+                    className="backdrop-placeholder"
+                    style={{
+                      backgroundImage: `url(${thumb})`
+                    }}
+                  />
+                )}
+                actual={() => (
+                  <div
+                    style={{
+                      backgroundImage: `url(${actual})`
+                    }}
+                    className="backdrop-actual"
+                  />
+                )}
+              />
+              <div className="backdrop-mask" />
+            </div>
           </div>
-        </div>
-      </Container>
-    );
+        </Container>
+      );
+    } else {
+      return <span>No image available</span>;
+    }
   }
 }
 
 Backdrop.propTypes = {
-  imageId: PropTypes.string.isRequired
+  image_id: PropTypes.string.isRequired
 };

@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "font-awesome": "^4.7.0",
     "i18n-iso-countries": "^4.1.0",
     "moment": "^2.24.0",
+    "nodemon": "^1.19.1",
     "react": "^16.8.6",
     "react-content-loader": "^4.2.1",
     "react-dates": "^20.2.4",
