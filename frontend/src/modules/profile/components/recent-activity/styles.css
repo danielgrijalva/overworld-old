@@ -1,0 +1,13 @@
+.recent-wrapper .icon {
+  opacity: 0.75;
+}
+
+.recent-wrapper .rating {
+    margin-right: .3rem;
+    display: inline;
+}
+
+.activity-icons {
+  margin-top: 0.35rem;
+  float: left;
+}

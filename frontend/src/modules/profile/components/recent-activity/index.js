@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { Divider, Message, Image } from "semantic-ui-react";
+import { Divider, Message, Image, Icon } from "semantic-ui-react";
 import { loadActivity } from "../../actions";
 import "./styles.css";
 
@@ -16,6 +16,23 @@ class RecentActivity extends React.Component {
       stars += "½";
     }
     return stars;
+  };
+
+  getEntryType = type => {
+    switch (type) {
+      case "F":
+        return "check circle";
+      case "P":
+        return "play circle";
+      case "R":
+        return "redo";
+      case "S":
+        return "plus";
+      case "A":
+        return "times circle";
+      default:
+        return null;
+    }
   };
 
   render() {
@@ -38,7 +55,14 @@ class RecentActivity extends React.Component {
                       className="cover"
                     />
                   </Link>
-                  <span>{this.stringifyStars(g.rating)}</span>
+                  <p className="activity-icons">
+                    <span className="rating">
+                      {this.stringifyStars(g.rating)}
+                    </span>
+                    <Icon name={this.getEntryType(g.entry_type)} />
+                    {g.liked && <Icon name="heart" />}
+                    {g.review && <Icon name="align left" />}
+                  </p>
                 </div>
               );
             })}
