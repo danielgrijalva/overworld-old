@@ -18,7 +18,7 @@ class GenreFilter extends React.Component {
 
   handleResultSelect = (e, { result }) => {
     this.setState({ value: result.name });
-    this.props.setFilter(result.name, this);
+    this.props.setFilter(result, this);
   };
 
   handleSearchChange = (e, { value }) => {

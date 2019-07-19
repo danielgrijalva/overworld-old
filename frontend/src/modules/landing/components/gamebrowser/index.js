@@ -108,7 +108,7 @@ class GameBrowser extends React.Component {
 
   removeFilters = (key, filter) => {
     let filters = { ...this.state.filters };
-    filters[key] = filters[key].filter(val => val !== filter); //remove element of value filter from the array
+    filters[key] = filters[key].filter(val => val.name !== filter.name); //remove element of value filter from the array
     this.setState({
       ...this.state,
       filters: filters,
@@ -141,8 +141,8 @@ class GameBrowser extends React.Component {
               <React.Fragment key={key}>
                 {filters[key].map(filter => {
                   return (
-                    <Label key={key + filter}>
-                      {key}: {filter}
+                    <Label key={key + filter.name}>
+                      {key}: {filter.name}
                       <Button onClick={() => this.removeFilters(key, filter)}>
                         ×
                       </Button>
@@ -218,7 +218,7 @@ class GameBrowser extends React.Component {
       filteredGames = filteredGames.filter(
         game =>
           game.genres &&
-          filters.genre.every(filter => game.genres.map(genre => genre.name).includes(filter))
+          filters.genre.every(filter => game.genres.map(genre => genre.name).includes(filter.name))
       );
     }
     return filteredGames;

@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from .fields import game_fields, search_fields, popular_fields, backdrop_fields
 from .models import Game
 from django.utils.datastructures import MultiValueDictKeyError
+import json
 
 @api_view(['GET'])
 def get_games(request):
@@ -100,14 +101,26 @@ def get_popular_games(request):
     """
     
 
-    #get parameters with defaults and check 
+    #get parameters with defaults and check bounds
     limit = int(request.GET.get("limit", 6)) 
     limit = limit if limit < 50 and limit > 0 else 6 
 
     offset = int(request.GET.get("offset", 0))
     offset = offset if offset >= 0 and offset < 150 else 0
 
-    data = f'fields {popular_fields}; sort popularity desc; limit {limit}; offset {offset};'
+    filters = request.GET.get("filters", {})
+    filters = json.loads(filters)
+
+    conditions = ""
+    if 'genre' in filters:
+        ids = tuple([x['id'] for x in filters['genre']]) if len(filters['genre']) > 1 else filters['genre'][0]['id'] #create list of id's in format required by IGDB api
+        conditions += f"where genres={ids};"
+    if 'date' in filters:
+        pass
+    if 'developer' in filters:
+        pass
+    
+    data = f'fields {popular_fields}; sort popularity desc; limit {limit}; offset {offset};' + conditions
     headers = {'user-key': settings.IGDB_KEY}
     url = settings.IGDB_URL.format(endpoint='games')
     r = requests.post(url=url, data=data, headers=headers)
