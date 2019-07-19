@@ -220,7 +220,6 @@ class Profile extends Component {
                         )}
                       </Message>
                     )}
-                    <Divider horizontal>Ratings</Divider>
                     <Divider horizontal>Lists</Divider>
                   </Grid.Column>
                 </Grid.Row>
