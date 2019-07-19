@@ -8,16 +8,17 @@ import "./styles.css";
 countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
 
 const Details = ({ game }) => {
-  const gameCountries = [
-    ...new Set(
-      game.involved_companies &&
-        game.involved_companies
-          .filter(companyInfo => companyInfo.company.country !== undefined)
-          .map(companyInfo =>
-            countries.getName(companyInfo.company.country, "en")
-          )
-    )
-  ];
+  const gameCountries = game.involved_companies
+    ? [
+        ...new Set(
+          game.involved_companies
+            .filter(companyInfo => companyInfo.company.country !== undefined)
+            .map(companyInfo =>
+              countries.getName(companyInfo.company.country, "en")
+            )
+        )
+      ]
+    : [];
 
   return (
     <Tab
@@ -29,23 +30,7 @@ const Details = ({ game }) => {
           render: () => (
             <Tab.Pane className="details" attached={false}>
               <Grid>
-                <Grid.Row>
-                  <Grid.Column width={8}>
-                    <h3>
-                      <span>Country</span>
-                    </h3>
-                  </Grid.Column>
-                  <Grid.Column width={8} className="details">
-                    <Label>
-                      {game.involved_companies &&
-                        countries.getName(
-                          game.involved_companies[0].company.country,
-                          "en"
-                        )}
-                    </Label>
-                  </Grid.Column>
-                </Grid.Row>
-                {gameCountries.length > 0 && (
+                {gameCountries && (
                   <Grid.Row>
                     <Grid.Column width={8}>
                       <h3>
@@ -107,7 +92,7 @@ const Details = ({ game }) => {
                       })}
                   </Grid.Column>
                 </Grid.Row>
-                {game.time_to_beat && game.time_to_beat.normally !== undefined && (
+                {game.time_to_beat && (
                   <Grid.Row>
                     <Grid.Column width={8}>
                       <h3>
@@ -116,7 +101,9 @@ const Details = ({ game }) => {
                     </Grid.Column>
                     <Grid.Column width={8} className="details">
                       <Label>
-                        {Math.floor(game.time_to_beat.normally / 3600)} hours
+                        {game.time_to_beat &&
+                          Math.floor(game.time_to_beat.normally / 3600)}{" "}
+                        hours
                       </Label>
                     </Grid.Column>
                   </Grid.Row>
@@ -142,12 +129,10 @@ const Details = ({ game }) => {
             <Tab.Pane attached={false}>
               {game.genres &&
                 game.genres.map(g => {
-                  console.log(typeof game.genres && game);
-                  return <Label key={g.index}>{g.name}</Label>;
+                  return <Label key={g.id}>{g.name}</Label>;
                 })}
               {game.themes &&
                 game.themes.map(t => {
-                  console.log(typeof game.themes);
                   return <Label key={t.id}>{t.name}</Label>;
                 })}
             </Tab.Pane>

@@ -14,7 +14,7 @@ import {
 } from "./components/";
 import "./styles.css";
 
-class Game extends React.Component {
+export default class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,14 +32,6 @@ class Game extends React.Component {
       this.loadGame(gameSlug);
     }
   }
-  /*
-  componentWillReceiveProps(props) {
-    if (props.match.params.slug !== this.state.gameSlug) {
-      const gameSlug = props.match.params.slug;
-      this.resetState(gameSlug);
-      this.loadGame(gameSlug);
-    }
-  }*/
 
   componentWillMount() {
     var gameSlug = this.props.match.params.slug;
@@ -59,14 +51,14 @@ class Game extends React.Component {
   //loads the new game
   loadGame = gameSlug => {
     axios.get(`/api/games/${gameSlug}`).then(res => {
-      console.log(res.data[0]);
       this.setState({
         game: res.data[0],
         isLoading: false
       });
+      console.log(this.state.game);
     });
   };
-
+  //either returns a developer or an empty array
   getDeveloperName = companies => {
     var dev = companies.find(c => {
       return c.developer === true || {};
@@ -81,7 +73,9 @@ class Game extends React.Component {
       <React.Fragment>
         <Container>
           <Grid className="game" centered>
-            {!isLoading && <Backdrop imageId={game.cover.image_id} />}
+            {!isLoading && this.state.game.screenshots && (
+              <Backdrop image_id={game.screenshots[0].image_id} />
+            )}
             <Grid.Row className="game-content">
               <React.Fragment>
                 <Grid.Column width={4}>
@@ -164,5 +158,3 @@ Game.propTypes = {
     })
   })
 };
-
-export default Game;
