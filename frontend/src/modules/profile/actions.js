@@ -6,7 +6,8 @@ import {
   EDIT_PROFILE_SUCCESS,
   LOAD_JOURNAL,
   REFRESH_AVATAR,
-  LOAD_RATINGS
+  LOAD_RATINGS,
+  LOAD_ACTIVITY
 } from "./actionTypes";
 import { tokenConfig } from "../app/actions";
 
@@ -95,16 +96,30 @@ export const loadJournal = username => dispatch => {
     });
 };
 
-export const loadRatings = user_id => dispatch => {
+export const loadRatings = username => dispatch => {
   axios
-    .get("/api/users/profile/ratings", {
+    .get(`/api/users/profile/${username}/ratings`)
+    .then(res => {
+      dispatch({
+        type: LOAD_RATINGS,
+        payload: res.data
+      });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+export const loadActivity = username => dispatch => {
+  axios
+    .get(`/api/users/profile/${username}/activity`, {
       params: {
-        user_id: user_id
+        limit: 5
       }
     })
     .then(res => {
       dispatch({
-        type: LOAD_RATINGS,
+        type: LOAD_ACTIVITY,
         payload: res.data
       });
     })

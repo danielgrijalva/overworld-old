@@ -2,6 +2,8 @@ from django.contrib.auth import authenticate
 from rest_framework.validators import UniqueValidator
 from rest_framework import serializers
 from libgravatar import Gravatar
+from actions.models import Journal
+from games.serializers import GameSerializer
 from .models import CustomUser
 
 
@@ -41,6 +43,13 @@ class ProfileSerializer(serializers.ModelSerializer):
             'following',
             'followers',
         )
+
+
+class RecentActivitySerializer(serializers.ModelSerializer):
+    game = GameSerializer(read_only=True)
+    class Meta:
+        model = Journal
+        fields = '__all__'
 
 
 class RegisterSerializer(serializers.ModelSerializer):

@@ -13,7 +13,13 @@ import {
 } from "semantic-ui-react";
 import { Backdrop, Footer, Cover, ListPreview } from "../app/components/";
 import { loadProfile, follow, unfollow } from "./actions";
-import { ProfileNav, Stats, Journal, Ratings } from "./components";
+import {
+  ProfileNav,
+  Stats,
+  Journal,
+  Ratings,
+  RecentActivity
+} from "./components";
 import "./styles.css";
 
 class Profile extends Component {
@@ -156,14 +162,7 @@ class Profile extends Component {
                         )}
                       </Message>
                     )}
-                    <Divider horizontal>Recent Activity</Divider>
-                    <div className="recent-wrapper">
-                      <React.Fragment>
-                        {[...Array(5)].map((_, i) => (
-                          <div key={i} className="placeholder" />
-                        ))}
-                      </React.Fragment>
-                    </div>
+                    <RecentActivity username={username} />
                     <Divider horizontal>Reviews</Divider>
                     <div className="review">
                       <div className="review-placeholder" />
@@ -187,7 +186,7 @@ class Profile extends Component {
                     <Journal me={me} username={username} />
                     <Ratings
                       showAverage={false}
-                      userId={me.id}
+                      username={username}
                       height={55}
                       width={225}
                     />
