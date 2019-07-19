@@ -135,8 +135,9 @@
 
 @media only screen and (max-width: 767px) and (min-width: 320px) {
   .placeholder {
-    width: 82px;
-    height: 116.6px;
+    width: 85px;
+    height: 120.8px;
+    margin: 0 0.75rem 0 0;
   }
   .ui.tiny.statistic > .value {
     font-size: 1.47rem !important;
@@ -149,8 +150,9 @@
 
 @media only screen and (max-width: 991px) and (min-width: 768px) {
   .placeholder {
-    width: 79px;
-    height: 112.3px;
+    width: 85px;
+    height: 120.8px;
+    margin: 0 0.75rem 0 0;
   }
 
   .ui.tiny.statistic > .value {
@@ -164,7 +166,8 @@
 
 @media only screen and (max-width: 1199px) and (min-width: 992px) {
   .placeholder {
-    width: 108px;
-    height: 153.6px;
+    width: 111px;
+    height: 157.8px;
+    margin: 0 1rem 0 0;
   }
 }
