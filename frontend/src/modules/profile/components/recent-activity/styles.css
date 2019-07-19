@@ -1,10 +1,13 @@
 .recent-wrapper .icon {
   opacity: 0.75;
+  color: #678;
 }
 
 .recent-wrapper .rating {
-    margin-right: .3rem;
-    display: inline;
+  margin-right: 0.3rem;
+  display: inline;
+  color: #678;
+  cursor: default;
 }
 
 .activity-icons {
