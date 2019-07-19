@@ -64,3 +64,11 @@
   border: 1px solid #2f353c;
   border-radius: 5px;
 }
+
+.remove-button{
+  margin: 3px;
+}
+
+.remove-button:hover{
+  color:#c4000a;
+}

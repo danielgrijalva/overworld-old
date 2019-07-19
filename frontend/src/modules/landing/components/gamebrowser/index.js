@@ -6,8 +6,13 @@ import Moment from "react-moment";
 import { Button, Card, Label, Dropdown } from "semantic-ui-react";
 import { Backdrop } from "../../../app/components";
 import { TileCoverLoader, TextLoader } from "../../../game/components";
-import {GenreFilter, DateFilter, DeveloperFilter} from "../filters";
-
+import { GenreFilter, DateFilter, DeveloperFilter } from "../filters";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faXbox,
+  faPlaystation,
+  faSteam,
+} from "@fortawesome/free-brands-svg-icons";
 
 const pickers = [
   { key: "genre", text: "Genre", value: "Genre" },
@@ -62,6 +67,21 @@ class GameBrowser extends React.Component {
       return "Not Found";
     };
 
+    const getPlatformIcons = platforms => {
+      return (
+        <React.Fragment>
+          {platforms.map(platform => {
+            let icon = null;
+
+            if (platform.name.includes("PC")) icon = faSteam;
+            else if (platform.name.includes("Playstation"))
+              icon = faPlaystation;
+            else if (platform.name.includes("Xbox")) icon = faXbox;
+            return <FontAwesomeIcon icon={icon} size={"sm"} />;
+          })}
+        </React.Fragment>
+      );
+    };
     if (game) {
       const description = game.summary
         ? game.summary.slice(0, 100) + "..."
@@ -83,6 +103,8 @@ class GameBrowser extends React.Component {
 
       const header = game.name ? game.name : null;
 
+      const platforms = game.platforms ? game.platforms : [];
+
       return (
         <Card
           className="game-card"
@@ -92,6 +114,7 @@ class GameBrowser extends React.Component {
           description={description}
           href={"/games/" + game.slug}
           key={key}
+          extra={getPlatformIcons(platforms)}
         />
       );
     } else {
@@ -136,16 +159,22 @@ class GameBrowser extends React.Component {
         </div>
         {/*Render labels for existing filters*/}
         <div className="filter-labels">
+          <Label size={"large"} pointing={"right"}>
+            Active Filters:
+          </Label>
           {Object.keys(filters).map(key => {
             return (
               <React.Fragment key={key}>
                 {filters[key].map(filter => {
                   return (
-                    <Label key={key + filter.name}>
+                    <Label key={key + filter.name} size={"large"}>
                       {key}: {filter.name}
-                      <Button onClick={() => this.removeFilters(key, filter)}>
+                      <span
+                        className="remove-button"
+                        onClick={() => this.removeFilters(key, filter)}
+                      >
                         ×
-                      </Button>
+                      </span>
                     </Label>
                   );
                 })}
@@ -194,10 +223,13 @@ class GameBrowser extends React.Component {
     if (filter instanceof GenreFilter && !filters.genre.includes(result))
       filters.genre.push(result);
     else if (filter instanceof DateFilter && !filters.date.includes(result))
-      filters.date.push(result)
-    else if (filter instanceof DeveloperFilter && !filters.developer.includes(result))
-      filters.developer.push(result)
-    else return //return if no new filters added
+      filters.date.push(result);
+    else if (
+      filter instanceof DeveloperFilter &&
+      !filters.developer.includes(result)
+    )
+      filters.developer.push(result);
+    else return; //return if no new filters added
 
     const filteredGames = this.applyFilters(filters);
 
@@ -218,7 +250,9 @@ class GameBrowser extends React.Component {
       filteredGames = filteredGames.filter(
         game =>
           game.genres &&
-          filters.genre.every(filter => game.genres.map(genre => genre.name).includes(filter.name))
+          filters.genre.every(filter =>
+            game.genres.map(genre => genre.name).includes(filter.name)
+          )
       );
     }
     return filteredGames;
