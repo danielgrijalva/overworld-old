@@ -29,7 +29,7 @@ export default class Game extends React.Component {
     this.resetState(gameSlug);
     this.loadGame(gameSlug);
   }
-  
+
   //call this function to update state of a new game
   componentDidUpdate() {
     if (this.props.match.params.slug !== this.state.gameSlug) {
@@ -57,12 +57,14 @@ export default class Game extends React.Component {
       });
     });
   };
-  
+
   //either returns a developer or an empty array
-  getDeveloperName = companies => {
+  getPublisherName = companies => {
+    console.log(companies);
     var dev = companies.find(c => {
-      return c.developer === true || {};
+      return c.publisher;
     });
+    console.log(dev);
 
     return dev.company.name;
   };
@@ -110,7 +112,7 @@ export default class Game extends React.Component {
                       <small className="company">
                         <a href="/">
                           {game.involved_companies &&
-                            this.getDeveloperName(game.involved_companies)}
+                            this.getPublisherName(game.involved_companies)}
                         </a>
                       </small>
                     </section>
