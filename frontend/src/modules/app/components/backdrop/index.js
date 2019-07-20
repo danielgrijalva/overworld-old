@@ -6,11 +6,10 @@ import "./styles.css";
 
 export default class Backdrop extends React.Component {
   render() {
-    const { image_id } = this.props || {};
-    const thumb = `https://images.igdb.com/igdb/image/upload/t_cover_small/${image_id}.jpg`;
-    const actual = `https://images.igdb.com/igdb/image/upload/t_1080p/${image_id}.jpg`;
-    if (this.props.image_id) {
-      console.log("image is available!");
+    const { imageId } = this.props;
+    const thumb = `https://images.igdb.com/igdb/image/upload/t_cover_small/${imageId}.jpg`;
+    const actual = `https://images.igdb.com/igdb/image/upload/t_1080p/${imageId}.jpg`;
+    if (imageId) {
       return (
         <Container className="backdrop">
           <div className="backdrop-container">
@@ -42,11 +41,11 @@ export default class Backdrop extends React.Component {
         </Container>
       );
     } else {
-      return <span>No image available</span>;
+      return null;
     }
   }
 }
 
 Backdrop.propTypes = {
-  image_id: PropTypes.string.isRequired
+  imageId: PropTypes.string.isRequired
 };

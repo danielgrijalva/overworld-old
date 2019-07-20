@@ -66,10 +66,13 @@ class RecentActivity extends React.Component {
                 </div>
               );
             })}
+            {[...Array(5-activity.length)].map((_, i) => (
+              <div key={i} className="placeholder" />
+            ))}
           </div>
         ) : (
           <Message className="no-content">
-            <p>No activity.</p>
+            <p>{this.props.username} has not been playing much...</p>
           </Message>
         )}
       </React.Fragment>
