@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import Moment from "react-moment";
 import { Container, Grid } from "semantic-ui-react";
-import { Backdrop, Footer, Cover } from "../app/components/";
+import { Backdrop, Footer, Cover, Ratings } from "../app/components/";
 import {
   Details,
   CoverLoader,
@@ -20,6 +20,7 @@ export default class Game extends React.Component {
     this.state = {
       gameSlug: "",
       game: {},
+      ratings: [],
       isLoading: true
     };
   }
@@ -28,8 +29,9 @@ export default class Game extends React.Component {
     var gameSlug = this.props.match.params.slug;
     this.resetState(gameSlug);
     this.loadGame(gameSlug);
+    this.loadGameRatings(gameSlug);
   }
-  
+
   //call this function to update state of a new game
   componentDidUpdate() {
     if (this.props.match.params.slug !== this.state.gameSlug) {
@@ -44,6 +46,7 @@ export default class Game extends React.Component {
     this.setState({
       gameSlug: gameSlug,
       game: {},
+      ratings: [],
       isLoading: true
     });
   };
@@ -57,7 +60,15 @@ export default class Game extends React.Component {
       });
     });
   };
-  
+
+  loadGameRatings = gameSlug => {
+    axios.get(`/api/games/${gameSlug}/ratings`).then(res => {
+      this.setState({
+        ratings: res.data
+      });
+    });
+  };
+
   //either returns a developer or an empty array
   getDeveloperName = companies => {
     var dev = companies.find(c => {
@@ -119,7 +130,7 @@ export default class Game extends React.Component {
                   )}
                   <Grid>
                     <Grid.Row>
-                      <Grid.Column width={10}>
+                      <Grid.Column width={11}>
                         {/* Game summary & details */}
                         {!isLoading ? (
                           <section>
@@ -130,13 +141,19 @@ export default class Game extends React.Component {
                           <TextLoader />
                         )}
                       </Grid.Column>
-                      <Grid.Column width={6}>
+                      <Grid.Column width={5}>
                         {/* Actions menu */}
                         {!isLoading ? (
                           <Actions game={game} />
                         ) : (
                           <ActionsLoader />
                         )}
+                        <Ratings
+                          ratings={this.state.ratings}
+                          showAverage={true}
+                          height={55}
+                          width={155}
+                        />
                       </Grid.Column>
                     </Grid.Row>
                   </Grid>
