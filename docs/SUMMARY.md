@@ -40,6 +40,7 @@
 ## Testing
 
 * [Backend](testing/backend.md)
+* [Frontend](testing/frontend.md)
 
 ## Community
 

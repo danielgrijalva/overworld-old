@@ -33,5 +33,5 @@ Make sure to run that command from the project root since `coverage` is configur
 coverage run backend/manage.py test actions games users
 ```
 
-That would run tests across all of Overworld's apps.
+That would run tests across all of Overworld's backend.
 
