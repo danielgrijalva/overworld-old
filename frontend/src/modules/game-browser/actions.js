@@ -7,7 +7,7 @@ export const getGameData = gameSlugs => dispatch => {
     const slugs = gameSlugs.slice(0, 10);
     gameSlugs = gameSlugs.slice(10);
     axios
-      .get("/api/games/multi", {
+      .get("/api/games/", {
         params: {
           slugs: slugs.join(",")
         }
