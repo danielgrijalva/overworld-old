@@ -113,12 +113,12 @@ def get_popular_games(request):
 
     conditions = ""
     print(filters)
-    if len(filters['genre']):
+    if 'genre' in filters and len(filters['genre']):
         ids = tuple([x['id'] for x in filters['genre']]) if len(filters['genre']) > 1 else filters['genre'][0]['id'] #create list of id's in format required by IGDB api
         conditions += f"where genres={ids};"
-    if len(filters['date']):
+    if 'date' in filters and len(filters['date']):
         pass
-    if len(filters['genre']):
+    if 'developer' in filters and len(filters['developer']):
         pass
     
     data = f'fields {popular_fields}; sort popularity desc; limit {limit}; offset {offset};' + conditions
