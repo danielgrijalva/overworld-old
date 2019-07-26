@@ -5,14 +5,16 @@ import {
   EDIT_PROFILE_SUCCESS,
   LOAD_JOURNAL,
   LOAD_FAVORITES,
-  LOAD_RATINGS
+  LOAD_RATINGS,
+  LOAD_ACTIVITY
 } from "./actionTypes";
 
 const initialState = {
   isLoading: true,
   profile: {},
   journal: [],
-  ratings: []
+  ratings: [],
+  activity: []
 };
 
 export default function(state = initialState, action) {
@@ -53,7 +55,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         ratings: action.payload
-      }
+      };
+    case LOAD_ACTIVITY:
+      return {
+        ...state,
+        activity: action.payload
+      };
     default:
       return state;
   }

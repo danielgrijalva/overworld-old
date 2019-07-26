@@ -3,6 +3,8 @@ from django.conf import settings
 from rest_framework.decorators import api_view
 from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
+from actions.models import Ratings
+from actions.serializers import RatingSerializer
 from .fields import game_fields, search_fields, popular_fields, backdrop_fields
 from .models import Game
 from django.utils.datastructures import MultiValueDictKeyError
@@ -149,3 +151,22 @@ def get_backdrop(request, guid):
     r = requests.post(url=url, data=data, headers=headers)
 
     return Response(r.json())
+
+
+@api_view(['GET'])
+def get_game_ratings(request, slug):
+    """Endpoint for getting ratings for a game.
+
+    Supports only GET.
+
+    Args:
+        slug: slugified name of a game (unique)
+    Returns:
+        data: [{game, user_id, rating}...]
+    """
+    game = Game.objects.get(slug=slug)
+    ratings = Ratings.objects.filter(game=game)
+    serializer = RatingSerializer(ratings, many=True).data
+    
+    return Response(serializer)
+        

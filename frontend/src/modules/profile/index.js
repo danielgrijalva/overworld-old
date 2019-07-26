@@ -11,15 +11,22 @@ import {
   Button,
   Message
 } from "semantic-ui-react";
-import { Backdrop, Footer, Cover, ListPreview } from "../app/components/";
-import { loadProfile, follow, unfollow } from "./actions";
-import { ProfileNav, Stats, Journal, Ratings } from "./components";
+import {
+  Backdrop,
+  Footer,
+  Cover,
+  Ratings,
+  ListPreview
+} from "../app/components/";
+import { loadProfile, loadRatings, follow, unfollow } from "./actions";
+import { ProfileNav, Stats, Journal, RecentActivity } from "./components";
 import "./styles.css";
 
 class Profile extends Component {
   componentWillMount() {
     const { username } = this.props.match.params;
     this.props.loadProfile(username);
+    this.props.loadRatings(username);
   }
 
   render() {
@@ -156,14 +163,7 @@ class Profile extends Component {
                         )}
                       </Message>
                     )}
-                    <Divider horizontal>Recent Activity</Divider>
-                    <div className="recent-wrapper">
-                      <React.Fragment>
-                        {[...Array(5)].map((_, i) => (
-                          <div key={i} className="placeholder" />
-                        ))}
-                      </React.Fragment>
-                    </div>
+                    <RecentActivity username={username} />
                     <Divider horizontal>Reviews</Divider>
                     <div className="review">
                       <div className="review-placeholder" />
@@ -186,8 +186,8 @@ class Profile extends Component {
                     )}
                     <Journal me={me} username={username} />
                     <Ratings
+                      ratings={this.props.ratings}
                       showAverage={false}
-                      userId={me.id}
                       height={55}
                       width={225}
                     />
@@ -221,7 +221,6 @@ class Profile extends Component {
                         )}
                       </Message>
                     )}
-                    <Divider horizontal>Ratings</Divider>
                     <Divider horizontal>Lists</Divider>
                   </Grid.Column>
                 </Grid.Row>
@@ -247,10 +246,11 @@ Profile.propTypes = {
 
 const mapStateToProps = state => ({
   profile: state.profile.profile,
-  isLoading: state.profile.isLoading
+  isLoading: state.profile.isLoading,
+  ratings: state.profile.ratings
 });
 
 export default connect(
   mapStateToProps,
-  { loadProfile, follow, unfollow }
+  { loadProfile, loadRatings, follow, unfollow }
 )(Profile);

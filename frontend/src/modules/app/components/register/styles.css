@@ -1,6 +1,6 @@
 .ui.modal,
-.register > .content {
-  background: #456 !important;
+.ui.modal.register > .content {
+  background: #456;
 }
 
 .description .ui.header {
@@ -20,8 +20,6 @@
 .register {
   padding: 1rem;
 }
-
-
 
 .register .button.positive {
   margin: 0.7rem 0 1.7rem;

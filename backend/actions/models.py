@@ -16,9 +16,25 @@ class Ratings(models.Model):
         
 
 class Journal(models.Model):
+    FINISHED = 'F'
+    STARTED = 'S'
+    PLAYED = 'P'
+    ABANDONED = 'A'
+    REPLAYED = 'R'
+
+    ENTRY_TYPE_CHOICES = (
+        (FINISHED, 'Finished'),
+        (STARTED, 'Started'),
+        (PLAYED, 'Played'),
+        (ABANDONED, 'Abandoned'),
+        (REPLAYED, 'Replayed'),
+    )
+
     game = models.ForeignKey('games.Game', on_delete=models.CASCADE)
     user = models.ForeignKey('users.CustomUser', on_delete=models.CASCADE)
     date = models.DateField()
+    platform = models.CharField(max_length=64, blank=True, null=True)
+    entry_type = models.CharField(max_length=1, choices=ENTRY_TYPE_CHOICES, default=FINISHED)
     review = models.TextField(null=True)
     spoilers = models.BooleanField(null=True)
     liked = models.BooleanField(null=True)

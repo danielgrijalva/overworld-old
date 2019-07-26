@@ -2,6 +2,8 @@
   padding: 0;
   margin: 0;
   background: #14181c !important;
+  border: none;
+  box-shadow: none;
 }
 
 .tabs > .menu > a {
