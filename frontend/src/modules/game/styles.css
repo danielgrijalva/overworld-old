@@ -39,6 +39,11 @@
   font-family: Georgia, serif;
 }
 
+/*
+This is to remove <br> tags when game summary is truncated.*/
+br{content:" ";}
+br:after{content:" ";}
+
 .popup,
 .popup::before {
   background-color: #242c34 !important;
