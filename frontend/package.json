@@ -3,9 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.19",
-    "@fortawesome/free-brands-svg-icons": "^5.9.0",
-    "@fortawesome/react-fontawesome": "^0.1.4",
     "axios": "^0.18.0",
     "font-awesome": "^4.7.0",
     "i18n-iso-countries": "^4.1.0",

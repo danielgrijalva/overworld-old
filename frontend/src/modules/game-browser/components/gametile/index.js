@@ -1,16 +1,9 @@
 import React from "react";
-import {
-  faXbox,
-  faPlaystation,
-  faSteam
-} from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TileCoverLoader, TextLoader } from "../../../game/components";
-import { Card } from "semantic-ui-react";
+import { Card, Icon } from "semantic-ui-react";
 import Moment from "react-moment";
 
-
-const GameTile = ({ game, key }) => {
+const GameTile = ({ game }) => {
   const getDeveloperName = companies => {
     if (companies) {
       var dev = companies.find(c => {
@@ -27,10 +20,15 @@ const GameTile = ({ game, key }) => {
         {platforms.map(platform => {
           let icon = null;
 
-          if (platform.name.includes("PC")) icon = faSteam;
-          else if (platform.name.includes("Playstation")) icon = faPlaystation;
-          else if (platform.name.includes("Xbox")) icon = faXbox;
-          return <FontAwesomeIcon icon={icon} size={"sm"} />;
+          if (platform.name.includes("PC")) icon = "steam";
+          else if (platform.name.includes("PlayStation")) icon = "playstation";
+          else if (platform.name.includes("Xbox")) icon = "xbox";
+          else if (platform.name.includes("Switch")) icon = "nintendo switch";
+          else if (platform.name.includes("Windows")) icon = "windows";
+          else if (platform.name.includes("Mac")) icon = "apple";
+          else if (platform.name.includes("Android")) icon = "android";
+          else if (platform.name.includes("iOS")) icon = "app store ios";
+          return <Icon name={icon} size={"large"} key={game.slug + icon} />;
         })}
       </React.Fragment>
     );
@@ -65,7 +63,6 @@ const GameTile = ({ game, key }) => {
         meta={developer && date}
         description={description}
         href={"/games/" + game.slug}
-        key={key}
         extra={getPlatformIcons(platforms)}
       />
     );
@@ -75,10 +72,9 @@ const GameTile = ({ game, key }) => {
         className="game-card"
         image={TileCoverLoader}
         description={TextLoader}
-        key={key}
       />
     );
   }
 };
 
-export default GameTile
+export default GameTile;
