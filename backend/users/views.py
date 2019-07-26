@@ -4,10 +4,10 @@ from rest_framework. response import Response
 from rest_framework.exceptions import PermissionDenied
 from knox.models import AuthToken
 from libgravatar import Gravatar
-from .models import CustomUser
-from .serializers import UserSerializer, ProfileSerializer, RegisterSerializer, LoginSerializer
 from actions.serializers import RatingSerializer
-from actions.models import Ratings
+from actions.models import Ratings, Journal
+from .models import CustomUser
+from .serializers import UserSerializer, ProfileSerializer, RegisterSerializer, LoginSerializer, RecentActivitySerializer
 
 
 class RatingsView(generics.GenericAPIView):
@@ -18,9 +18,10 @@ class RatingsView(generics.GenericAPIView):
         data: [{game, user_id, rating}...]
     """
     def get(self, request, *args, **kwargs):
-        user_id = request.GET["user_id"]
-        ratings = Ratings.objects.filter(user=user_id)
-        serializer = RatingSerializer(list(ratings), many=True).data
+        username = kwargs['username']
+        user = CustomUser.objects.get(username=username)
+        ratings = Ratings.objects.filter(user=user)
+        serializer = RatingSerializer(ratings, many=True).data
         
         return Response(serializer)
 
@@ -127,6 +128,19 @@ class ProfileView(generics.GenericAPIView):
                 serializer['followingUser'] = True
 
         return Response(serializer)
+
+
+class RecentActivityView(generics.GenericAPIView):
+    def get(self, request, *args, **kwargs):
+        limit = int(request.GET.get('limit', 0))
+        if limit <= 0:
+            limit = None
+
+        user = CustomUser.objects.get(username=kwargs['username'])
+        entries = Journal.objects.filter(user=user).order_by('-date')[:limit]
+        serializer = RecentActivitySerializer(entries, many=True)
+
+        return Response(serializer.data)
 
 
 class FollowView(generics.GenericAPIView):

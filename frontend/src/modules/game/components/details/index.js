@@ -8,14 +8,17 @@ import "./styles.css";
 countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
 
 const Details = ({ game }) => {
-
-  const gameCompanies = game.involved_companies ? game.involved_companies : []
-  const themes = game.themes ? game.themes : []
-  const platforms = game.platforms ? game.platforms : []
-  const genres = game.genres ? game.genres : []
-  const gameCountries = [...new Set(gameCompanies
-    .filter(companyInfo => companyInfo.company.country !== undefined)
-    .map(companyInfo => countries.getName(companyInfo.company.country, "en")))];
+  const gameCountries = game.involved_companies
+    ? [
+        ...new Set(
+          game.involved_companies
+            .filter(companyInfo => companyInfo.company.country !== undefined)
+            .map(companyInfo =>
+              countries.getName(companyInfo.company.country, "en")
+            )
+        )
+      ]
+    : [];
 
   return (
     <Tab
@@ -36,11 +39,8 @@ const Details = ({ game }) => {
                     </Grid.Column>
                     <Grid.Column width={8} className="details">
                       {gameCountries.map(country => (
-                         <Label key={country}>
-                         {country}
-                       </Label>
+                        <Label key={country}>{country}</Label>
                       ))}
-                     
                     </Grid.Column>
                   </Grid.Row>
                 )}
@@ -65,13 +65,14 @@ const Details = ({ game }) => {
                     </h3>
                   </Grid.Column>
                   <Grid.Column width={8} className="details">
-                    {gameCompanies.map(d => {
-                      return (
-                        d.developer && (
-                          <Label key={d.id}>{d.company.name}</Label>
-                        )
-                      );
-                    })}
+                    {game.involved_companies &&
+                      game.involved_companies.map(d => {
+                        return (
+                          d.developer && (
+                            <Label key={d.id}>{d.company.name}</Label>
+                          )
+                        );
+                      })}
                   </Grid.Column>
                 </Grid.Row>
                 <Grid.Row>
@@ -81,13 +82,14 @@ const Details = ({ game }) => {
                     </h3>
                   </Grid.Column>
                   <Grid.Column width={8} className="details">
-                    {gameCompanies.map(d => {
-                      return (
-                        d.publisher && (
-                          <Label key={d.id}>{d.company.name}</Label>
-                        )
-                      );
-                    })}
+                    {game.involved_companies &&
+                      game.involved_companies.map(d => {
+                        return (
+                          d.publisher && (
+                            <Label key={d.id}>{d.company.name}</Label>
+                          )
+                        );
+                      })}
                   </Grid.Column>
                 </Grid.Row>
                 {game.time_to_beat && game.time_to_beat.normally !== undefined && (
@@ -99,7 +101,9 @@ const Details = ({ game }) => {
                     </Grid.Column>
                     <Grid.Column width={8} className="details">
                       <Label>
-                        {Math.floor(game.time_to_beat.normally / 3600)} hours
+                        {game.time_to_beat &&
+                          Math.floor(game.time_to_beat.normally / 3600)}{" "}
+                        hours
                       </Label>
                     </Grid.Column>
                   </Grid.Row>
@@ -112,9 +116,10 @@ const Details = ({ game }) => {
           menuItem: "platforms",
           render: () => (
             <Tab.Pane attached={false}>
-              {platforms.map(p => {
-                return <Label key={p.id}>{p.name}</Label>;
-              })}
+              {game.platforms &&
+                game.platforms.map(p => {
+                  return <Label key={p.id}>{p.name}</Label>;
+                })}
             </Tab.Pane>
           )
         },
@@ -122,12 +127,15 @@ const Details = ({ game }) => {
           menuItem: "genres",
           render: () => (
             <Tab.Pane attached={false}>
-              {genres.map(g => {
-                return <Label key={g.id}>{g.name}</Label>;
-              })}
-              {themes.map(t => {
-                return <Label key={t.id}>{t.name}</Label>;
-              })}
+
+              {game.genres &&
+                game.genres.map(g => {
+                  return <Label key={g.id}>{g.name}</Label>;
+                })}
+              {game.themes &&
+                game.themes.map(t => {
+                  return <Label key={t.id}>{t.name}</Label>;
+                })}
             </Tab.Pane>
           )
         }
