@@ -137,8 +137,8 @@ export default class Game extends React.Component {
                           <section className="summary">
                             <ShowMore
                                 lines={4}
-                                more='Show more'
-                                less='Show less'
+                                more="Show more"
+                                less="Show less"
                             >
                                 <p>{game.summary}</p>
                             </ShowMore>

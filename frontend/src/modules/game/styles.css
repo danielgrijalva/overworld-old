@@ -34,15 +34,11 @@
   text-align: justify;
   font-size: 16px;
   line-height: 1.75rem;
-  letter-spacing: 0.025rem;
+  /*If this is not removed/commented out the text looks funky (i.e. only one word on some lines*/
+  /*letter-spacing: 0.025rem;*/
   text-shadow: 0 0 7px rgba(0, 0, 0, 0.45);
   font-family: Georgia, serif;
 }
-
-/*
-This is to remove <br> tags when game summary is truncated.*/
-br{content:" ";}
-br:after{content:" ";}
 
 .popup,
 .popup::before {
