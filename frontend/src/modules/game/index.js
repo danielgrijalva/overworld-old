@@ -13,7 +13,7 @@ import {
   ActionsLoader
 } from "./components/";
 import "./styles.css";
-import ShowMore from 'react-show-more';
+import ShowMoreText from 'react-show-more-text';
 
 export default class Game extends React.Component {
   constructor(props) {
@@ -135,13 +135,13 @@ export default class Game extends React.Component {
                         {/* Game summary & details */}
                         {!isLoading ? (
                           <section className="summary">
-                            <ShowMore
+                            <ShowMoreText
                                 lines={4}
-                                more="Show more"
-                                less="Show less"
+                                more='Show more'
+                                less='Show less'
                             >
                                 <p>{game.summary}</p>
-                            </ShowMore>
+                            </ShowMoreText>
                             <Details game={game} />
                           </section>
                         ) : (
