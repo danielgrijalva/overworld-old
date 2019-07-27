@@ -30,7 +30,7 @@ const Details = ({ game }) => {
           render: () => (
             <Tab.Pane className="details" attached={false}>
               <Grid>
-                {gameCountries && (
+                {gameCountries.length > 0 && (
                   <Grid.Row>
                     <Grid.Column width={8}>
                       <h3>
@@ -39,7 +39,7 @@ const Details = ({ game }) => {
                     </Grid.Column>
                     <Grid.Column width={8} className="details">
                       {gameCountries.map(country => (
-                        <Label>{country}</Label>
+                        <Label key={country}>{country}</Label>
                       ))}
                     </Grid.Column>
                   </Grid.Row>
@@ -92,7 +92,7 @@ const Details = ({ game }) => {
                       })}
                   </Grid.Column>
                 </Grid.Row>
-                {game.time_to_beat && (
+                {game.time_to_beat && game.time_to_beat.normally !== undefined && (
                   <Grid.Row>
                     <Grid.Column width={8}>
                       <h3>
