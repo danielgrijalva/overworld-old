@@ -62,7 +62,7 @@ export default class Game extends React.Component {
   getPublisherName = companies => {
     console.log(companies);
     var dev = companies.find(c => {
-      return c.publisher;
+      return c.developer;
     });
     console.log(dev);
 

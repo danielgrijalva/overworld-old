@@ -53,7 +53,8 @@ const Details = ({ game }) => {
                   <Grid.Column width={8} className="details">
                     <Label>
                       <Moment format="MMMM DD YYYY">
-                        {game.first_release_date * 1000}
+                        {game.first_release_date &&
+                          game.first_release_date * 1000}
                       </Moment>
                     </Label>
                   </Grid.Column>
