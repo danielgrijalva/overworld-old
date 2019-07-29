@@ -1,4 +1,5 @@
 _game_fields = [
+    'age_ratings',
     'cover.image_id',
     'first_release_date',
     'genres.name',
