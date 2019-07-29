@@ -92,6 +92,18 @@ const Details = ({ game }) => {
                       })}
                   </Grid.Column>
                 </Grid.Row>
+                {game.age_ratings !== undefined &&(
+                  <Grid.Row>
+                    <Grid.Column width={8}>
+                      <h3>
+                        <span>Age Ratings</span>
+                      </h3>
+                    </Grid.Column>
+                    <Grid.Column width={8} className="details">
+                      <Label>{game.age_ratings}</Label>
+                    </Grid.Column>
+                  </Grid.Row>
+                )}
                 {game.time_to_beat && game.time_to_beat.normally !== undefined && (
                   <Grid.Row>
                     <Grid.Column width={8}>
