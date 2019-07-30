@@ -21,7 +21,6 @@ export default class FilterBar extends React.Component {
     const filters = this.props.filters
     const setFilter = this.props.setFilter;
     const removeFilter = this.props.removeFilter
-    console.log(filters)
     return (
       <div className="filter-bar">
         <div className="filter-selector">

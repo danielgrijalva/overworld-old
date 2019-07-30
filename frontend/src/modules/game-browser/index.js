@@ -14,7 +14,6 @@ class GameBrowser extends React.Component {
       filters: {
         genre: [],
         date: [null, null], //[before, after]
-        developer: []
       },
       filteredGames: []
     };
@@ -92,6 +91,11 @@ class GameBrowser extends React.Component {
     });
   };
 
+  hasActiveFilters = () => {
+    const filters = {...this.state.filters}
+    return(filters.genre.length || filters.date[0] || filters.date[1])
+  }
+
   handleFilterChange = (result, type) => {
     const filters = { ...this.state.filters };
     if (type === "genre" && !filters.genre.includes(result))
@@ -160,7 +164,22 @@ class GameBrowser extends React.Component {
           </div>
         </React.Fragment>
       );
-    } else {
+    } 
+    else if (this.hasActiveFilters()){
+      return (
+        <React.Fragment>
+        <h1 className="title">Check out some current popular games!</h1>
+        <FilterBar
+          setFilter={this.handleFilterChange}
+          filters={this.state.filters}
+          activePicker={this.state.activePicker}
+          removeFilter={this.removeFilters}
+        />
+        <h1>No Games found matching those filters.</h1>
+        </React.Fragment>
+      )
+    }
+    else {
       //if data not get loaded display 20 loading tiles
       return (
         <React.Fragment>
