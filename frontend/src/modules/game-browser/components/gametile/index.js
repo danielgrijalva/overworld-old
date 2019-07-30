@@ -1,6 +1,6 @@
 import React from "react";
 import { TileCoverLoader, TextLoader } from "../../../game/components";
-import { Card, Icon } from "semantic-ui-react";
+import { Card, Icon, Popup } from "semantic-ui-react";
 import Moment from "react-moment";
 
 const GameTile = ({ game }) => {
@@ -17,19 +17,22 @@ const GameTile = ({ game }) => {
   const getPlatformIcons = platforms => {
     return (
       <React.Fragment>
-        {platforms.map(platform => {
-          let icon = null;
+        {platforms.map((platform, index) => {
+          let name = null;
 
-          if (platform.name.includes("PC")) icon = "steam";
-          else if (platform.name.includes("PlayStation")) icon = "playstation";
-          else if (platform.name.includes("Xbox")) icon = "xbox";
-          else if (platform.name.includes("Switch")) icon = "nintendo switch";
-          else if (platform.name.includes("Windows")) icon = "windows";
-          else if (platform.name.includes("Mac")) icon = "apple";
-          else if (platform.name.includes("Android")) icon = "android";
-          else if (platform.name.includes("iOS")) icon = "app store ios";
-          return <Icon name={icon} size={"large"} key={game.slug + icon} />;
+          if (platform.name.includes("PC")) name = "steam";
+          else if (platform.name.includes("PlayStation")) name = "playstation";
+          else if (platform.name.includes("Xbox")) name = "xbox";
+          else if (platform.name.includes("Switch")) name = "nintendo switch";
+          else if (platform.name.includes("Windows")) name = "windows";
+          else if (platform.name.includes("Mac")) name = "apple";
+          else if (platform.name.includes("Android")) name = "android";
+          else if (platform.name.includes("iOS")) name = "app store ios";
+          const iconWrapper = React.createElement(Icon, {name: name, size: 'large'})
+          // const iconWrapper = () => <Icon name={name} size={"large"} aria-label={platform.name} />
+          return <Popup key={game.slug + name + index} content = {platform.name} trigger ={iconWrapper}/>
         })}
+
       </React.Fragment>
     );
   };

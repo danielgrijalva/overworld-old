@@ -1,4 +1,4 @@
-import { GET_POPULAR, GET_BACKDROP, GET_GAME_DATA } from "./actionTypes";
+import { GET_POPULAR, GET_BACKDROP } from "./actionTypes";
 
 const initialState = {
   backdrop: {},

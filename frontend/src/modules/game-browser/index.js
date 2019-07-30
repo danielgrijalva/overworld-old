@@ -4,7 +4,7 @@ import { getPopular, getGameData } from "./actions";
 import { connect } from "react-redux";
 import { Button, Label, Dropdown } from "semantic-ui-react";
 import { Backdrop } from "../app/components";
-import { GenreFilter, DateFilter, DeveloperFilter } from "./components/filters";
+import { GenreFilter, DateFilter } from "./components/filters";
 import GameTile from "./components/gametile";
 
 const pickers = [

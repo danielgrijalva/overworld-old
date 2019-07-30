@@ -19,7 +19,7 @@ class GenreFilter extends React.Component {
   }
 
   componentWillMount(){
-    if (this.props.genres.length == 0){
+    if (this.props.genres.length === 0){
       this.props.getGenres()
     }
   }
