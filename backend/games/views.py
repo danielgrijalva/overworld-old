@@ -113,8 +113,10 @@ def get_popular_games(request):
     filters = request.GET.get("filters", '{}')
     filters = json.loads(filters)
 
+    adultContent = request.GET.get("adultContent", False)
+
     conditions = ""
-    print(filters)
+
     if 'genre' in filters and len(filters['genre']):
         ids = tuple([x['id'] for x in filters['genre']]) if len(filters['genre']) > 1 else filters['genre'][0]['id'] #create list of id's in format required by IGDB api
         conditions += f"where genres={ids};"
@@ -122,8 +124,12 @@ def get_popular_games(request):
         pass
     if 'developer' in filters and len(filters['developer']):
         pass
-    
-    data = f'fields {popular_fields}; sort popularity desc; limit {limit}; offset {offset};' + conditions
+        
+    if not adultContent:
+        data = f'fields {popular_fields}; sort popularity desc; limit {limit}; offset {offset}; where themes != (42);' + conditions
+    if adultContent:
+        data = f'fields {popular_fields}; sort popularity desc; limit {limit}; offset {offset};' + conditions
+
     headers = {'user-key': settings.IGDB_KEY}
     url = settings.IGDB_URL.format(endpoint='games')
     r = requests.post(url=url, data=data, headers=headers)
