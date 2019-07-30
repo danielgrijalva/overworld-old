@@ -19,6 +19,9 @@ const Details = ({ game }) => {
         )
       ]
     : [];
+    const lookup={
+      1:'Three',2:'Seven',3:'Twelve',4:'Sixteen',5:'Eighteen',6:'RP',7:'EC',8:'E',9:'E10',10:'T',11:'M',12:'AO',"01":'ESRB',"02":'PEGI'
+    }
 
   return (
     <Tab
@@ -92,15 +95,27 @@ const Details = ({ game }) => {
                       })}
                   </Grid.Column>
                 </Grid.Row>
-                {game.age_ratings !== undefined &&(
+                <Grid.Row>
+                  <Grid.Column width={8}>
+                    <h3>
+                      <span>Age Ratings</span>
+                    </h3>
+                  </Grid.Column>
+                  <Grid.Column width={8} className="details">
+                      {game.age_ratings !== undefined && game.age_ratings.map(a =>{
+                      return <Label key={a.category}>{lookup[0+""+a.category]+" "+lookup[a.rating]}</Label>
+                    })}
+                  </Grid.Column>
+                </Grid.Row>
+                {game.videos !== undefined &&(
                   <Grid.Row>
                     <Grid.Column width={8}>
                       <h3>
-                        <span>Age Ratings</span>
+                        <span>Videos</span>
                       </h3>
                     </Grid.Column>
                     <Grid.Column width={8} className="details">
-                      <Label>{game.age_ratings}</Label>
+                      <Label>{game.videos}</Label>
                     </Grid.Column>
                   </Grid.Row>
                 )}
