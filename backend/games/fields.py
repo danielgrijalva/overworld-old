@@ -1,5 +1,8 @@
 _game_fields = [
     'age_ratings',
+    'age_ratings.category',
+    'age_ratings.rating',
+    'age_ratings.rating_cover_url',
     'cover.image_id',
     'first_release_date',
     'genres.name',
@@ -14,6 +17,7 @@ _game_fields = [
     'summary',
     'time_to_beat.normally',
     'themes.name',
+    'videos'
 ]
 
 _search_fields = [
