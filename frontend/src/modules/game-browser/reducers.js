@@ -1,8 +1,9 @@
-import { GET_POPULAR, GET_GAME_DATA } from "./actionTypes";
+import { GET_POPULAR, GET_GAME_DATA, GET_GENRES } from "./actionTypes";
 
 const initialState = {
   popular: [],
-  gameData: []
+  gameData: [],
+  genres: []
 };
 
 export default function(state = initialState, action) {
@@ -20,6 +21,11 @@ export default function(state = initialState, action) {
         gameData: gameData
       };
     }
+    case GET_GENRES:
+      return {
+        ...state,
+        genres: action.payload
+      }
     default:
       return state;
   }

@@ -1,8 +1,10 @@
 import React from "react";
-import { genres } from "./genres";
-import { Search, Label, Dropdown } from "semantic-ui-react";
+import { Search, Label } from "semantic-ui-react";
+import { getGenres } from "../../actions"
+import { connect } from "react-redux";
 import _ from "lodash";
 import "./styles.css";
+
 const initialState = {
   isLoading: false,
   results: [],
@@ -16,9 +18,15 @@ class GenreFilter extends React.Component {
     this.state = initialState;
   }
 
+  componentWillMount(){
+    if (this.props.genres.length == 0){
+      this.props.getGenres()
+    }
+  }
+
   handleResultSelect = (e, { result }) => {
     this.setState({ value: result.name });
-    this.props.setFilter(result, this);
+    this.props.setFilter(result, 'genre');
   };
 
   handleSearchChange = (e, { value }) => {
@@ -30,7 +38,7 @@ class GenreFilter extends React.Component {
       const re = new RegExp(_.escapeRegExp(this.state.value), "i");
       const isMatch = result => re.test(result.name);
 
-      const results = _.filter(genres, isMatch).map(result => {
+      const results = _.filter(this.props.genres, isMatch).map(result => {
         return { ...result, key: result.id, title: result.name };
       });
       this.setState({
@@ -62,4 +70,11 @@ class GenreFilter extends React.Component {
   }
 }
 
-export default GenreFilter;
+const mapStateToProps = state => ({
+  genres: state.gameBrowser.genres,
+});
+export default connect(
+  mapStateToProps,
+  { getGenres }
+)(GenreFilter);
+

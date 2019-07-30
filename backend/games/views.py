@@ -5,11 +5,24 @@ from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 from actions.models import Ratings
 from actions.serializers import RatingSerializer
-from .fields import game_fields, search_fields, popular_fields, backdrop_fields
+from .fields import game_fields, search_fields, popular_fields, backdrop_fields, genre_fields
 from .models import Game
 from django.utils.datastructures import MultiValueDictKeyError
 import json
 
+
+@api_view(['GET'])
+def get_genres(request):
+    """Get list of all genres
+        Makes call to https://api-v3.igdb.com/genres with maximum limit and no params
+     """
+    data = f'fields {genre_fields}; limit 50;'
+    headers = {'user-key': settings.IGDB_KEY}
+    url = settings.IGDB_URL.format(endpoint='genres')
+    r = requests.post(url=url, data=data, headers=headers).json()
+
+    return Response(r)
+    
 @api_view(['GET'])
 def get_games(request):
     """Get a list of games from IGDB.
@@ -124,7 +137,7 @@ def get_popular_games(request):
         pass
     if 'developer' in filters and len(filters['developer']):
         pass
-        
+
     if not adultContent:
         data = f'fields {popular_fields}; sort popularity desc; limit {limit}; offset {offset}; where themes != (42);' + conditions
     if adultContent:

@@ -1,5 +1,19 @@
 import axios from "axios";
-import { GET_GAME_DATA, GET_POPULAR } from "./actionTypes";
+import { GET_GAME_DATA, GET_POPULAR, GET_GENRES } from "./actionTypes";
+
+export const getGenres = () => dispatch => {
+  axios
+    .get("/api/games/genres")
+    .then(res => {
+      dispatch({
+        type: GET_GENRES,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
 
 export const getGameData = gameSlugs => dispatch => {
   //break the array into chunks of 10 and perform a request for each chunk

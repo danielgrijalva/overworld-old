@@ -2,7 +2,7 @@ import React from "react";
 import "./styles.css";
 import { getPopular, getGameData } from "./actions";
 import { connect } from "react-redux";
-import { Button, Card, Label, Dropdown } from "semantic-ui-react";
+import { Button, Label, Dropdown } from "semantic-ui-react";
 import { Backdrop } from "../app/components";
 import { GenreFilter, DateFilter, DeveloperFilter } from "./components/filters";
 import GameTile from "./components/gametile";
@@ -138,17 +138,12 @@ class GameBrowser extends React.Component {
     });
   };
 
-  handleFilterChange = (result, filter) => {
+  handleFilterChange = (result, type) => {
     const filters = { ...this.state.filters };
-    if (filter instanceof GenreFilter && !filters.genre.includes(result))
+    if (type === 'genre' && !filters.genre.includes(result))
       filters.genre.push(result);
-    else if (filter instanceof DateFilter && !filters.date.includes(result))
+    else if (type ==='date' && !filters.date.includes(result))
       filters.date.push(result);
-    else if (
-      filter instanceof DeveloperFilter &&
-      !filters.developer.includes(result)
-    )
-      filters.developer.push(result);
     else return; //return if no new filters added
 
     const filteredGames = this.applyFilters(filters);
