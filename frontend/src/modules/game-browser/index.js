@@ -19,7 +19,7 @@ class GameBrowser extends React.Component {
     this.state = {
       filters: {
         genre: [],
-        date: [],
+        date: [null, null], //[before, after]
         developer: []
       },
       filteredGames: [],
@@ -51,7 +51,17 @@ class GameBrowser extends React.Component {
 
   removeFilters = (key, filter) => {
     let filters = { ...this.state.filters };
-    filters[key] = filters[key].filter(val => val.name !== filter.name); //remove element of value filter from the array
+    if (key === "genre"){
+      filters[key] = filters[key].filter(val => val.name !== filter.name); //remove element of value filter from the array
+    }
+    else if (key === 'date'){
+      if (filter.order === "Before"){
+        filters.date[0] = null
+      }
+      else{
+        filters.date[1] = null
+      }
+    }
     this.setState({
       ...this.state,
       filters: filters,
@@ -76,6 +86,9 @@ class GameBrowser extends React.Component {
           {activePicker === "Genre" && (
             <GenreFilter setFilter={this.handleFilterChange} />
           )}
+          {activePicker === "Date" && (
+            <DateFilter setFilter={this.handleFilterChange} />
+          )}
         </div>
         {/*Render labels for existing filters*/}
         <div className="filter-labels">
@@ -87,6 +100,7 @@ class GameBrowser extends React.Component {
               <React.Fragment key={key}>
                 {filters[key].map(filter => {
                   return (
+                    filter  && 
                     <Label key={key + filter.name} size={"large"}>
                       {key}: {filter.name}
                       <span
@@ -143,7 +157,11 @@ class GameBrowser extends React.Component {
     if (type === 'genre' && !filters.genre.includes(result))
       filters.genre.push(result);
     else if (type ==='date' && !filters.date.includes(result))
-      filters.date.push(result);
+      console.log(result)
+      if (result.order === 'Before')
+        filters.date[0] = result
+      else if (result.order === 'After')
+        filters.date[1] = result
     else return; //return if no new filters added
 
     const filteredGames = this.applyFilters(filters);
@@ -169,6 +187,12 @@ class GameBrowser extends React.Component {
             game.genres.map(genre => genre.name).includes(filter.name)
           )
       );
+    }
+    if (filters.date[1]){
+      filteredGames=filteredGames.filter(game => game.first_release_date >= filters.date[1].utc)
+    }
+    if (filters.date[0]){
+      filteredGames=filteredGames.filter(game => game.first_release_date <= filters.date[0].utc)
     }
     return filteredGames;
   };
