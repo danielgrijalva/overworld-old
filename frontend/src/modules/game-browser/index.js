@@ -159,9 +159,6 @@ class GameBrowser extends React.Component {
               return <GameTile game={game} key={"game" + index} />;
             })}
           </div>
-          <div className="center">
-            <Button onClick={this.loadMore}>Load More!</Button>
-          </div>
         </React.Fragment>
       );
     } 
