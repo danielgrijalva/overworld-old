@@ -1,7 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Divider, Popup } from "semantic-ui-react";
-import { loadRatings } from "../../actions";
 import "./styles.css";
 
 class Ratings extends React.Component {
@@ -11,10 +9,6 @@ class Ratings extends React.Component {
       total: 0,
       average: 0
     };
-  }
-
-  componentWillMount() {
-    this.props.loadRatings(this.props.userId);
   }
 
   processRatings = data => {
@@ -105,11 +99,4 @@ class Ratings extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  ratings: state.profile.ratings
-});
-
-export default connect(
-  mapStateToProps,
-  { loadRatings }
-)(Ratings);
+export default Ratings;
