@@ -219,7 +219,7 @@ class GameTests(APITestCase):
         # Test mock is called with correct arguments
         self.assertEqual(mock_post.call_count, 1)
         self.assertEqual(mock_post.call_args[1]['data'],
-                         f'fields {popular_fields}; sort popularity desc; limit 6; offset 0;')
+                         f'fields {popular_fields}; sort popularity desc; limit 6; offset 0; where themes != (42);')
         self.assertEqual(mock_post.call_args[1]['url'],
                          'https://api-v3.igdb.com/games/')
         # Test response contains expected result
@@ -231,7 +231,7 @@ class GameTests(APITestCase):
         response = self.client.get(url, format='json')
         self.assertEqual(mock_post.call_count, 2)
         self.assertEqual(mock_post.call_args[1]['data'],
-                         f'fields {popular_fields}; sort popularity desc; limit 6; offset 0;')
+                         f'fields {popular_fields}; sort popularity desc; limit 6; offset 0; where themes != (42);')
         self.assertEqual(mock_post.call_args[1]['url'],
                          'https://api-v3.igdb.com/games/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -242,11 +242,22 @@ class GameTests(APITestCase):
 
         self.assertEqual(mock_post.call_count, 3)
         self.assertEqual(mock_post.call_args[1]['data'],
-                         f'fields {popular_fields}; sort popularity desc; limit 20; offset 0;where genres=1;')
+                         f'fields {popular_fields}; sort popularity desc; limit 20; offset 0; where themes != (42);where genres=1;')
         self.assertEqual(mock_post.call_args[1]['url'],
                          'https://api-v3.igdb.com/games/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        
+
+
+        # don't filter adult content
+        response = self.client.get(url, {"adultContent": True}, format='json')
+        self.assertEqual(mock_post.call_count, 4)
+        self.assertEqual(mock_post.call_args[1]['data'],
+                         f'fields {popular_fields}; sort popularity desc; limit 6; offset 0;')
+        self.assertEqual(mock_post.call_args[1]['url'],
+                         'https://api-v3.igdb.com/games/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+
     @patch('games.views.requests.post')
     def test_get_backdrop(self, mock_post):
         """Ensure we can retrieve a game's screenshots/artwork."""
