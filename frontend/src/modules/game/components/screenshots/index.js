@@ -38,7 +38,7 @@ export default class Screenshots extends React.Component {
           </small>
         </Header>
         <Segment basic className={`${!this.state.showAll && "truncate"}`}>
-          {this.props.screenshots.map((s, i) => {
+          {this.props.screenshots && this.props.screenshots.map((s, i) => {
             return (
               <Screenshot
                 size="med"
