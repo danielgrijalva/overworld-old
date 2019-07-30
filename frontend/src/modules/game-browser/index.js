@@ -2,16 +2,10 @@ import React from "react";
 import "./styles.css";
 import { getPopular, getGameData } from "./actions";
 import { connect } from "react-redux";
-import { Button, Label, Dropdown } from "semantic-ui-react";
+import { Button } from "semantic-ui-react";
 import { Backdrop } from "../app/components";
-import { GenreFilter, DateFilter } from "./components/filters";
 import GameTile from "./components/gametile";
-
-const pickers = [
-  { key: "genre", text: "Genre", value: "Genre" },
-  { key: "date", text: "Date", value: "Date" },
-  { key: "developer", text: "Developer", value: "Developer" }
-];
+import FilterBar from "./components/filterbar/filterBar";
 
 class GameBrowser extends React.Component {
   constructor(props) {
@@ -22,8 +16,7 @@ class GameBrowser extends React.Component {
         date: [null, null], //[before, after]
         developer: []
       },
-      filteredGames: [],
-      activePicker: "Genre"
+      filteredGames: []
     };
   }
   componentWillMount() {
@@ -51,15 +44,13 @@ class GameBrowser extends React.Component {
 
   removeFilters = (key, filter) => {
     let filters = { ...this.state.filters };
-    if (key === "genre"){
+    if (key === "genre") {
       filters[key] = filters[key].filter(val => val.name !== filter.name); //remove element of value filter from the array
-    }
-    else if (key === 'date'){
-      if (filter.order === "Before"){
-        filters.date[0] = null
-      }
-      else{
-        filters.date[1] = null
+    } else if (key === "date") {
+      if (filter.order === "Before") {
+        filters.date[0] = null;
+      } else {
+        filters.date[1] = null;
       }
     }
     this.setState({
@@ -67,57 +58,6 @@ class GameBrowser extends React.Component {
       filters: filters,
       filteredGames: this.applyFilters(filters)
     });
-  };
-
-  renderFilters = () => {
-    const filters = { ...this.state.filters };
-    const activePicker = this.state.activePicker;
-    return (
-      <div className="filter-bar">
-        <div className="filter-selector">
-          <Dropdown
-            placeholder={"Filter by..."}
-            selection
-            onChange={(e, { value }) =>
-              this.setState({ ...this.state, activePicker: value })
-            }
-            options={pickers}
-          />
-          {activePicker === "Genre" && (
-            <GenreFilter setFilter={this.handleFilterChange} />
-          )}
-          {activePicker === "Date" && (
-            <DateFilter setFilter={this.handleFilterChange} />
-          )}
-        </div>
-        {/*Render labels for existing filters*/}
-        <div className="filter-labels">
-          <Label size={"large"} pointing={"right"}>
-            Active Filters:
-          </Label>
-          {Object.keys(filters).map(key => {
-            return (
-              <React.Fragment key={key}>
-                {filters[key].map(filter => {
-                  return (
-                    filter  && 
-                    <Label key={key + filter.name} size={"large"}>
-                      {key}: {filter.name}
-                      <span
-                        className="remove-button"
-                        onClick={() => this.removeFilters(key, filter)}
-                      >
-                        ×
-                      </span>
-                    </Label>
-                  );
-                })}
-              </React.Fragment>
-            );
-          })}
-        </div>
-      </div>
-    );
   };
 
   getRandomBackground = () => {
@@ -154,15 +94,12 @@ class GameBrowser extends React.Component {
 
   handleFilterChange = (result, type) => {
     const filters = { ...this.state.filters };
-    if (type === 'genre' && !filters.genre.includes(result))
+    if (type === "genre" && !filters.genre.includes(result))
       filters.genre.push(result);
-    else if (type ==='date' && !filters.date.includes(result))
-      console.log(result)
-      if (result.order === 'Before')
-        filters.date[0] = result
-      else if (result.order === 'After')
-        filters.date[1] = result
-    else return; //return if no new filters added
+    else if (type === "date" && !filters.date.includes(result)) {
+      if (result.order === "Before") filters.date[0] = result;
+      else if (result.order === "After") filters.date[1] = result;
+    } else return; //return if no new filters added
 
     const filteredGames = this.applyFilters(filters);
 
@@ -188,11 +125,15 @@ class GameBrowser extends React.Component {
           )
       );
     }
-    if (filters.date[1]){
-      filteredGames=filteredGames.filter(game => game.first_release_date >= filters.date[1].utc)
+    if (filters.date[1]) {
+      filteredGames = filteredGames.filter(
+        game => game.first_release_date >= filters.date[1].utc
+      );
     }
-    if (filters.date[0]){
-      filteredGames=filteredGames.filter(game => game.first_release_date <= filters.date[0].utc)
+    if (filters.date[0]) {
+      filteredGames = filteredGames.filter(
+        game => game.first_release_date <= filters.date[0].utc
+      );
     }
     return filteredGames;
   };
@@ -203,7 +144,12 @@ class GameBrowser extends React.Component {
         <React.Fragment>
           <h1 className="title">Check out some current popular games!</h1>
           <Backdrop imageId={this.getRandomBackground()} />
-          {this.renderFilters()}
+          <FilterBar
+            setFilter={this.handleFilterChange}
+            filters={{ ...this.state.filters }}
+            activePicker={this.state.activePicker}
+            removeFilter={this.removeFilters}
+          />
           <div className="game-grid">
             {this.state.filteredGames.map((game, index) => {
               return <GameTile game={game} key={"game" + index} />;
@@ -219,12 +165,17 @@ class GameBrowser extends React.Component {
       return (
         <React.Fragment>
           <h1 className="title">Check out some current popular games!</h1>
-          {this.renderFilters()}
+          <FilterBar
+            setFilter={this.handleFilterChange}
+            filters={this.state.filters}
+            activePicker={this.state.activePicker}
+            removeFilter={this.removeFilters}
+          />
           <div className="game-grid">
             {[...Array(20).keys()].map((val, index) => {
               return (
                 <div className="game-box" key={"game" + index}>
-                  <GameTile game={null}/>
+                  <GameTile game={null} />
                 </div>
               );
             })}
