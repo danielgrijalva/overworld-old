@@ -269,6 +269,37 @@ class GameTests(APITestCase):
 
 
     @patch('games.views.requests.post')
+    def test_get_game_rating_invalid_game(self, mock_post):
+        """Attempt to get rating for game for which a rating does not exist"""
+        # Create Mock post and response return value
+        mock_response = Mock()
+        expected_dict = [{}]
+        mock_response.json.return_value = expected_dict
+        mock_post.return_value = mock_response
+        url = reverse('get-game-ratings', kwargs={'slug': 'not a slug'})
+
+        # out of bounds simple params
+        response = self.client.get(url, format='json')
+        # Test mock is called with correct arguments
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    @patch('games.views.requests.post')
+    def test_get_game_rating(self, mock_post):
+        """Get rating for game -- depends on game having rating in DB"""
+
+        # TODO -- not sure how to test this given that no ratings exist in DB on build
+        # FIXME -- change this to valid test
+        # Create Mock post and response return value
+        mock_response = Mock()
+        expected_dict = [{}]
+        mock_response.json.return_value = expected_dict
+        mock_post.return_value = mock_response
+        url = reverse('get-game-ratings', kwargs={'slug': 'dark-souls'})
+
+        response = self.client.get(url, format='json')
+   
+
+    @patch('games.views.requests.post')
     def test_get_backdrop(self, mock_post):
         """Ensure we can retrieve a game's screenshots/artwork."""
         # Create Mock post and response return value

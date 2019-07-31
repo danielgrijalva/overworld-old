@@ -188,9 +188,12 @@ def get_game_ratings(request, slug):
     Returns:
         data: [{game, user_id, rating}...]
     """
-    game = Game.objects.get(slug=slug)
-    ratings = Ratings.objects.filter(game=game)
-    serializer = RatingSerializer(ratings, many=True).data
-    
-    return Response(serializer)
+    try:
+        game = Game.objects.get(slug=slug)
+        ratings = Ratings.objects.filter(game=game)
+        serializer = RatingSerializer(ratings, many=True).data
+        return Response(serializer)
+    except:
+        raise NotFound(detail='Game does not have rating.')
+   
         
