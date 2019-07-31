@@ -20,7 +20,7 @@ const Details = ({ game }) => {
       ]
     : [];
     const lookup={
-      1:'Three',2:'Seven',3:'Twelve',4:'Sixteen',5:'Eighteen',6:'RP',7:'EC',8:'E',9:'E10',10:'T',11:'M',12:'AO',"01":'ESRB',"02":'PEGI'
+      1:'3',2:'7',3:'12',4:'16',5:'18',6:'RP',7:'EC',8:'E',9:'E10',10:'T',11:'M',12:'AO',"01":'ESRB',"02":'PEGI'
     }
 
   return (
@@ -107,18 +107,6 @@ const Details = ({ game }) => {
                     })}
                   </Grid.Column>
                 </Grid.Row>
-                {game.videos !== undefined &&(
-                  <Grid.Row>
-                    <Grid.Column width={8}>
-                      <h3>
-                        <span>Videos</span>
-                      </h3>
-                    </Grid.Column>
-                    <Grid.Column width={8} className="details">
-                      <Label>{game.videos}</Label>
-                    </Grid.Column>
-                  </Grid.Row>
-                )}
                 {game.time_to_beat && game.time_to_beat.normally !== undefined && (
                   <Grid.Row>
                     <Grid.Column width={8}>
