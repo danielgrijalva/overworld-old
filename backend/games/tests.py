@@ -2,6 +2,7 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 from unittest.mock import Mock, MagicMock, patch
+from games.models import Game
 from .fields import game_fields, search_fields, popular_fields, backdrop_fields, genre_fields
 import json
 
@@ -287,16 +288,35 @@ class GameTests(APITestCase):
     def test_get_game_rating(self, mock_post):
         """Get rating for game -- depends on game having rating in DB"""
 
-        # TODO -- not sure how to test this given that no ratings exist in DB on build
-        # FIXME -- change this to valid test
-        # Create Mock post and response return value
+
+        game = Game.objects.create(
+            igdb=1074,
+            name='Super Mario 64',
+            slug='super-mario-64',
+            cover_id='iwe8jlk21lmf',
+            backdrop_id='i43a2ksd901R43'
+        )
+        url = reverse('rate-game')
+        data = {
+            'igdb': game.igdb,
+            'name': game.name,
+            'slug': game.slug,
+            'cover_id': game.cover_id,
+            'backdrop_id': game.backdrop_id,
+            'rating': 4.5
+        }
+        # create rating for game
+        response = self.client.post(url, data, format='json')
+
+        #get rating from db
         mock_response = Mock()
         expected_dict = [{}]
         mock_response.json.return_value = expected_dict
         mock_post.return_value = mock_response
-        url = reverse('get-game-ratings', kwargs={'slug': 'dark-souls'})
-
+        url = reverse('get-game-ratings', kwargs={'slug': game.slug})
         response = self.client.get(url, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
    
 
     @patch('games.views.requests.post')
