@@ -11,7 +11,8 @@ import {
   TitleLoader,
   TextLoader,
   ActionsLoader,
-  Screenshots
+  Screenshots,
+  Video
 } from "./components/";
 import "./styles.css";
 
@@ -160,6 +161,14 @@ export default class Game extends React.Component {
                   </Grid>
                 </Grid.Column>
               </React.Fragment>
+            </Grid.Row>
+            <Grid.Row>
+              {/* the following empty columns are used as offset */}
+              <Grid.Column width={4} />
+              <Grid.Column width={9}>
+                {!isLoading && <Video game={game} />}
+              </Grid.Column>
+              <Grid.Column width={3} />
             </Grid.Row>
             <Grid.Row>
               {/* the following empty columns are used as offset */}
