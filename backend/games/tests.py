@@ -2,8 +2,9 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 from unittest.mock import Mock, MagicMock, patch
-from .fields import game_fields, search_fields, popular_fields, backdrop_fields
+from .fields import game_fields, search_fields, popular_fields, backdrop_fields, genre_fields
 import json
+
 
 class GameTests(APITestCase):
     @patch('games.views.requests.post')
@@ -14,7 +15,8 @@ class GameTests(APITestCase):
         mock_post.return_value = mock_response
 
         url = reverse('get-games')
-        response = self.client.get(url, {"slugs": "not a game,more not a game"}, format='json')
+        response = self.client.get(
+            url, {"slugs": "not a game,more not a game"}, format='json')
 
         # Test mock is called with correct arguments
         self.assertEqual(mock_post.call_count, 1)
@@ -151,71 +153,88 @@ class GameTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     @patch('games.views.requests.post')
-    def test_get_popular_with_params(self, mock_post):
-        """Ensure we can obtain a list of popular games with a variety of different params"""
-        # Create Mock post and response return value
+    def test_get_popular_with_adult_content(self, mock_post):
         mock_response = Mock()
-        expected_dict = [
-            {
-                "id": 1877,
-                "cover": {
-                    "id": 75012,
-                    "image_id": "co1lvo"
-                },
-                "name": "Cyberpunk 2077",
-                "popularity": 1735.401818908951
-            },
-            {
-                "id": 119207,
-                "cover": {
-                    "id": 74840,
-                    "image_id": "co1lqw"
-                },
-                "name": "Aquapark.io",
-                "popularity": 1380.091049131278
-            },
-            {
-                "id": 38967,
-                "cover": {
-                    "id": 75151,
-                    "image_id": "co1lzj"
-                },
-                "name": "Cooking Simulator",
-                "popularity": 1332.181668715655
-            },
-            {
-                "id": 114455,
-                "cover": {
-                    "id": 71287,
-                    "image_id": "co1j07"
-                },
-                "name": "Pacify",
-                "popularity": 536.4335905677425
-            },
-            {
-                "id": 115276,
-                "cover": {
-                    "id": 71673,
-                    "image_id": "co1jax"
-                },
-                "name": "Super Mario Maker 2",
-                "popularity": 339.6555774443441
-            },
-            {
-                "id": 10760,
-                "cover": {
-                    "id": 24758,
-                    "image_id": "jt5ypn4a00wf4bmqrhre"
-                },
-                "name": "Bloodstained: Ritual of the Night",
-                "popularity": 330.4026928147172
-            }]
+        expected_dict = [{}]
         mock_response.json.return_value = expected_dict
         mock_post.return_value = mock_response
         url = reverse('get-popular')
 
-        #out of bounds simple params
-        response = self.client.get(url, {"limit": 100, "offset": 200}, format='json')
+        # don't filter adult content
+        response = self.client.get(url, {"adultContent": True}, format='json')
+        self.assertEqual(mock_post.call_count, 1)
+        self.assertEqual(mock_post.call_args[1]['data'],
+                         f'fields {popular_fields}; sort popularity desc; limit 6; offset 0;')
+        self.assertEqual(mock_post.call_args[1]['url'],
+                         'https://api-v3.igdb.com/games/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    @patch('games.views.requests.post')
+    def test_get_popular_with_genre_filter(self, mock_post):
+        mock_response = Mock()
+        expected_dict = [{}]
+        mock_response.json.return_value = expected_dict
+        mock_post.return_value = mock_response
+        url = reverse('get-popular')
+        # Valid params and genre filter
+        params = {'limit': 20, 'offset': 0,
+                  'filters': json.dumps({"genre": [{"id": 1}]})}
+        response = self.client.get(url, params, format='json')
+
+        self.assertEqual(mock_post.call_count, 1)
+        self.assertEqual(mock_post.call_args[1]['data'],
+                         f'fields {popular_fields}; sort popularity desc; limit 20; offset 0; where themes != (42);where genres=1;')
+        self.assertEqual(mock_post.call_args[1]['url'],
+                         'https://api-v3.igdb.com/games/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    @patch('games.views.requests.post')
+    def test_get_popular_with_date_filter(self, mock_post):
+        mock_response = Mock()
+        expected_dict = [{}]
+        mock_response.json.return_value = expected_dict
+        mock_post.return_value = mock_response
+        params = {'limit': 20, 'offset': 0, 'filters': json.dumps({'genre': [], 'date': [{'order': 'Before', 'dateString': '2019-07-28', 'utc': 1564272000, 'name': 'Before: 2019-07-28'}, {
+                                                                  'order': 'After', 'dateString': '2019-07-01', 'utc': 1561939200, 'name': 'After: 2019-07-01'}]})}
+        url = reverse('get-popular')
+        response = self.client.get(url, params, format='json')
+        self.assertEqual(mock_post.call_count, 1)
+        self.assertEqual(mock_post.call_args[1]['data'],
+                         f'fields {popular_fields}; sort popularity desc; limit 20; offset 0; where themes != (42);where release_date.date <= 1564272000;where release_date.date >= 1561939200;')
+        self.assertEqual(mock_post.call_args[1]['url'],
+                         'https://api-v3.igdb.com/games/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    @patch('games.views.requests.post')
+    def test_get_popular_with_no_params(self, mock_post):
+        mock_response = Mock()
+        expected_dict = [{}]
+        mock_response.json.return_value = expected_dict
+        mock_post.return_value = mock_response
+        url = reverse('get-popular')
+
+        # No params at all
+        response = self.client.get(url, format='json')
+        self.assertEqual(mock_post.call_count, 1)
+        self.assertEqual(mock_post.call_args[1]['data'],
+                         f'fields {popular_fields}; sort popularity desc; limit 6; offset 0; where themes != (42);')
+        self.assertEqual(mock_post.call_args[1]['url'],
+                         'https://api-v3.igdb.com/games/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    @patch('games.views.requests.post')
+    def test_get_popular_with_limit_and_offset(self, mock_post):
+        """Ensure we can obtain a list of popular games with out of bounds limit and offset"""
+        # Create Mock post and response return value
+        mock_response = Mock()
+        expected_dict = [{}]
+        mock_response.json.return_value = expected_dict
+        mock_post.return_value = mock_response
+        url = reverse('get-popular')
+
+        # out of bounds simple params
+        response = self.client.get(
+            url, {"limit": 100, "offset": 200}, format='json')
         # Test mock is called with correct arguments
         self.assertEqual(mock_post.call_count, 1)
         self.assertEqual(mock_post.call_args[1]['data'],
@@ -223,38 +242,29 @@ class GameTests(APITestCase):
         self.assertEqual(mock_post.call_args[1]['url'],
                          'https://api-v3.igdb.com/games/')
         # Test response contains expected result
-        self.assertEqual(response.json(), expected_dict)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
 
-        #No params at all 
+    @patch('games.views.requests.post')
+    def test_get_genres(self, mock_post):
+        """Ensure we can obtain a list of popular games with out of bounds limit and offset"""
+        # Create Mock post and response return value
+        mock_response = Mock()
+        expected_dict = [{}]
+        mock_response.json.return_value = expected_dict
+        mock_post.return_value = mock_response
+        url = reverse('get-genres')
+
+        # out of bounds simple params
         response = self.client.get(url, format='json')
-        self.assertEqual(mock_post.call_count, 2)
+        # Test mock is called with correct arguments
+        self.assertEqual(mock_post.call_count, 1)
         self.assertEqual(mock_post.call_args[1]['data'],
-                         f'fields {popular_fields}; sort popularity desc; limit 6; offset 0; where themes != (42);')
+                         f'fields {genre_fields}; limit 50;')
+
         self.assertEqual(mock_post.call_args[1]['url'],
-                         'https://api-v3.igdb.com/games/')
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-        #Valid params and genre filter
-        params = {'limit': 20, 'offset': 0, 'filters': json.dumps({"genre": [{"id": 1}]})}
-        response = self.client.get(url, params, format='json')
-
-        self.assertEqual(mock_post.call_count, 3)
-        self.assertEqual(mock_post.call_args[1]['data'],
-                         f'fields {popular_fields}; sort popularity desc; limit 20; offset 0; where themes != (42);where genres=1;')
-        self.assertEqual(mock_post.call_args[1]['url'],
-                         'https://api-v3.igdb.com/games/')
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-
-        # don't filter adult content
-        response = self.client.get(url, {"adultContent": True}, format='json')
-        self.assertEqual(mock_post.call_count, 4)
-        self.assertEqual(mock_post.call_args[1]['data'],
-                         f'fields {popular_fields}; sort popularity desc; limit 6; offset 0;')
-        self.assertEqual(mock_post.call_args[1]['url'],
-                         'https://api-v3.igdb.com/games/')
+                         'https://api-v3.igdb.com/genres/')
+        # Test response contains expected result
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
 
