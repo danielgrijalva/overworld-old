@@ -8,6 +8,7 @@ import App from "./modules/app/";
 import Profile from "./modules/profile/";
 import Settings from "./modules/settings/";
 import { loadUser } from "./modules/app/actions";
+import GameBrowser from "./modules/game-browser"
 
 const notFound = () => {
   return <p>Not Found</p>;
@@ -25,6 +26,7 @@ class AppRouter extends React.Component {
           <Navbar />
           <Switch>
             <Route path="/" exact component={App} />
+            <Route exact path ="/games" component = {GameBrowser}/>
             <Route path="/games/:slug" component={Game} />
             <Route path="/user/:username" component={Profile} />
             <Route path="/settings" component={Settings} />
