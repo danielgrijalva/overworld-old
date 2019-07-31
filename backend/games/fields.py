@@ -17,7 +17,9 @@ _game_fields = [
     'summary',
     'time_to_beat.normally',
     'themes.name',
-    'videos'
+    'videos.name',
+    'videos',
+    'videos.video_id'
 ]
 
 _search_fields = [
