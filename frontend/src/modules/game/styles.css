@@ -1,0 +1,63 @@
+.game {
+  margin-bottom: 10rem !important;
+}
+
+.game-header > h1,
+h2 {
+  color: #fff;
+  text-shadow: #000 2px 0 5px;
+  display: inline;
+  margin-right: 0.7rem;
+}
+
+.game-info:not(rect),
+.game-header {
+  display: block;
+  font-size: 1.5rem;
+  color: #9ab;
+  text-shadow: 0 0 7px rgba(0, 0, 0, 0.45);
+  white-space: nowrap;
+  max-width: 100%;
+  letter-spacing: 0.02em;
+}
+
+.release-date {
+  margin-right: 0.7rem;
+}
+
+.game-header a,
+.game-info a {
+  color: #9ab;
+  border-bottom: 1px solid #456 !important;
+}
+
+.summary {
+  text-align: justify;
+  font-size: 16px;
+  line-height: 1.75rem;
+  /*If this is not removed/commented out the text looks funky (i.e. only one word on some lines*/
+  /*letter-spacing: 0.025rem;*/
+  text-shadow: 0 0 7px rgba(0, 0, 0, 0.45);
+  font-family: Georgia, serif;
+}
+
+.popup,
+.popup::before {
+  background-color: #242c34 !important;
+  background: #242c34 !important;
+  color: #9ab !important;
+}
+
+.game-content .label {
+  color: #9ab !important;
+  margin: 0 0.3rem 0.4rem 0 !important;
+  background-color: #242c34 !important;
+  box-shadow: inset 0 1px 0 hsla(0, 0%, 100%, 0.1);
+  font-weight: 400 !important;
+  cursor: pointer;
+}
+
+.game-content .label:hover {
+  color: #def !important;
+  background: #303840 !important;
+}
