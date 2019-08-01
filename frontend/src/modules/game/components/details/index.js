@@ -97,9 +97,11 @@ const Details = ({ game }) => {
                 </Grid.Row>
                 <Grid.Row>
                   <Grid.Column width={8}>
-                    <h3>
-                      <span>Age Ratings</span>
-                    </h3>
+                    {game.age_ratings!== undefined &&(
+                      <h3>
+                        <span>Age Ratings</span>
+                      </h3>
+                    )}
                   </Grid.Column>
                   <Grid.Column width={8} className="details">
                       {game.age_ratings !== undefined && game.age_ratings.map(a =>{
