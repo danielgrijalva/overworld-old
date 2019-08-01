@@ -1,11 +1,12 @@
 import React from 'react';
-import axios from "axios";
+import axios from 'axios';
 import Enzyme, { shallow } from 'enzyme';
-import thunk from "redux-thunk";
+import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import { Landing } from '../landing';
-import { Backdrop, Footer, Register, LogIn } from "../app/components/";
-import { getPopular, getBackdrop } from "./actions";
+import { Backdrop, Footer, Register, LogIn } from '../app/components/';
+import { getPopular, getBackdrop } from './actions';
+import reducer from './reducers'
 
 describe('Test <Landing /> with valid backdrop and popular props', () => {
   let wrap, props;
@@ -17,7 +18,7 @@ describe('Test <Landing /> with valid backdrop and popular props', () => {
         getBackdrop: jest.fn().mockName('getBackdropMock'),
         getPopular: jest.fn().mockName('getPopularMock'),
         backdrop: {
-            gameId: '2155',
+            gameId: "2155",
             name: "Dark Souls",
             imageId: "sylfmtzktmb4b0ext8nr",
             slug: "dark-souls"
@@ -220,8 +221,8 @@ describe('Test Landing actions', () => {
     axios.get.mockRestore()
   });
 
-  describe("Test getPopular action", () => {
-    it("dispatches GET_POPULAR action and returns data on success", async () => {
+  describe('Test getPopular action', () => {
+    it('dispatches GET_POPULAR action and returns data on success', async () => {
 
       const mockResponse = [
         {
@@ -263,9 +264,9 @@ describe('Test Landing actions', () => {
       expect(actions[0].payload).toEqual(mockResponse);
     });
 
-    it("does not dispatch GET_POPULAR when an error occurs", async () => {
+    it('does not dispatch GET_POPULAR when an error occurs', async () => {
 
-      const mockResponse = Promise.reject({ error: "Something bad happened" });
+      const mockResponse = Promise.reject({ error: 'Something bad happened' });
       axios.get.mockImplementationOnce(() => mockResponse);
 
       await store.dispatch(getPopular());
@@ -281,8 +282,8 @@ describe('Test Landing actions', () => {
     });
   });
 
-  describe("Test getBackdrop action", () => {
-    it("dispatches GET_BACKDROP action and returns data on success", async () => {
+  describe('Test getBackdrop action', () => {
+    it('dispatches GET_BACKDROP action and returns data on success', async () => {
 
       const mockResponse = [
         {
@@ -338,7 +339,7 @@ describe('Test Landing actions', () => {
       expect(actions[0].payload).toEqual(expectedActionPayload);
     });
 
-    it("does not dispatch GET_BACKDROP when an error occurs", async () => {
+    it('does not dispatch GET_BACKDROP when an error occurs', async () => {
 
       const mockResponse = Promise.reject({ error: "Something bad happened" });
       axios.get.mockImplementationOnce(() => mockResponse);
@@ -355,5 +356,103 @@ describe('Test Landing actions', () => {
       // No actions were dispatched because of error
       expect(actions).toEqual([]);
     });
+  });
+});
+
+describe('Test Landing reducers', () => {
+
+  const initialState = {
+    backdrop: {},
+    popular: [],
+    gameData: [],
+    isLoadingPopular: true
+  };
+
+  it('returns the initial state when an action type is not passed', () => {
+    expect(reducer(undefined, {})).toEqual(initialState);
+  });
+
+  it('handles GET_POPULAR', () => {
+    const getPayloadAction = {
+      type: "GET_POPULAR",
+      payload: [
+        {
+            "id": 26950,
+            "cover": {
+                "id": 75103,
+                "image_id": "co1ly7"
+            },
+            "name": "Marvel's Avengers",
+            "popularity": 1969.805380721215,
+            "slug": "marvels-avengers"
+        },
+        {
+            "id": 18225,
+            "cover": {
+                "id": 74152,
+                "image_id": "co1l7s"
+            },
+            "name": "The Sinking City",
+            "popularity": 1307.732224438319,
+            "slug": "the-sinking-city"
+        }]
+    };
+
+    const expectedState = {
+      backdrop: {},
+      popular: [
+        {
+            "id": 26950,
+            "cover": {
+                "id": 75103,
+                "image_id": "co1ly7"
+            },
+            "name": "Marvel's Avengers",
+            "popularity": 1969.805380721215,
+            "slug": "marvels-avengers"
+        },
+        {
+            "id": 18225,
+            "cover": {
+                "id": 74152,
+                "image_id": "co1l7s"
+            },
+            "name": "The Sinking City",
+            "popularity": 1307.732224438319,
+            "slug": "the-sinking-city"
+        }],
+      gameData: [],
+      isLoadingPopular: false
+    };
+
+    const getPopularReducer = reducer(initialState, getPayloadAction);
+    expect(getPopularReducer).toEqual(expectedState);
+  });
+
+  it('handles GET_BACKDROP', () => {
+    const getBackdropAction = {
+      type: "GET_BACKDROP",
+      payload: {
+          gameId: 2155,
+          name: "Dark Souls",
+          imageId: "nz70mpjc7kszcyesgmqw",
+          slug: "dark-souls"
+      }
+    };
+
+    const expectedState = {
+      backdrop: {
+          gameId: 2155,
+          name: "Dark Souls",
+          imageId: "nz70mpjc7kszcyesgmqw",
+          slug: "dark-souls"
+      },
+      popular: [],
+      gameData: [],
+      isLoadingPopular: true
+    };
+
+    const getBackdropReducer = reducer(initialState, getBackdropAction);
+    expect(getBackdropReducer).toEqual(expectedState);
   });
 });
