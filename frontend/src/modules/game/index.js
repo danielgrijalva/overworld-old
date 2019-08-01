@@ -15,6 +15,7 @@ import {
   Video
 } from "./components/";
 import "./styles.css";
+import ShowMoreText from 'react-show-more-text';
 
 export default class Game extends React.Component {
   constructor(props) {
@@ -142,8 +143,14 @@ export default class Game extends React.Component {
                       <Grid.Column width={11}>
                         {/* Game summary & details */}
                         {!isLoading ? (
-                          <section>
-                            <p className="summary">{game.summary}</p>
+                          <section className="summary">
+                            <ShowMoreText
+                                lines={4}
+                                more="Show more"
+                                less="Show less"
+                            >
+                                <p>{game.summary}</p>
+                            </ShowMoreText>
                             <Details game={game} />
                           </section>
                         ) : (
