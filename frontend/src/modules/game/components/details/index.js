@@ -143,6 +143,7 @@ const Details = ({ game }) => {
           menuItem: "genres",
           render: () => (
             <Tab.Pane attached={false}>
+
               {game.genres &&
                 game.genres.map(g => {
                   return <Label key={g.id}>{g.name}</Label>;
