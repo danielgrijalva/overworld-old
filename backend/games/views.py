@@ -3,9 +3,53 @@ from django.conf import settings
 from rest_framework.decorators import api_view
 from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
-from .fields import game_fields, search_fields, popular_fields, backdrop_fields
+from actions.models import Ratings
+from actions.serializers import RatingSerializer
+from .fields import game_fields, search_fields, popular_fields, backdrop_fields, genre_fields
 from .models import Game
+from django.utils.datastructures import MultiValueDictKeyError
+import json
 
+
+@api_view(['GET'])
+def get_genres(request):
+    """Get list of all genres
+        Makes call to https://api-v3.igdb.com/genres with maximum limit and no params
+     """
+    data = f'fields {genre_fields}; limit 50;'
+    headers = {'user-key': settings.IGDB_KEY}
+    url = settings.IGDB_URL.format(endpoint='genres')
+    r = requests.post(url=url, data=data, headers=headers).json()
+
+    return Response(r)
+    
+@api_view(['GET'])
+def get_games(request):
+    """Get a list of games from IGDB.
+
+    Makes a call to the `https://api-v3.igdb.com/games` endpoint, specifying the
+    fields (defined as `game_fields` in fields.py) and game IDs in the POST data.
+    
+    For more details read https://api-docs.igdb.com/?javascript#game.
+
+    Args:
+        slugs: a list of unique name of the game e.g. dark-souls, prey, prey--1. maximum of 10 per request
+
+    Returns:
+        game: a JSON response containing a list of the details of the games.
+    """
+    slugs = request.GET['slugs']
+    slugs = (",").join([f'"{x}"' for x in slugs.split(",")][:10])
+    
+    data = f'fields {game_fields}; where slug=({slugs});'
+    headers = {'user-key': settings.IGDB_KEY}
+    url = settings.IGDB_URL.format(endpoint='games')
+    r = requests.post(url=url, data=data, headers=headers).json()
+
+    if not r:
+        raise NotFound(detail='Game not found.')
+
+    return Response(r)
 
 @api_view(['GET'])
 def get_game(request, slug):
@@ -66,10 +110,44 @@ def get_popular_games(request):
     This endpoint is called in Overworld's landing page. An example of this
     is documented on IGDB https://api-docs.igdb.com/?javascript#examples-12. 
 
+    Takes limit parameter with max of 50, min 1 and default of 6 if not passed
     Returns:
-        games: six games sorted by popularity.
+        games: games sorted by popularity.
     """
-    data = f'fields {popular_fields}; sort popularity desc; limit 6;'
+    
+
+    #get parameters with defaults and check bounds
+    limit = int(request.GET.get("limit", 6)) 
+    limit = limit if limit < 50 and limit > 0 else 6 
+
+    offset = int(request.GET.get("offset", 0))
+    offset = offset if offset >= 0 and offset < 150 else 0
+
+    filters = request.GET.get("filters", '{}')
+    filters = json.loads(filters)
+
+    adultContent = request.GET.get("adultContent", False)
+
+    conditions = ""
+
+    if 'genre' in filters and len(filters['genre']):
+        ids = tuple([x['id'] for x in filters['genre']]) if len(filters['genre']) > 1 else filters['genre'][0]['id'] #create list of id's in format required by IGDB api
+        conditions += f"where genres={ids};"
+    
+    if 'date' in filters and len(filters['date']):
+        if filters['date'][0]:
+            conditions += f"where release_date.date <= {filters['date'][0]['utc']};"
+        if filters['date'][1]:
+            conditions += f"where release_date.date >= {filters['date'][1]['utc']};"
+
+    if 'developer' in filters and len(filters['developer']):
+        pass
+
+    if not adultContent:
+        data = f'fields {popular_fields}; sort popularity desc; limit {limit}; offset {offset}; where themes != (42);' + conditions
+    if adultContent:
+        data = f'fields {popular_fields}; sort popularity desc; limit {limit}; offset {offset};' + conditions
+
     headers = {'user-key': settings.IGDB_KEY}
     url = settings.IGDB_URL.format(endpoint='games')
     r = requests.post(url=url, data=data, headers=headers)
@@ -97,3 +175,25 @@ def get_backdrop(request, guid):
     r = requests.post(url=url, data=data, headers=headers)
 
     return Response(r.json())
+
+
+@api_view(['GET'])
+def get_game_ratings(request, slug):
+    """Endpoint for getting ratings for a game.
+
+    Supports only GET.
+
+    Args:
+        slug: slugified name of a game (unique)
+    Returns:
+        data: [{game, user_id, rating}...]
+    """
+    try:
+        game = Game.objects.get(slug=slug)
+        ratings = Ratings.objects.filter(game=game)
+        serializer = RatingSerializer(ratings, many=True).data
+        return Response(serializer)
+    except:
+        raise NotFound(detail='Game does not have rating.')
+   
+        

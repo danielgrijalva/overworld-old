@@ -3,16 +3,18 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import Moment from "react-moment";
 import { Container, Grid } from "semantic-ui-react";
-import { Backdrop, Footer, Cover } from "../app/components/";
+import { Backdrop, Footer, Cover, Ratings } from "../app/components/";
 import {
   Details,
   CoverLoader,
   Actions,
   TitleLoader,
   TextLoader,
-  ActionsLoader
+  ActionsLoader,
+  Screenshots
 } from "./components/";
 import "./styles.css";
+import ShowMoreText from "react-show-more-text";
 
 export default class Game extends React.Component {
   constructor(props) {
@@ -20,6 +22,7 @@ export default class Game extends React.Component {
     this.state = {
       gameSlug: "",
       game: {},
+      ratings: [],
       isLoading: true
     };
   }
@@ -28,6 +31,7 @@ export default class Game extends React.Component {
     var gameSlug = this.props.match.params.slug;
     this.resetState(gameSlug);
     this.loadGame(gameSlug);
+    this.loadGameRatings(gameSlug);
   }
 
   //call this function to update state of a new game
@@ -44,6 +48,7 @@ export default class Game extends React.Component {
     this.setState({
       gameSlug: gameSlug,
       game: {},
+      ratings: [],
       isLoading: true
     });
   };
@@ -121,29 +126,49 @@ export default class Game extends React.Component {
                   )}
                   <Grid>
                     <Grid.Row>
-                      <Grid.Column width={10}>
+                      <Grid.Column width={11}>
                         {/* Game summary & details */}
                         {!isLoading ? (
-                          <section>
-                            <p className="summary">{game.summary}</p>
+                          <section className="summary">
+                            <ShowMoreText
+                              lines={4}
+                              more="Show more"
+                              less="Show less"
+                            >
+                              <p>{game.summary}</p>
+                            </ShowMoreText>
                             <Details game={game} />
                           </section>
                         ) : (
                           <TextLoader />
                         )}
                       </Grid.Column>
-                      <Grid.Column width={6}>
+                      <Grid.Column width={5}>
                         {/* Actions menu */}
                         {!isLoading ? (
                           <Actions game={game} />
                         ) : (
                           <ActionsLoader />
                         )}
+                        <Ratings
+                          ratings={this.state.ratings}
+                          showAverage={true}
+                          height={55}
+                          width={155}
+                        />
                       </Grid.Column>
                     </Grid.Row>
                   </Grid>
                 </Grid.Column>
               </React.Fragment>
+            </Grid.Row>
+            <Grid.Row>
+              {/* the following empty columns are used as offset */}
+              <Grid.Column width={4} />
+              <Grid.Column width={9}>
+                {!isLoading && <Screenshots screenshots={game.screenshots} />}
+              </Grid.Column>
+              <Grid.Column width={3} />
             </Grid.Row>
           </Grid>
         </Container>

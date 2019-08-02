@@ -11,21 +11,22 @@ import {
   Button,
   Message
 } from "semantic-ui-react";
-import { Backdrop, Footer, Cover, ListPreview } from "../app/components/";
-import { loadProfile, follow, unfollow } from "./actions";
 import {
-  ProfileNav,
-  Stats,
-  Journal,
+  Backdrop,
+  Footer,
+  Cover,
   Ratings,
-  RecentActivity
-} from "./components";
+  ListPreview
+} from "../app/components/";
+import { loadProfile, loadRatings, follow, unfollow } from "./actions";
+import { ProfileNav, Stats, Journal, RecentActivity } from "./components";
 import "./styles.css";
 
 class Profile extends Component {
   componentWillMount() {
     const { username } = this.props.match.params;
     this.props.loadProfile(username);
+    this.props.loadRatings(username);
   }
 
   render() {
@@ -185,8 +186,8 @@ class Profile extends Component {
                     )}
                     <Journal me={me} username={username} />
                     <Ratings
+                      ratings={this.props.ratings}
                       showAverage={false}
-                      username={username}
                       height={55}
                       width={225}
                     />
@@ -245,10 +246,11 @@ Profile.propTypes = {
 
 const mapStateToProps = state => ({
   profile: state.profile.profile,
-  isLoading: state.profile.isLoading
+  isLoading: state.profile.isLoading,
+  ratings: state.profile.ratings
 });
 
 export default connect(
   mapStateToProps,
-  { loadProfile, follow, unfollow }
+  { loadProfile, loadRatings, follow, unfollow }
 )(Profile);

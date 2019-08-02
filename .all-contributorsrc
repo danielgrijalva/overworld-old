@@ -59,6 +59,15 @@
         "bug",
         "code"
       ]
+    },
+    {
+      "login": "ProfoundWanderer",
+      "name": "ProfoundWanderer",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/18703678?v=4",
+      "profile": "http://profoundwanderer.pythonanywhere.com",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
