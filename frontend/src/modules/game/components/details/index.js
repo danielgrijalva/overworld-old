@@ -22,7 +22,6 @@ const Details = ({ game }) => {
     const lookup={
       1:'3',2:'7',3:'12',4:'16',5:'18',6:'RP',7:'EC',8:'E',9:'E10',10:'T',11:'M',12:'AO',"01":'ESRB',"02":'PEGI'
     }
-
   return (
     <Tab
       className="tabs margin-top"
@@ -97,14 +96,14 @@ const Details = ({ game }) => {
                 </Grid.Row>
                 <Grid.Row>
                   <Grid.Column width={8}>
-                    {game.age_ratings!== undefined &&(
+                    {game.age_ratings &&(
                       <h3>
                         <span>Age Ratings</span>
                       </h3>
                     )}
                   </Grid.Column>
                   <Grid.Column width={8} className="details">
-                      {game.age_ratings !== undefined && game.age_ratings.map(a =>{
+                      {game.age_ratings && game.age_ratings.map(a =>{
                       return <Label key={a.category}>{lookup[0+""+a.category]+" "+lookup[a.rating]}</Label>
                     })}
                   </Grid.Column>
@@ -144,6 +143,7 @@ const Details = ({ game }) => {
           menuItem: "genres",
           render: () => (
             <Tab.Pane attached={false}>
+
               {game.genres &&
                 game.genres.map(g => {
                   return <Label key={g.id}>{g.name}</Label>;

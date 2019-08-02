@@ -6,12 +6,13 @@ import "./styles.css";
 
 const Video_holder = ({game})=>{
     var ID = null
-    game.videos.map(v=>{
-        if(v.name.toLowerCase().includes('trailer')){
-            ID=v.video_id
-        }
-    })
-    if(ID!==null){
+    if(game.videos){
+        const video_object=game.videos.find((video)=>{
+            return video.name.toLowerCase().includes('trailer')  
+        })
+        ID=video_object.video_id
+    }
+    if(ID){
         return(<Embed id={ID} placeholder='../../../../../../public/earth.ico' brandedUI={false} source='youtube' active={true}></Embed>)
     }
     else{

@@ -43,7 +43,13 @@ _backdrop_fields = [
     'slug',
 ]
 
+_genre_fields = {
+    'name',
+    'slug'
+}
+
 game_fields = ','.join(_game_fields)
 search_fields = ','.join(_search_fields)
 popular_fields = ','.join(_popular_fields)
 backdrop_fields = ','.join(_backdrop_fields)
+genre_fields = ','.join(_genre_fields)
