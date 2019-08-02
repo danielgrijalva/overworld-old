@@ -254,12 +254,16 @@ describe('Test Landing actions', () => {
 
       await store.dispatch(getPopular());
 
-      const actions = store.getActions();
-      // Test axios is called with correct args
+      // Test axios is called with correct endpoint
       expect(axios.get.mock.calls.length).toEqual(1);
       expect(axios.get.mock.calls[0][0]).toEqual('/api/games/popular/');
 
+      // Test axios get is called with default params
+      const params = { limit: 6, offset: 0, filters: {} };
+      expect(axios.get.mock.calls[0][1].params).toEqual(params);
+
       // Test correct action with correct payload
+      const actions = store.getActions();
       expect(actions[0].type).toEqual('GET_POPULAR');
       expect(actions[0].payload).toEqual(mockResponse);
     });
@@ -269,15 +273,22 @@ describe('Test Landing actions', () => {
       const mockResponse = Promise.reject({ error: 'Something bad happened' });
       axios.get.mockImplementationOnce(() => mockResponse);
 
-      await store.dispatch(getPopular());
+      // Call getPopular with non default params
+      await store.dispatch(getPopular(7, 2, { genre: [{id: 5}]}));
 
-      const actions = store.getActions();
       // Test axios is called with correct args and returns mock response
       expect(axios.get.mock.calls.length).toEqual(1);
       expect(axios.get.mock.calls[0][0]).toEqual('/api/games/popular/');
+
+      // Test axios get is called with given params
+      const params = { limit: 7, offset: 2, filters: { genre: [{id: 5}]} };
+      expect(axios.get.mock.calls[0][1].params).toEqual(params);
+
+      // Ensure mock axios returns mock response
       expect(axios.get.mock.results[0].value).toEqual(mockResponse);
 
-      // No actions were dispatched because of error
+      // No actions were dispatched because of error in response
+      const actions = store.getActions();
       expect(actions).toEqual([]);
     });
   });
@@ -329,12 +340,12 @@ describe('Test Landing actions', () => {
 
       await store.dispatch(getBackdrop(2155));
 
-      const actions = store.getActions();
       // Test axios is called with correct args
       expect(axios.get.mock.calls.length).toEqual(1);
       expect(axios.get.mock.calls[0][0]).toEqual('/api/games/backdrop/2155/');
 
       // Test correct action with expected payload
+      const actions = store.getActions();
       expect(actions[0].type).toEqual('GET_BACKDROP');
       expect(actions[0].payload).toEqual(expectedActionPayload);
     });
@@ -346,14 +357,15 @@ describe('Test Landing actions', () => {
 
       await store.dispatch(getBackdrop(2155));
 
-      const actions = store.getActions();
-
       // Test axios is called with correct args and returns mock response
       expect(axios.get.mock.calls.length).toEqual(1);
       expect(axios.get.mock.calls[0][0]).toEqual('/api/games/backdrop/2155/');
+
+      // Ensure mock axios returns mock response
       expect(axios.get.mock.results[0].value).toEqual(mockResponse);
 
-      // No actions were dispatched because of error
+      // No actions were dispatched because of error in response
+      const actions = store.getActions();
       expect(actions).toEqual([]);
     });
   });
