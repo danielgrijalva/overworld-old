@@ -44,12 +44,12 @@ class Register extends React.Component {
     this.setState({
       email: "",
       username: "",
-      password1: "",
+      password: "",
       password2: "",
       open: false
     });
-
-    if (this.props.errors.length > 0) {
+    const { errors } = this.props;
+    if (errors && errors.length > 0) {
       this.props.dismissErrors();
     }
   };
