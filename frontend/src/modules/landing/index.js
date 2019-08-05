@@ -9,7 +9,7 @@ import { Features, Popular } from "./components/";
 import { Backdrops as options } from "./utils";
 import "./styles.css";
 
-class Landing extends React.Component {
+export class Landing extends React.Component {
   componentDidMount() {
     const game = options[Math.floor(Math.random() * options.length)];
     if (Object.keys(this.props.backdrop).length === 0) {
@@ -40,17 +40,19 @@ class Landing extends React.Component {
             </section>
             <Popular isLoading={isLoadingPopular} popular={popular} />
             <Features />
-            <section className="backdrop-name">
-              Backdrop from{" "}
-              <Link
-                to={{
-                  pathname: `/games/${backdrop.slug}`,
-                  state: backdrop.gameId
-                }}
-              >
-                {backdrop.name}
-              </Link>
-            </section>
+            {Object.keys(backdrop).length > 0 && (
+              <section className="backdrop-name">
+                Backdrop from{" "}
+                <Link
+                  to={{
+                    pathname: `/games/${backdrop.slug}`,
+                    state: backdrop.gameId
+                  }}
+                >
+                  {backdrop.name}
+                </Link>
+              </section>
+            )}
           </div>
         </Container>
         <Footer />
