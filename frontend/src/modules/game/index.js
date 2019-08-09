@@ -12,7 +12,8 @@ import {
   TextLoader,
   ActionsLoader,
   Screenshots,
-  Video
+  Video,
+  Similar
 } from "./components/";
 import "./styles.css";
 import ShowMoreText from 'react-show-more-text';
@@ -181,6 +182,14 @@ export default class Game extends React.Component {
               <Grid.Column width={4} />
               <Grid.Column width={9}>
                 {!isLoading && <Screenshots screenshots={game.screenshots} />}
+              </Grid.Column>
+              <Grid.Column width={3} />
+            </Grid.Row>
+            <Grid.Row>
+              {/* the following empty columns are used as offset */}
+              <Grid.Column width={4} />
+              <Grid.Column width={9}>
+                {!isLoading && <Similar similar_games={game.similar_games} isLoading={isLoading} />}
               </Grid.Column>
               <Grid.Column width={3} />
             </Grid.Row>
