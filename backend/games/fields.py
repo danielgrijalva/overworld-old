@@ -19,7 +19,11 @@ _game_fields = [
     'themes.name',
     'videos.name',
     'videos',
-    'videos.video_id'
+    'videos.video_id',
+    'similar_games',
+    'similar_games.cover.image_id',
+    'similar_games.slug',
+    'similar_games.name'
 ]
 
 _search_fields = [
