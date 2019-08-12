@@ -1,12 +1,15 @@
-.similar .ui.header.white {
+.dlc .ui.header.white {
   color: #fff;
   margin: 0;  
+}
+.white{
+  text-align: left;
 }
 .sec {
     text-align: center;
   }
   
-  .similar .sec .cover-wrapper {
+  .dlc .sec .cover-wrapper {
     margin: 1rem 0.5rem 0 0.5rem;
     width: 135px;
     height: 192px;
@@ -17,22 +20,22 @@
     cursor: pointer;
   }
   
-  .similar .sec .cover-wrapper:last-child,
-  .similar .placeholder:last-child {
+  .dlc .sec .cover-wrapper:last-child,
+  .dlc .placeholder:last-child {
     margin: 1rem 0 0 0.5rem;
   }
   
-  .similar .sec .cover-wrapper:hover .cover-overlay {
+  .dlc .sec .cover-wrapper:hover .cover-overlay {
     opacity: 1;
   }
   
-  .similar .sec .cover {
+  .dlc .sec .cover {
     width: 100%;
     height: 100%;
     border-radius: 0.3125rem;
   }
   
-  .similar .sec .cover-overlay {
+  .dlc .sec .cover-overlay {
     position: absolute;
     opacity: 0;
     flex-shrink: 0;
@@ -55,7 +58,7 @@
     vertical-align: middle;
   }
   
-  .similar .sec .placeholder {
+  .dlc .sec .placeholder {
     display: inline-block;
     width: 135px;
     height: 192px;
@@ -66,8 +69,8 @@
   }
   
   @media only screen and (max-width: 767px) and (min-width: 320px) {
-    .similar .sec .cover-wrapper,
-    .similar .sec .placeholder {
+    .dlc .sec .cover-wrapper,
+    .dlc .sec .placeholder {
       width: 90px;
       height: 128px;
     }

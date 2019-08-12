@@ -23,7 +23,16 @@ _game_fields = [
     'similar_games',
     'similar_games.cover.image_id',
     'similar_games.slug',
-    'similar_games.name'
+    'similar_games.name',
+    'dlcs',
+    'dlcs.cover.image_id',
+    'dlcs.slug',
+    'dlcs.name',
+    'expansions',
+    'expansions.cover.image_id',
+    'expansions.slug',
+    'expansions.name'
+
 ]
 
 _search_fields = [
