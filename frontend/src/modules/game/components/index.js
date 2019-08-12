@@ -9,3 +9,5 @@ export { default as QuickStats } from "./quick-stats";
 export { default as Screenshots } from "./screenshots";
 export { default as Video } from "./video";
 export { default as Similar } from "./similar-games";
+export { default as DLC } from "./dlc";
+export { default as Expansions } from "./expansions";
