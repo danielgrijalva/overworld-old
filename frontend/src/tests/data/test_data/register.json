@@ -1,0 +1,13 @@
+{
+  "local": {
+    "input_data": {
+      "password": "Test1234",
+      "email": "thevernon124@gmail.com"
+    },
+    "expected_data": {
+      "spiel_register_success": "Welcome",
+      "spiel_existing_email_error": "This field must be unique.",
+      "profile_url": "https://overworld.netlify.com/user/{}"
+    }
+  }
+}
