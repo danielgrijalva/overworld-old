@@ -1,5 +1,5 @@
 {
-  "chromedriver_path": "C:\\Users\\dell\\Utilities\\chromedriver_win32\\chromedriver.exe",
+  "chromedriver_path": "path_to_chromedriver\\chromedriver.exe",
   "implicit_wait_timeout": 15,
   "url_base_local": "http://localhost:3000/",
   "url_base_prod": "https://overworld.netlify.com/",

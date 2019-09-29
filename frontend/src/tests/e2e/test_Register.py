@@ -29,7 +29,7 @@ class TestRegister(object):
         cls.config_data = cls.utils.get_config_data()
 
     def setup_method(self):
-        self.steps.navigate_to_url(self.driver, self.config_data["url_base_prod"])
+        self.steps.navigate_to_url(self.driver, self.config_data["url_base_local"])
 
     @classmethod
     def teardown_class(cls):
