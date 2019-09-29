@@ -29,7 +29,7 @@ class TestRegister(object):
         cls.config_data = cls.utils.get_config_data()
 
     def setup_method(self):
-        self.steps.navigate_to_url(self.driver, self.config_data["url_base_local"])
+        self.steps.navigate_to_url(self.driver, self.config_data["url_base_prod"])
 
     @classmethod
     def teardown_class(cls):
@@ -63,3 +63,35 @@ class TestRegister(object):
         self.asserts.verify_element_text(
             self.steps.get_element(self.driver, self.landing_page.register["label_error_spiel"]),
             self.register_data["expected_data"]["spiel_existing_email_error"])
+
+    @pytest.mark.negative
+    def test_register_with_invalid_email_address(self):
+        username = self.utils.generate_test_username()
+        self.landing_page.click_get_started_button(self.driver)
+        self.landing_page.perform_register(self.driver, self.register_data["input_data"]["invalid_email"], username,
+                                           self.register_data["input_data"]["password"],
+                                           self.register_data["input_data"]["password"])
+        self.asserts.verify_element_text(
+            self.steps.get_element(self.driver, self.landing_page.register["label_error_spiel"]),
+            self.register_data["expected_data"]["spiel_invalid_email_error"])
+
+    @pytest.mark.negative
+    def test_register_with_blank_username(self):
+        self.landing_page.click_get_started_button(self.driver)
+        self.landing_page.perform_register(self.driver, self.register_data["input_data"]["email"], " ",
+                                           self.register_data["input_data"]["password"],
+                                           self.register_data["input_data"]["password"])
+        self.asserts.verify_element_text(
+            self.steps.get_element(self.driver, self.landing_page.register["label_error_spiel"]),
+            self.register_data["expected_data"]["spiel_blank_field_error"])
+
+    @pytest.mark.negative
+    def test_register_with_existing_username(self):
+        self.landing_page.click_get_started_button(self.driver)
+        self.landing_page.perform_register(self.driver, self.register_data["input_data"]["email"],
+                                           self.register_data["input_data"]["existing_username"],
+                                           self.register_data["input_data"]["password"],
+                                           self.register_data["input_data"]["password"])
+        self.asserts.verify_element_text(
+            self.steps.get_element(self.driver, self.landing_page.register["label_error_spiel"]),
+            self.register_data["expected_data"]["spiel_existing_username_error"])

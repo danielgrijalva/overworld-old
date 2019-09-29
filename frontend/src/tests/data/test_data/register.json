@@ -2,11 +2,31 @@
   "local": {
     "input_data": {
       "password": "Test1234",
-      "email": "thevernon124@gmail.com"
+      "email": "thevernon124@gmail.com",
+      "invalid_email": "iamaninv@lidemail"
     },
     "expected_data": {
       "spiel_register_success": "Welcome",
       "spiel_existing_email_error": "This field must be unique.",
+      "spiel_invalid_email_error": "Enter a valid email address.",
+      "spiel_blank_field_error": "This field may not be blank.",
+      "spiel_existing_username_error": "A user with that username already exists.",
+      "profile_url": "localhost:3000/user/{}"
+    }
+  },
+  "prod": {
+    "input_data": {
+      "password": "Test1234",
+      "email": "thevernon124@gmail.com",
+      "invalid_email": "iamaninv@lidemail",
+      "existing_username": "vrucenzon"
+    },
+    "expected_data": {
+      "spiel_register_success": "Welcome",
+      "spiel_existing_email_error": "This field must be unique.",
+      "spiel_invalid_email_error": "Enter a valid email address.",
+      "spiel_blank_field_error": "This field may not be blank.",
+      "spiel_existing_username_error": "A user with that username already exists.",
       "profile_url": "https://overworld.netlify.com/user/{}"
     }
   }
