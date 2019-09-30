@@ -66,6 +66,7 @@ class TestLog(object):
 
     @pytest.mark.smoke
     def test_mark_game_as_played(self):
+        """Test that a game can be marked as played when the user is logged in."""
         self.landing_page.go_to_profile(self.driver)
         current_game_count = self.profile_page.get_game_count(self.driver)
         self.search_game_and_click_played(self.driver, self.log_data["input_data"]["game_title"])

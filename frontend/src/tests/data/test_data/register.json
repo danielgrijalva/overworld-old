@@ -3,7 +3,9 @@
     "input_data": {
       "password": "Test1234",
       "email": "thevernon124@gmail.com",
-      "invalid_email": "iamaninv@lidemail"
+      "existing_username": "vrucenzon",
+      "invalid_username": "~",
+      "long_username": "sLzvj3czOZ2sSgHsrDX7yhr4VA9OFQLWiv45sNfQXsS3vLKvTNShqK1h5WJj6QpY2NNIbxKWHnU58KSOTyn8IPFUtzy5hiC7MT89pivOCwKPgzxXi8DCbRR5oQg4BfmZTP2JiUK6evkThyaLincYv2g"
     },
     "expected_data": {
       "spiel_register_success": "Welcome",
@@ -11,6 +13,8 @@
       "spiel_invalid_email_error": "Enter a valid email address.",
       "spiel_blank_field_error": "This field may not be blank.",
       "spiel_existing_username_error": "A user with that username already exists.",
+      "spiel_invalid_username_error": "Enter a valid username. This value may contain only letters, numbers, and @/./+/-/_ characters.",
+      "spiel_long_username_error": "Ensure this field has no more than 150 characters.",
       "profile_url": "localhost:3000/user/{}"
     }
   },
@@ -18,7 +22,6 @@
     "input_data": {
       "password": "Test1234",
       "email": "thevernon124@gmail.com",
-      "invalid_email": "iamaninv@lidemail",
       "existing_username": "vrucenzon"
     },
     "expected_data": {
@@ -27,6 +30,7 @@
       "spiel_invalid_email_error": "Enter a valid email address.",
       "spiel_blank_field_error": "This field may not be blank.",
       "spiel_existing_username_error": "A user with that username already exists.",
+      "spiel_invalid_username_error": "Enter a valid username. This value may contain only letters, numbers, and @/./+/-/_ characters.",
       "profile_url": "https://overworld.netlify.com/user/{}"
     }
   }

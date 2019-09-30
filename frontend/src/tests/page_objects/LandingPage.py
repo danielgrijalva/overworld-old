@@ -1,3 +1,5 @@
+"""Locators for the Home/Landing page, and methods for interacting with them."""
+
 from ..commands.TestSteps import TestSteps
 
 

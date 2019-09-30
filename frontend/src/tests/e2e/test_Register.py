@@ -37,6 +37,7 @@ class TestRegister(object):
 
     @pytest.mark.smoke
     def test_valid_registration(self):
+        """Test that registration succeeds when valid inputs are provided."""
         register_email = self.utils.generate_test_email()
         username = self.utils.generate_test_username()
         self.landing_page.click_get_started_button(self.driver)
@@ -55,6 +56,7 @@ class TestRegister(object):
 
     @pytest.mark.negative
     def test_register_with_existing_email(self):
+        """Test that registration fails when a used email address is provided."""
         username = self.utils.generate_test_username()
         self.landing_page.click_get_started_button(self.driver)
         self.landing_page.perform_register(self.driver, self.register_data["input_data"]["email"], username,
@@ -66,9 +68,11 @@ class TestRegister(object):
 
     @pytest.mark.negative
     def test_register_with_invalid_email_address(self):
+        """Test that registration fails when an invalid format email address is provided."""
+        register_email = self.utils.generate_test_email(domain="invalid")
         username = self.utils.generate_test_username()
         self.landing_page.click_get_started_button(self.driver)
-        self.landing_page.perform_register(self.driver, self.register_data["input_data"]["invalid_email"], username,
+        self.landing_page.perform_register(self.driver, register_email, username,
                                            self.register_data["input_data"]["password"],
                                            self.register_data["input_data"]["password"])
         self.asserts.verify_element_text(
@@ -77,8 +81,10 @@ class TestRegister(object):
 
     @pytest.mark.negative
     def test_register_with_blank_username(self):
+        """Test that registration fails when spaces are provided for the username."""
+        register_email = self.utils.generate_test_email()
         self.landing_page.click_get_started_button(self.driver)
-        self.landing_page.perform_register(self.driver, self.register_data["input_data"]["email"], " ",
+        self.landing_page.perform_register(self.driver, register_email, " ",
                                            self.register_data["input_data"]["password"],
                                            self.register_data["input_data"]["password"])
         self.asserts.verify_element_text(
@@ -87,11 +93,50 @@ class TestRegister(object):
 
     @pytest.mark.negative
     def test_register_with_existing_username(self):
+        """Test that registration fails when a used username is provided."""
+        register_email = self.utils.generate_test_email()
         self.landing_page.click_get_started_button(self.driver)
-        self.landing_page.perform_register(self.driver, self.register_data["input_data"]["email"],
+        self.landing_page.perform_register(self.driver, register_email,
                                            self.register_data["input_data"]["existing_username"],
                                            self.register_data["input_data"]["password"],
                                            self.register_data["input_data"]["password"])
         self.asserts.verify_element_text(
             self.steps.get_element(self.driver, self.landing_page.register["label_error_spiel"]),
             self.register_data["expected_data"]["spiel_existing_username_error"])
+
+    @pytest.mark.negative
+    def test_register_with_invalid_username(self):
+        """Test that registration fails when an invalid format username is provided."""
+        register_email = self.utils.generate_test_email()
+        self.landing_page.click_get_started_button(self.driver)
+        self.landing_page.perform_register(self.driver, register_email,
+                                           self.register_data["input_data"]["invalid_username"],
+                                           self.register_data["input_data"]["password"],
+                                           self.register_data["input_data"]["password"])
+        self.asserts.verify_element_text(
+            self.steps.get_element(self.driver, self.landing_page.register["label_error_spiel"]),
+            self.register_data["expected_data"]["spiel_invalid_username_error"])
+
+    @pytest.mark.negative
+    def test_register_with_long_username(self):
+        """Test that registration fails when a username with more than 150 characters is provided."""
+        register_email = self.utils.generate_test_email()
+        self.landing_page.click_get_started_button(self.driver)
+        self.landing_page.perform_register(self.driver, register_email,
+                                           self.register_data["input_data"]["long_username"],
+                                           self.register_data["input_data"]["password"],
+                                           self.register_data["input_data"]["password"])
+        self.asserts.verify_element_text(
+            self.steps.get_element(self.driver, self.landing_page.register["label_error_spiel"]),
+            self.register_data["expected_data"]["spiel_long_username_error"])
+
+    @pytest.mark.negative
+    def test_register_with_blank_password(self):
+        """Test that registration fails when blanks are provided for the password."""
+        register_email = self.utils.generate_test_email()
+        username = self.utils.generate_test_username()
+        self.landing_page.click_get_started_button(self.driver)
+        self.landing_page.perform_register(self.driver, register_email, username, "        ", "        ")
+        self.asserts.verify_element_text(
+            self.steps.get_element(self.driver, self.landing_page.register["label_error_spiel"]),
+            self.register_data["expected_data"]["spiel_blank_field_error"])

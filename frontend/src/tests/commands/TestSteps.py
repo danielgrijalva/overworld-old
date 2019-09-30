@@ -1,3 +1,5 @@
+"""Re-usable methods for interacting with and waiting for elements and the web page in tests."""
+
 from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.common.exceptions import NoSuchElementException
@@ -5,7 +7,6 @@ from selenium.webdriver.common.by import By
 
 
 class TestSteps:
-
     def navigate_to_url(self, driver, url):
         driver.get(url)
 

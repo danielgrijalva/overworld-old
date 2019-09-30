@@ -1,3 +1,5 @@
+"""Re-usable methods for setting up and manipulating environment and test data."""
+
 import os
 import json
 
@@ -30,8 +32,8 @@ class Utils:
         with open(_pwd + "overworld\\frontend\\src\\tests\\data\\test_data\\" + test_data_name + ".json") as json_file:
             return json.load(json_file)[test_env]
 
-    def generate_test_email(self):
-        return self.fake.email()
+    def generate_test_email(self, domain=None):
+        return self.fake.email(domain)
 
     def generate_test_username(self):
         return self.fake.user_name()

@@ -1,3 +1,6 @@
+"""Re-usable methods for asserting the expected results in tests."""
+
+
 class Assertions:
     def verify_url(self, driver, expected_url):
         assert expected_url in driver.current_url
