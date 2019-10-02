@@ -49,7 +49,8 @@ class Register extends React.Component {
       open: false
     });
 
-    if (this.props.errors.length > 0) {
+    // If there's an error, dismiss the errors on close
+    if (this.props.errors && this.props.errors.length > 0) {
       this.props.dismissErrors();
     }
   };
