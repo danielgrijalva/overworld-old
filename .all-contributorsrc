@@ -95,9 +95,18 @@
       "contributions": [
         "bug"
       ]
-    }
+    },
+    {
+      "login": "Apoorv01017",
+      "name": "Apoorv Srivastava",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/53645584?v=4",
+      "profile": "https://github.com/Apoorv01017",
+      "contributions": [
+        "content"
+      ]
+    }  
   ],
-  "contributorsPerLine": 7,
+  "contributorsPerLine": 6,
   "projectName": "overworld",
   "projectOwner": "danielgrijalva",
   "repoType": "github",
