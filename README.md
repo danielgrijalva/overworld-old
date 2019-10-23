@@ -18,7 +18,7 @@
 
 If you use Letterboxd you probably know what this project is about. If not...  
   
-**Overworld** is a place where you can share your gaming experiences, keep track of what you play, discover games, manage your backlog, show love to your favorite games, write reviews, compile lists of specific games and *More Stuff™*.  
+**Overworld** is a place where you can share your gaming experiences, keep track of what you play, discover games, manage your backlog, show love to your favourite games, write reviews, compile lists of specific games and *More Stuff™*.  
 
 Follow other people to discuss or discover new games, or you can be a lone wolf and use it as a personal gaming journal.  
   
@@ -49,7 +49,7 @@ So far you can do the following:
 * Add a game to your played games
 * Add a game to your backlog and/or wish list
 * Like a game
-* Add antries to your gaming journal
+* Add entries to your gaming journal
 * View your profile
 * Edit basic profile info
 * Follow other users
@@ -60,7 +60,7 @@ Try it now, join the [testing environment](https://overworld.netlify.com)! 🌎�
 
 ## Contributors
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+Thanks go to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
