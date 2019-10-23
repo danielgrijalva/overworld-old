@@ -8,7 +8,7 @@ import Error from "../errors/";
 import { LoginForm } from "./Form";
 import "./styles.css";
 
-class LogIn extends React.Component {
+export class LogIn extends React.Component {
   constructor() {
     super();
     this.state = {
