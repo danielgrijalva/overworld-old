@@ -1,5 +1,5 @@
 import React from "react";
-import { Header, Segment, Image, Modal } from "semantic-ui-react";
+import { Header, Segment, Modal } from "semantic-ui-react";
 import { Screenshot } from "./Screenshot";
 import "./styles.css";
 
@@ -32,7 +32,7 @@ export default class Screenshots extends React.Component {
         <Header className="white">
           Screenshots{" "}
           <small>
-            <a onClick={this.showAllScreenshots}>
+            <a href="#" onClick={this.showAllScreenshots}>
               show {!this.state.showAll ? "more" : "less"}...
             </a>
           </small>
