@@ -70,6 +70,15 @@
       ]
     },
     {
+      "login": "theVernon124",
+      "name": "theVernon124",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/18108251?v=4",
+      "profile": "https://github.com/theVernon124",
+      "contributions": [
+        "test"
+      ]
+    },
+    {
       "login": "TonyDMorris",
       "name": "TonyDMorris",
       "avatar_url": "https://avatars0.githubusercontent.com/u/40209459?v=4",
@@ -77,7 +86,7 @@
       "contributions": [
         "bug"
       ]
-    }
+    },
   ],
   "contributorsPerLine": 7,
   "projectName": "overworld",

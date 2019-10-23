@@ -73,6 +73,7 @@ Thanks go to these wonderful people ([emoji key](https://allcontributors.org/doc
     <td align="center"><a href="https://github.com/raufabr"><img src="https://avatars1.githubusercontent.com/u/30205551?v=4" width="100px;" alt="raufabr"/><br /><sub><b>raufabr</b></sub></a><br /><a href="https://github.com/danielgrijalva/overworld/issues?q=author%3Araufabr" title="Bug reports">🐛</a> <a href="https://github.com/danielgrijalva/overworld/commits?author=raufabr" title="Code">💻</a></td>
     <td align="center"><a href="http://profoundwanderer.pythonanywhere.com"><img src="https://avatars3.githubusercontent.com/u/18703678?v=4" width="100px;" alt="ProfoundWanderer"/><br /><sub><b>ProfoundWanderer</b></sub></a><br /><a href="https://github.com/danielgrijalva/overworld/commits?author=ProfoundWanderer" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/TonyDMorris"><img src="https://avatars0.githubusercontent.com/u/40209459?v=4" width="100px;" alt="TonyDMorris"/><br /><sub><b>TonyDMorris</b></sub></a><br /><a href="https://github.com/danielgrijalva/overworld/issues?q=author%3ATonyDMorris" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/theVernon124"><img src="https://avatars3.githubusercontent.com/u/18108251?v=4" width="100px;" alt="theVernon124"/><br /><sub><b>theVernon124</b></sub></a><br /><a href="https://github.com/danielgrijalva/overworld/commits?author=theVernon124" title="Tests">⚠️</a></td>
   </tr>
 </table>
 
