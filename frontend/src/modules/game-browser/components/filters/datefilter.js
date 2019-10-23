@@ -1,7 +1,6 @@
 import React from "react";
 import { DateInput } from "semantic-ui-calendar-react";
 import { Form, Dropdown } from "semantic-ui-react";
-import moment from "moment"
 
 const initialState = {
   order: "after",
