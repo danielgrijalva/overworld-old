@@ -68,6 +68,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "bovas85",
+      "name": "Alessandro Giordo",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/16958684?v=4",
+      "profile": "https://moustachedesign.xyz",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
