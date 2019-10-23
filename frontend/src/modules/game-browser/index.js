@@ -2,7 +2,6 @@ import React from "react";
 import "./styles.css";
 import { getPopular, getGameData } from "./actions";
 import { connect } from "react-redux";
-import { Button } from "semantic-ui-react";
 import { Backdrop } from "../app/components";
 import GameTile from "./components/gametile";
 import FilterBar from "./components/filterbar/filterBar";
