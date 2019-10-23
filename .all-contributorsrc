@@ -68,6 +68,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "TonyDMorris",
+      "name": "TonyDMorris",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/40209459?v=4",
+      "profile": "https://github.com/TonyDMorris",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
