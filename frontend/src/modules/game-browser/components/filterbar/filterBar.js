@@ -2,8 +2,6 @@ import React from "react";
 import {
   GenreFilter,
   DateFilter,
-  ThemeFilter,
-  PlatformFilter
 } from "../filters";
 import { Dropdown, Label } from "semantic-ui-react";
 
@@ -18,7 +16,6 @@ export default class FilterBar extends React.Component {
     ];
   }
   render() {
-    const filters = this.props.filters
     const setFilter = this.props.setFilter;
     const removeFilter = this.props.removeFilter
     return (
