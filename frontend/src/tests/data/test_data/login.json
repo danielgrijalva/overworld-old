@@ -1,0 +1,9 @@
+{
+  "local": {
+    "input_data": {
+      "username": "vrucenzon",
+      "password": "Test1234"
+    },
+    "expected_data": {}
+  }
+}
