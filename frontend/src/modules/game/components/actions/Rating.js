@@ -13,7 +13,7 @@ class Ratings extends React.Component {
 
   onStarClick = rate => {
     const { game } = this.props;
-    if (this.props.rating == rate) {
+    if (this.props.rating === rate) {
       this.props.rate(game, 0);
     } else {
       this.props.rate(game, rate);
