@@ -49,7 +49,7 @@ class Register extends React.Component {
       open: false
     });
 
-    if (this.props.errors.length > 0) {
+    if (this.props.errors) {
       this.props.dismissErrors();
     }
   };
