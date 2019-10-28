@@ -4,7 +4,7 @@
 
 > ### *A [letterboxd](https://letterboxd.com) for video games.*
 
-&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://travis-ci.com/danielgrijalva/overworld.svg?branch=master)](https://travis-ci.com/danielgrijalva/overworld) [![All Contributors](https://img.shields.io/badge/all_contributors-11-success.svg)](#contributors) [![codecov](https://codecov.io/gh/danielgrijalva/overworld/branch/master/graph/badge.svg)](https://codecov.io/gh/danielgrijalva/overworld) [![Netlify Status](https://api.netlify.com/api/v1/badges/33b0b37b-b9ac-4077-9cd3-731e470a948a/deploy-status)](https://overworld.netlify.com/)
+&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://travis-ci.com/danielgrijalva/overworld.svg?branch=master)](https://travis-ci.com/danielgrijalva/overworld) [![All Contributors](https://img.shields.io/badge/all_contributors-12-orange.svg?style=flat-square)](#contributors) [![codecov](https://codecov.io/gh/danielgrijalva/overworld/branch/master/graph/badge.svg)](https://codecov.io/gh/danielgrijalva/overworld) [![Netlify Status](https://api.netlify.com/api/v1/badges/33b0b37b-b9ac-4077-9cd3-731e470a948a/deploy-status)](https://overworld.netlify.com/)
 
 * [About](#about)
   + [Inspiration](#inspiration)
@@ -78,6 +78,7 @@ Thanks go to these wonderful people ([emoji key](https://allcontributors.org/doc
     <td align="center"><a href="https://moustachedesign.xyz"><img src="https://avatars3.githubusercontent.com/u/16958684?v=4" width="100px;" alt="Alessandro Giordo"/><br /><sub><b>Alessandro Giordo</b></sub></a><br /><a href="https://github.com/danielgrijalva/overworld/issues?q=author%3Abovas85" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://github.com/Apoorv01017"><img src="https://avatars0.githubusercontent.com/u/53645584?v=4" width="100px;" alt="Apoorv Srivastava"/><br /><sub><b>Apoorv Srivastava</b></sub></a><br /><a href="#content-Apoorv01017" title="Content">🖋</a></td>
     <td align="center"><a href="https://github.com/akpark"><img src="https://avatars0.githubusercontent.com/u/12914723?v=4" width="100px;" alt="akpark"/><br /><sub><b>akpark</b></sub></a><br /><a href="https://github.com/danielgrijalva/overworld/commits?author=akpark" title="Code">💻</a> <a href="#maintenance-akpark" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="https://jespers.site"><img src="https://avatars3.githubusercontent.com/u/1763556?v=4" width="100px;" alt="Jesper Nellemann Jakobsen"/><br /><sub><b>Jesper Nellemann Jakobsen</b></sub></a><br /><a href="#tool-bingocaller" title="Tools">🔧</a> <a href="#infra-bingocaller" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
   </tr>
 </table>
 
