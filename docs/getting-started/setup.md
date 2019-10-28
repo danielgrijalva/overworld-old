@@ -19,38 +19,49 @@ Overworld needs Python 3.6+ to run.
 
 ## Installation
 
-After forking the repository, do the following:
+After forking the repository, copy the `.env.default` file to your actual `.env`:
 
-* Obtain your API keys from [IGDB](https://api.igdb.com) and paste it inside your `.env` file. But first, copy the `.env.default` file to your actual `.env`:
-
-```text
+```bash
 cp .env.default .env
 ```
 
-* Now, set up the backend:
+Then obtain your API keys from [IGDB](https://api.igdb.com) and paste it inside your new `.env` file.
 
-```text
+#### Set up the backend
+
+You can set up the backend by using the provided [setup\_run\_backend](https://github.com/danielgrijalva/overworld/blob/master/setup_run_backend.sh) script like so:
+
+```bash
+./setup_run_backend.sh
+```
+
+It will try to install missing dependencies \(Python and Postgres\) through [Homebrew](https://brew.sh/), if it's available on your system. It will then install requirements through pip, migrate, and then finally start the server.
+
+If you're not using Homebrew or want to do things manually, here are the steps required:
+
+```bash
 cd backend/
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
 ```
 
-* Set up the frontend:
-  1. Create the `.env` file:
+#### Set up the frontend
 
-```text
+* Create the `.env` file:
+
+```bash
 cd frontend/
 cp .env.default .env
 ```
 
-1. Install the dependencies:
+* Install the dependencies:
 
-   **Note: Due to a bug in Semantic UI on Windows 10 node version 10.10.0 or lower is required to install it.**
+```bash
+npm ci
+```
 
-   ```text
-   npm ci
-   ```
+**Note: Due to a bug in Semantic UI on Windows 10 node version 10.10.0 or lower is required to install it.**
 
 This will build the project dependencies based off of the `package-lock.json`.
 
@@ -62,7 +73,7 @@ This will build the project dependencies based off of the `package-lock.json`.
 
 After the build completes:
 
-```text
+```bash
 npm start
 ```
 
