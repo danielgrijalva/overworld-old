@@ -114,6 +114,16 @@
         "code",
         "maintenance"
       ]
+    },
+    {
+      "login": "bingocaller",
+      "name": "Jesper Nellemann Jakobsen",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1763556?v=4",
+      "profile": "https://jespers.site",
+      "contributions": [
+        "tool",
+        "infra"
+      ]
     }
   ],
   "contributorsPerLine": 6,
