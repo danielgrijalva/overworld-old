@@ -11,6 +11,7 @@
     "nodemon": "^1.19.4",
     "react": "^16.10.2",
     "react-content-loader": "^4.3.2",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-dates": "^21.2.1",
     "react-dom": "^16.10.2",
     "react-lazy-images": "^1.1.0",
