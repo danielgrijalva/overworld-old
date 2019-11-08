@@ -37,7 +37,7 @@ For a detailed guide of Overworld's development, take a look at the [documentati
 
 ## Features
 
-> #### [Demo](/media/demo.gif) | [Log feature](/media/log.gif) | [Favorite Games](/media/favorites.gif)
+> #### [Example Profile](https://overworld.netlify.com/user/daniel) | [Demo](/media/demo.gif) | [Log feature](/media/log.gif) | [Favorite Games](/media/favorites.gif)
   
 So far you can do the following:
 * Create an account
