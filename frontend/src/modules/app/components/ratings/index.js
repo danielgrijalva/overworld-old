@@ -30,8 +30,7 @@ class Ratings extends React.Component {
       chartData[val.rating] += 1;
       total_val += parseFloat(val.rating);
     });
-    const average = Math.round((total_val / total_length) * 100) / 100;
-
+    const average = total_val / total_length;
     return { chartData: chartData, average: average, total: total_length };
   };
 
@@ -55,12 +54,9 @@ class Ratings extends React.Component {
             <span className="rating-label">
               <span className="star">★</span>
             </span>
-            <div
-              className="rating-chart"
-              style={{ height: this.props.height, width: this.props.width }}
-            >
+            <div className="rating-chart">
               {Object.keys(chartData).map((key, i) => {
-                const percent = total ? chartData[key] / total : 0;
+                const height = total ? (chartData[key] * 100) / total : 0;
                 return (
                   <Popup
                     key={i}
@@ -75,8 +71,7 @@ class Ratings extends React.Component {
                         className="rating-bar"
                         key={"rating" + i}
                         style={{
-                          height: percent * this.props.height + 1,
-                          width: this.props.width / 10
+                          height: height + 1
                         }}
                       />
                     }
@@ -86,7 +81,7 @@ class Ratings extends React.Component {
             </div>
             <div className="rating-label">
               {this.props.showAverage && (
-                <span className="rating-average">{average}</span>
+                <span className="rating-average">{average.toFixed(1)}</span>
               )}
               <span className="star">★★★★★</span>
             </div>

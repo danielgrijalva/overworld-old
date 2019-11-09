@@ -185,12 +185,7 @@ class Profile extends Component {
                       </React.Fragment>
                     )}
                     <Journal me={me} username={username} />
-                    <Ratings
-                      ratings={this.props.ratings}
-                      showAverage={false}
-                      height={55}
-                      width={225}
-                    />
+                    <Ratings ratings={this.props.ratings} showAverage={false} />
                     <Divider horizontal>Backlog</Divider>
                     {backlog.length > 0 ? (
                       <ListPreview games={backlog} />
