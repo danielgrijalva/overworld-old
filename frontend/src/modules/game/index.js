@@ -14,7 +14,7 @@ import {
   Screenshots
 } from "./components/";
 import "./styles.css";
-import ShowMoreText from 'react-show-more-text';
+import ShowMoreText from "react-show-more-text";
 
 export default class Game extends React.Component {
   constructor(props) {
@@ -137,11 +137,11 @@ export default class Game extends React.Component {
                         {!isLoading ? (
                           <section className="summary">
                             <ShowMoreText
-                                lines={4}
-                                more="Show more"
-                                less="Show less"
+                              lines={4}
+                              more="Show more"
+                              less="Show less"
                             >
-                                <p>{game.summary}</p>
+                              <p>{game.summary}</p>
                             </ShowMoreText>
                             <Details game={game} />
                           </section>
@@ -159,8 +159,6 @@ export default class Game extends React.Component {
                         <Ratings
                           ratings={this.state.ratings}
                           showAverage={true}
-                          height={55}
-                          width={155}
                         />
                       </Grid.Column>
                     </Grid.Row>
