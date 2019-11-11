@@ -23,7 +23,7 @@ import { ProfileNav, Stats, Journal, RecentActivity } from "./components";
 import "./styles.css";
 
 class Profile extends Component {
-  componentWillMount() {
+  componentDidMount() {
     const { username } = this.props.match.params;
     this.props.loadProfile(username);
     this.props.loadRatings(username);

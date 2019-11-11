@@ -11,14 +11,14 @@ import {
 } from "../../actions";
 
 class Buttons extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const { id } = this.props.game;
     this.props.loadActions(id);
   }
 
   onClick = (e, { value }) => {
     const { id, name, slug, cover, screenshots } = this.props.game;
-    const backdropId = screenshots[1].image_id
+    const backdropId = screenshots[1].image_id;
     switch (value) {
       case "played":
         this.props.logGame(id, name, slug, cover.image_id, backdropId);

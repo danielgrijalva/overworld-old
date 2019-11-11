@@ -6,7 +6,7 @@ import { loadActivity } from "../../actions";
 import "./styles.css";
 
 class RecentActivity extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.loadActivity(this.props.username);
   }
 
@@ -44,12 +44,10 @@ class RecentActivity extends React.Component {
           <div className="recent-wrapper">
             {activity.map((g, i) => {
               return (
-                <div className="small-cover-wrapper">
+                <div key={i} className="small-cover-wrapper">
                   <Link to={`/games/${g.game.slug}`} className="cover-link">
                     <Image
-                      src={`https://images.igdb.com/igdb/image/upload/t_cover_big/${
-                        g.game.cover_id
-                      }.jpg`}
+                      src={`https://images.igdb.com/igdb/image/upload/t_cover_big/${g.game.cover_id}.jpg`}
                       rounded
                       fluid
                       className="cover"
@@ -66,7 +64,7 @@ class RecentActivity extends React.Component {
                 </div>
               );
             })}
-            {[...Array(5-activity.length)].map((_, i) => (
+            {[...Array(5 - activity.length)].map((_, i) => (
               <div key={i} className="placeholder" />
             ))}
           </div>

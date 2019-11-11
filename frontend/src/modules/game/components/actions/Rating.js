@@ -6,7 +6,7 @@ import Rating from "react-rating";
 import "font-awesome/css/font-awesome.min.css";
 
 class Ratings extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const { game } = this.props;
     this.props.loadRating(game.id);
   }

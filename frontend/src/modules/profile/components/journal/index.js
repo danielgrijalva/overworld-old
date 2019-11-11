@@ -7,7 +7,7 @@ import { loadJournal } from "../../actions";
 import "./styles.css";
 
 class Journal extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.loadJournal(this.props.username);
   }
 

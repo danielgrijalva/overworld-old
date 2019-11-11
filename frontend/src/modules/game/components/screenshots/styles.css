@@ -14,7 +14,7 @@
   position: absolute;
   left: 0;
   top: 0;
-  background: linear-gradient(transparent 100px, #14181c);
+  background: linear-gradient(transparent 50px, #14181c);
 }
 
 .screenshots img.screenshot {
@@ -33,5 +33,13 @@
 .screenshots .ui.header > small > a {
   font-weight: 300;
   color: #fff;
+  cursor: pointer;
+}
+
+.screenshots .show-hide-screenshots {
+  border: none;
+  background: none;
+  padding: 0;
+  color: #9ab;
   cursor: pointer;
 }
