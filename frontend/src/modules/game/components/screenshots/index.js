@@ -32,22 +32,26 @@ export default class Screenshots extends React.Component {
         <Header className="white">
           Screenshots{" "}
           <small>
-            <a href="#" onClick={this.showAllScreenshots}>
-              show {!this.state.showAll ? "more" : "less"}...
-            </a>
+            <button
+              className="show-hide-screenshots"
+              onClick={this.showAllScreenshots}
+            >
+              ...show {!this.state.showAll ? "all" : "less"}
+            </button>
           </small>
         </Header>
         <Segment basic className={`${!this.state.showAll && "truncate"}`}>
-          {this.props.screenshots && this.props.screenshots.map((s, i) => {
-            return (
-              <Screenshot
-                size="med"
-                onClick={() => this.showScreenshotModal(s.image_id)}
-                imageId={s.image_id}
-                key={i}
-              />
-            );
-          })}
+          {this.props.screenshots &&
+            this.props.screenshots.map((s, i) => {
+              return (
+                <Screenshot
+                  size="med"
+                  onClick={() => this.showScreenshotModal(s.image_id)}
+                  imageId={s.image_id}
+                  key={i}
+                />
+              );
+            })}
         </Segment>
         <Modal
           size="small"

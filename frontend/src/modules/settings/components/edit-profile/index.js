@@ -11,8 +11,8 @@ import { ChooseFavorites } from "../../components";
 import "./styles.css";
 
 class EditProfile extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       email: "",
       username: "",
@@ -22,7 +22,7 @@ class EditProfile extends Component {
     };
   }
 
-  componentWillReceiveProps(props) {
+  UNSAFE_componentWillReceiveProps(props) {
     if (!props.auth.isLoading & (Object.keys(props.profile).length === 0)) {
       this.props.loadProfile(props.auth.user.username);
     }

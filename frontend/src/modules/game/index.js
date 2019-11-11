@@ -27,7 +27,7 @@ export default class Game extends React.Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     var gameSlug = this.props.match.params.slug;
     this.resetState(gameSlug);
     this.loadGame(gameSlug);
@@ -137,12 +137,12 @@ export default class Game extends React.Component {
                         {!isLoading ? (
                           <section className="summary">
                             <ShowMoreText
-                              lines={4}
-                              more="Show more"
-                              less="Show less"
-                            >
-                              <p>{game.summary}</p>
-                            </ShowMoreText>
+                              lines={5}
+                              more="show more."
+                              less="Show less."
+                              anchorClass="show"
+                              children={game.summary}
+                            />
                             <Details game={game} />
                           </section>
                         ) : (
