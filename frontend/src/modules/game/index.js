@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import Moment from "react-moment";
 import { Container, Grid } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 import { Backdrop, Footer, Cover, Ratings } from "../app/components/";
 import {
   Details,
@@ -113,18 +114,18 @@ export default class Game extends React.Component {
                       <h1>{game.name}</h1>
                       {game.first_release_date && (
                         <small className="release-date">
-                          <a href="/">
+                          <Link to="/">
                             <Moment format="YYYY">
                               {game.first_release_date * 1000}
                             </Moment>
-                          </a>
+                          </Link>
                         </small>
                       )}
                       <small className="company">
-                        <a href="/">
+                        <Link to="/">
                           {game.involved_companies &&
                             this.getDeveloperName(game.involved_companies)}
-                        </a>
+                        </Link>
                       </small>
                     </section>
                   ) : (
