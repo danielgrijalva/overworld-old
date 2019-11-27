@@ -301,7 +301,4 @@ class LogModal extends React.Component {
   }
 }
 
-export default connect(
-  null,
-  { addJournalEntry }
-)(LogModal);
+export default connect(null, { addJournalEntry })(LogModal);

@@ -75,7 +75,4 @@ const mapStateToProps = state => ({
   popular: state.landing.popular
 });
 
-export default connect(
-  mapStateToProps,
-  { getPopular, getBackdrop }
-)(Landing);
+export default connect(mapStateToProps, { getPopular, getBackdrop })(Landing);

@@ -140,13 +140,10 @@ const mapStateToProps = state => ({
   loadingActions: state.game.loadingActions
 });
 
-export default connect(
-  mapStateToProps,
-  {
-    loadActions,
-    logGame,
-    likeGame,
-    addToBacklog,
-    addToWishlist
-  }
-)(Buttons);
+export default connect(mapStateToProps, {
+  loadActions,
+  logGame,
+  likeGame,
+  addToBacklog,
+  addToWishlist
+})(Buttons);

@@ -124,7 +124,4 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
-export default connect(
-  mapStateToProps,
-  { logout }
-)(withRouter(Navbar));
+export default connect(mapStateToProps, { logout })(withRouter(Navbar));
