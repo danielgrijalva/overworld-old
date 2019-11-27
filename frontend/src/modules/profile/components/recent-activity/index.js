@@ -82,7 +82,4 @@ const mapStateToProps = state => ({
   activity: state.profile.activity
 });
 
-export default connect(
-  mapStateToProps,
-  { loadActivity }
-)(RecentActivity);
+export default connect(mapStateToProps, { loadActivity })(RecentActivity);

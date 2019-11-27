@@ -9,6 +9,7 @@
     "i18n-iso-countries": "^4.3.1",
     "moment": "^2.24.0",
     "nodemon": "^1.19.4",
+    "prettier": "^1.19.1",
     "react": "^16.10.2",
     "react-content-loader": "^4.3.2",
     "react-dates": "^21.2.1",
@@ -37,7 +38,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "prettier \"src/**/*.{js,html,css}\" --write"
   },
   "eslintConfig": {
     "extends": "react-app"
