@@ -176,7 +176,7 @@ export const rate = (game, rating) => (dispatch, getState) => {
         name: game.name,
         slug: game.slug,
         cover_id: game.cover.image_id,
-        backdrop_id: game.screenshots[1].image_id,
+        backdrop_id: game.screenshots ? game.screenshots[1].image_id : '',
         rating: rating
       },
       tokenConfig(getState)
