@@ -124,6 +124,15 @@
         "tool",
         "infra"
       ]
+    },
+    {
+      "login": "lenniezelk",
+      "name": "Leonard Kioi kinyanjui",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/13750897?v=4",
+      "profile": "http://lkioi.me",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 6,

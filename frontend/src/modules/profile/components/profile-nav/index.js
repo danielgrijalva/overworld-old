@@ -1,6 +1,6 @@
 import React from "react";
 import { Menu } from "semantic-ui-react";
-import './styles.css'
+import "./styles.css";
 
 export default class ProfileNav extends React.Component {
   state = {

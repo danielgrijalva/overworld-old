@@ -40,9 +40,7 @@ class ChooseFavorites extends React.Component {
                 <div className="favorite-game-wrapper" key={i}>
                   <Image
                     rounded
-                    src={`https://images.igdb.com/igdb/image/upload/t_cover_big/${
-                      g.cover_id
-                    }.jpg`}
+                    src={`https://images.igdb.com/igdb/image/upload/t_cover_big/${g.cover_id}.jpg`}
                     className="game-cover"
                   />
 
@@ -95,7 +93,4 @@ class ChooseFavorites extends React.Component {
   }
 }
 
-export default connect(
-  null,
-  { addFavorite, removeFavorite }
-)(ChooseFavorites);
+export default connect(null, { addFavorite, removeFavorite })(ChooseFavorites);

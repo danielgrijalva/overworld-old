@@ -59,7 +59,4 @@ const mapStateToProps = state => ({
   loadRating: state.game.loadingRating
 });
 
-export default connect(
-  mapStateToProps,
-  { loadRating, rate }
-)(Ratings);
+export default connect(mapStateToProps, { loadRating, rate })(Ratings);

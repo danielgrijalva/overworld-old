@@ -11,6 +11,7 @@ import {
   Button,
   Message
 } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 import {
   Backdrop,
   Footer,
@@ -156,7 +157,7 @@ class Profile extends Component {
                         {me && me.username === username ? (
                           <p>
                             Remember to add your{" "}
-                            <a href="/settings">favorite games!</a>
+                            <Link to="/settings">favorite games!</Link>
                           </p>
                         ) : (
                           <p>{username} has no favorite games yet.</p>
@@ -194,7 +195,7 @@ class Profile extends Component {
                         {me && me.username === username ? (
                           <p>
                             Keep track of what you want to play. <br />
-                            <a href="/games">Add some games now?</a>
+                            <Link to="/games">Add some games now?</Link>
                           </p>
                         ) : (
                           <p>Wow, {username} has an empty backlog!</p>
@@ -209,7 +210,7 @@ class Profile extends Component {
                         {me && me.username === username ? (
                           <p>
                             The games you wanna buy go here. <br />
-                            <a href="/games">Browse or search games?</a>
+                            <Link to="/games">Browse or search games?</Link>
                           </p>
                         ) : (
                           <p>Nothing here yet!</p>
@@ -245,7 +246,9 @@ const mapStateToProps = state => ({
   ratings: state.profile.ratings
 });
 
-export default connect(
-  mapStateToProps,
-  { loadProfile, loadRatings, follow, unfollow }
-)(Profile);
+export default connect(mapStateToProps, {
+  loadProfile,
+  loadRatings,
+  follow,
+  unfollow
+})(Profile);

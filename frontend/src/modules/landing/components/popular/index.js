@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import "./styles.css";
 
 const Popular = ({ isLoading, popular }) => (
@@ -8,18 +9,16 @@ const Popular = ({ isLoading, popular }) => (
       <React.Fragment>
         {popular.map((p, i) => {
           return (
-            <a href={`/games/${p.slug}`} key={p.id} className="cover-wrapper">
+            <Link to={`/games/${p.slug}`} key={p.id} className="cover-wrapper">
               <img
                 className="cover"
                 alt={p.name}
-                src={`https://images.igdb.com/igdb/image/upload/t_cover_big/${
-                  p.cover.image_id
-                }.jpg`}
+                src={`https://images.igdb.com/igdb/image/upload/t_cover_big/${p.cover.image_id}.jpg`}
               />
               <div key={i} className="cover-overlay">
                 <strong>{p.name}</strong>
               </div>
-            </a>
+            </Link>
           );
         })}
       </React.Fragment>

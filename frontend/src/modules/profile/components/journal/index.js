@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Divider, Message } from "semantic-ui-react";
 import moment from "moment";
 import Moment from "react-moment";
+import { Link } from "react-router-dom";
 import { loadJournal } from "../../actions";
 import "./styles.css";
 
@@ -32,9 +33,9 @@ class Journal extends Component {
                             <Moment format="D">{entry.date}</Moment>
                           </dt>
                           <dd>
-                            <a href={`/games/${entry.game.slug}`}>
+                            <Link to={`/games/${entry.game.slug}`}>
                               {entry.game.name}
-                            </a>
+                            </Link>
                           </dd>
                         </React.Fragment>
                       );
@@ -54,7 +55,7 @@ class Journal extends Component {
             {this.props.me && this.props.me.username === this.props.username ? (
               <p>
                 Save and record everything you play. <br />
-                <a href="/games">Start by logging a game!</a>
+                <Link to="/games">Start by logging a game!</Link>
               </p>
             ) : (
               <p>{this.props.username}'s gaming journal is blank.</p>
@@ -70,7 +71,4 @@ const mapStateToProps = state => ({
   journal: state.profile.journal
 });
 
-export default connect(
-  mapStateToProps,
-  { loadJournal }
-)(Journal);
+export default connect(mapStateToProps, { loadJournal })(Journal);

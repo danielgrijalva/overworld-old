@@ -164,7 +164,8 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(
-  mapStateToProps,
-  { loadProfile, editProfile, refreshAvatar }
-)(EditProfile);
+export default connect(mapStateToProps, {
+  loadProfile,
+  editProfile,
+  refreshAvatar
+})(EditProfile);
