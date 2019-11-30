@@ -11,14 +11,7 @@ describe("Test <Cover /> rendering", () => {
     imageId = "sylfmtzktmb4b0ext8nr";
     slug = "dark-souls";
     size = "big";
-    wrap = shallow(
-      <Cover
-        imageId={imageId}
-        slug={slug}
-        className="cover-wrapper"
-        size={size}
-      />
-    );
+    wrap = shallow(<Cover imageId={imageId} slug={slug} size={size} />);
   });
 
   it("renders without crashing", () => {
