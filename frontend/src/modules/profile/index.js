@@ -146,8 +146,7 @@ class Profile extends Component {
                               key={i}
                               imageId={g.cover_id}
                               slug={g.slug}
-                              className="small-cover-wrapper"
-                              size="big"
+                              size="small"
                             />
                           );
                         })}

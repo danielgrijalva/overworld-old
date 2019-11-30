@@ -99,7 +99,6 @@ export default class Game extends React.Component {
                       <Cover
                         imageId={game.cover.image_id}
                         slug={game.slug}
-                        className="cover-wrapper"
                         size="big"
                       />
                     </React.Fragment>
@@ -139,8 +138,8 @@ export default class Game extends React.Component {
                           <section className="summary">
                             <ShowMoreText
                               lines={5}
-                              more="show more."
-                              less="Show less."
+                              more="more."
+                              less="Less."
                               anchorClass="show"
                               children={game.summary}
                             />

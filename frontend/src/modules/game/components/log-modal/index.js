@@ -123,7 +123,7 @@ class LogModal extends React.Component {
           name: this.props.game.name,
           slug: this.props.game.slug,
           coverId: this.props.game.cover.image_id,
-          backdropId: this.props.game.screenshots[1].image_id
+          backdropId: this.props.game.screenshots[0].image_id
         },
         date: date.format("YYYY-MM-DD"),
         liked,
@@ -164,7 +164,6 @@ class LogModal extends React.Component {
               <Grid.Row>
                 <Grid.Column width={6}>
                   <Cover
-                    className="cover-in-log"
                     size="big"
                     imageId={this.props.game.cover.image_id}
                     slug={this.props.game.slug}
