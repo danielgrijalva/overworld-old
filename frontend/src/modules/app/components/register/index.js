@@ -1,33 +1,36 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useState, useContext } from "react";
 import { Modal, Button, Header } from "semantic-ui-react";
 import Error from "../errors/";
-import { connect } from "react-redux";
 import { register, dismissErrors } from "../../actions";
 import { RegistrationForm } from "./Form";
+import { StoreContext } from "../../../../Router";
 import "./styles.css";
 
-class Register extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      email: "",
-      username: "",
-      password: "",
-      password2: "",
-      open: false
-    };
-  }
-
-  handleChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
+const Register = () => {
+  const defaultState = {
+    email: "",
+    username: "",
+    password: "",
+    password2: "",
+    open: false
   };
 
-  handleSubmit = event => {
+  const [{ email, username, password, password2, open }, setState] = useState(
+    defaultState
+  );
+
+  const { dispatch, getState } = useContext(StoreContext);
+  const { errors } = getState();
+
+  const handleChange = event => {
+    setState(prevState => ({
+      ...prevState,
+      [event.target.name]: event.target.value
+    }));
+  };
+
+  const handleSubmit = event => {
     event.preventDefault();
-    const { email, username, password } = this.state;
 
     const newUser = {
       email,
@@ -35,83 +38,66 @@ class Register extends React.Component {
       password
     };
 
-    this.props.register(newUser);
+    register(newUser)(dispatch);
   };
 
-  handleOpen = () => this.setState({ open: true });
+  const handleOpen = () =>
+    setState(prevState => ({ ...prevState, open: true }));
 
-  handleClose = () => {
-    this.setState({
-      email: "",
-      username: "",
-      password1: "",
-      password2: "",
-      open: false
-    });
+  const handleClose = () => {
+    setState(defaultState);
 
-    if (this.props.errors) {
-      this.props.dismissErrors();
+    if (errors) {
+      dismissErrors()(dispatch);
     }
   };
 
-  validateForm = () => {
+  const validateForm = () => {
     return (
-      this.state.email.length > 0 &&
-      this.state.username.length > 0 &&
-      this.state.password.length >= 8 &&
-      this.state.password === this.state.password2
+      email.length > 0 &&
+      username.length > 0 &&
+      password.length >= 8 &&
+      password === password2
     );
   };
 
-  render() {
-    const { open } = this.state;
-    const { errors } = this.props;
-    return (
-      <Modal
-        size="mini"
-        open={open}
-        onClose={this.handleClose}
-        trigger={
-          <Button
-            onClick={this.handleOpen}
-            color="green"
-            style={{ margin: "0 1rem" }}
-          >
-            Get Started
-          </Button>
-        }
-        className="register"
-        closeIcon
-      >
-        <Modal.Content>
-          <Modal.Description>
-            <Header>Join Overworld</Header>
-          </Modal.Description>
-          <RegistrationForm
-            validateForm={this.validateForm}
-            handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit}
-          />
-          {errors &&
-            errors.map((e, i) => {
-              return <Error message={e} size="small" compact key={i} />;
-            })}
-        </Modal.Content>
-      </Modal>
-    );
-  }
-}
-
-Register.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired,
-  errors: PropTypes.array,
-  register: PropTypes.func.isRequired,
-  dismissErrors: PropTypes.func.isRequired
+  return (
+    <Modal
+      size="mini"
+      open={open}
+      onClose={handleClose}
+      trigger={
+        <Button
+          onClick={handleOpen}
+          color="green"
+          style={{ margin: "0 1rem" }}
+        >
+          Get Started
+        </Button>
+      }
+      className="register"
+      closeIcon
+    >
+      <Modal.Content>
+        <Modal.Description>
+          <Header>Join Overworld</Header>
+        </Modal.Description>
+        <RegistrationForm
+          validateForm={validateForm}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          email={email}
+          username={username}
+          password={password}
+          password2={password2}
+        />
+        {errors &&
+          errors.map((e, i) => {
+            return <Error message={e} size="small" compact key={i} />;
+          })}
+      </Modal.Content>
+    </Modal>
+  );
 };
 
-const mapStateToProps = state => ({
-  errors: state.auth.errors,
-  isAuthenticated: state.auth.isAuthenticated
-});
-
-export default connect(mapStateToProps, { register, dismissErrors })(Register);
+export default Register;
