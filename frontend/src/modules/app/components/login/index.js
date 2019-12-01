@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Modal, Header, Menu } from "semantic-ui-react";
 import { Redirect } from "react-router-dom";
@@ -8,87 +8,73 @@ import Error from "../errors/";
 import { LoginForm } from "./Form";
 import "./styles.css";
 
-export class LogIn extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      username: "",
-      password: "",
-      open: false
-    };
-  }
+const LogIn = ({
+  login,
+  loginText,
+  errors,
+  dismissErrors,
+  isAuthenticated,
+  user
+}) => {
+  const defaultState = {
+    username: "",
+    password: "",
+    open: false
+  };
+  const [{ username, password, open }, setState] = useState(defaultState);
 
-  handleChange = event => {
-    this.setState({
+  const handleChange = event => {
+    setState(prevState => ({
+      ...prevState,
       [event.target.name]: event.target.value
-    });
+    }));
   };
 
-  handleSubmit = event => {
+  const handleSubmit = event => {
     event.preventDefault();
-    const { username, password } = this.state;
-
-    this.props.login(username, password);
+    login(username, password);
   };
 
-  handleOpen = () => this.setState({ open: true });
+  const handleOpen = () =>
+    setState(prevState => ({ ...prevState, open: true }));
 
-  handleClose = () => {
-    this.setState({
-      username: "",
-      password: "",
-      open: false
-    });
-
-    if (this.props.errors) {
-      this.props.dismissErrors();
-    }
+  const handleClose = () => {
+    setState(defaultState);
+    dismissErrors();
   };
 
-  validateForm = () => {
-    return this.state.username.length > 0 && this.state.password.length > 0;
-  };
+  const validateForm = () => username.length > 0 && password.length > 0;
 
-  render() {
-    if (this.props.isAuthenticated) {
-      return <Redirect to={`/${this.props.user.username}`} />;
-    }
-
-    const { open } = this.state;
-    const { errors } = this.props;
-    return (
-      <Modal
-        size="mini"
-        open={open}
-        onClose={this.handleClose}
-        trigger={
-          <Menu.Item
-            content={this.props.loginText}
-            onClick={this.handleOpen}
-            link
-          />
-        }
-        closeIcon
-        className="register"
-      >
-        <Modal.Content>
-          <Modal.Description>
-            <Header>Welcome back</Header>
-          </Modal.Description>
-          <LoginForm
-            validateForm={this.validateForm}
-            handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit}
-          />
-          {errors &&
-            errors.map((e, i) => {
-              return <Error message={e} size="small" compact key={i} />;
-            })}
-        </Modal.Content>
-      </Modal>
-    );
+  if (isAuthenticated) {
+    return <Redirect to={`/${user.username}`} />;
   }
-}
+
+  return (
+    <Modal
+      size="mini"
+      open={open}
+      onClose={handleClose}
+      trigger={<Menu.Item content={loginText} onClick={handleOpen} link />}
+      closeIcon
+      className="register"
+    >
+      <Modal.Content>
+        <Modal.Description>
+          <Header>Welcome back</Header>
+        </Modal.Description>
+        <LoginForm
+          validateForm={validateForm}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+        />
+        {errors &&
+          errors.map((e, i) => {
+            return <Error message={e} size="small" compact key={i} />;
+          })}
+      </Modal.Content>
+    </Modal>
+  );
+};
 
 LogIn.propTypes = {
   isAuthenticated: PropTypes.bool,
