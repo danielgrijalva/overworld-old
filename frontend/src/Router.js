@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
@@ -12,6 +12,8 @@ import { loadUser } from "./modules/app/actions";
 const notFound = () => {
   return <p>Not Found</p>;
 };
+
+export const StoreContext = createContext(store);
 
 class AppRouter extends React.Component {
   componentDidMount() {

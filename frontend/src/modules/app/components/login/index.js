@@ -1,27 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import PropTypes from "prop-types";
 import { Modal, Header, Menu } from "semantic-ui-react";
 import { Redirect } from "react-router-dom";
-import { connect } from "react-redux";
 import { login, dismissErrors } from "../../actions";
+import { StoreContext } from "../../../../Router";
 import Error from "../errors/";
 import { LoginForm } from "./Form";
 import "./styles.css";
 
-const LogIn = ({
-  login,
-  loginText,
-  errors,
-  dismissErrors,
-  isAuthenticated,
-  user
-}) => {
+const LogIn = ({ loginText }) => {
   const defaultState = {
     username: "",
     password: "",
     open: false
   };
   const [{ username, password, open }, setState] = useState(defaultState);
+  const { getState, dispatch } = useContext(StoreContext);
+  const { user, errors, isAuthenticated } = getState();
 
   const handleChange = event => {
     setState(prevState => ({
@@ -32,7 +27,7 @@ const LogIn = ({
 
   const handleSubmit = event => {
     event.preventDefault();
-    login(username, password);
+    login(username, password)(dispatch);
   };
 
   const handleOpen = () =>
@@ -40,7 +35,7 @@ const LogIn = ({
 
   const handleClose = () => {
     setState(defaultState);
-    dismissErrors();
+    dismissErrors()(dispatch);
   };
 
   const validateForm = () => username.length > 0 && password.length > 0;
@@ -66,6 +61,8 @@ const LogIn = ({
           validateForm={validateForm}
           handleChange={handleChange}
           handleSubmit={handleSubmit}
+          username={username}
+          password={password}
         />
         {errors &&
           errors.map((e, i) => {
@@ -76,18 +73,4 @@ const LogIn = ({
   );
 };
 
-LogIn.propTypes = {
-  isAuthenticated: PropTypes.bool,
-  errors: PropTypes.array,
-  user: PropTypes.object,
-  login: PropTypes.func.isRequired,
-  dismissErrors: PropTypes.func.isRequired
-};
-
-const mapStateToProps = state => ({
-  errors: state.auth.errors,
-  user: state.auth.user,
-  isAuthenticated: state.auth.isAuthenticated
-});
-
-export default connect(mapStateToProps, { login, dismissErrors })(LogIn);
+export default LogIn;
