@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-import PropTypes from "prop-types";
 import { Modal, Header, Menu } from "semantic-ui-react";
 import { Redirect } from "react-router-dom";
 import { login, dismissErrors } from "../../actions";
