@@ -3,7 +3,7 @@ import { Modal, Button, Header } from "semantic-ui-react";
 import Error from "../errors/";
 import { register, dismissErrors } from "../../actions";
 import { RegistrationForm } from "./Form";
-import { StoreContext } from "../../../../Router";
+import { ReactReduxContext } from "react-redux";
 import "./styles.css";
 
 const Register = () => {
@@ -19,13 +19,14 @@ const Register = () => {
     defaultState
   );
 
-  const { dispatch, getState } = useContext(StoreContext);
-  const { errors } = getState();
+  const { dispatch, getState } = useContext(ReactReduxContext).store;
+  const { errors } = getState().auth;
 
   const handleChange = event => {
+    const { name, value } = event.target;
     setState(prevState => ({
       ...prevState,
-      [event.target.name]: event.target.value
+      [name]: value
     }));
   };
 

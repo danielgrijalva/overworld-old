@@ -4,20 +4,21 @@ import { Menu, Icon, Dropdown } from "semantic-ui-react";
 import GameSearch from "../search/";
 import LogIn from "../login/";
 import { logout } from "../../actions";
-import { StoreContext } from '../../../../Router';
+import { ReactReduxContext } from "react-redux";
 import "./styles.css";
 
 const Navbar = ({ history }) => {
   const [activeItem, setActiveItem] = useState("");
-  const { dispatch, getState } = useContext(StoreContext);
-  const { user, isAuthenticated } = getState();
+  const { dispatch, getState } = useContext(ReactReduxContext).store;
+  const { user, isAuthenticated } = getState().auth;
 
   const handleItemClick = (_e, { name }) => {
     setActiveItem(name);
     history.push(`/${name}`);
-  }
+  };
 
-  const handleResultSelect = result => history.push(`/games/${result.slug}`, result.slug);
+  const handleResultSelect = result =>
+    history.push(`/games/${result.slug}`, result.slug);
 
   return (
     <Menu className="navbar" inverted secondary>
@@ -53,16 +54,9 @@ const Navbar = ({ history }) => {
           onClick={handleItemClick}
         />
         {isAuthenticated ? (
-          <Dropdown
-            text={`${user.username}`}
-            pointing
-            className="link item"
-          >
+          <Dropdown text={`${user.username}`} pointing className="link item">
             <Dropdown.Menu>
-              <Dropdown.Item
-                as="a"
-                href={`/user/${user.username}`}
-              >
+              <Dropdown.Item as="a" href={`/user/${user.username}`}>
                 <Icon name="user circle" />
                 Profile
               </Dropdown.Item>

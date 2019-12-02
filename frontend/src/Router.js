@@ -13,8 +13,6 @@ const notFound = () => {
   return <p>Not Found</p>;
 };
 
-export const StoreContext = createContext(store);
-
 class AppRouter extends React.Component {
   componentDidMount() {
     store.dispatch(loadUser());

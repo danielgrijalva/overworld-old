@@ -1,10 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import React, { useContext } from "react";
+import { ReactReduxContext } from "react-redux";
 import { Container } from "semantic-ui-react";
 import Landing from "../landing/";
 
-const App = ({ auth }) => {
+const App = () => {
+  const { getState } = useContext(ReactReduxContext).store;
+  const { auth } = getState();
+
   if (auth.isAuthenticated) {
     return (
       <Container>
@@ -18,12 +20,4 @@ const App = ({ auth }) => {
   }
 };
 
-App.propTypes = {
-  auth: PropTypes.object.isRequired
-};
-
-const mapStateToProps = state => ({
-  auth: state.auth
-});
-
-export default connect(mapStateToProps)(App);
+export default App;

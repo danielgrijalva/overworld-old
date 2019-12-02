@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Modal, Header, Menu } from "semantic-ui-react";
 import { Redirect } from "react-router-dom";
 import { login, dismissErrors } from "../../actions";
-import { StoreContext } from "../../../../Router";
+import { ReactReduxContext } from "react-redux";
 import Error from "../errors/";
 import { LoginForm } from "./Form";
 import "./styles.css";
@@ -14,13 +14,14 @@ const LogIn = ({ loginText }) => {
     open: false
   };
   const [{ username, password, open }, setState] = useState(defaultState);
-  const { getState, dispatch } = useContext(StoreContext);
-  const { user, errors, isAuthenticated } = getState();
+  const { getState, dispatch } = useContext(ReactReduxContext).store;
+  const { user, errors, isAuthenticated } = getState().auth;
 
   const handleChange = event => {
+    const { name, value } = event.target;
     setState(prevState => ({
       ...prevState,
-      [event.target.name]: event.target.value
+      [name]: value
     }));
   };
 
