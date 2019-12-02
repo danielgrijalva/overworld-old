@@ -4,7 +4,7 @@
 
 > ### *A [letterboxd](https://letterboxd.com) for video games.*
 
-&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://travis-ci.com/danielgrijalva/overworld.svg?branch=master)](https://travis-ci.com/danielgrijalva/overworld) [![All Contributors](https://img.shields.io/badge/all_contributors-13-orange.svg?style=flat-square)](#contributors) [![codecov](https://codecov.io/gh/danielgrijalva/overworld/branch/master/graph/badge.svg)](https://codecov.io/gh/danielgrijalva/overworld) [![Netlify Status](https://api.netlify.com/api/v1/badges/33b0b37b-b9ac-4077-9cd3-731e470a948a/deploy-status)](https://overworld.netlify.com/)
+&nbsp;&nbsp;&nbsp;&nbsp;[![Build Status](https://img.shields.io/travis/danielgrijalva/overworld.svg?branch=master&style=for-the-badge)](https://travis-ci.com/danielgrijalva/overworld) [![codecov](https://img.shields.io/codecov/c/github/danielgrijalva/overworld?style=for-the-badge)](https://codecov.io/gh/danielgrijalva/overworld) [![All Contributors](https://img.shields.io/badge/all_contributors-13-orange.svg?style=for-the-badge)](#contributors)
 
 * [About](#about)
   + [Inspiration](#inspiration)
