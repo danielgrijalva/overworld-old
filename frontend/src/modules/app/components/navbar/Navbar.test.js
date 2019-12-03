@@ -1,7 +1,15 @@
 import React from "react";
 import { mount } from "enzyme";
 import Navbar from ".";
-import store from '../../../../store';
+import * as reactRedux from "react-redux";
+
+jest
+  .spyOn(reactRedux, "useDispatch")
+  .mockReturnValue(jest.fn(action => action()));
+jest.spyOn(reactRedux, "useStore").mockReturnValue({ getState: jest.fn() });
+const useSelectorSpy = jest
+  .spyOn(reactRedux, "useSelector")
+  .mockReturnValue({ errors: [], user: null, isAuthenticated: false });
 
 jest.mock("react-router-dom", () => ({
   withRouter: component => component,
@@ -14,7 +22,6 @@ describe("<Navbar />", () => {
   const historyMock = {
     push: jest.fn()
   };
-  const getStateSpy = jest.spyOn(store, "getState");
 
   beforeEach(() => {
     wrapper = mount(<Navbar history={historyMock} />);
@@ -26,18 +33,16 @@ describe("<Navbar />", () => {
   });
 
   it("pushes to history when an item is clicked", () => {
-    wrapper
-      .find('[name="games"]')
-      .simulate("click");
+    wrapper.find('[name="games"]').simulate("click");
     expect(historyMock.push).toHaveBeenCalledTimes(1);
     expect(historyMock.push).toHaveBeenCalledWith("/games");
   });
 
   it("displays a dropdown when the user is authenticated", () => {
-    getStateSpy.mockReturnValueOnce({ user: {}, isAuthenticated: true });
+    useSelectorSpy.mockReturnValueOnce({ user: {}, isAuthenticated: true });
 
     wrapper = mount(<Navbar />);
 
-    expect(wrapper.find('Dropdown').length).toEqual(1);
+    expect(wrapper.find("Dropdown").length).toEqual(1);
   });
 });

@@ -4,13 +4,14 @@ import { Menu, Icon, Dropdown } from "semantic-ui-react";
 import GameSearch from "../search/";
 import LogIn from "../login/";
 import { logout } from "../../actions";
-import { ReactReduxContext } from "react-redux";
+import { useSelector, useDispatch, useStore } from "react-redux";
 import "./styles.css";
 
 const Navbar = ({ history }) => {
   const [activeItem, setActiveItem] = useState("");
-  const { dispatch, getState } = useContext(ReactReduxContext).store;
-  const { user, isAuthenticated } = getState().auth;
+  const { user, isAuthenticated } = useSelector(state => state.auth);
+  const dispatch = useDispatch();
+  const { getState } = useStore();
 
   const handleItemClick = (_e, { name }) => {
     setActiveItem(name);

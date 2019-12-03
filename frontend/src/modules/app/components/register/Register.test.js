@@ -1,6 +1,10 @@
 import React from "react";
 import { mount } from "enzyme";
 import Register from ".";
+import * as reactRedux from "react-redux";
+
+jest.spyOn(reactRedux, "useDispatch").mockReturnValue(jest.fn(action => action()));
+jest.spyOn(reactRedux, "useSelector").mockReturnValue({});
 
 describe("<Register />", () => {
   let wrapper;

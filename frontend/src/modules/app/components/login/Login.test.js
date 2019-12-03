@@ -5,14 +5,17 @@ import { Modal } from "semantic-ui-react";
 import Error from "../errors/";
 import { LoginForm } from "./Form";
 import LogIn from "../login";
-import store from "../../../../store";
+import * as reactRedux from "react-redux";
 import * as actions from "../../actions";
+
+jest.spyOn(reactRedux, "useDispatch").mockReturnValue(jest.fn(action => action()));
+const useSelectorMock = jest
+  .spyOn(reactRedux, "useSelector")
+  .mockReturnValue({ errors: [], user: null, isAuthenticated: false });
 
 describe("Test <LogIn /> rendering", () => {
   let wrap;
   let props;
-
-  const getStateMock = jest.spyOn(store, "getState");
 
   beforeEach(() => {
     props = {
@@ -32,7 +35,7 @@ describe("Test <LogIn /> rendering", () => {
   });
 
   it("redirects when user is authenticated", () => {
-    getStateMock.mockReturnValueOnce({
+    useSelectorMock.mockReturnValueOnce({
       user: { username: "testuser" },
       errors: [],
       isAuthenticated: true
@@ -60,7 +63,7 @@ describe("Test <LogIn /> rendering", () => {
 
   it("renders errors if errors exist", () => {
     const errorsObj = { errors: ["test", "some", "errors"] };
-    getStateMock.mockReturnValueOnce(errorsObj);
+    useSelectorMock.mockReturnValueOnce(errorsObj);
     wrap = shallow(<LogIn {...props} />);
 
     const errors = wrap.find(Error);
@@ -81,7 +84,6 @@ describe("Test <LogIn /> functions", () => {
 
   const dismissErrorsSpy = jest.spyOn(actions, "dismissErrors");
   const loginSpy = jest.spyOn(actions, "login").mockReturnValue(jest.fn());
-  const getStateMock = jest.spyOn(store, "getState");
 
   const fillForm = (username, password) => {
     wrap.simulate("click");
@@ -148,7 +150,7 @@ describe("Test <LogIn /> functions", () => {
 
     it("calls dismissErrors when handleClose is called and errors exist", () => {
       const errorsObj = { errors: ["test", "some", "errors"] };
-      getStateMock.mockReturnValueOnce(errorsObj);
+      useSelectorMock.mockReturnValueOnce(errorsObj);
       wrap = shallow(<LogIn {...props} />);
 
       wrap.simulate("click");
