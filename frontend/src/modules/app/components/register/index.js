@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Modal, Button, Header } from "semantic-ui-react";
 import Error from "../errors/";
 import { register, dismissErrors } from "../../actions";

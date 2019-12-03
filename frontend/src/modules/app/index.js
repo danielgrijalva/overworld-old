@@ -1,11 +1,10 @@
-import React, { useContext } from "react";
-import { ReactReduxContext } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import { Container } from "semantic-ui-react";
 import Landing from "../landing/";
 
 const App = () => {
-  const { getState } = useContext(ReactReduxContext).store;
-  const { auth } = getState();
+  const auth = useSelector(state => state.auth);
 
   if (auth.isAuthenticated) {
     return (
