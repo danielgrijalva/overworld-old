@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { withRouter } from "react-router-dom";
 import { debounce } from "lodash";
@@ -6,22 +6,21 @@ import { Search, Grid } from "semantic-ui-react";
 import { ResultRenderer } from "./ResultRenderer";
 import "./styles.css";
 
-class GameSearch extends Component {
-  constructor() {
-    super();
-    this.state = {
-      results: [],
-      isLoading: false,
-      value: ""
-    };
-  }
-
-  handleResultSelect = (e, { result }) => {
-    this.setState({ results: [], isLoading: false, value: "" });
-    this.props.onResultSelect(result);
+const GameSearch = ({ onResultSelect, autoFocus }) => {
+  const defaultState = {
+    results: [],
+    isLoading: false,
+    value: ""
   };
 
-  search = debounce(value => {
+  const [{ results, isLoading, value }, setState] = useState(defaultState);
+
+  const handleResultSelect = (e, { result }) => {
+    setState(defaultState);
+    onResultSelect(result);
+  };
+
+  const search = debounce(value => {
     axios
       .get(`/api/games/search/${value}`)
       .then(response => {
@@ -29,42 +28,42 @@ class GameSearch extends Component {
           ...result,
           key: result.id
         }));
-        this.setState({ results: results, isLoading: false });
+        setState(prevState => ({
+          ...prevState,
+          results: results,
+          isLoading: false
+        }));
       })
       .catch(function(error) {
         console.log(error);
       });
   }, 350);
 
-  onChange = value => {
+  const onChange = value => {
     if (value.length < 1) {
-      this.setState({ isLoading: false, results: [], value: "" });
+      setState(defaultState);
     } else {
-      this.setState({ isLoading: true, value: value });
-      this.search(value);
+      setState(prevState => ({ ...prevState, isLoading: true, value: value }));
+      search(value);
     }
   };
 
-  render() {
-    const { results, isLoading, value } = this.state;
-    const { autoFocus } = this.props;
-    return (
-      <Grid>
-        <Grid.Column width={6}>
-          <Search
-            loading={isLoading}
-            onResultSelect={this.handleResultSelect}
-            onSearchChange={e => this.onChange(e.target.value)}
-            results={results}
-            resultRenderer={ResultRenderer}
-            value={value}
-            noResultsMessage={"No games found"}
-            autoFocus={autoFocus}
-          />
-        </Grid.Column>
-      </Grid>
-    );
-  }
-}
+  return (
+    <Grid>
+      <Grid.Column width={6}>
+        <Search
+          loading={isLoading}
+          onResultSelect={handleResultSelect}
+          onSearchChange={e => onChange(e.target.value)}
+          results={results}
+          resultRenderer={ResultRenderer}
+          value={value}
+          noResultsMessage={"No games found"}
+          autoFocus={autoFocus}
+        />
+      </Grid.Column>
+    </Grid>
+  );
+};
 
 export default withRouter(GameSearch);

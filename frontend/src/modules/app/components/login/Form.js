@@ -2,15 +2,26 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Button, Form } from "semantic-ui-react";
 
-export const LoginForm = ({ handleChange, handleSubmit, validateForm }) => (
+export const LoginForm = ({
+  handleChange,
+  handleSubmit,
+  validateForm,
+  username,
+  password
+}) => (
   <Form onSubmit={handleSubmit}>
     <Form.Field>
       <label>Username</label>
-      <input name="username" onChange={handleChange} />
+      <input name="username" value={username} onChange={handleChange} />
     </Form.Field>
     <Form.Field>
       <label>Password</label>
-      <input type="password" name="password" onChange={handleChange} />
+      <input
+        type="password"
+        value={password}
+        name="password"
+        onChange={handleChange}
+      />
     </Form.Field>
     <Button
       floated="right"
