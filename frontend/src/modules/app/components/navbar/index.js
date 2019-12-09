@@ -86,7 +86,7 @@ const Navbar = ({ history }) => {
                 <Icon name="cog" />
                 Settings
               </Dropdown.Item>
-              <Dropdown.Item onClick={() => logout(dispatch, getState)}>
+              <Dropdown.Item onClick={() => dispatch(logout())}>
                 <Icon name="log out" />
                 Logout
               </Dropdown.Item>
