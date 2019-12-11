@@ -1,31 +1,22 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import { Container } from "semantic-ui-react";
 import Landing from "../landing/";
 
-class App extends Component {
-  render() {
-    if (this.props.auth.isAuthenticated) {
-      return (
-        <Container>
-          <h1>Welcome</h1>
-        </Container>
-      );
-    } else if (this.props.auth.isLoading) {
-      return null;
-    } else {
-      return <Landing />;
-    }
-  }
-}
+const App = () => {
+  const auth = useSelector(state => state.auth);
 
-App.propTypes = {
-  auth: PropTypes.object.isRequired
+  if (auth.isAuthenticated) {
+    return (
+      <Container>
+        <h1>Welcome</h1>
+      </Container>
+    );
+  } else if (auth.isLoading) {
+    return null;
+  } else {
+    return <Landing />;
+  }
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth
-});
-
-export default connect(mapStateToProps)(App);
+export default App;

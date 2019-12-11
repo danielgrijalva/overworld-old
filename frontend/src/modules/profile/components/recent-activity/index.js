@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { Divider, Message, Image, Icon } from "semantic-ui-react";
+import { Divider, Message } from "semantic-ui-react";
+import Cover from "../../../app/components/cover";
 import { loadActivity } from "../../actions";
 import "./styles.css";
 
@@ -43,26 +43,7 @@ class RecentActivity extends React.Component {
         {activity.length > 0 ? (
           <div className="recent-wrapper">
             {activity.map((g, i) => {
-              return (
-                <div key={i} className="small-cover-wrapper">
-                  <Link to={`/games/${g.game.slug}`} className="cover-link">
-                    <Image
-                      src={`https://images.igdb.com/igdb/image/upload/t_cover_big/${g.game.cover_id}.jpg`}
-                      rounded
-                      fluid
-                      className="cover"
-                    />
-                  </Link>
-                  <p className="activity-icons">
-                    <span className="rating">
-                      {this.stringifyStars(g.rating)}
-                    </span>
-                    <Icon name={this.getEntryType(g.entry_type)} />
-                    {g.liked && <Icon name="heart" />}
-                    {g.review && <Icon name="align left" />}
-                  </p>
-                </div>
-              );
+              return <Cover key={i} imageId={g.game.cover_id} size="small" />;
             })}
             {[...Array(5 - activity.length)].map((_, i) => (
               <div key={i} className="placeholder" />

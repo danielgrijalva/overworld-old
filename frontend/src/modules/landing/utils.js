@@ -3,7 +3,6 @@ export const Backdrops = [
   { name: "Firewatch", gameId: "9730" },
   { name: "NieR:Automata", gameId: "11208" },
   { name: "The Elder Scrolls V: Skyrim", gameId: "472" },
-  { name: "Super Mario Odyssey", gameId: "26758" },
   { name: "Red Dead Redemption 2", gameId: "25076" },
   { name: "Horizon Zero Dawn", gameId: "11156" },
   { name: "Nioh", gameId: "12571" },
