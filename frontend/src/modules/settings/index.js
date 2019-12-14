@@ -1,9 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import { Tab, Container } from "semantic-ui-react";
 import { EditProfile } from "./components";
 
-export default class Settings extends Component {
-  render() {
+const Settings = () => {
     return (
       <Container>
         <Tab
@@ -32,5 +31,6 @@ export default class Settings extends Component {
         />
       </Container>
     );
-  }
 }
+
+export default Settings;
