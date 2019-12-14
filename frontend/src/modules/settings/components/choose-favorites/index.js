@@ -1,96 +1,91 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, Form, Button, Header, Image } from "semantic-ui-react";
-import { connect } from "react-redux";
 import { GameSearch } from "../../../app/components";
 import { addFavorite, removeFavorite } from "../../actions";
 import "./styles.css";
+import { useDispatch } from "react-redux";
 
-class ChooseFavorites extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      open: false
-    };
-  }
+const ChooseFavorites = (props) => {
 
-  handleRemove = gameId => {
-    this.props.removeFavorite(gameId);
+  const [ open, setOpen ] = useState(false);
+  const dispatch = useDispatch();
+  const { favorites } = props;
+
+  const handleRemove = gameId => {
+    dispatch(removeFavorite(gameId));
   };
 
-  handleResultSelect = result => {
-    this.props.addFavorite(result);
-    this.setState({ open: false });
+  const handleResultSelect = result => {
+    dispatch(addFavorite(result));
+    setOpen(false);
   };
 
-  handleOpen = () => this.setState({ open: true });
+  const handleOpen = () => setOpen(true);
 
-  handleClose = () => this.setState({ open: false });
+  const handleClose = () => setOpen(false);
 
-  render() {
-    const { favorites } = this.props;
-    if (favorites) {
-      return (
-        <Form>
-          <Form.Field>
-            <label>Favorite Games</label>
-          </Form.Field>
-          <div className="choose-favorites-wrapper">
-            {favorites.map((g, i) => {
-              return (
-                <div className="favorite-game-wrapper" key={i}>
-                  <Image
-                    rounded
-                    src={`https://images.igdb.com/igdb/image/upload/t_cover_big/${g.cover_id}.jpg`}
-                    className="game-cover"
+  if (favorites) {
+    return (
+      <Form>
+        <Form.Field>
+          <label>Favorite Games</label>
+        </Form.Field>
+        <div className="choose-favorites-wrapper">
+          {favorites.map((g, i) => {
+            return (
+              <div className="favorite-game-wrapper" key={i}>
+                <Image
+                  rounded
+                  src={`https://images.igdb.com/igdb/image/upload/t_cover_big/${g.cover_id}.jpg`}
+                  className="game-cover"
+                />
+
+                <div key={i} className="favorite-overlay">
+                  <Button
+                    onClick={() => handleRemove(g.igdb)}
+                    circular
+                    className="remove-favorite"
+                    icon="remove"
                   />
-
-                  <div key={i} className="favorite-overlay">
-                    <Button
-                      onClick={() => this.handleRemove(g.igdb)}
-                      circular
-                      className="remove-favorite"
-                      icon="remove"
-                    />
-                  </div>
                 </div>
-              );
-            })}
-            {[...Array(5 - favorites.length)].map((_, i) => (
-              <div key={i} className="placeholder">
-                <Modal
-                  size="mini"
-                  open={this.state.open}
-                  onClose={this.handleClose}
-                  closeIcon
-                  className="register pick-favorites-modal"
-                  trigger={
-                    <Button
-                      onClick={this.handleOpen}
-                      circular
-                      className="add-favorite"
-                      icon="plus"
-                    />
-                  }
-                >
-                  <Modal.Content>
-                    <Modal.Description>
-                      <Header>Add a favorite game</Header>
-                    </Modal.Description>
-                    <GameSearch
-                      autoFocus
-                      onResultSelect={this.handleResultSelect}
-                    />
-                  </Modal.Content>
-                </Modal>
               </div>
-            ))}
-          </div>
-        </Form>
-      );
-    } else {
-      return null;
-    }
+            );
+          })}
+          {[...Array(5 - favorites.length)].map((_, i) => (
+            <div key={i} className="placeholder">
+              <Modal
+                size="mini"
+                open={open}
+                onClose={handleClose}
+                closeIcon
+                className="register pick-favorites-modal"
+                trigger={
+                  <Button
+                    onClick={handleOpen}
+                    circular
+                    className="add-favorite"
+                    icon="plus"
+                  />
+                }
+              >
+                <Modal.Content>
+                  <Modal.Description>
+                    <Header>Add a favorite game</Header>
+                  </Modal.Description>
+                  <GameSearch
+                    autoFocus
+                    onResultSelect={handleResultSelect}
+                  />
+                </Modal.Content>
+              </Modal>
+            </div>
+          ))}
+        </div>
+      </Form>
+    );
+  } else {
+    return null;
   }
 }
 
-export default connect(null, { addFavorite, removeFavorite })(ChooseFavorites);
+export default ChooseFavorites;
