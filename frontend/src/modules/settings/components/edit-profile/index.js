@@ -59,7 +59,7 @@ const EditProfile = () => {
     <Grid>
       <Grid.Row>
         <Grid.Column width={8}>
-          <Form onSubmit={handleSubmit}>
+          <Form className="edit-profile-form" onSubmit={handleSubmit}>
             <Form.Field>
               <label>Username</label>
               <input
@@ -125,7 +125,7 @@ const EditProfile = () => {
                 />
               </Grid.Column>
               <Grid.Column verticalAlign="middle" computer={7} mobile={5}>
-                <Form onSubmit={handleRefreshAvatar}>
+                <Form className="avatar-form" onSubmit={handleRefreshAvatar}>
                   <Form.Field>
                     <label>Avatar</label>
                     We use a <a href="https://en.gravatar.com/">
