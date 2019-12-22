@@ -4,11 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   Container,
   Segment,
-  Icon,
   Grid,
   Divider,
   Image,
-  Button,
   Message
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
@@ -19,12 +17,17 @@ import {
   Ratings,
   ListPreview
 } from "../app/components/";
-import { loadProfile, loadRatings, follow, unfollow } from "./actions";
-import { ProfileNav, Stats, Journal, RecentActivity } from "./components";
+import { loadProfile, loadRatings } from "./actions";
+import {
+  ProfileNav,
+  Stats,
+  Journal,
+  RecentActivity,
+  BasicProfile
+} from "./components";
 import "./styles.css";
 
-const Profile = (props) => {
-
+const Profile = props => {
   const dispatch = useDispatch();
   const { profile, isLoading, ratings } = useSelector(state => state.profile);
 
@@ -32,23 +35,13 @@ const Profile = (props) => {
     const { username } = props.match.params;
     dispatch(loadProfile(username));
     dispatch(loadRatings(username));
-  }, [])
+  }, []);
 
-  const {
-    username,
-    gravatar,
-    bio,
-    location,
-    twitter,
-    favorites,
-    backlog,
-    wishlist,
-    me
-  } = profile;
+  const { username, gravatar, bio, favorites, backlog, wishlist, me } = profile;
 
   if (!isLoading) {
     return (
-      <React.Fragment>
+      <>
         <Container>
           {favorites.length > 0 && (
             <Backdrop imageId={favorites[0].backdrop_id} />
@@ -64,66 +57,11 @@ const Profile = (props) => {
                     size="tiny"
                   />
                 </Grid.Column>
-                <Grid.Column verticalAlign="middle" computer={7} mobile={5}>
-                  <h2>{username}</h2>
-                  <div className="profile-info">
-                    {location && (
-                      <span>
-                        <Icon name="map marker alternate" />
-                        {location}
-                      </span>
-                    )}
-                    {twitter && (
-                      <span>
-                        <Icon name="twitter" />
-                        <a href={`http://twitter.com/${twitter}`}>
-                          {twitter}
-                        </a>
-                      </span>
-                    )}
-                  </div>
-                  {me && me.username === username && (
-                    <Button
-                      className="default"
-                      compact
-                      size="tiny"
-                      as="a"
-                      href="/settings"
-                    >
-                      Edit Profile
-                    </Button>
-                  )}
-                  {me && me.username !== username ? (
-                    <React.Fragment>
-                      {profile.followingUser ? (
-                        <Button
-                          className="following"
-                          compact
-                          size="tiny"
-                          color="blue"
-                          onClick={() => dispatch(unfollow(username))}
-                        />
-                      ) : (
-                        <Button
-                          compact
-                          size="tiny"
-                          color="green"
-                          onClick={() => dispatch(follow(username))}
-                        >
-                          Follow
-                        </Button>
-                      )}
-                    </React.Fragment>
-                  ) : null}
+                <Grid.Column computer={7} mobile={5}>
+                  <BasicProfile />
                 </Grid.Column>
-                <Grid.Column
-                  width={7}
-                  className="stats"
-                  verticalAlign="middle"
-                >
-                  <Stats
-                    profile={profile}
-                  />
+                <Grid.Column width={7} className="stats" verticalAlign="middle">
+                  <Stats profile={profile} />
                 </Grid.Column>
               </Grid.Row>
             </Grid>
@@ -179,10 +117,10 @@ const Profile = (props) => {
                 </Grid.Column>
                 <Grid.Column width={5}>
                   {bio && (
-                    <React.Fragment>
+                    <>
                       <Divider horizontal>Bio</Divider>
                       <p className="profile-bio">{bio}</p>
-                    </React.Fragment>
+                    </>
                   )}
                   <Journal me={me} username={username} />
                   <Ratings ratings={ratings} showAverage={false} />
@@ -223,12 +161,12 @@ const Profile = (props) => {
           </Segment>
         </Container>
         <Footer />
-      </React.Fragment>
+      </>
     );
   } else {
     return null;
   }
-}
+};
 
 Profile.propTypes = {
   isLoading: PropTypes.bool.isRequired,

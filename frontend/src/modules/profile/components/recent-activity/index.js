@@ -14,33 +14,8 @@ const RecentActivity = (props) => {
     dispatch(loadActivity(props.username));
   },[props.username]);
 
-  const stringifyStars = value => {
-    let stars = "★".repeat(value);
-    if (value % 1) {
-      stars += "½";
-    }
-    return stars;
-  };
-
-  const getEntryType = type => {
-    switch (type) {
-      case "F":
-        return "check circle";
-      case "P":
-        return "play circle";
-      case "R":
-        return "redo";
-      case "S":
-        return "plus";
-      case "A":
-        return "times circle";
-      default:
-        return null;
-    }
-  };
-
   return (
-    <React.Fragment>
+    <>
       <Divider horizontal>Recent Activity</Divider>
       {activity.length > 0 ? (
         <div className="recent-wrapper">
@@ -56,7 +31,7 @@ const RecentActivity = (props) => {
           <p>{props.username} has not been playing much...</p>
         </Message>
       )}
-    </React.Fragment>
+    </>
   );
 }
 
