@@ -171,9 +171,6 @@ const Profile = props => {
 Profile.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   profile: PropTypes.object.isRequired,
-  loadProfile: PropTypes.func.isRequired,
-  follow: PropTypes.func.isRequired,
-  unfollow: PropTypes.func.isRequired
 };
 
 export default Profile;
