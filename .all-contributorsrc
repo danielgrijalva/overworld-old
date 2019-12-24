@@ -153,6 +153,17 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "PathakPratik",
+      "name": "Pratik Pathak",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/17859354?v=4",
+      "profile": "https://github.com/PathakPratik",
+      "contributions": [
+        "code",
+        "test",
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 6,
