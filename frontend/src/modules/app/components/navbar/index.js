@@ -11,7 +11,6 @@ const Navbar = ({ history }) => {
   const [activeItem, setActiveItem] = useState("");
   const { user, isAuthenticated } = useSelector(state => state.auth);
   const dispatch = useDispatch();
-  const { getState } = useStore();
 
   const handleItemClick = (_e, { name }) => {
     setActiveItem(name);
