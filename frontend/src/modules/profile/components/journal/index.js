@@ -1,19 +1,21 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { useEffect } from "react";
 import { Divider, Message } from "semantic-ui-react";
 import moment from "moment";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
 import { loadJournal } from "../../actions";
 import "./styles.css";
+import { useDispatch, useSelector } from "react-redux";
 
-class Journal extends Component {
-  componentDidMount() {
-    this.props.loadJournal(this.props.username);
-  }
+const Journal = (props) => {
+  
+    const dispatch = useDispatch();
+    const { journal } = useSelector(state => state.profile);
+  
+    useEffect(() => {
+      dispatch(loadJournal(props.username));
+    },[props.username]);
 
-  render() {
-    const { journal } = this.props;
     if (journal.length > 0) {
       return (
         <ul className="journal">
@@ -52,23 +54,18 @@ class Journal extends Component {
         <React.Fragment>
           <Divider horizontal>Journal</Divider>
           <Message className="no-content">
-            {this.props.me && this.props.me.username === this.props.username ? (
+            {props.me && props.me.username === props.username ? (
               <p>
                 Save and record everything you play. <br />
                 <Link to="/games">Start by logging a game!</Link>
               </p>
             ) : (
-              <p>{this.props.username}'s gaming journal is blank.</p>
+              <p>{props.username}'s gaming journal is blank.</p>
             )}
           </Message>
         </React.Fragment>
       );
     }
-  }
 }
 
-const mapStateToProps = state => ({
-  journal: state.profile.journal
-});
-
-export default connect(mapStateToProps, { loadJournal })(Journal);
+export default Journal;
