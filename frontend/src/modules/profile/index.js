@@ -108,10 +108,9 @@ const Profile = props => {
                     <h1>A review</h1>
                     <p>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore
-                      magna aliqua. Ut enim ad minim veniam, quis nostrud
-                      exercitation ullamco laboris nisi ut aliquip ex ea
-                      commodo consequat.
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
                     </p>
                   </div>
                 </Grid.Column>
@@ -170,7 +169,7 @@ const Profile = props => {
 
 Profile.propTypes = {
   isLoading: PropTypes.bool.isRequired,
-  profile: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired
 };
 
 export default Profile;

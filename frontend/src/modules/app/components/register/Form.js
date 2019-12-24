@@ -22,11 +22,21 @@ export const RegistrationForm = ({
     </Form.Field>
     <Form.Field>
       <label>Password (at least 8 characters)</label>
-      <input type="password" name="password" value={password} onChange={handleChange} />
+      <input
+        type="password"
+        name="password"
+        value={password}
+        onChange={handleChange}
+      />
     </Form.Field>
     <Form.Field>
       <label>Confirm password</label>
-      <input type="password" name="password2" value={password2} onChange={handleChange} />
+      <input
+        type="password"
+        name="password2"
+        value={password2}
+        onChange={handleChange}
+      />
     </Form.Field>
     <Button
       floated="right"

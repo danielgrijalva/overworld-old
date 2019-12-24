@@ -12,13 +12,15 @@ import {
 import { tokenConfig } from "../app/actions";
 
 export const loadProfile = username => async (dispatch, getState) => {
-  try{
-    let res = await axios.get(`/api/users/profile/${username}`, tokenConfig(getState));
+  try {
+    let res = await axios.get(
+      `/api/users/profile/${username}`,
+      tokenConfig(getState)
+    );
     dispatch({ type: LOAD_PROFILE, payload: res.data });
-  }
-  catch(error) {
+  } catch (error) {
     console.log(error);
-  };
+  }
 };
 
 export const follow = username => (dispatch, getState) => {

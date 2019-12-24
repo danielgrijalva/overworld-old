@@ -5,9 +5,8 @@ import { addFavorite, removeFavorite } from "../../actions";
 import "./styles.css";
 import { useDispatch } from "react-redux";
 
-const ChooseFavorites = (props) => {
-
-  const [ open, setOpen ] = useState(false);
+const ChooseFavorites = props => {
+  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const { favorites } = props;
 
@@ -72,10 +71,7 @@ const ChooseFavorites = (props) => {
                   <Modal.Description>
                     <Header>Add a favorite game</Header>
                   </Modal.Description>
-                  <GameSearch
-                    autoFocus
-                    onResultSelect={handleResultSelect}
-                  />
+                  <GameSearch autoFocus onResultSelect={handleResultSelect} />
                 </Modal.Content>
               </Modal>
             </div>
@@ -86,6 +82,6 @@ const ChooseFavorites = (props) => {
   } else {
     return null;
   }
-}
+};
 
 export default ChooseFavorites;
