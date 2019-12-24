@@ -153,6 +153,15 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "tlaudahl",
+      "name": "Travis Laudahl",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/19698780?v=4",
+      "profile": "http://www.travislaudahl.com",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 6,
