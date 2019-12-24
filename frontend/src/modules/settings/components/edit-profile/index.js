@@ -10,7 +10,6 @@ import "./styles.css";
 import { useDispatch, useSelector } from "react-redux";
 
 const EditProfile = () => {
-  
   const initialState = {
     email: "",
     username: "",
@@ -19,15 +18,14 @@ const EditProfile = () => {
     bio: ""
   };
 
-  const [state, setState] = useState(initialState)
+  const [state, setState] = useState(initialState);
   const dispatch = useDispatch();
-  const { profile } = useSelector( state => state.profile );
-  const auth = useSelector( state => state.auth );
+  const { profile } = useSelector(state => state.profile);
+  const auth = useSelector(state => state.auth);
   const { gravatar, favorites } = profile;
 
-
   useEffect(() => {
-    if (!auth.isLoading && auth.user && (Object.keys(profile).length === 0)) {
+    if (!auth.isLoading && auth.user && Object.keys(profile).length === 0) {
       dispatch(loadProfile(auth.user.username));
     }
   }, [auth.user, auth.isLoading, profile]);
@@ -35,14 +33,21 @@ const EditProfile = () => {
   useEffect(() => {
     if (Object.keys(profile).length > 0) {
       const { email, username, location, twitter, bio } = profile;
-      setState(prevState => ({ ...prevState, email, username, location, twitter, bio }));
+      setState(prevState => ({
+        ...prevState,
+        email,
+        username,
+        location,
+        twitter,
+        bio
+      }));
     }
   }, [profile]);
 
   const handleChange = event => {
     const name = event.target.name;
     const value = event.target.value;
-    setState(prevState => ({ ...prevState, [name]:value }));
+    setState(prevState => ({ ...prevState, [name]: value }));
   };
 
   const handleSubmit = event => {
@@ -149,6 +154,6 @@ const EditProfile = () => {
       </Grid.Row>
     </Grid>
   );
-}
+};
 
 export default EditProfile;

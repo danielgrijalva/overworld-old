@@ -8,7 +8,9 @@ import LogIn from "../login";
 import * as reactRedux from "react-redux";
 import * as actions from "../../actions";
 
-jest.spyOn(reactRedux, "useDispatch").mockReturnValue(jest.fn(action => action()));
+jest
+  .spyOn(reactRedux, "useDispatch")
+  .mockReturnValue(jest.fn(action => action()));
 const useSelectorMock = jest
   .spyOn(reactRedux, "useSelector")
   .mockReturnValue({ errors: [], user: null, isAuthenticated: false });

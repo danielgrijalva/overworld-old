@@ -15,13 +15,13 @@ describe("Testing <ChooseFavorites />", () => {
 
   beforeEach(() => {
     const props = {
-        "favorites": []
-    }
-    const store = initializeStore();    
+      favorites: []
+    };
+    const store = initializeStore();
     wrapper = mount(
-        <Provider store={store}>
-            <ChooseFavorites {...props} />
-        </Provider>
+      <Provider store={store}>
+        <ChooseFavorites {...props} />
+      </Provider>
     );
   });
 
@@ -31,34 +31,33 @@ describe("Testing <ChooseFavorites />", () => {
   });
 
   it("shows nothing if no favorite games", () => {
-    expect(wrapper.find('.favorite-game-wrapper')).toHaveLength(0);
+    expect(wrapper.find(".favorite-game-wrapper")).toHaveLength(0);
   });
 
   describe("with favorite games passed in", () => {
-
     const store = initializeStore();
     const props = {
-        "favorites": [
-            {
-            "igdb": 26186,
-            "name": "Need for Speed: Most Wanted NFS Heroes Pack",
-            "slug": "need-for-speed-most-wanted-nfs-heroes-pack",
-            "cover_id": "mui696xbkocbab6tnunn",
-            "backdrop_id": "bc23xhr2ymtnrcr9se6r"
-          },
-          {
-            "igdb": 42601,
-            "name": "Super Baseball Simulator 1.000",
-            "slug": "super-baseball-simulator-1-dot-000",
-            "cover_id": "bxq1srmsfgoapoce27pz",
-            "backdrop_id": ""
-          }
-        ]
-    }    
+      favorites: [
+        {
+          igdb: 26186,
+          name: "Need for Speed: Most Wanted NFS Heroes Pack",
+          slug: "need-for-speed-most-wanted-nfs-heroes-pack",
+          cover_id: "mui696xbkocbab6tnunn",
+          backdrop_id: "bc23xhr2ymtnrcr9se6r"
+        },
+        {
+          igdb: 42601,
+          name: "Super Baseball Simulator 1.000",
+          slug: "super-baseball-simulator-1-dot-000",
+          cover_id: "bxq1srmsfgoapoce27pz",
+          backdrop_id: ""
+        }
+      ]
+    };
     const wrapper = mount(
-        <Provider store={store}>
-            <ChooseFavorites {...props} />
-        </Provider>
+      <Provider store={store}>
+        <ChooseFavorites {...props} />
+      </Provider>
     );
 
     it("render games with remove buttons", () => {
@@ -67,9 +66,11 @@ describe("Testing <ChooseFavorites />", () => {
     });
 
     it("add favorite button opens a modal", () => {
-      wrapper.find(".add-favorite").at(1).simulate("click");
+      wrapper
+        .find(".add-favorite")
+        .at(1)
+        .simulate("click");
       expect(wrapper.contains(Modal)).toBe(true);
     });
   });
-
 });

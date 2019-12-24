@@ -11,7 +11,7 @@ const GameSearch = ({ onResultSelect, autoFocus }) => {
     results: [],
     isLoading: false,
     value: ""
-  }
+  };
 
   const [{ results, isLoading, value }, setState] = useState(defaultState);
 
@@ -56,7 +56,7 @@ const GameSearch = ({ onResultSelect, autoFocus }) => {
           onResultSelect={handleResultSelect}
           onSearchChange={e => onChange(e.target.value)}
           results={results}
-          placeholder='Search...'
+          placeholder="Search..."
           resultRenderer={ResultRenderer}
           value={value}
           noResultsMessage={"No games found"}

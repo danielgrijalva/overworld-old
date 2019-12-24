@@ -5,10 +5,11 @@ import rootReducer from "./reducers";
 
 const middleware = [thunk];
 
-export const initializeStore = (initialState) => createStore(
-  rootReducer,
-  initialState,
-  composeWithDevTools(applyMiddleware(...middleware))
-);
+export const initializeStore = initialState =>
+  createStore(
+    rootReducer,
+    initialState,
+    composeWithDevTools(applyMiddleware(...middleware))
+  );
 
 export default initializeStore({});
