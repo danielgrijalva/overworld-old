@@ -11,8 +11,8 @@ export const addFavorite = game => (dispatch, getState) => {
         igdb: game.id,
         name: game.name,
         slug: game.slug,
-        cover_id: game.cover ? game.cover.image_id : '',
-        backdrop_id: game.screenshots ? game.screenshots[0].image_id : ''
+        cover_id: game.cover ? game.cover.image_id : "",
+        backdrop_id: game.screenshots ? game.screenshots[0].image_id : ""
       },
       tokenConfig(getState)
     )

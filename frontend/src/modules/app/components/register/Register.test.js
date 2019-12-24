@@ -3,7 +3,9 @@ import { mount } from "enzyme";
 import Register from ".";
 import * as reactRedux from "react-redux";
 
-jest.spyOn(reactRedux, "useDispatch").mockReturnValue(jest.fn(action => action()));
+jest
+  .spyOn(reactRedux, "useDispatch")
+  .mockReturnValue(jest.fn(action => action()));
 jest.spyOn(reactRedux, "useSelector").mockReturnValue({});
 
 describe("<Register />", () => {
@@ -50,41 +52,71 @@ describe("<Register />", () => {
 
     it("is invalid if nothing is entered", () => {
       enterFormValues(formValuesToEnter);
-      expect(wrapper.find('Button').at(0).props().disabled).toBe(true);
+      expect(
+        wrapper
+          .find("Button")
+          .at(0)
+          .props().disabled
+      ).toBe(true);
     });
 
     it("is invalid if only username is entered", () => {
       formValuesToEnter.username = completedFormValues.username;
       enterFormValues(formValuesToEnter);
-      expect(wrapper.find('Button').at(0).props().disabled).toBe(true);
+      expect(
+        wrapper
+          .find("Button")
+          .at(0)
+          .props().disabled
+      ).toBe(true);
     });
 
     it("is invalid if only username and email are entered", () => {
       formValuesToEnter.username = completedFormValues.username;
       formValuesToEnter.email = completedFormValues.email;
       enterFormValues(formValuesToEnter);
-      expect(wrapper.find('Button').at(0).props().disabled).toBe(true);
-    })
+      expect(
+        wrapper
+          .find("Button")
+          .at(0)
+          .props().disabled
+      ).toBe(true);
+    });
 
     it("is invalid if only username, email, and password are entered", () => {
       formValuesToEnter.username = completedFormValues.username;
       formValuesToEnter.email = completedFormValues.email;
       formValuesToEnter.password = completedFormValues.password;
       enterFormValues(formValuesToEnter);
-      expect(wrapper.find('Button').at(0).props().disabled).toBe(true);
+      expect(
+        wrapper
+          .find("Button")
+          .at(0)
+          .props().disabled
+      ).toBe(true);
     });
 
     it("is invalid if passwords do not match", () => {
       formValuesToEnter = { ...completedFormValues };
       formValuesToEnter.password2 = "testpass2";
       enterFormValues(formValuesToEnter);
-      expect(wrapper.find('Button').at(0).props().disabled).toBe(true);
+      expect(
+        wrapper
+          .find("Button")
+          .at(0)
+          .props().disabled
+      ).toBe(true);
     });
 
     it("is valid if all info is entered properly", () => {
       formValuesToEnter = { ...completedFormValues };
       enterFormValues(formValuesToEnter);
-      expect(wrapper.find('Button').at(0).props().disabled).toBe(false);
-    })
+      expect(
+        wrapper
+          .find("Button")
+          .at(0)
+          .props().disabled
+      ).toBe(false);
+    });
   });
 });

@@ -40,7 +40,7 @@ export default function Backdrop({ imageId }) {
     );
   }
   return null;
-};
+}
 
 Backdrop.propTypes = {
   imageId: PropTypes.string.isRequired

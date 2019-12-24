@@ -68,11 +68,7 @@ const Register = () => {
       open={open}
       onClose={handleClose}
       trigger={
-        <Button
-          onClick={handleOpen}
-          color="green"
-          style={{ margin: "0 1rem" }}
-        >
+        <Button onClick={handleOpen} color="green" style={{ margin: "0 1rem" }}>
           Get Started
         </Button>
       }

@@ -3,12 +3,12 @@ import { Menu } from "semantic-ui-react";
 import "./styles.css";
 
 const ProfileNav = () => {
-  
   const initialState = {
     activeItem: "profile"
   };
-  const [state, setState] = useState(initialState)
-  const handleItemClick = (e, { name }) => setState(prevState => ({ ...prevState, activeItem: name }));
+  const [state, setState] = useState(initialState);
+  const handleItemClick = (e, { name }) =>
+    setState(prevState => ({ ...prevState, activeItem: name }));
   const { activeItem } = state;
 
   return (
@@ -71,6 +71,6 @@ const ProfileNav = () => {
       </Menu.Item>
     </Menu>
   );
-}
+};
 
 export default ProfileNav;

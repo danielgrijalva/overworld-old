@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Statistic } from "semantic-ui-react";
 import "./styles.css";
 
-const Stats = (props) => {
+const Stats = props => {
   const { played, backlog, wishlist, followers, following } = props.profile;
   return (
     <React.Fragment>
@@ -29,7 +29,7 @@ const Stats = (props) => {
       </Statistic>
     </React.Fragment>
   );
-}
+};
 
 Stats.propTypes = {
   played: PropTypes.array,
