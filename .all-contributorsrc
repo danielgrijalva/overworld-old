@@ -146,10 +146,21 @@
       ]
     },
     {
-      "login": "pathak-pratik",
-      "name": "pathak-pratik",
-      "avatar_url": "https://avatars0.githubusercontent.com/u/55838979?v=4",
-      "profile": "https://github.com/pathak-pratik",
+      "login": "PathakPratik",
+      "name": "Pratik Pathak",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/17859354?v=4",
+      "profile": "https://github.com/PathakPratik",
+      "contributions": [
+        "code",
+        "test",
+        "bug"
+      ]
+    },
+    {
+      "login": "tlaudahl",
+      "name": "Travis Laudahl",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/19698780?v=4",
+      "profile": "http://www.travislaudahl.com",
       "contributions": [
         "bug"
       ]
