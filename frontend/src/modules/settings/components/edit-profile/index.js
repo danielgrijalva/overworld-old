@@ -61,7 +61,7 @@ const EditProfile = () => {
   };
 
   return (
-    <Grid>
+    <Grid stackable>
       <Grid.Row>
         <Grid.Column width={8}>
           <Form className="edit-profile-form" onSubmit={handleSubmit}>
@@ -129,7 +129,7 @@ const EditProfile = () => {
                   size="tiny"
                 />
               </Grid.Column>
-              <Grid.Column verticalAlign="middle" computer={7} mobile={5}>
+              <Grid.Column verticalAlign="middle" width={12}>
                 <Form className="avatar-form" onSubmit={handleRefreshAvatar}>
                   <Form.Field>
                     <label>Avatar</label>
