@@ -21,7 +21,7 @@
   padding: 1rem;
 }
 
-.register .button.positive {
+.button.positive {
   margin: 0.7rem 0 1.7rem;
   text-shadow: 0 0 7px rgba(0, 0, 0, 0.35);
 }
@@ -36,4 +36,15 @@
 
 .ui.error.message:not(:last-child) {
   margin-bottom: 0.7rem;
+}
+
+.backdrop-name,
+.backdrop-name a {
+  margin-top: 7rem;
+  text-align: center;
+  color: #678;
+}
+
+.backdrop-name a:hover {
+  color: #9ab !important;
 }

@@ -9,3 +9,4 @@ export { default as ListPreview } from "./list-preview";
 export { default as Cover } from "./cover";
 export { default as Ratings } from "./ratings";
 export { default as ListLoader } from "./loaders";
+export { default as SignUpPage } from "./register/SignUpPage";
