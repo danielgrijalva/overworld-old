@@ -121,7 +121,7 @@ export default class Game extends React.Component {
                         </small>
                       )}
                       <small className="company">
-                        <Link to="/">
+                        <Link to={"/developer/"+game.involved_companies[0].id} >
                           {game.involved_companies &&
                             this.getDeveloperName(game.involved_companies)}
                         </Link>

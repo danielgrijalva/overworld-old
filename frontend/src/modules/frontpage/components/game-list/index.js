@@ -3,7 +3,7 @@ import { List, Image } from "semantic-ui-react";
 import Moment from "react-moment";
 import { StyledListDesc, StyledListHeader } from "./styles";
 
-export const GameList = ({ games }) => {
+const GameList = ({ games }) => {
   return (
     <List relaxed>
       {games.map(game => (
@@ -28,3 +28,5 @@ export const GameList = ({ games }) => {
     </List>
   );
 };
+
+export default GameList;

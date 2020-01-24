@@ -8,7 +8,7 @@ from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 from actions.models import Ratings
 from actions.serializers import RatingSerializer
-from .fields import game_fields, search_fields, popular_fields, backdrop_fields, genre_fields, recents_fields, upcoming_fields
+from .fields import game_fields, search_fields, company_game_fields, popular_fields, backdrop_fields, genre_fields, recents_fields, upcoming_fields
 from .models import Game
 
 
@@ -118,6 +118,16 @@ def get_frontpage_games(request):
     r = {'recents': recents.json(), 'upcoming': upcoming.json()}
     return Response(r) 
 
+@api_view(['GET'])
+def get_games_by_company(request, cid):
+    """Gets games created by a particular company."""
+    
+    query = f'fields {company_game_fields}; where involved_companies = [{cid}];'
+    headers = {'user-key': settings.IGDB_KEY}
+    url = settings.IGDB_URL.format(endpoint='games')
+
+    r = requests.post(url=url, data=query, headers=headers)
+    return Response(r.json()) 
 
 @api_view(['GET'])
 def get_popular_games(request):
