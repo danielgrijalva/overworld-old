@@ -38,11 +38,11 @@
   margin-bottom: 0.7rem;
 }
 
-.backdrop-name,
 .backdrop-name a {
   margin-top: 7rem;
   text-align: center;
   color: #678;
+  border-bottom: 1px solid #456;
 }
 
 .backdrop-name a:hover {

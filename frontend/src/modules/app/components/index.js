@@ -1,4 +1,5 @@
 export { default as Backdrop } from "./backdrop";
+export { default as BackdropFrom } from "./backdrop/BackdropFrom";
 export { default as Error } from "./errors";
 export { default as Footer } from "./footer";
 export { default as LogIn } from "./login";
@@ -10,3 +11,4 @@ export { default as Cover } from "./cover";
 export { default as Ratings } from "./ratings";
 export { default as ListLoader } from "./loaders";
 export { default as SignUpPage } from "./register/SignUpPage";
+export { default as SignInPage } from "./login/SignInPage";

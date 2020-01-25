@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { List, Grid } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 import { ListLoader } from "../../../app/components";
 import { SectionTitle } from "./styles";
 import { GameList } from "../game-list";
