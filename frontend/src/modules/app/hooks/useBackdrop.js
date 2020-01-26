@@ -24,11 +24,14 @@ const UseBackdrop = params => {
       {Object.keys(backdrop).length > 0 && (
         <BackdropElement
           imageId={backdrop.imageId}
-          isBackground={params ? params.isBackground : false}
+          position={params ? params.position : false}
         />
       )}
       {props.children}
-      <BackdropFrom backdrop={backdrop} />
+      <BackdropFrom
+        backdrop={backdrop}
+        position={params ? params.position : false}
+      />
       <Footer />
     </>
   );

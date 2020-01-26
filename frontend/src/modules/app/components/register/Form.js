@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import Error from "../errors/";
 import { Button, Form } from "semantic-ui-react";
 import { register } from "../../actions";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-export const RegistrationForm = () => {
+export const RegistrationForm = (props) => {
   const defaultState = {
     email: "",
     username: "",
@@ -96,6 +96,17 @@ export const RegistrationForm = () => {
         >
           Sign Up
         </Button>
+        <h4 style={{ textAlign: "center" }}>
+          Already a member?{" "}
+          <Link
+            onClick={props.handleClose}
+            to={{
+              pathname: `/login`
+            }}
+          >
+            Login to your account
+          </Link>
+        </h4>
       </Form>
       {errors &&
         errors.map((e, i) => {

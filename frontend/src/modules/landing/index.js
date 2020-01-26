@@ -8,7 +8,7 @@ import { Features, Popular } from "./components/";
 import UseBackdrop from "../app/hooks/useBackdrop";
 import "./styles.css";
 
-const Landing = () => {
+const Landing = (props) => {
   const dispatch = useDispatch();
   const { isLoadingPopular, popular } = useSelector(state => state.landing);
   const { Backdrop } = UseBackdrop();

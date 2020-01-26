@@ -45,7 +45,7 @@ const Register = () => {
         <Modal.Description>
           <Header>Join Overworld</Header>
         </Modal.Description>
-        <RegistrationForm/>
+        <RegistrationForm handleClose={handleClose}/>
       </Modal.Content>
     </Modal>
   );

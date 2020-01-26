@@ -6,7 +6,7 @@ import "./styles.css";
 
 const SignUpPage = () => {
 
-  const options = { isBackground: true };
+  const options = { position: ['isBackground'] };
   const { Backdrop } = UseBackdrop(options);
 
   return (

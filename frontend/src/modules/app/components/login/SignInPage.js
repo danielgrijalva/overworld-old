@@ -5,24 +5,26 @@ import UseBackdrop from "../../hooks/useBackdrop";
 import "./styles.css";
 
 const SignInPage = () => {
-
-  const options = { isBackground: true };
+  const options = { position: ["isLeft"] };
   const { Backdrop } = UseBackdrop(options);
 
   return (
     <>
       <Backdrop>
-        <Grid centered stackable>
-          <Grid.Row style={{ marginBottom: "30px" }}>
-            <h1>Start your gaming journal now, it's free!</h1>
-          </Grid.Row>
+        <Grid stackable>
           <Grid.Row>
-            <Grid.Column width={4}>
+            <Grid.Column
+              floated="right"
+              width={4}
+              style={{ marginRight: "50px" }}
+            >
               <Container>
+                <h1 style={{ marginBottom: "30px", textAlign: "center" }}>Welcome Back</h1>
                 <LoginForm />
               </Container>
             </Grid.Column>
           </Grid.Row>
+          <Grid.Row style={{ marginBottom: "10px" }}></Grid.Row>
         </Grid>
       </Backdrop>
     </>

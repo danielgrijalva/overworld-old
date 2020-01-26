@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { login } from "../../actions";
 import Error from "../errors/";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Button, Form } from "semantic-ui-react";
 
-export const LoginForm = () => {
+export const LoginForm = (props) => {
   const defaultState = {
     username: "",
     password: ""
@@ -35,7 +35,7 @@ export const LoginForm = () => {
   }
 
   return (
-    <>  
+    <>
       <Form onSubmit={handleSubmit}>
         <Form.Field>
           <label>Username</label>
@@ -59,6 +59,17 @@ export const LoginForm = () => {
         >
           Sign In
         </Button>
+        <h4 style={{ textAlign: "center" }}>
+          New to Overworld?{" "}
+          <Link
+            onClick={props.handleClose}
+            to={{
+              pathname: `/signup`
+            }}
+          >
+            Create an account
+          </Link>
+        </h4>
       </Form>
       {errors &&
         errors.map((e, i) => {

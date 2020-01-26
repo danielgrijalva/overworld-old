@@ -37,7 +37,7 @@ const LogIn = ({ loginText }) => {
         <Modal.Description>
           <Header>Welcome back</Header>
         </Modal.Description>
-        <LoginForm/>
+        <LoginForm handleClose={handleClose}/>
       </Modal.Content>
     </Modal>
   );

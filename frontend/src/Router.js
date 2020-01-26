@@ -26,7 +26,7 @@ class AppRouter extends React.Component {
           <Switch>
             <Route path="/" exact component={App} />
             <Route path="/signup" component={SignUpPage} />
-            <Route path="/signin" component={SignInPage} />
+            <Route path="/login" component={SignInPage} />
             <Route path="/games/:slug" component={Game} />
             <Route path="/user/:username" component={Profile} />
             <Route path="/settings" component={Settings} />
