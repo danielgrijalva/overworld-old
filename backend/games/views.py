@@ -8,7 +8,7 @@ from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 from actions.models import Ratings
 from actions.serializers import RatingSerializer
-from .fields import game_fields, search_fields, company_game_fields, popular_fields, backdrop_fields, genre_fields, recents_fields, upcoming_fields
+from .fields import game_fields, search_fields, company_fields, company_logo_fields, company_game_fields, popular_fields, backdrop_fields, genre_fields, recents_fields, upcoming_fields
 from .models import Game
 
 
@@ -118,16 +118,41 @@ def get_frontpage_games(request):
     r = {'recents': recents.json(), 'upcoming': upcoming.json()}
     return Response(r) 
 
-@api_view(['GET'])
-def get_games_by_company(request, cid):
+def get_company_logo(id):
+    """Gets company logo."""
+    
+    query = f'fields {company_logo_fields}; where id = {id};'
+    headers = {'user-key': settings.IGDB_KEY}
+    url = settings.IGDB_URL.format(endpoint='company_logos')
+
+    return requests.post(url=url, data=query, headers=headers).json()
+
+def get_games_by_company(cid):
     """Gets games created by a particular company."""
     
-    query = f'fields {company_game_fields}; where involved_companies = [{cid}];'
+    query = f'fields {company_game_fields}; where involved_companies.company = {cid};'
     headers = {'user-key': settings.IGDB_KEY}
     url = settings.IGDB_URL.format(endpoint='games')
 
-    r = requests.post(url=url, data=query, headers=headers)
-    return Response(r.json()) 
+    return requests.post(url=url, data=query, headers=headers).json()
+
+@api_view(['GET'])
+def get_company(request, cid):
+    """Gets Company/Creator of games from IGDB."""
+    
+    query = f'fields {company_fields}; where id = {cid};'
+    headers = {'user-key': settings.IGDB_KEY}
+    url = settings.IGDB_URL.format(endpoint='companies')
+
+    company_json = requests.post(url=url, data=query, headers=headers).json()
+
+    company_json[0]['logo_details'] = get_company_logo(company_json[0]['logo'])
+
+    games_json = get_games_by_company(cid)
+
+    r = {'company': company_json, 'games': games_json}
+
+    return Response(r) 
 
 @api_view(['GET'])
 def get_popular_games(request):
