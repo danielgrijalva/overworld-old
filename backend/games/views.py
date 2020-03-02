@@ -130,7 +130,7 @@ def get_company_logo(id):
 def get_games_by_company(cid):
     """Gets games created by a particular company."""
     
-    query = f'fields {company_game_fields}; where involved_companies.company = {cid};'
+    query = f'fields {company_game_fields}; where involved_companies.company = {cid} & involved_companies.developer = true;'
     headers = {'user-key': settings.IGDB_KEY}
     url = settings.IGDB_URL.format(endpoint='games')
 

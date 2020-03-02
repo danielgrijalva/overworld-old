@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import CompanyLogo from "./";
+import CompanyLogo from "../company-logo/index";
 import { Description, LogoWrapper } from "./styles";
 import { CoverLoader } from "../../../app/components";
 
-const CompanyDetails = ({company}) => {
+const CompanyDetails = React.memo(({company}) => {
   const [descToggle, setDescToggle] = useState("more");
 
   const descToggleClick = e => {
@@ -36,7 +36,7 @@ const CompanyDetails = ({company}) => {
 
   return Object.keys(company).length > 0 ? (
     <LogoWrapper>
-      {/* <CompanyLogo imageId={"hcbqwbhbmrabsfk600zs"} /> */}
+      <CompanyLogo imageId={company.logo_details[0].image_id} />
       {company.start_date && <h3>Founded: {getDate(company.start_date)}</h3>}
       <Description
         id="desctest"
@@ -56,6 +56,6 @@ const CompanyDetails = ({company}) => {
       padding={3}
     />
   );
-};
+});
 
 export default CompanyDetails;
