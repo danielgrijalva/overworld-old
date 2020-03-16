@@ -1,0 +1,13 @@
+.quick-stats {
+  text-align: center;
+  color: #678 !important;
+
+  a {
+    text-align: center;
+    color: #678 !important;
+
+    &:hover {
+      color: #9ab !important;
+    }
+  }
+}

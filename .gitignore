@@ -11,6 +11,9 @@ Icon
 # VS Code
 .vscode/
 
+# IntelliJ IDEA
+.idea/
+
 # Thumbnails
 ._*
 

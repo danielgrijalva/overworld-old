@@ -1,0 +1,69 @@
+.ui {
+  &.menu {
+    &.fluid.actions {
+      border: none !important;
+      box-shadow: 0 2px 7px rgba(0, 0, 0, 0.35) !important;
+      background: #456 !important;
+      margin-bottom: 1.5rem;
+    }
+
+    &.actions .item {
+      text-shadow: 0 0 7px rgba(0, 0, 0, 0.45);
+      color: #bcd;
+      background: #456 !important;
+
+      &:hover {
+        color: #def !important;
+      }
+    }
+  }
+
+  &.floated.menu .item:last-child:before {
+    display: initial;
+  }
+
+  &.checkbox label {
+    color: #def !important;
+  }
+}
+
+.action-buttons {
+  padding: 0 1rem !important;
+  margin: auto !important;
+
+  .column {
+    padding: 0.35rem 0 !important;
+  }
+
+  i {
+    text-shadow: 0 0 7px rgba(0, 0, 0, 0.25);
+    color: #9ab;
+    padding: 0 !important;
+  }
+}
+
+.star {
+  text-shadow: none !important;
+}
+
+rect {
+  text-shadow: none !important;
+}
+
+.half-star {
+  color: #334556 !important;
+}
+
+.rate {
+  display: inline-flex !important;
+}
+
+.stars {
+  margin-top: 0.8rem;
+  color: #fbbd08;
+
+  > span > .fa.fa-star {
+    color: #345;
+    text-shadow: none;
+  }
+}
