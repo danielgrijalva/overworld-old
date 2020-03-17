@@ -4,7 +4,7 @@ import moment from "moment";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
 import { loadJournal } from "../../actions";
-import "./styles.css";
+import "./styles.scss";
 import { useDispatch, useSelector } from "react-redux";
 
 const Journal = props => {

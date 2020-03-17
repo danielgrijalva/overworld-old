@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Statistic } from "semantic-ui-react";
-import "./styles.css";
+import "./styles.scss";
 
 const Stats = props => {
   const { played, backlog, wishlist, followers, following } = props.profile;
