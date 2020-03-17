@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import { debounce } from "lodash";
 import { Search, Grid } from "semantic-ui-react";
 import { ResultRenderer } from "./ResultRenderer";
-import "./styles.css";
+import "./styles.scss";
 
 class GameSearch extends Component {
   constructor() {
