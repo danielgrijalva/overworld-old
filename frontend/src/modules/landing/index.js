@@ -7,7 +7,7 @@ import { Backdrop, Footer, Register, LogIn } from "../app/components/";
 import { getPopular, getBackdrop } from "./actions";
 import { Features, Popular } from "./components/";
 import { Backdrops as options } from "./utils";
-import "./styles.css";
+import "./styles.scss";
 
 export class Landing extends React.Component {
   componentDidMount() {
