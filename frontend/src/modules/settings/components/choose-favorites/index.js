@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal, Form, Button, Header, Image } from "semantic-ui-react";
 import { GameSearch } from "../../../app/components";
 import { addFavorite, removeFavorite } from "../../actions";
-import "./styles.css";
+import "./styles.scss";
 import { useDispatch } from "react-redux";
 
 const ChooseFavorites = props => {
