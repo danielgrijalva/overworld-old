@@ -1,110 +1,79 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useState } from "react";
 import { Modal, Header, Menu } from "semantic-ui-react";
 import { Redirect } from "react-router-dom";
-import { connect } from "react-redux";
 import { login, dismissErrors } from "../../actions";
+import { useSelector, useDispatch } from "react-redux";
 import Error from "../errors/";
 import { LoginForm } from "./Form";
 import "./styles.css";
 
-class LogIn extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      username: "",
-      password: "",
-      open: false
-    };
-  }
+const LogIn = ({ loginText }) => {
+  const defaultState = {
+    username: "",
+    password: "",
+    open: false
+  };
+  const [{ username, password, open }, setState] = useState(defaultState);
+  const { user, errors, isAuthenticated } = useSelector(state => state.auth);
+  const dispatch = useDispatch();
 
-  handleChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
+  const handleChange = event => {
+    const { name, value } = event.target;
+    setState(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
   };
 
-  handleSubmit = event => {
+  const handleSubmit = event => {
     event.preventDefault();
-    const { username, password } = this.state;
-
-    this.props.login(username, password);
+    dispatch(login(username, password));
   };
 
-  handleOpen = () => this.setState({ open: true });
+  const handleOpen = () =>
+    setState(prevState => ({ ...prevState, open: true }));
 
-  handleClose = () => {
-    this.setState({
-      username: "",
-      password: "",
-      open: false
-    });
+  const handleClose = () => {
+    setState(defaultState);
 
-    if (this.props.errors) {
-      this.props.dismissErrors();
+    if (errors) {
+      dispatch(dismissErrors);
     }
   };
 
-  validateForm = () => {
-    return this.state.username.length > 0 && this.state.password.length > 0;
-  };
+  const validateForm = () => username.length > 0 && password.length > 0;
 
-  render() {
-    if (this.props.isAuthenticated) {
-      return <Redirect to={`/${this.props.user.username}`} />;
-    }
-
-    const { open } = this.state;
-    const { errors } = this.props;
-    return (
-      <Modal
-        size="mini"
-        open={open}
-        onClose={this.handleClose}
-        trigger={
-          <Menu.Item
-            content={this.props.loginText}
-            onClick={this.handleOpen}
-            link
-          />
-        }
-        closeIcon
-        className="register"
-      >
-        <Modal.Content>
-          <Modal.Description>
-            <Header>Welcome back</Header>
-          </Modal.Description>
-          <LoginForm
-            validateForm={this.validateForm}
-            handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit}
-          />
-          {errors &&
-            errors.map((e, i) => {
-              return <Error message={e} size="small" compact key={i} />;
-            })}
-        </Modal.Content>
-      </Modal>
-    );
+  if (isAuthenticated) {
+    return <Redirect to={`/${user.username}`} />;
   }
-}
 
-LogIn.propTypes = {
-  isAuthenticated: PropTypes.bool,
-  errors: PropTypes.array,
-  user: PropTypes.object,
-  login: PropTypes.func.isRequired,
-  dismissErrors: PropTypes.func.isRequired
+  return (
+    <Modal
+      size="mini"
+      open={open}
+      onClose={handleClose}
+      trigger={<Menu.Item content={loginText} onClick={handleOpen} link />}
+      closeIcon
+      className="register"
+    >
+      <Modal.Content>
+        <Modal.Description>
+          <Header>Welcome back</Header>
+        </Modal.Description>
+        <LoginForm
+          validateForm={validateForm}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          username={username}
+          password={password}
+        />
+        {errors &&
+          errors.map((e, i) => {
+            return <Error message={e} size="small" compact key={i} />;
+          })}
+      </Modal.Content>
+    </Modal>
+  );
 };
 
-const mapStateToProps = state => ({
-  errors: state.auth.errors,
-  user: state.auth.user,
-  isAuthenticated: state.auth.isAuthenticated
-});
-
-export default connect(
-  mapStateToProps,
-  { login, dismissErrors }
-)(LogIn);
+export default LogIn;

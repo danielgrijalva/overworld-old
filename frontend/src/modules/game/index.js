@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import Moment from "react-moment";
 import { Container, Grid } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 import { Backdrop, Footer, Cover, Ratings } from "../app/components/";
 import {
   Details,
@@ -18,7 +19,7 @@ import {
   Expansions
 } from "./components/";
 import "./styles.css";
-import ShowMoreText from 'react-show-more-text';
+import ShowMoreText from "react-show-more-text";
 
 export default class Game extends React.Component {
   constructor(props) {
@@ -31,7 +32,7 @@ export default class Game extends React.Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     var gameSlug = this.props.match.params.slug;
     this.resetState(gameSlug);
     this.loadGame(gameSlug);
@@ -102,7 +103,6 @@ export default class Game extends React.Component {
                       <Cover
                         imageId={game.cover.image_id}
                         slug={game.slug}
-                        className="cover-wrapper"
                         size="big"
                       />
                     </React.Fragment>
@@ -124,18 +124,18 @@ export default class Game extends React.Component {
                       <h1>{game.name}</h1>
                       {game.first_release_date && (
                         <small className="release-date">
-                          <a href="/">
+                          <Link to="/">
                             <Moment format="YYYY">
                               {game.first_release_date * 1000}
                             </Moment>
-                          </a>
+                          </Link>
                         </small>
                       )}
                       <small className="company">
-                        <a href="/">
+                        <Link to="/">
                           {game.involved_companies &&
                             this.getDeveloperName(game.involved_companies)}
-                        </a>
+                        </Link>
                       </small>
                     </section>
                   ) : (
@@ -148,12 +148,12 @@ export default class Game extends React.Component {
                         {!isLoading ? (
                           <section className="summary">
                             <ShowMoreText
-                                lines={4}
-                                more="Show more"
-                                less="Show less"
-                            >
-                                <p>{game.summary}</p>
-                            </ShowMoreText>
+                              lines={5}
+                              more="more."
+                              less="Less."
+                              anchorClass="show"
+                              children={game.summary}
+                            />
                             <Details game={game} />
                           </section>
                         ) : (
@@ -170,8 +170,6 @@ export default class Game extends React.Component {
                         <Ratings
                           ratings={this.state.ratings}
                           showAverage={true}
-                          height={55}
-                          width={155}
                         />
                       </Grid.Column>
                     </Grid.Row>

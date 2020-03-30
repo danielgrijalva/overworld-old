@@ -1,15 +1,19 @@
 .rating-chart {
   background-color: #14181c;
-  margin: 0 0.5rem;
+  margin: 0;
   display: flex;
+  width: 100%;
+  margin: 0 0.55rem;
 }
 
 .rating-chart > .rating-bar {
+  width: 10%;
   background-color: #435566;
   margin-top: auto;
-  border-top-right-radius: 3px;
-  border-top-left-radius: 3px;
+  border-top-right-radius: 2px;
+  border-top-left-radius: 2px;
   border-right: 1px solid #14181c;
+  cursor: pointer;
 }
 
 .rating-chart > .rating-bar:hover {
@@ -32,6 +36,7 @@
 .rating-label {
   margin-top: auto;
   text-align: center;
+  font-size: 13px;
 }
 
 .rating-label .star {

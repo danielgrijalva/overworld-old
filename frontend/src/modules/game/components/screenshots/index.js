@@ -1,5 +1,5 @@
 import React from "react";
-import { Header, Segment, Image, Modal } from "semantic-ui-react";
+import { Header, Segment, Modal } from "semantic-ui-react";
 import { Screenshot } from "./Screenshot";
 import "./styles.css";
 
@@ -32,22 +32,28 @@ export default class Screenshots extends React.Component {
         <Header className="white">
           Screenshots{" "}
           <small>
-            <a onClick={this.showAllScreenshots}>
-              show {!this.state.showAll ? "more" : "less"}...
-            </a>
+            <button
+              className="show-hide-screenshots"
+              onClick={this.showAllScreenshots}
+            >
+              show {!this.state.showAll ? "all" : "less"}
+            </button>
           </small>
         </Header>
-        <Segment basic className={`${!this.state.showAll && "truncate"}`}>
-          {this.props.screenshots && this.props.screenshots.map((s, i) => {
-            return (
-              <Screenshot
-                size="med"
-                onClick={() => this.showScreenshotModal(s.image_id)}
-                imageId={s.image_id}
-                key={i}
-              />
-            );
-          })}
+        <Segment basic>
+          {this.props.screenshots &&
+            this.props.screenshots
+              .slice(0, this.state.showAll ? this.props.screenshots.length : 3)
+              .map((s, i) => {
+                return (
+                  <Screenshot
+                    size="med"
+                    onClick={() => this.showScreenshotModal(s.image_id)}
+                    imageId={s.image_id}
+                    key={i}
+                  />
+                );
+              })}
         </Segment>
         <Modal
           size="small"

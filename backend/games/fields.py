@@ -35,6 +35,21 @@ _game_fields = [
 
 ]
 
+_recent_game_fields = [
+    'cover.image_id',
+    'first_release_date',
+    'name',
+    'slug',
+]
+
+_upcoming_game_fields = [
+    'cover.image_id',
+    'first_release_date',
+    'name',
+    'release_dates.category',
+    'slug',
+]
+
 _search_fields = [
     'cover.image_id',
     'first_release_date',
@@ -66,3 +81,5 @@ search_fields = ','.join(_search_fields)
 popular_fields = ','.join(_popular_fields)
 backdrop_fields = ','.join(_backdrop_fields)
 genre_fields = ','.join(_genre_fields)
+recents_fields = ','.join(_recent_game_fields)
+upcoming_fields = ','.join(_upcoming_game_fields)

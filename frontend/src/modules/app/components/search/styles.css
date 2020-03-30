@@ -19,3 +19,8 @@
 .ui.icon.input > .search.icon {
   color: #9ab;
 }
+
+.ui.search > .results {
+  overflow-y: auto;
+  max-height: 350px;
+}
