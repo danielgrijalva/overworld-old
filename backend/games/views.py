@@ -1,14 +1,15 @@
+import json
 import requests
+from datetime import datetime
 from django.conf import settings
+from django.utils.datastructures import MultiValueDictKeyError
 from rest_framework.decorators import api_view
 from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 from actions.models import Ratings
 from actions.serializers import RatingSerializer
-from .fields import game_fields, search_fields, popular_fields, backdrop_fields, genre_fields
+from .fields import game_fields, search_fields, popular_fields, backdrop_fields, genre_fields, recents_fields, upcoming_fields
 from .models import Game
-from django.utils.datastructures import MultiValueDictKeyError
-import json
 
 
 @api_view(['GET'])
@@ -100,6 +101,22 @@ def search_game(request, name):
     r = requests.post(url=url, data=data, headers=headers)
 
     return Response(r.json())
+
+
+@api_view(['GET'])
+def get_frontpage_games(request):
+    """Gets a set of recently released games and upcoming games from today."""
+    
+    now = int(datetime.timestamp(datetime.now()))
+    recents_query = f'fields {recents_fields}; sort first_release_date desc; where first_release_date < {now};'
+    upcoming_query = f'fields {upcoming_fields}; sort first_release_date asc; where first_release_date > {now} & release_dates.category = 0;'
+    headers = {'user-key': settings.IGDB_KEY}
+    url = settings.IGDB_URL.format(endpoint='games')
+
+    recents = requests.post(url=url, data=recents_query, headers=headers)
+    upcoming = requests.post(url=url, data=upcoming_query, headers=headers)
+    r = {'recents': recents.json(), 'upcoming': upcoming.json()}
+    return Response(r) 
 
 
 @api_view(['GET'])

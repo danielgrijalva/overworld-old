@@ -27,7 +27,8 @@ class GameSearch extends Component {
       .then(response => {
         const results = response.data.map(result => ({
           ...result,
-          key: result.id
+          key: result.id,
+          title: result.name
         }));
         this.setState({ results: results, isLoading: false });
       })
@@ -54,6 +55,7 @@ class GameSearch extends Component {
           <Search
             loading={isLoading}
             onResultSelect={this.handleResultSelect}
+            placeholder="Search..."
             onSearchChange={e => this.onChange(e.target.value)}
             results={results}
             resultRenderer={ResultRenderer}

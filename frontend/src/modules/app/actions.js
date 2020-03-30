@@ -81,7 +81,10 @@ export const register = ({ email, username, password }) => dispatch => {
     .catch(error => {
       dispatch({
         type: REGISTER_FAIL,
-        payload: Object.values(error.response.data)
+        payload:
+          error.response.status === 404
+            ? ["Something happened, please try again later."]
+            : Object.values(error.response.data)
       });
     });
 };

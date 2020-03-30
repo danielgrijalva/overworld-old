@@ -6,14 +6,14 @@ import Rating from "react-rating";
 import "font-awesome/css/font-awesome.min.css";
 
 class Ratings extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const { game } = this.props;
     this.props.loadRating(game.id);
   }
 
   onStarClick = rate => {
     const { game } = this.props;
-    if (this.props.rating == rate) {
+    if (this.props.rating === rate) {
       this.props.rate(game, 0);
     } else {
       this.props.rate(game, rate);
@@ -59,7 +59,4 @@ const mapStateToProps = state => ({
   loadRating: state.game.loadingRating
 });
 
-export default connect(
-  mapStateToProps,
-  { loadRating, rate }
-)(Ratings);
+export default connect(mapStateToProps, { loadRating, rate })(Ratings);

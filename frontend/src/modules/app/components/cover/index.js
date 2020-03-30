@@ -1,17 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import { Image } from "semantic-ui-react";
-import "./styles.css";
+import { CoverWrapper, ImageLink, StyledCoverImage } from "./styles";
 
-const Cover = ({ imageId, slug, className, size }) => {
-  const cover = `https://images.igdb.com/igdb/image/upload/t_cover_${size}/${imageId}.jpg`;
+const Cover = ({ imageId, slug, size }) => {
+  const coverUrl = `https://images.igdb.com/igdb/image/upload/t_cover_big/${imageId}.jpg`;
   return (
-    <div className={className}>
-      <Link to={`/games/${slug}`} className="cover-link">
-        <Image src={cover} rounded fluid className="cover" />
-      </Link>
-    </div>
+    <CoverWrapper size={size}>
+      <ImageLink to={`/games/${slug}`}>
+        <StyledCoverImage src={coverUrl} rounded fluid />
+      </ImageLink>
+    </CoverWrapper>
   );
 };
 

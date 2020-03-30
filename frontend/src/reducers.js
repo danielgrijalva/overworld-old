@@ -4,13 +4,11 @@ import game from "./modules/game/reducers";
 import auth from "./modules/app/reducers";
 import profile from "./modules/profile/reducers";
 import settings from "./modules/settings/reducers";
-import gameBrowser from "./modules/game-browser/reducers"
 
 export default combineReducers({
   landing,
   game,
   auth,
   profile,
-  settings,
-  gameBrowser
+  settings
 });
