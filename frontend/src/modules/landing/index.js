@@ -6,7 +6,7 @@ import { Register, LogIn } from "../app/components/";
 import { getPopular } from "./actions";
 import { Features, Popular } from "./components/";
 import UseBackdrop from "../app/hooks/useBackdrop";
-import "./styles.css";
+import "./styles.scss";
 
 const Landing = (props) => {
   const dispatch = useDispatch();

@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, Container } from "semantic-ui-react";
 import { RegistrationForm } from "./Form";
 import UseBackdrop from "../../hooks/useBackdrop";
-import "./styles.css";
+import "./styles.scss";
 
 const SignUpPage = () => {
 
