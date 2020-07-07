@@ -19,7 +19,7 @@ matrix:
         - codecov
     - language: node_js
       node_js: 
-        - "8.10"
+        - "12.18.1"
       before_script:
         - cd frontend/
         - npm install
