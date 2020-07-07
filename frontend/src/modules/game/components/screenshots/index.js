@@ -1,7 +1,7 @@
 import React from "react";
 import { Header, Segment, Modal } from "semantic-ui-react";
 import { Screenshot } from "./Screenshot";
-import "./styles.css";
+import "./styles.scss";
 
 export default class Screenshots extends React.Component {
   constructor() {

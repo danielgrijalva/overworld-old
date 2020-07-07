@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import "./styles.css";
+import "./styles.scss";
 
 const Popular = ({ isLoading, popular }) => (
   <section className="popular margin-top-xs margin-bottom">

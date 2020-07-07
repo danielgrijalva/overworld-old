@@ -1,0 +1,42 @@
+.profile-menu-wrapper {
+  border: 1px solid #24303c !important;
+  transition: 0.1s;
+  border-radius: 0.3rem;
+
+  &:hover {
+    background: #24303c !important;
+
+    .profile-menu {
+      background: #24303c !important;
+    }
+  }
+}
+.profile-menu {
+  background: #14181c !important;
+  box-shadow: none !important;
+  border: none !important;
+  transition: 0.1s;
+
+  .item {
+    color: #9ab !important;
+    
+    text-shadow: none !important;
+    &:hover {
+      color: #fff !important;
+    }
+  }
+
+  .active.item {
+    background: #24303c !important;
+    color: #fff !important;
+  }
+}
+.ui.compact.menu .item {
+  &:last-child {
+    border-radius: 0 !important;
+  }
+
+  &:first-child {
+    border-radius: 0 !important;
+  }
+}

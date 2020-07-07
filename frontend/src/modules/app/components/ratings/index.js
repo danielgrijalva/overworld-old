@@ -1,6 +1,6 @@
 import React from "react";
 import { Divider, Popup } from "semantic-ui-react";
-import "./styles.css";
+import "./styles.scss";
 
 const Ratings = ({ ratings, showAverage }) => {
   const processRatings = data => {

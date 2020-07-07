@@ -5,7 +5,7 @@ import { login, dismissErrors } from "../../actions";
 import { useSelector, useDispatch } from "react-redux";
 import Error from "../errors/";
 import { LoginForm } from "./Form";
-import "./styles.css";
+import "./styles.scss";
 
 const LogIn = ({ loginText }) => {
   const defaultState = {

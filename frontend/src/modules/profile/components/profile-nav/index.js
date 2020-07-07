@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Menu } from "semantic-ui-react";
-import "./styles.css";
+import "./styles.scss";
 
 const ProfileNav = () => {
   const initialState = {

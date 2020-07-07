@@ -1,0 +1,88 @@
+.SingleDatePickerInput {
+  display: inline !important;
+  background: none;
+}
+
+.DateInput {
+  width: 6rem !important;
+  background: none;
+}
+
+.DateInput_input {
+  display: inline !important;
+  cursor: pointer;
+  font-family: Segoe UI, sans-serif !important;
+  background: #345 !important;
+  color: #fff !important;
+  border: none !important;
+  text-align: center !important;
+  font-size: 0.85rem !important;
+  padding: 0.5rem !important;
+  box-shadow: inset 1px 0 5px rgba(0, 0, 0, 0.1) !important;
+}
+
+.modal {
+  .cover {
+    box-shadow: none;
+  }
+
+  .heart {
+    color: #345;
+  }
+
+  .stars {
+    margin-top: 0;
+  }
+
+  .checkbox label {
+    padding-right: 0.7rem;
+  }
+
+  .game-header h2 {
+    text-shadow: 2px 0 7px rgba(0, 0, 0, 0.6);
+  }
+
+  .ui.selection.dropdown {
+    box-shadow: inset 1px 0 5px rgba(0, 0, 0, 0.1) !important;
+    min-height: 1rem;
+    padding: 0.5em 2.1em 0.5em 1em;
+    background: #9ab;
+    border: 1px solid #9ab !important;
+
+    .menu {
+      background: #9ab;
+      border: 1px solid #9ab !important;
+    }
+
+    .text {
+      text-shadow: none;
+      font-family: Segoe UI, sans-serif;
+      font-weight: 300;
+      font-size: 0.9rem;
+      color: #234;
+    }
+
+    > .dropdown.icon {
+      top: 0.5em;
+    }
+  }
+}
+
+.game-header {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ui {
+  &.active.visible.selection.dropdown > .text {
+    color: #234 !important;
+  }
+
+  &.selection.dropdown .menu > .item {
+    border-top: none;
+  }
+}
+
+.register.log .button.positive {
+  margin: 0;
+}

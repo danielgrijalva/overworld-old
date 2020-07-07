@@ -6,7 +6,7 @@ import {
   refreshAvatar
 } from "../../../profile/actions";
 import { ChooseFavorites } from "../../components";
-import "./styles.css";
+import "./styles.scss";
 import { useDispatch, useSelector } from "react-redux";
 
 const EditProfile = () => {

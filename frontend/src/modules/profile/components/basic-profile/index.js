@@ -1,7 +1,7 @@
 import React from "react";
 import { Icon, Button } from "semantic-ui-react";
 import { follow, unfollow } from "../../actions";
-import "./styles.css";
+import "./styles.scss";
 import { useDispatch, useSelector } from "react-redux";
 
 const BasicProfile = () => {
