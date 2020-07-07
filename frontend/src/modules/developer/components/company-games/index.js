@@ -1,5 +1,5 @@
 import React from "react";
-import { CoverLoader } from "../../../app/components";
+import CoverLoader from "../../../app/components/loaders/CoverLoader";
 import ContentLoader from "react-content-loader";
 import { Cover } from "../../../app/components";
 

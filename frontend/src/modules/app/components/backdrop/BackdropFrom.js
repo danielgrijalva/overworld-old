@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import "./styles.css";
+import "./styles.scss";
 
 export default function BackdropFrom({ backdrop, position = false }) {
   return (
