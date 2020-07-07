@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Tab, Grid, Label } from "semantic-ui-react";
 import countries from "i18n-iso-countries";
 import Moment from "react-moment";
-import "./styles.css";
+import "./styles.scss";
 
 countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
 

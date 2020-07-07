@@ -14,7 +14,7 @@ import {
   ActionsLoader,
   Screenshots
 } from "./components/";
-import "./styles.css";
+import "./styles.scss";
 import ShowMoreText from "react-show-more-text";
 
 export default class Game extends React.Component {

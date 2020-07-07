@@ -1,0 +1,23 @@
+.stats {
+  text-align: right;
+}
+
+.statistic {
+  margin-bottom: 0 !important;
+
+  div {
+    font-weight: 300 !important;
+    color: #9ab !important;
+    text-transform: capitalize !important;
+    text-align: right !important;
+  }
+
+  .value {
+    font-family: Lato, sans-serif !important;
+  }
+
+  .label {
+    font-family: Raleway, sans-serif !important;
+    font-size: 0.9rem !important;
+  }
+}

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Container } from "semantic-ui-react";
 import { LazyImage } from "react-lazy-images";
-import "./styles.css";
+import "./styles.scss";
 
 export default function Backdrop({ imageId }) {
   const thumb = `https://images.igdb.com/igdb/image/upload/t_cover_small/${imageId}.jpg`;

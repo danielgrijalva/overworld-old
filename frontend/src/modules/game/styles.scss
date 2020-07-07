@@ -1,0 +1,84 @@
+.game {
+    margin-bottom: 10rem !important;
+}
+
+.game-header {
+    display: block;
+    font-size: 1.5rem;
+    color: #9ab;
+    white-space: nowrap;
+    max-width: 100%;
+    letter-spacing: 0.02em;
+
+    > h1 {
+        color: #fff;
+        display: inline;
+        margin-right: 0.7rem;
+    }
+
+    a {
+        color: #9ab;
+        border-bottom: 1px solid #456 !important;
+    }
+}
+
+h2 {
+    color: #fff;
+    display: inline;
+    margin-right: 0.7rem;
+}
+
+.game-info {
+    &:not(rect) {
+        display: block;
+        font-size: 1.5rem;
+        color: #9ab;
+        white-space: nowrap;
+        max-width: 100%;
+        letter-spacing: 0.02em;
+    }
+
+    a {
+        color: #9ab;
+        border-bottom: 1px solid #456 !important;
+    }
+}
+
+.release-date {
+    margin-right: 0.7rem;
+}
+
+.summary {
+    text-align: justify;
+    font-size: 16px;
+    line-height: 1.75rem;
+    font-family: "Lato", "sans-serif";
+
+    a.show {
+        color: #cde;
+
+        &:hover {
+            color: #fff;
+        }
+    }
+}
+
+.popup,
+.popup::before {
+    background-color: #242c34 !important;
+    color: #9ab !important;
+}
+
+.game-content .label {
+    color: #9ab !important;
+    margin: 0 0.3rem 0.4rem 0 !important;
+    background-color: #242c34 !important;
+    font-weight: 400 !important;
+    font-family: "Segoe UI", "sans-serif";
+    cursor: pointer;
+
+    &:hover {
+        color: #def !important;
+        background: #303840 !important;
+    }
+}

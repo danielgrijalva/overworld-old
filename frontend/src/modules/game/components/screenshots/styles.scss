@@ -1,0 +1,50 @@
+.screenshots {
+  .ui {
+    &.header {
+      &.white {
+        color: #fff;
+        margin: 0;
+      }
+
+      > small > a {
+        font-weight: 300;
+        color: #fff;
+        cursor: pointer;
+      }
+    }
+
+    &.basic.segment {
+      padding: 0 0 0 0.05rem;
+    }
+
+    &.segment.truncate {
+      height: 220px;
+      overflow: hidden;
+      &:after {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: linear-gradient(transparent 50px, #14181c);
+      }
+    }
+  }
+
+  .show-hide-screenshots {
+    border: none;
+    background: none;
+    padding: 0;
+    color: #9ab;
+    cursor: pointer;
+  }
+
+  img.screenshot {
+    width: 29%;
+    display: inline-block;
+    box-shadow: 0 0 0 1px rgb(48, 56, 64);
+    margin: 1rem 1rem 0 0;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,161 @@
+body {
+  color: #9ab;
+  font-family: "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1rem;
+  background-color: #14181c;
+  /* background-image: linear-gradient(180deg,#2c3440 0,#14181c 100%); */
+  background-repeat: repeat-x;
+  background-position: 0 0;
+  /* min-width: 768px; */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Lora", serif;
+}
+
+a {
+  &:hover {
+    color: #40bcf4;
+  }
+
+  &.button.default {
+    background: #24303c;
+    color: #9ab;
+
+    &:hover {
+      background: #234;
+      color: #9ab !important;
+    }
+  }
+}
+
+.margin-bottom {
+  margin-bottom: 3rem !important;
+}
+
+.margin-bottom-sm {
+  margin-bottom: 1.5rem !important;
+}
+
+.margin-bottom-xs {
+  margin-bottom: 0.75rem !important;
+}
+
+.padding-bottom {
+  padding-bottom: 3rem !important;
+}
+
+.padding-bottom-sm {
+  padding-bottom: 1.5rem !important;
+}
+
+.padding-bottom-xs {
+  padding-bottom: 0.75rem !important;
+}
+
+.margin-top {
+  margin-top: 3rem !important;
+}
+
+.margin-top-sm {
+  margin-top: 1.5rem !important;
+}
+
+.margin-top-xs {
+  margin-top: 0.75rem !important;
+}
+
+.padding-top {
+  padding-top: 3rem !important;
+}
+
+.padding-top-sm {
+  padding-top: 1.5rem !important;
+}
+
+.padding-top-xs {
+  padding-top: 0.75rem !important;
+}
+
+::selection {
+  color: #fff;
+  background: #48c5ff;
+}
+
+.ui {
+  &.form {
+    .field > label {
+      color: #def;
+      font-weight: 300;
+    }
+
+    > .field {
+      > input {
+        background: #9ab;
+        transition: 0.2s;
+        border: none !important;
+        color: #000 !important;
+      }
+
+      > textarea {
+        background: #9ab;
+        transition: 0.2s;
+        border: none !important;
+        color: #000 !important;
+      }
+
+      > input::placeholder {
+        color: #456;
+      }
+    }
+
+    .required.field > .checkbox:after {
+      content: "";
+    }
+  }
+
+  &.checkbox {
+    input {
+      &:focus ~ label {
+        color: #def !important;
+      }
+
+      &:checked ~ label:after {
+        color: #456 !important;
+      }
+    }
+
+    .box:before {
+      background: #def !important;
+      border: none !important;
+    }
+
+    label:before {
+      background: #def !important;
+      border: none !important;
+    }
+  }
+
+  &.button.default {
+    &:not(.circular):not(.positive) {
+      background: #24303c;
+      color: #9ab;
+    }
+
+    &:hover:not(.circular):not(.positive) {
+      background: #234;
+      color: #9ab !important;
+    }
+  }
+}
+
+textarea:focus {
+  background: #fff !important;
+}

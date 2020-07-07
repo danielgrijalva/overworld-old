@@ -4,7 +4,7 @@ import Error from "../errors/";
 import { register, dismissErrors } from "../../actions";
 import { RegistrationForm } from "./Form";
 import { useSelector, useDispatch } from "react-redux";
-import "./styles.css";
+import "./styles.scss";
 
 const Register = () => {
   const defaultState = {
