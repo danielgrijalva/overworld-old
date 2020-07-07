@@ -1,34 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { Container } from "semantic-ui-react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { Backdrop, Footer, Register, LogIn } from "../app/components/";
-import { getPopular, getBackdrop } from "./actions";
+import { useSelector, useDispatch } from "react-redux";
+import { Register, LogIn } from "../app/components/";
+import { getPopular } from "./actions";
 import { Features, Popular } from "./components/";
-import { Backdrops as options } from "./utils";
-import "./styles.scss";
+import UseBackdrop from "../app/hooks/useBackdrop";
+import "./styles.css";
 
-export class Landing extends React.Component {
-  componentDidMount() {
-    const game = options[Math.floor(Math.random() * options.length)];
-    if (Object.keys(this.props.backdrop).length === 0) {
-      this.props.getBackdrop(game.gameId);
+const Landing = (props) => {
+  const dispatch = useDispatch();
+  const { isLoadingPopular, popular } = useSelector(state => state.landing);
+  const { Backdrop } = UseBackdrop();
+
+  useEffect(() => {
+    if (popular.length === 0) {
+      dispatch(getPopular());
     }
+  }, [popular]);
 
-    if (this.props.popular.length === 0) {
-      this.props.getPopular();
-    }
-  }
-
-  render() {
-    const { isLoadingPopular, popular, backdrop } = this.props;
-    return (
-      <React.Fragment>
-        <Container className="padding-bottom">
-          {Object.keys(backdrop).length > 0 && (
-            <Backdrop imageId={backdrop.imageId} />
-          )}
+  return (
+    <>
+      <Backdrop>
+        <Container>
           <div className="landing">
             <section className="landing-header">
               <h1>The social network for video game lovers.</h1>
@@ -40,39 +34,16 @@ export class Landing extends React.Component {
             </section>
             <Popular isLoading={isLoadingPopular} popular={popular} />
             <Features />
-            {Object.keys(backdrop).length > 0 && (
-              <section className="backdrop-name">
-                Backdrop from{" "}
-                <Link
-                  to={{
-                    pathname: `/games/${backdrop.slug}`,
-                    state: backdrop.gameId
-                  }}
-                >
-                  {backdrop.name}
-                </Link>
-              </section>
-            )}
           </div>
         </Container>
-        <Footer />
-      </React.Fragment>
-    );
-  }
-}
+      </Backdrop>
+    </>
+  );
+};
 
 Landing.propTypes = {
   isLoadingPopular: PropTypes.bool.isRequired,
-  getBackdrop: PropTypes.func.isRequired,
-  getPopular: PropTypes.func.isRequired,
-  backdrop: PropTypes.object.isRequired,
   popular: PropTypes.array.isRequired
 };
 
-const mapStateToProps = state => ({
-  backdrop: state.landing.backdrop,
-  isLoadingPopular: state.landing.isLoadingPopular,
-  popular: state.landing.popular
-});
-
-export default connect(mapStateToProps, { getPopular, getBackdrop })(Landing);
+export default Landing;

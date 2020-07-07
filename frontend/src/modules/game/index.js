@@ -94,7 +94,7 @@ export default class Game extends React.Component {
     return (
       <React.Fragment>
         <Container>
-          <Grid className="game" centered>
+          <Grid stackable className="game" centered>
             {!isLoading && this.state.game.screenshots && (
               <Backdrop imageId={game.screenshots[0].image_id} />
             )}
