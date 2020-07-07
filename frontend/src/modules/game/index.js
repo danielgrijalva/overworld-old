@@ -75,10 +75,18 @@ export default class Game extends React.Component {
   //either returns a developer or an empty array
   getDeveloperName = companies => {
     var dev = companies.find(c => {
-      return c.developer === true || {};
+      return c.developer == true;
     });
 
     return dev.company.name;
+  };
+
+  getDeveloperId = companies => {
+    var dev = companies.find(c => {
+      return c.developer == true;
+    });
+
+    return dev.company.id;
   };
 
   render() {
@@ -121,7 +129,12 @@ export default class Game extends React.Component {
                         </small>
                       )}
                       <small className="company">
-                        <Link to="/">
+                        <Link
+                          to={
+                            "/developer/" +
+                            this.getDeveloperId(game.involved_companies)
+                          }
+                        >
                           {game.involved_companies &&
                             this.getDeveloperName(game.involved_companies)}
                         </Link>
