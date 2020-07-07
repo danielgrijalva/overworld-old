@@ -3,7 +3,7 @@ import axios from "axios";
 import { Grid } from "semantic-ui-react";
 import { ListLoader } from "../../../app/components";
 import { SectionTitle } from "./styles";
-import { GameList } from "../game-list";
+import GameList from "../game-list";
 
 const GamesBoard = () => {
   const [games, setGames] = useState({});

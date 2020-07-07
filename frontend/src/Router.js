@@ -7,6 +7,7 @@ import { Navbar, SignUpPage, SignInPage } from "./modules/app/components/";
 import App from "./modules/app/";
 import Profile from "./modules/profile/";
 import Settings from "./modules/settings/";
+import { Developer } from "./modules/developer";
 import { loadUser } from "./modules/app/actions";
 
 const notFound = () => {
@@ -29,6 +30,7 @@ class AppRouter extends React.Component {
             <Route path="/login" component={SignInPage} />
             <Route path="/games/:slug" component={Game} />
             <Route path="/user/:username" component={Profile} />
+            <Route path="/developer/:creator" component={Developer} />
             <Route path="/settings" component={Settings} />
             <Route component={notFound} />
           </Switch>
