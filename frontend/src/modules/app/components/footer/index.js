@@ -4,7 +4,7 @@ import "./styles.scss";
 
 const Footer = () => (
   <footer>
-    <Container>
+    <Container className="footer">
       <List horizontal>
         <List.Item as="a" href="https://overworld.gitbook.io/docs/">
           About
