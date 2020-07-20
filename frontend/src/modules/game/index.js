@@ -106,17 +106,19 @@ export default class Game extends React.Component {
               <React.Fragment>
                 <Grid.Column width={4}>
                   {/* Game cover/poster */}
-                  {!isLoading ? (
-                    <React.Fragment>
-                      <Cover
-                        imageId={game.cover.image_id}
-                        slug={game.slug}
-                        size="big"
-                      />
-                    </React.Fragment>
-                  ) : (
-                    <CoverLoader />
-                  )}
+                  <Grid.Row width="100%" className="game-poster">
+                    {!isLoading ? (
+                      <React.Fragment>
+                        <Cover
+                          imageId={game.cover.image_id}
+                          slug={game.slug}
+                          size="big"
+                        />
+                      </React.Fragment>
+                    ) : (
+                      <CoverLoader />
+                    )}
+                  </Grid.Row>
                   {/* Trailer */}
                   <Grid.Row className="trailer-button">
                     {/* the following empty columns are used as offset */}
