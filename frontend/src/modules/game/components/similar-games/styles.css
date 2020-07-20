@@ -3,7 +3,8 @@
   margin: 0;  
 }
 .sec {
-    text-align: center;
+    text-align: inherit !important;
+    /* margin:0 -0.5rem; */
   }
   
   .similar .sec .cover-wrapper {
