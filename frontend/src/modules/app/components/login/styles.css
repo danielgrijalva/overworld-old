@@ -1,9 +1,0 @@
-.landing-header .sign-in {
-  cursor: pointer;
-  color: #def;
-  border-bottom: 1px solid #456;
-}
-
-.landing-header .sign-in:hover {
-  color: #fff;
-}

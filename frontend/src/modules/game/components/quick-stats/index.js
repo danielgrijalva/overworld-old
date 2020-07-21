@@ -1,6 +1,6 @@
 import React from "react";
 import { List, Icon } from "semantic-ui-react";
-import "./styles.css";
+import "./styles.scss";
 
 const QuickStats = () => {
   return (

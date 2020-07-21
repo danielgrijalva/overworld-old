@@ -1,0 +1,55 @@
+.features {
+  .row {
+    padding: 0 !important;
+  }
+
+  .column {
+    margin: 1rem 1rem 0 0 !important;
+    padding: 0 !important;
+  }
+
+  .message {
+    text-align: left;
+    text-shadow: none;
+    color: #9ab;
+    background: #456;
+    cursor: pointer;
+  }
+
+  .ui.message {
+    .icon {
+      margin: 0 0.6em 0 0 !important;
+    }
+
+    &:hover {
+      color: #fff;
+      text-shadow: 0 0 7px rgba(0, 0, 0, 0.45);
+    }
+  }
+}
+
+.ui.message {
+  &.track:hover {
+    background-color: #21ba45;
+  }
+
+  &.like:hover {
+    background-color: #f2711c;
+  }
+
+  &.reviews:hover {
+    background-color: #6435c9;
+  }
+
+  &.rate:hover {
+    background-color: #fbbd08;
+  }
+
+  &.journal:hover {
+    background-color: #e03997;
+  }
+
+  &.lists:hover {
+    background-color: #2185d0;
+  }
+}

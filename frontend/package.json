@@ -4,10 +4,10 @@
   "private": true,
   "dependencies": {
     "axios": "^0.19.0",
-    "fomantic-ui": "^2.7.8",
     "font-awesome": "^4.7.0",
     "i18n-iso-countries": "^4.3.1",
     "moment": "^2.24.0",
+    "node-sass": "^4.13.1",
     "nodemon": "^1.19.4",
     "prettier": "^1.19.1",
     "react": "^16.10.2",
@@ -30,6 +30,7 @@
     "styled-components": "^4.4.1"
   },
   "devDependencies": {
+    "@babel/plugin-syntax-optional-chaining": "^7.8.3",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "enzyme-to-json": "^3.4.2",

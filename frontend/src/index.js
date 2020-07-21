@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
-import "./index.css";
+import "./index.scss";
 import AppRouter from "./Router";
 import * as serviceWorker from "./serviceWorker";
 import ErrorBoundary from "./modules/app/components/error";

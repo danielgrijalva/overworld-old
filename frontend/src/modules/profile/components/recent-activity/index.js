@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Divider, Message } from "semantic-ui-react";
 import Cover from "../../../app/components/cover";
 import { loadActivity } from "../../actions";
-import "./styles.css";
+import "./styles.scss";
 
 const RecentActivity = props => {
   const dispatch = useDispatch();

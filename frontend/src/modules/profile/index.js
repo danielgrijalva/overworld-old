@@ -25,7 +25,7 @@ import {
   RecentActivity,
   BasicProfile
 } from "./components";
-import "./styles.css";
+import "./styles.scss";
 
 const Profile = props => {
   const dispatch = useDispatch();

@@ -1,0 +1,32 @@
+footer {
+  background-color: #2c3440;
+  padding: 2rem;
+  display: block;
+  margin-top: 3.5rem;
+
+  .info {
+    padding-top: 0 !important;
+    color: #678 !important;
+
+    a {
+      padding-top: 0 !important;
+      color: #678 !important;
+
+      &:hover {
+        color: #9ab !important;
+      }
+    }
+  }
+
+  .list a {
+    font-size: 16px !important;
+    font-weight: 700;
+    color: #9ab !important;
+    text-shadow: 0 0 7px rgba(0, 0, 0, 0.45);
+    letter-spacing: 0.025rem;
+
+    &:hover {
+      color: #def !important;
+    }
+  }
+}

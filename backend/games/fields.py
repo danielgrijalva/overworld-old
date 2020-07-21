@@ -35,6 +35,33 @@ _game_fields = [
 
 ]
 
+_company_game_fields = [
+    'cover.image_id',
+    'first_release_date',
+    'name',
+    'slug',
+]
+
+_company_fields = [
+    'country',
+    'description',
+    'developed',
+    'logo',
+    'published',
+    'slug',
+    'start_date',
+    'url',
+    'websites',
+    'name',
+]
+
+_company_logo_fields = [
+    'height',
+    'image_id',
+    'url',
+    'width',
+]
+
 _recent_game_fields = [
     'cover.image_id',
     'first_release_date',
@@ -81,5 +108,8 @@ search_fields = ','.join(_search_fields)
 popular_fields = ','.join(_popular_fields)
 backdrop_fields = ','.join(_backdrop_fields)
 genre_fields = ','.join(_genre_fields)
+company_game_fields = ','.join(_company_game_fields)
+company_fields = ','.join(_company_fields)
+company_logo_fields = ','.join(_company_logo_fields)
 recents_fields = ','.join(_recent_game_fields)
 upcoming_fields = ','.join(_upcoming_game_fields)

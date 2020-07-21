@@ -6,7 +6,7 @@ import { LogIn } from "../../../app/components";
 import LogModal from "../log-modal";
 import Buttons from "./Buttons";
 import Ratings from "./Rating";
-import "./styles.css";
+import "./styles.scss";
 
 class Actions extends React.Component {
   handleChange = (event, { name, value }) => {

@@ -46,10 +46,7 @@ export const CoverWrapper = styled.div`
     `
     text-align: center;
     display: inline-block;
-    margin: 0 1.25rem 0 0;
-    &:last-child {
-      margin: 0;
-    }
+    margin: 0 1.25rem 0.5rem 0;
   `}
 
   @media only screen and (max-width: 991px) and (min-width: 320px) {

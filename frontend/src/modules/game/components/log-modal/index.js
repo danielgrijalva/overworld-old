@@ -19,7 +19,7 @@ import {
 } from "semantic-ui-react";
 import { Cover } from "../../../app/components/";
 import Moment from "react-moment";
-import "./styles.css";
+import "./styles.scss";
 
 const entryOptions = [
   { key: "f", text: "Finished", value: "Finished" },
