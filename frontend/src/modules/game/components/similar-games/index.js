@@ -2,7 +2,7 @@ import React from "react";
 import {Cover} from "./Similar_game";
 import {Header} from "semantic-ui-react";
 import {Holder} from "./holder";
-import "./styles.css";
+import "./styles.scss";
 
 
 

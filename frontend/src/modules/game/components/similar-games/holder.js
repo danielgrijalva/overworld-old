@@ -1,6 +1,6 @@
 import React from "react";
 import {Cover} from "./Similar_game";
-import "./styles.css"
+import "./styles.scss"
 
 
 export const Holder = (({similar_games})=>{

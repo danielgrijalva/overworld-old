@@ -1,6 +1,6 @@
 import React from "react";
 import { Image } from "semantic-ui-react";
-import "./styles.css"
+import "./styles.scss"
 
 
 export const Cover = (({id ,size, imageID, slug, key, name})=>{

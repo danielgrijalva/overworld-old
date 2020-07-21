@@ -25,14 +25,16 @@
 h2 {
     color: #fff;
     display: inline;
+    text-shadow: #000 2px 0 5px;
     margin-right: 0.7rem;
 }
 
-.game-info {
+.game-info,.game-header {
     &:not(rect) {
         display: block;
         font-size: 1.5rem;
         color: #9ab;
+        text-shadow: 0 0 7px rgba(0, 0, 0, 0.45);
         white-space: nowrap;
         max-width: 100%;
         letter-spacing: 0.02em;
@@ -48,11 +50,18 @@ h2 {
     margin-right: 0.7rem;
 }
 
+.game-header a,
+.game-info a {
+    color: #9ab;
+    border-bottom: 1px solid #456 !important;
+}
+  
 .summary {
     text-align: justify;
     font-size: 16px;
     line-height: 1.75rem;
     font-family: "Lato", "sans-serif";
+    text-shadow: 0 0 7px rgba(0, 0, 0, 0.45);
 
     a.show {
         color: #cde;
@@ -66,6 +75,7 @@ h2 {
 .popup,
 .popup::before {
     background-color: #242c34 !important;
+    background: #242c34 !important;
     color: #9ab !important;
 }
 
@@ -73,6 +83,7 @@ h2 {
     color: #9ab !important;
     margin: 0 0.3rem 0.4rem 0 !important;
     background-color: #242c34 !important;
+    // box-shadow: inset 0 1px 0 hsla(0, 0%, 100%, 0.1);
     font-weight: 400 !important;
     font-family: "Segoe UI", "sans-serif";
     cursor: pointer;
@@ -82,3 +93,13 @@ h2 {
         background: #303840 !important;
     }
 }
+
+  .game-poster > div{
+    width:100%;
+  }
+  
+  .trailer-button{
+    margin-top: 10%;
+    background-color:#14181C;
+  }
+  

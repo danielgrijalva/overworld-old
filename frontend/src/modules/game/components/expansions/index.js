@@ -1,7 +1,7 @@
 import React from "react";
 import {Cover} from "./expansions"
 import {Header} from "semantic-ui-react";
-import "./styles.css";
+import "./styles.scss";
 
 
 
