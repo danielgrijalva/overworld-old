@@ -1,0 +1,47 @@
+h1 {
+  color: #fff;
+}
+
+.landing {
+  text-shadow: 0 0 7px rgba(0, 0, 0, 0.45);
+
+  a {
+    border-bottom: 1px solid #456;
+  }
+}
+
+.backdrop-name {
+  margin-top: 7rem;
+  text-align: center;
+  color: #678;
+
+  a {
+    margin-top: 7rem;
+    text-align: center;
+    color: #678;
+
+    &:hover {
+      color: #9ab !important;
+    }
+  }
+}
+
+.landing-header {
+  text-align: center;
+
+  .item {
+    cursor: pointer;
+  }
+
+  a {
+    color: #def;
+
+    &:hover {
+      color: #fff !important;
+    }
+  }
+
+  .button {
+    text-shadow: 0 0 7px rgba(0, 0, 0, 0.45) !important;
+  }
+}

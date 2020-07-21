@@ -5,7 +5,7 @@ import GameSearch from "../search/";
 import LogIn from "../login/";
 import { logout } from "../../actions";
 import { useSelector, useDispatch, useStore } from "react-redux";
-import "./styles.css";
+import "./styles.scss";
 
 const Navbar = ({ history }) => {
   const [activeItem, setActiveItem] = useState("");

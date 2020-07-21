@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CompanyLogo from "../company-logo/index";
 import { Description, LogoWrapper } from "./styles";
-import { CoverLoader } from "../../../app/components";
+import CoverLoader from "../../../app/components/loaders/CoverLoader";
 
 const CompanyDetails = React.memo(({company}) => {
   const [descToggle, setDescToggle] = useState("more");

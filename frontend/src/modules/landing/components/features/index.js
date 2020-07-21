@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid, Message } from "semantic-ui-react";
-import "./styles.css";
+import "./styles.scss";
 
 const columnProps = { mobile: 12, computer: 4 };
 
