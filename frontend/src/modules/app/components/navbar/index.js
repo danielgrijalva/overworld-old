@@ -21,7 +21,7 @@ const Navbar = ({ history }) => {
     history.push(`/games/${result.slug}`, result.slug);
 
   return (
-    <Menu className="navbar" inverted secondary>
+    <Menu className="navbar" inverted secondary stackable>
       <div className="menu-bg" />
       <Menu.Item
         content={

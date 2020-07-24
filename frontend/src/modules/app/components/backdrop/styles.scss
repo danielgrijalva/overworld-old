@@ -1,5 +1,8 @@
 .backdrop {
   padding-bottom: 400px;
+  @media (max-width: 767px) {
+    padding-bottom: 0px;
+  }
 }
 
 .backdrop-container {
