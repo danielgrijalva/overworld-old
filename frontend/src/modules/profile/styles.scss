@@ -51,6 +51,9 @@
 
 .profile-header {
   text-shadow: 0 0 7px rgba(0, 0, 0, 0.45) !important;
+  @media (max-width: 767px) {
+    text-align: center;
+  }
 
   h2 {
     font-family: Raleway, sans-serif !important;
@@ -113,7 +116,10 @@
 
 .profile-avatar {
   box-shadow: 0 0 0 1px rgb(48, 56, 64);
-  width: 100% !important;
+  min-width: 63.4px !important;
+  @media (max-width: 767px) {
+    margin: auto !important;
+  }
 }
 
 .review {

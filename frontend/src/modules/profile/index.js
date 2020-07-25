@@ -47,7 +47,7 @@ const Profile = props => {
             <Backdrop imageId={favorites[0].backdrop_id} />
           )}
           <Segment basic className="profile-header">
-            <Grid>
+            <Grid stackable>
               <Grid.Row className="">
                 <Grid.Column mobile={2}>
                   <Image
@@ -72,7 +72,7 @@ const Profile = props => {
             </Container>
           </Segment>
           <Segment className="profile-content" basic>
-            <Grid>
+            <Grid stackable>
               <Grid.Row>
                 <Grid.Column width={11}>
                   <Divider horizontal>Favorites</Divider>
