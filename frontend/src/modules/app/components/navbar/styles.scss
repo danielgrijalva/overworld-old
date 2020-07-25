@@ -42,11 +42,21 @@
 }
 
 .navbar {
-  width: 1200px;
+  @media (min-width: 1199px) {
+    max-width: 1200px;
+  }
+  max-width: 100vw;
   margin: auto !important;
   z-index: 1;
   height: 75px;
-
+  .grid {
+    @media (max-width: 800px) {
+      margin-left: -40px !important;
+    }
+    @media (max-width: 767px) {
+      margin-left: -14px !important;
+    }
+  }
   &:hover .menu-bg {
     opacity: 0.85;
   }
@@ -62,11 +72,12 @@
     > .active.item {
       text-shadow: none !important;
     }
+    
   }
 }
 
 .menu-bg {
-  width: 1200px;
+  max-width: 100vw;
   position: absolute;
   z-index: 0;
   height: 95px;

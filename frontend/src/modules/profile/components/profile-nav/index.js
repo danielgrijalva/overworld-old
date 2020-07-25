@@ -12,7 +12,7 @@ const ProfileNav = () => {
   const { activeItem } = state;
 
   return (
-    <Menu borderless compact className="profile-menu">
+    <Menu borderless compact className="profile-menu" stackable>
       <Menu.Item
         name="profile"
         active={activeItem === "profile"}

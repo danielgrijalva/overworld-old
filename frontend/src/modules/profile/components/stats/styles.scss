@@ -1,5 +1,8 @@
 .stats {
   text-align: right;
+  @media (max-width: 767px) {
+    text-align: center;
+  }
 }
 
 .statistic {

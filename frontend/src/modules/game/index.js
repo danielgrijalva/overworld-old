@@ -156,7 +156,7 @@ export default class Game extends React.Component {
                   ) : (
                     <TitleLoader />
                   )}
-                  <Grid>
+                  <Grid stackable>
                     <Grid.Row>
                       <Grid.Column width={11}>
                         {/* Game summary & details */}
