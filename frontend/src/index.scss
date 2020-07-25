@@ -90,6 +90,11 @@ a {
 }
 
 .ui {
+  &.container:not(.backdrop):not(.profile-menu-wrapper):not(.footer) {
+    @media (max-width: 767px) {
+      margin-top: 180px;
+    }
+  }
   &.form {
     .field > label {
       color: #def;
@@ -158,4 +163,10 @@ a {
 
 textarea:focus {
   background: #fff !important;
+}
+
+#root > p{
+  @media (max-width: 767px) {
+    margin-top: 180px;
+  }
 }
