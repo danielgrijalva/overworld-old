@@ -82,7 +82,6 @@ class Actions extends React.Component {
     const { isShareHovered, shortUrl, isUrlCopied } = this.state;
     return (
       <Menu floated="right" icon="labeled" className="actions" vertical fluid>
-        
         {this.props.isAuthenticated ? (
           <React.Fragment>
             <Menu.Item>
@@ -104,18 +103,28 @@ class Actions extends React.Component {
           onMouseOver={this.onMouseOver}
           onMouseLeave={this.onMouseLeave}
         >
-          {!isShareHovered && <div>Share</div>}
+          {!isShareHovered && (
+            <div
+              style={{
+                height: "20px",
+                padding: "3px",
+              }}
+            >
+              Share
+            </div>
+          )}
           {isShareHovered && (
             <Fragment>
               <CopyToClipboard text={shortUrl}>
                 <div
                   onClick={(e) => this.handleUrlCopiedCick(e)}
                   style={{
-                    backgroundColor: "#424344",
+                    height: "20px",
+                    backgroundColor: "rgb(44, 52, 64)",
                     wordWrap: "unset",
-                    padding: "1.5px",
+                    padding: "4.5px",
                     borderRadius: "3px",
-                    fontSize: "10px",
+                    fontSize: "11px",
                     width: "120px",
                     display: "inline-block",
                   }}
