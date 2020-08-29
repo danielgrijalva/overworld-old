@@ -13,7 +13,7 @@ description: Welcome to Overworld!
 * [Development](./#development)
   * [Contributing](./#contributing)
 * [Features](./#features)
-* [Desired Features](./#desired_features)
+* [Desired Features](./#desired-features)
 * [Acknowledgements](./#acknowledgements)
 
 ## About
@@ -53,7 +53,7 @@ So far you can do the following:
 
 Here at Overworld, our goal is to continue enabling gamers to share, discover and play the best gaming experiences.
 
-Currently, we are looking to implement the following new features:
+Currently, we are looking to implement the following features:
 
 * An improved rating system, allowing users to rate individual aspects of a game \(gameplay, story, graphics and more\)
 * A discovery section, allowing users to find games based on their current likes and ratings
