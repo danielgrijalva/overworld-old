@@ -13,6 +13,7 @@ description: Welcome to Overworld!
 * [Development](./#development)
   * [Contributing](./#contributing)
 * [Features](./#features)
+* [Desired Features](./#desired_features)
 * [Acknowledgements](./#acknowledgements)
 
 ## About
@@ -47,6 +48,19 @@ So far you can do the following:
 * Add a game to your played games
 * Add a game to your backlog and/or wish list
 * Like a game  
+
+## Desired Features
+
+Here at Overworld, our goal is to continue enabling gamers to share, discover and play the best gaming experiences.
+
+Currently, we are looking to implement the following new features:
+
+* An improved rating system, allowing users to rate individual aspects of a game \(gameplay, story, graphics and more\)
+* A discovery section, allowing users to find games based on their current likes and ratings
+* Additional game information
+* Improved compatability with mobile devices
+
+If any of these projects sound interesting to you, feel free to [contribute](getting-started/contributing.md)!
 
 ![](.gitbook/assets/landing-4%20%281%29.png)
 
