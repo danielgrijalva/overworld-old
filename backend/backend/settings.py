@@ -38,6 +38,7 @@ else:
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
     'https://overworld.netlify.com',
+    'https://overworld.netlify.app'
 )
 
 # Application definition
