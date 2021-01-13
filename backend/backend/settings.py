@@ -19,7 +19,7 @@ load_dotenv()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-HEROKU = '/app' in os.path.expanduser('~')
+# HEROKU = '/app' in os.path.expanduser('~')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -30,7 +30,7 @@ SECRET_KEY = 'mp=7%x4y3*b2*ehgc!*xslh*c9$$edf6bqdr6m9xx35=fb_zx%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
 
-if HEROKU:
+if not DEBUG:
     ALLOWED_HOSTS = ['.netlify.com', '.netlify.app']
 else:
     ALLOWED_HOSTS = ['localhost', '127.0.0.1']
