@@ -31,7 +31,7 @@ SECRET_KEY = 'mp=7%x4y3*b2*ehgc!*xslh*c9$$edf6bqdr6m9xx35=fb_zx%'
 DEBUG = os.getenv('DEBUG')
 
 if HEROKU:
-    ALLOWED_HOSTS = ['.netlify.com']
+    ALLOWED_HOSTS = ['.netlify.com', '.netlify.app']
 else:
     ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
@@ -153,7 +153,7 @@ STATIC_URL = '/static/'
 # IGDB
 
 IGDB_KEY = os.getenv('IGDB_KEY')
-IGDB_URL = 'https://api-v3.igdb.com/{endpoint}/'
+IGDB_URL = 'https://api.igdb.com/v4/{endpoint}/'
 
 
 # Django Heroku

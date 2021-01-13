@@ -24,7 +24,7 @@ class GameTests(APITestCase):
         self.assertEqual(mock_post.call_args[1]['data'],
                          f'fields {game_fields}; where slug=("not a game","more not a game");')
         self.assertEqual(mock_post.call_args[1]['url'],
-                         'https://api-v3.igdb.com/games/')
+                         'https://api.igdb.com/v4/games/')
         # No game exists with slug = "0", IGDB returns empty []
         # Test response is 404 with "Game not found." message
         self.assertEqual(response.json(), {'detail': 'Game not found.'})
@@ -59,7 +59,7 @@ class GameTests(APITestCase):
         self.assertEqual(mock_post.call_args[1]['data'],
                          f'fields {game_fields}; where slug=("dark-souls","dota-2");')
         self.assertEqual(mock_post.call_args[1]['url'],
-                         'https://api-v3.igdb.com/games/')
+                         'https://api.igdb.com/v4/games/')
         # Test response contains expected result
         self.assertEqual(response.json(), expected_dict)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -87,7 +87,7 @@ class GameTests(APITestCase):
         self.assertEqual(mock_post.call_args[1]['data'],
                          f'fields {game_fields}; where slug="dark-souls";')
         self.assertEqual(mock_post.call_args[1]['url'],
-                         'https://api-v3.igdb.com/games/')
+                         'https://api.igdb.com/v4/games/')
         # Test response contains expected result
         self.assertEqual(response.json(), expected_dict)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -108,7 +108,7 @@ class GameTests(APITestCase):
         self.assertEqual(mock_post.call_args[1]['data'],
                          f'fields {game_fields}; where slug="0";')
         self.assertEqual(mock_post.call_args[1]['url'],
-                         'https://api-v3.igdb.com/games/')
+                         'https://api.igdb.com/v4/games/')
         # No game exists with slug = "0", IGDB returns empty []
         # Test response is 404 with "Game not found." message
         self.assertEqual(response.json(), {'detail': 'Game not found.'})
@@ -148,7 +148,7 @@ class GameTests(APITestCase):
         self.assertEqual(mock_post.call_args[1]['data'],
                          f'fields {search_fields}; search "Dark Souls";')
         self.assertEqual(mock_post.call_args[1]['url'],
-                         'https://api-v3.igdb.com/games/')
+                         'https://api.igdb.com/v4/games/')
         # Test response contains expected result
         self.assertEqual(response.json(), expected_dict)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -167,7 +167,7 @@ class GameTests(APITestCase):
         self.assertEqual(mock_post.call_args[1]['data'],
                          f'fields {popular_fields}; sort popularity desc; limit 6; offset 0;')
         self.assertEqual(mock_post.call_args[1]['url'],
-                         'https://api-v3.igdb.com/games/')
+                         'https://api.igdb.com/v4/games/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     @patch('games.views.requests.post')
@@ -186,7 +186,7 @@ class GameTests(APITestCase):
         self.assertEqual(mock_post.call_args[1]['data'],
                          f'fields {popular_fields}; sort popularity desc; limit 20; offset 0; where themes != (42);where genres=1;')
         self.assertEqual(mock_post.call_args[1]['url'],
-                         'https://api-v3.igdb.com/games/')
+                         'https://api.igdb.com/v4/games/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     @patch('games.views.requests.post')
@@ -203,7 +203,7 @@ class GameTests(APITestCase):
         self.assertEqual(mock_post.call_args[1]['data'],
                          f'fields {popular_fields}; sort popularity desc; limit 20; offset 0; where themes != (42);where release_date.date <= 1564272000;where release_date.date >= 1561939200;')
         self.assertEqual(mock_post.call_args[1]['url'],
-                         'https://api-v3.igdb.com/games/')
+                         'https://api.igdb.com/v4/games/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     @patch('games.views.requests.post')
@@ -220,7 +220,7 @@ class GameTests(APITestCase):
         self.assertEqual(mock_post.call_args[1]['data'],
                          f'fields {popular_fields}; sort popularity desc; limit 6; offset 0; where themes != (42);')
         self.assertEqual(mock_post.call_args[1]['url'],
-                         'https://api-v3.igdb.com/games/')
+                         'https://api.igdb.com/v4/games/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     @patch('games.views.requests.post')
@@ -241,7 +241,7 @@ class GameTests(APITestCase):
         self.assertEqual(mock_post.call_args[1]['data'],
                          f'fields {popular_fields}; sort popularity desc; limit 6; offset 0; where themes != (42);')
         self.assertEqual(mock_post.call_args[1]['url'],
-                         'https://api-v3.igdb.com/games/')
+                         'https://api.igdb.com/v4/games/')
         # Test response contains expected result
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -264,7 +264,7 @@ class GameTests(APITestCase):
                          f'fields {genre_fields}; limit 50;')
 
         self.assertEqual(mock_post.call_args[1]['url'],
-                         'https://api-v3.igdb.com/genres/')
+                         'https://api.igdb.com/v4/genres/')
         # Test response contains expected result
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -350,7 +350,7 @@ class GameTests(APITestCase):
         self.assertEqual(mock_post.call_args[1]['data'],
                          f'fields {backdrop_fields}; where id=2155;')
         self.assertEqual(mock_post.call_args[1]['url'],
-                         'https://api-v3.igdb.com/games/')
+                         'https://api.igdb.com/v4/games/')
         # Test response contains expected result
         self.assertEqual(response.json(), expected_dict)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
