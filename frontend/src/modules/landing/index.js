@@ -41,9 +41,4 @@ const Landing = (props) => {
   );
 };
 
-Landing.propTypes = {
-  isLoadingPopular: PropTypes.bool.isRequired,
-  popular: PropTypes.array.isRequired
-};
-
 export default Landing;

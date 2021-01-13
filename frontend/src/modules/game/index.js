@@ -82,11 +82,16 @@ export default class Game extends React.Component {
   };
 
   getDeveloperId = companies => {
-    var dev = companies.find(c => {
-      return c.developer == true;
-    });
+    if (companies){
+      var dev = companies.find(c => {
+        return c.developer == true;
+      });
+  
+      return dev.company.id;
+    } else {
+      return null;
+    }
 
-    return dev.company.id;
   };
 
   render() {

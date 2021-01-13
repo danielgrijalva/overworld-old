@@ -9,14 +9,14 @@ const Popular = ({ isLoading, popular }) => (
       <React.Fragment>
         {popular.map((p, i) => {
           return (
-            <Link to={`/games/${p.slug}`} key={p.id} className="cover-wrapper">
+            <Link to={`/games/${p.game.slug}`} key={p.game.id} className="cover-wrapper">
               <img
                 className="cover"
-                alt={p.name}
-                src={`https://images.igdb.com/igdb/image/upload/t_cover_big/${p.cover.image_id}.jpg`}
+                alt={p.game.name}
+                src={`https://images.igdb.com/igdb/image/upload/t_cover_big/${p.game.cover.image_id}.jpg`}
               />
               <div key={i} className="cover-overlay">
-                <strong>{p.name}</strong>
+                <strong>{p.game.name}</strong>
               </div>
             </Link>
           );
@@ -34,7 +34,6 @@ const Popular = ({ isLoading, popular }) => (
 
 Popular.propTypes = {
   isLoading: PropTypes.bool.isRequired,
-  popular: PropTypes.array.isRequired
 };
 
 export default Popular;

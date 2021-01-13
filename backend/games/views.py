@@ -196,12 +196,13 @@ def get_popular_games(request):
         pass
 
     if not adultContent:
-        data = f'fields {popular_fields}; sort popularity desc; limit {limit}; offset {offset}; where themes != (42);' + conditions
+        data = f'fields {popular_fields}; where date < 1538129353; sort date desc; limit {limit}; offset {offset};' + conditions
+        print(data)
     if adultContent:
-        data = f'fields {popular_fields}; sort popularity desc; limit {limit}; offset {offset};' + conditions
+        data = f'fields {popular_fields}; sort follows asc; limit {limit}; offset {offset};' + conditions
 
     headers = {'client-id': settings.IGDB_KEY, 'authorization': settings.IGDB_AUTH}
-    url = settings.IGDB_URL.format(endpoint='games')
+    url = settings.IGDB_URL.format(endpoint='release_dates')
     r = requests.post(url=url, data=data, headers=headers)
 
     return Response(r.json())

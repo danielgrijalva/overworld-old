@@ -11,7 +11,6 @@ _game_fields = [
     'screenshots.image_id',
     'slug',
     'summary',
-    'time_to_beat.normally',
     'themes.name',
 ]
 
@@ -66,10 +65,10 @@ _search_fields = [
 ]
 
 _popular_fields = [
-    'cover.image_id',
-    'name',
-    'popularity',
-    'slug',
+    'game.cover.image_id',
+    'game.name',
+    'date',
+    'game.slug',
 ]
 
 _backdrop_fields = [

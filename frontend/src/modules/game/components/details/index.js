@@ -92,22 +92,6 @@ const Details = ({ game }) => {
                       })}
                   </Grid.Column>
                 </Grid.Row>
-                {game.time_to_beat && game.time_to_beat.normally !== undefined && (
-                  <Grid.Row>
-                    <Grid.Column width={8}>
-                      <h3>
-                        <span>Time to beat</span>
-                      </h3>
-                    </Grid.Column>
-                    <Grid.Column width={8} className="details">
-                      <Label>
-                        {game.time_to_beat &&
-                          Math.floor(game.time_to_beat.normally / 3600)}{" "}
-                        hours
-                      </Label>
-                    </Grid.Column>
-                  </Grid.Row>
-                )}
               </Grid>
             </Tab.Pane>
           )
