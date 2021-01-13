@@ -154,8 +154,8 @@ STATIC_URL = '/static/'
 # IGDB
 
 IGDB_KEY = os.getenv('IGDB_KEY')
+IGDB_AUTH = os.getenv('IGDB_AUTH')
 IGDB_URL = 'https://api.igdb.com/v4/{endpoint}/'
-IGDB_auth = os.getenv('IGDB_auth')
 
 
 # Django Heroku

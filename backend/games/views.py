@@ -18,7 +18,7 @@ def get_genres(request):
         Makes call to https://api.igdb.com/v4/genres with maximum limit and no params
      """
     data = f'fields {genre_fields}; limit 50;'
-    headers = {'client-id': settings.IGDB_KEY, 'authorization': settings.IGDB_auth}
+    headers = {'client-id': settings.IGDB_KEY, 'authorization': settings.IGDB_AUTH}
     url = settings.IGDB_URL.format(endpoint='genres')
     r = requests.post(url=url, data=data, headers=headers).json()
 
@@ -43,7 +43,7 @@ def get_games(request):
     slugs = (",").join([f'"{x}"' for x in slugs.split(",")][:10])
     
     data = f'fields {game_fields}; where slug=({slugs});'
-    headers = {'client-id': settings.IGDB_KEY, 'authorization': settings.IGDB_auth}
+    headers = {'client-id': settings.IGDB_KEY, 'authorization': settings.IGDB_AUTH}
     url = settings.IGDB_URL.format(endpoint='games')
     r = requests.post(url=url, data=data, headers=headers).json()
 
@@ -68,7 +68,7 @@ def get_game(request, slug):
         game: a JSON response containing the details of a game.
     """
     data = f'fields {game_fields}; where slug="{slug}";'
-    headers = {'client-id': settings.IGDB_KEY, 'authorization': settings.IGDB_auth}
+    headers = {'client-id': settings.IGDB_KEY, 'authorization': settings.IGDB_AUTH}
     url = settings.IGDB_URL.format(endpoint='games')
     r = requests.post(url=url, data=data, headers=headers).json()
 
@@ -96,7 +96,7 @@ def search_game(request, name):
         games: a JSON containing a list of search results.
     """
     data = f'fields {search_fields}; search "{name}";'
-    headers = {'client-id': settings.IGDB_KEY, 'authorization': settings.IGDB_auth}
+    headers = {'client-id': settings.IGDB_KEY, 'authorization': settings.IGDB_AUTH}
     url = settings.IGDB_URL.format(endpoint='games')
     r = requests.post(url=url, data=data, headers=headers)
 
@@ -110,7 +110,7 @@ def get_frontpage_games(request):
     now = int(datetime.timestamp(datetime.now()))
     recents_query = f'fields {recents_fields}; sort first_release_date desc; where first_release_date < {now};'
     upcoming_query = f'fields {upcoming_fields}; sort first_release_date asc; where first_release_date > {now} & release_dates.category = 0;'
-    headers = {'client-id': settings.IGDB_KEY, 'authorization': settings.IGDB_auth}
+    headers = {'client-id': settings.IGDB_KEY, 'authorization': settings.IGDB_AUTH}
     url = settings.IGDB_URL.format(endpoint='games')
 
     recents = requests.post(url=url, data=recents_query, headers=headers)
@@ -122,7 +122,7 @@ def get_company_logo(id):
     """Gets company logo."""
     
     query = f'fields {company_logo_fields}; where id = {id};'
-    headers = {'client-id': settings.IGDB_KEY, 'authorization': settings.IGDB_auth}
+    headers = {'client-id': settings.IGDB_KEY, 'authorization': settings.IGDB_AUTH}
     url = settings.IGDB_URL.format(endpoint='company_logos')
 
     return requests.post(url=url, data=query, headers=headers).json()
@@ -131,7 +131,7 @@ def get_games_by_company(cid):
     """Gets games created by a particular company."""
     
     query = f'fields {company_game_fields}; where involved_companies.company = {cid} & involved_companies.developer = true;'
-    headers = {'client-id': settings.IGDB_KEY, 'authorization': settings.IGDB_auth}
+    headers = {'client-id': settings.IGDB_KEY, 'authorization': settings.IGDB_AUTH}
     url = settings.IGDB_URL.format(endpoint='games')
 
     return requests.post(url=url, data=query, headers=headers).json()
@@ -141,7 +141,7 @@ def get_company(request, cid):
     """Gets Company/Creator of games from IGDB."""
     
     query = f'fields {company_fields}; where id = {cid};'
-    headers = {'client-id': settings.IGDB_KEY, 'authorization': settings.IGDB_auth}
+    headers = {'client-id': settings.IGDB_KEY, 'authorization': settings.IGDB_AUTH}
     url = settings.IGDB_URL.format(endpoint='companies')
 
     company_json = requests.post(url=url, data=query, headers=headers).json()
@@ -200,7 +200,7 @@ def get_popular_games(request):
     if adultContent:
         data = f'fields {popular_fields}; sort popularity desc; limit {limit}; offset {offset};' + conditions
 
-    headers = {'client-id': settings.IGDB_KEY, 'authorization': settings.IGDB_auth}
+    headers = {'client-id': settings.IGDB_KEY, 'authorization': settings.IGDB_AUTH}
     url = settings.IGDB_URL.format(endpoint='games')
     r = requests.post(url=url, data=data, headers=headers)
 
@@ -222,7 +222,7 @@ def get_backdrop(request, guid):
         backdrop: a JSON object with the image IDs necessary for the backdrop.
     """
     data = f'fields {backdrop_fields}; where id={guid};'
-    headers = {'client-id': settings.IGDB_KEY, 'authorization': settings.IGDB_auth}
+    headers = {'client-id': settings.IGDB_KEY, 'authorization': settings.IGDB_AUTH}
     url = settings.IGDB_URL.format(endpoint='games')
     r = requests.post(url=url, data=data, headers=headers)
 
