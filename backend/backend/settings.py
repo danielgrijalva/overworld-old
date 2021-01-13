@@ -160,6 +160,6 @@ IGDB_URL = 'https://api.igdb.com/v4/{endpoint}/'
 
 # Django Heroku
 
-if HEROKU:
+if not DEBUG:
     import django_heroku
     django_heroku.settings(locals())
