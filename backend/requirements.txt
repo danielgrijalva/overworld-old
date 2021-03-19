@@ -12,7 +12,7 @@ django-cors-headers==3.0.2
 django-heroku==0.3.1
 django-rest-framework==0.1.0
 django-rest-knox==4.1.0
-djangorestframework==3.9.4
+djangorestframework==3.11.2
 Faker==2.0.2
 gunicorn==19.9.0
 idna==2.8
