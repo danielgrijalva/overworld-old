@@ -8,7 +8,7 @@ chardet==4.0.0
 colorama==0.4.4
 cryptography==3.4.7
 dj-database-url==0.5.0
-Django==3.2.4
+Django==3.2.5
 django-cors-headers==3.7.0
 django-heroku==0.3.1
 django-rest-framework==0.1.0
