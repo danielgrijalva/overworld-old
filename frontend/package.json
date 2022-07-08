@@ -7,7 +7,7 @@
     "bitly-react": "^6.0.12",
     "font-awesome": "^4.7.0",
     "i18n-iso-countries": "^4.3.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "node-sass": "^4.13.1",
     "nodemon": "^1.19.4",
     "prettier": "^1.19.1",
