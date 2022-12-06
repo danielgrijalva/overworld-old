@@ -28,8 +28,10 @@ const Landing = (props) => {
               <h1>The social network for video game lovers.</h1>
               <p>
                 Start your gaming journal now, it's free!
+                <br>
                 <Register />
-                Or <LogIn loginText="sign in" /> if you're already a member.
+                <br>
+                Or <LogIn loginText="sign in" class="login"/> if you're already a member.
               </p>
             </section>
             <Popular isLoading={isLoadingPopular} popular={popular} />
